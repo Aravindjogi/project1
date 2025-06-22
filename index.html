@@ -93,7 +93,7 @@
         iframe {
             border-radius: 500px;
             display: flex;
-            box-shadow: 100px 100px 100px 100px gold;
+            box-shadow: 10px 15px 20px gold;
         }
 
         #imgfam {
@@ -106,6 +106,75 @@
             width: 1000px;
             /* this is for image in image as a background image */
 
+        }
+
+        /* for single href we use this 
+        a[href] {
+           
+            color: blueviolet;
+        }*/
+
+        .hreff a[href="https://tai.thetapacademy.com/courses/67e14442bfdbaf48c76c82bf"] {
+            /*for we want to perticular link we use this */
+            font-weight: bolder;
+            font-size: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .actionstwo:link {
+            /* by using this we see the working go this text i given detailed information 
+            in this there are three 1.link ,2.visited 3.active by a double "" */
+            color: red;
+            background-color: rgb(198, 10, 255);
+        }
+
+        .actionstwo:visited {
+            /* by using this we see the working go this text i given detailed information 
+            in this there are three 1.link ,2.visited 3.active by a double "" */
+            color: rgb(0, 255, 60);
+            background-color: rgb(112, 231, 9);
+        }
+
+        .actionstwo:active {
+            /* by using this we see the working go this text i given detailed information 
+            in this there are three 1.link ,2.visited 3.active by a double "" */
+            color: rgb(43, 61, 255);
+            background-color: rgb(196, 2, 2);
+        }
+
+        .how:hover {
+            background-image: url(https://th.bing.com/th/id/OIP.cNMOV5j-NPNJp8YPrTNocQAAAA?pid=ImgDet&w=195&h=145&c=7&dpr=1.4&cb=idpwebp2&o=7&rm=3);
+            width: 1000px;
+            font-size: 100px;
+            background-size: cover;
+            font-family: monospace;
+            color: rgba(234, 30, 241, 0.942);
+            border-radius: 50px;
+            box-shadow: 10px 15px 20px lightgreen;
+        }
+
+        .how {
+            background-image: url(https://th.bing.com/th/id/R.ffe459582c8e4dc676d73e4b07dcabc0?rik=6SMf4H4I5ChVpQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fBeautiful-nature-cool-images-background-hd.jpg&ehk=E1s4F45rJN%2b%2feGvJDIkl0dBO1%2bRXNfZHrbfDQr2ZK9Y%3d&risl=&pid=ImgRaw&r=0);
+            width: 1000px;
+            font-size: 100px;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(38, 218, 32);
+            border-radius: 50px;
+            box-shadow: 10px 15px 20px rgb(20, 210, 235);
+            box-shadow: -100px -150px -200px lightgreen;
+        }
+
+        button {
+
+            background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+            background-size: 100% 300px;
+        }
+
+        button:hover {
+            background-image: url(https://th.bing.com/th/id/OIP.APgo75RfI0lxwZEdxtW-lgHaEo?pid=ImgDet&w=195&h=122&c=7&dpr=1.4&cb=idpwebp2&o=7&rm=3);
+            background-size: cover;
+            border-radius: 500px;
         }
     </style>
 
@@ -132,6 +201,9 @@
 
     <nav>
         <div class="navbar1">
+            <a href="#actionstwo">
+                <button>Click me</button>
+            </a>
             <a href="https://www.youtube.com/watch?v=uGCmE_1SwyU&list=RDuGCmE_1SwyU&start_radio=1">
                 <button>
                     Create account
@@ -152,6 +224,14 @@
             <button>
                 developer
             </button>
+            <a href="#link2"><button>Header1</button></a>
+            <a href="#para2"><button>Para1</button></a>
+            <a href="#link3"><button>Header2</button></a>
+            <a href="#para3"><button>Para2</button></a>
+            <a href="#link4"><button>Header3</button></a>
+            <a href="#para4"><button>Para3</button></a>
+            <a href="#link5"><button>Header4</button></a>
+            <a href="#para5"><button>Para4</button></a>
         </div>
     </nav>
 
@@ -322,7 +402,54 @@
                 <img src="/fam.jpg" alt="no iamge">
             </td>
         </tr>
+
+        <div class="hreff">
+            <!-- this is for only style refernce which can perform some operations such as 
+             work like a hover but based up on click ,open,close it can chaneg the styles for that we are using this a tag 
+             -->
+            <a href="http://127.0.0.1:5500/index.html">Job Poratl </a>
+            <br>
+            <a href="https://tai.thetapacademy.com/courses/67e14442bfdbaf48c76c82bf">tai-</a>
+        </div>
+
     </table>
+
+    <div class="actionstwo" id="actionstwo">
+        <!-- this is a psuedo class where we can style some attributes like a pro level in this we can perform the hover like feature i.e while click it can change one color to another color ,if it is rest postion it changes one color to another,if it can do any function agsin u=it conme in to rest postion it can perform another functio-->
+        <a href="http://127.0.0.1:2500/index.html">Job Poratl </a>
+        <br>
+        <a href=" https://ui.aceternity.com/">tai-</a>
+        <br>
+        <a href="https://tai.thetapacademy.co">tai-</a>
+    </div>
+    <div>
+        <p class="how"> this page was developed by aravind</p>
+    </div>
+    <div>
+        <!--one expmaple for taget,visted,active-->
+        <h1 id="link2">header1</h1>
+        <p id="para2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi sit magnam blanditiis natus
+            rerum
+            laudantium dolores enim, incidunt, quos illo hic ratione! Exercitationem quibusdam voluptates asperiores et
+            saepe dolores?</p>
+        <h1 id="link3">header2</h1>
+        <p id="para3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, repellat optio, vel sunt enim
+            hic autem
+            rem mollitia aperiam modi provident quo est consectetur in, explicabo error? Voluptatum, obcaecati
+            architecto!</p>
+        <h1 id="link4">header1</h1>
+        <p id="para4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi sit magnam blanditiis natus
+            rerum
+            laudantium dolores enim, incidunt, quos illo hic ratione! Exercitationem quibusdam voluptates asperiores et
+            saepe dolores?</p>
+        <h1 id="link5">header2</h1>
+        <p id="para5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, repellat optio, vel sunt enim
+            hic autem
+            rem mollitia aperiam modi provident quo est consectetur in, explicabo error? Voluptatum, obcaecati
+            architecto!</p>
+
+
+    </div>
 </body>
 
 </html>
