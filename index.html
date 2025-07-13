@@ -1,455 +1,1780 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/startup-india-logo-gradient-circle.png">
-    <style>
-        * {
-
-            color: rgb(255, 255, 255);
-            background-color: black;
-        }
-
-        img {
-            border: 5px dotted;
-            border-radius: 10px gold solid;
-            height: 100px;
-            width: 100px;
-
-        }
-
-        .navbar1 {
-
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-
-        ul> :first-child {
-            color: greenyellow;
-        }
-
-        ul>li :only-child {
-            font-size: 500px;
-            /* for only single child is there we use the only child this can make a stylling to that perticular tag only of the element where we are given in html
-        }
-
-        ul> :nth-child(3) {
-            /*--- pseudo --*/
-            color: rgb(180, 29, 231);
-            background: #21212e;
-            background: radial-gradient(circle, rgba(33, 33, 46, 1) 0%, rgba(28, 28, 61, 1) 14%, rgba(22, 22, 81, 1) 33%, rgba(10, 118, 84, 1) 54%, rgba(9, 9, 121, 1) 73%, rgba(187, 4, 190, 1) 87%, rgba(0, 212, 255, 1) 100%);
-            color: transparent;
-            background-clip: text;
-            /* if we use any gradient colors as a backgroud that wants to apperers in for color we use the background-cell: text and with color as transparent then it will apper*/
-        }
-
-        .orderedlist> :last-child {
-            background-color: #00BAAD;
-            background-image: linear-gradient(90deg, transparent 50%,
-                    rgba(255, 255, 255, .5) 50%);
-            background-size: 50px 50px;
-            ;
-        }
-
-        #orderedlist> :only-child {
-            background-color: #00BAAD;
-            background-image: linear-gradient(90deg, transparent 50%,
-                    rgba(255, 255, 255, .5) 50%);
-            background-size: 50px 50px;
-            color: transparent;
-            background-clip: text;
-
-        }
-
-        .aravind {
-            background-color: rgb(114, 114, 114);
-            font-size: 100px;
-            border: 500px;
-            height: 125px;
-            border-radius: 50px;
-            width: 350px;
-        }
-
-        table :nth-child(2n) {
-            color: pink;
-        }
-
-        .nth :nth-child(2n) {
-            background-color: rgb(51, 52, 42);
-            width: max-content;
-        }
-
-        h1 {
-            border: 5px goldenrod solid;
-            border-radius: 50px;
-            box-shadow: 10px 20px 30px 30px #407edb;
-            align-items: center;
-            justify-content: center;
-            display: flex;
-        }
-
-        iframe {
-            border-radius: 500px;
-            display: flex;
-            box-shadow: 10px 15px 20px gold;
-        }
-
-        #imgfam {
-            border-radius: 500px;
-            box-shadow: 10px 10px 10px rgb(0, 0, 0, 0.3);
-            background-image: url(/fam.jpg);
-            background-size: cover;
-            background-position: right;
-            height: 1000px;
-            width: 1000px;
-            /* this is for image in image as a background image */
-
-        }
-
-        /* for single href we use this 
-        a[href] {
-           
-            color: blueviolet;
-        }*/
-
-        .hreff a[href="https://tai.thetapacademy.com/courses/67e14442bfdbaf48c76c82bf"] {
-            /*for we want to perticular link we use this */
-            font-weight: bolder;
-            font-size: 80px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .actionstwo:link {
-            /* by using this we see the working go this text i given detailed information 
-            in this there are three 1.link ,2.visited 3.active by a double "" */
-            color: red;
-            background-color: rgb(198, 10, 255);
-        }
-
-        .actionstwo:visited {
-            /* by using this we see the working go this text i given detailed information 
-            in this there are three 1.link ,2.visited 3.active by a double "" */
-            color: rgb(0, 255, 60);
-            background-color: rgb(112, 231, 9);
-        }
-
-        .actionstwo:active {
-            /* by using this we see the working go this text i given detailed information 
-            in this there are three 1.link ,2.visited 3.active by a double "" */
-            color: rgb(43, 61, 255);
-            background-color: rgb(196, 2, 2);
-        }
-
-        .how:hover {
-            background-image: url(https://th.bing.com/th/id/OIP.cNMOV5j-NPNJp8YPrTNocQAAAA?pid=ImgDet&w=195&h=145&c=7&dpr=1.4&cb=idpwebp2&o=7&rm=3);
-            width: 1000px;
-            font-size: 100px;
-            background-size: cover;
-            font-family: monospace;
-            color: rgba(234, 30, 241, 0.942);
-            border-radius: 50px;
-            box-shadow: 10px 15px 20px lightgreen;
-        }
-
-        .how {
-            background-image: url(https://th.bing.com/th/id/R.ffe459582c8e4dc676d73e4b07dcabc0?rik=6SMf4H4I5ChVpQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fBeautiful-nature-cool-images-background-hd.jpg&ehk=E1s4F45rJN%2b%2feGvJDIkl0dBO1%2bRXNfZHrbfDQr2ZK9Y%3d&risl=&pid=ImgRaw&r=0);
-            width: 1000px;
-            font-size: 100px;
-            background-size: cover;
-            font-family: Arial, Helvetica, sans-serif;
-            color: rgb(38, 218, 32);
-            border-radius: 50px;
-            box-shadow: 10px 15px 20px rgb(20, 210, 235);
-            box-shadow: -100px -150px -200px lightgreen;
-        }
-
-        button {
-
-            background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-            background-size: 100% 300px;
-        }
-
-        button:hover {
-            background-image: url(https://th.bing.com/th/id/OIP.APgo75RfI0lxwZEdxtW-lgHaEo?pid=ImgDet&w=195&h=122&c=7&dpr=1.4&cb=idpwebp2&o=7&rm=3);
-            background-size: cover;
-            border-radius: 500px;
-        }
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Jogi Bala Venkata Aravind, a full-stack developer specializing in web development, IoT, and job portal solutions.">
+  <meta name="keywords" content="portfolio, web developer, IoT, ESP32, job portal, Hyderabad, quality assurance">
+  <meta name="author" content="Jogi Bala Venkata Aravind">
+  <title>Jogi Bala Venkata Aravind - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/monokai-sublime.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #14b8a6;
+      --secondary-color: #f43f5e;
+      --bg-color: #e5e7eb;
+      --text-color: #1f2937;
+      --card-bg: rgba(229, 231, 235, 0.8);
+      --blur: blur(8px);
+    }
+    .dark {
+      --bg-color: #1f2937;
+      --text-color: #f3f4f6;
+      --card-bg: rgba(55, 65, 81, 0.8);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .neumorphic {
+      background: var(--card-bg);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .neumorphic:hover {
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), -4px -4px 8px rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+      background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+    .btn-primary:hover::after {
+      width: 200px;
+      height: 200px;
+    }
+    .section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .parallax {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    .lightbox, .project-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .chat-message {
+      max-width: 70%;
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+    .chat-message.sent {
+      background: var(--primary-color);
+      margin-left: auto;
+    }
+    .chat-message.received {
+      background: var(--secondary-color);
+    }
+    .chat-message .delete-btn, .chat-message .read-status, .chat-message .pin-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .chat-message:hover .delete-btn, .chat-message:hover .read-status, .chat-message:hover .pin-btn {
+      opacity: 1;
+    }
+    .chat-message.pinned {
+      border: 2px solid var(--secondary-color);
+    }
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      position: absolute;
+      left: -6px;
+      top: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .timeline-dot.visible {
+      opacity: 1;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .progress-bar {
+      background: linear-gradient(to right, var(--primary-color) 50%, var(--card-bg) 50%);
+      background-size: 200% 100%;
+      background-position: 0 0;
+      height: 8px;
+      border-radius: 4px;
+      transition: background-position 1s ease;
+    }
+    .progress-bar:hover {
+      background-position: 100% 0;
+    }
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .progress-container:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .toast {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 1000;
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    pre code {
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .achievement {
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+    .achievement.unlocked {
+      opacity: 1;
+      animation: bounce 0.5s ease;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .navbar-shadow {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-color);
+    }
+    .star-rating i {
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .star-rating i:hover {
+      color: #f59e0b;
+    }
+  </style>
 </head>
+<body class="min-h-screen transition-all duration-300" id="body">
+  <!-- Loading Spinner -->
+  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div class="spinner"></div>
+  </div>
 
-<body>
-    <!-----
-    <h1>sign up to log in </h1>
-    <form action="https://aravindjogi.github.io/project1/">
-        <label>Name</label>
-        <br>
-        <input type="text" name="enter your name" required>
-        <br>
-        <label for="block">Email id</label>
-        <br>
-        <input type="email" name="enter your name" required>
-        <br>
-        <input type="checkbox" required>
-        <br>
-        <input type="submit" required>
-    
-    </form>
-    ----->
+  <!-- Navbar -->
+  <nav class="neumorphic fixed w-full top-0 z-50 p-4 transition-all duration-300" aria-label="Main navigation" id="navbar">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Aravind's Portfolio</h1>
+      <div class="flex items-center space-x-4">
+        <input id="search-bar" type="text" placeholder="Search portfolio..." class="p-2 rounded neumorphic hidden md:block" aria-label="Search portfolio">
+        <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="voice-control" class="text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Voice control">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div id="nav-links" class="hidden md:flex space-x-4">
+        <a href="#home" class="nav-link hover:text-teal-500 transition" data-section="home" aria-label="Home">Home</a>
+        <a href="#about" class="nav-link hover:text-teal-500 transition" data-section="about" aria-label="About">About</a>
+        <a href="#skills" class="nav-link hover:text-teal-500 transition" data-section="skills" aria-label="Skills">Skills</a>
+        <a href="#projects" class="nav-link hover:text-teal-500 transition" data-section="projects" aria-label="Projects">Projects</a>
+        <a href="#jobs" class="nav-link hover:text-teal-500 transition" data-section="jobs" aria-label="Job Portal">Job Portal</a>
+        <a href="#gallery" class="nav-link hover:text-teal-500 transition" data-section="gallery" aria-label="Gallery">Gallery</a>
+        <a href="#analytics" class="nav-link hover:text-teal-500 transition" data-section="analytics" aria-label="Analytics">Analytics</a>
+        <a href="#chat" class="nav-link hover:text-teal-500 transition" data-section="chat" aria-label="Chat">Chat</a>
+        <a href="#iot" class="nav-link hover:text-teal-500 transition" data-section="iot" aria-label="IoT Control">IoT Control</a>
+        <a href="#testimonials" class="nav-link hover:text-teal-500 transition" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
+        <a href="#codesnippets" class="nav-link hover:text-teal-500 transition" data-section="codesnippets" aria-label="Code Snippets">Code Snippets</a>
+        <a href="#achievements" class="nav-link hover:text-teal-500 transition" data-section="achievements" aria-label="Achievements">Achievements</a>
+        <a href="#social" class="nav-link hover:text-teal-500 transition" data-section="social" aria-label="Social Feed">Social Feed</a>
+        <a href="#ideas" class="nav-link hover:text-teal-500 transition" data-section="ideas" aria-label="Ideas">Ideas</a>
+        <a href="#blog" class="nav-link hover:text-teal-500 transition" data-section="blog" aria-label="Blog">Blog</a>
+        <a href="#newsletter" class="nav-link hover:text-teal-500 transition" data-section="newsletter" aria-label="Newsletter">Newsletter</a>
+        <a href="#contact" class="nav-link hover:text-teal-500 transition" data-section="contact" aria-label="Contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <nav>
-        <div class="navbar1">
-            <a href="#actionstwo">
-                <button>Click me</button>
-            </a>
-            <a href="https://www.youtube.com/watch?v=uGCmE_1SwyU&list=RDuGCmE_1SwyU&start_radio=1">
-                <button>
-                    Create account
-                </button>
-            </a>
-            <iframe width="500px" height="500px" src="/index.html" allowfullscreen></iframe>
-            <button>login</button>
-            <button>
-                Startup ideas
-            </button>
-            <button>
-                Funds
-            </button>
-            <button>Overall Details</button>
-            <button>
-                About Comapany
-            </button>
-            <button>
-                developer
-            </button>
-            <a href="#link2"><button>Header1</button></a>
-            <a href="#para2"><button>Para1</button></a>
-            <a href="#link3"><button>Header2</button></a>
-            <a href="#para3"><button>Para2</button></a>
-            <a href="#link4"><button>Header3</button></a>
-            <a href="#para4"><button>Para3</button></a>
-            <a href="#link5"><button>Header4</button></a>
-            <a href="#para5"><button>Para4</button></a>
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-4 right-4 neumorphic rounded-full p-3 hidden" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Project Modal -->
+  <div id="project-modal" class="hidden project-modal">
+    <div class="neumorphic p-6 max-w-lg w-full">
+      <span onclick="closeProjectModal()" class="absolute top-4 right-4 text-white text-2xl cursor-pointer" aria-label="Close modal">×</span>
+      <h3 id="modal-title" class="text-xl font-semibold"></h3>
+      <p id="modal-description" class="mt-2"></p>
+      <p id="modal-tech" class="mt-2"><strong>Tech Stack:</strong></p>
+      <p id="modal-duration" class="mt-2"><strong>Duration:</strong></p>
+      <a id="modal-link" href="#" class="btn-primary mt-4 block text-center">Live Demo</a>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <main class="pt-16">
+    <!-- Home Section -->
+    <section id="home" class="section min-h-screen flex items-center justify-center parallax active" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+Background')" data-aos="fade-up">
+      <div class="neumorphic rounded-lg p-8 max-w-md mx-auto">
+        <img src="https://via.placeholder.com/150" alt="Profile Photo" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+        <h2 class="text-2xl font-bold text-center">Jogi Bala Venkata Aravind</h2>
+        <p class="text-center">I am a <span id="typed" class="font-semibold"></span></p>
+        <p class="text-center mt-2">Visitors Online: <span id="visitor-counter">1</span></p>
+        <button id="download-portfolio" class="btn-primary mt-4 mx-auto block">Download Portfolio</button>
+        <div class="flex justify-center space-x-4 mt-4">
+          <a href="https://twitter.com/intent/tweet?url=https://yourportfolio.com&text=Check%20out%20my%20portfolio!" target="_blank" class="hover:text-teal-500" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://yourportfolio.com" target="_blank" class="hover:text-teal-500" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
-    </nav>
+      </div>
+    </section>
 
-
-    <h1>course registration form</h1>
-    <form action="hi">
-
-
-        <fieldset>
-            <legend>Personal Details</legend>
-            <table>
-
-                <tr id="frist">
-                    <td><label for="FN">Frist name</label></td>
-                    <td><input type="text" required placeholder="frist name"></td>
-                    <td>hi</td>
-                </tr>
-                <tr id="Second">
-                    <td><label for="SN">surname</label></td>
-                    <td><input type="text" name="" required placeholder="surname"></td>
-
-                </tr>
-                <tr id="Third">
-                    <td><label for="PH">mobile no</label></td>
-                    <td><input type="tel" name="" required placeholder="9999999999"></td>
-                </tr>
-                <tr id="Fourth">
-                    <td><label for="EM">email</label></td>
-                    <td><input type="email" name="" placeholder="A@gmail.com" required></td>
-                </tr>
-                <tr id="Sixth">
-                    <td><label for="PS">password</label></td>
-                    <td><input type="password" name="" required></td>
-                </tr>
-                <tr id="Seventh">
-                    <td><label for="CPS">confirm password</label></td>
-                    <td> <input type="password" name="" required></td>
-                </tr>
-
-                <tr id="Eighth">
-                    <td><label for="DOB">DOB</label><br></td>
-                    <td><input type="date" name="" id="" required placeholder="11/11/1111"></td>
-                </tr>
-                <tr id="ninth">
-                    <td><label for="G">Gender</label></td>
-                    <td>
-                        <input type="radio" name="gender" value="Male"> Male
-                        <input type="radio" name="gender" value="Female"> Female
-                        <input type="radio" name="gender" value="Other"> Other
-                    </td>
-                </tr>
-
-                <tr id="tenth">
-                    <td><label for="SC">select country</label></td>
-                    <td>
-                        <select name="plz select " id="">
-                            <option value="I" required>India</option>
-                            <option value="U" required>USA</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><label for="UP">upload picture</label></td>
-                    <td>
-                        <input type="file" name="File" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td id="reset"><input type="reset" name="reset" required></td>
-                </tr>
-            </table>
-        </fieldset>
-        <br>
-        <fieldset>
-            <legend>Course Selection Area</legend>
-            <table>
-                <tr>
-                    <td><label for="">select course</label></td>
-                    <td>
-                        <select name="select source" id="">
-                            <option value="py" required>python</option>
-                            <option value="jv" required>java</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><label for="DM">Delivery mode</label></td>
-                    <td>
-                        <input type="radio" name="DM" value="online">Online
-                        <input type="radio" name="DM" value="offline">offline
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><label for="C">comments</label></td>
-                    <td><textarea name="TA" id="" style="width: 300px;
-                    height:100px" required placeholder="comments"></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" required>
-                    </td>
-                </tr>
-        </fieldset>
-        </table>
-    </form>
-
-    <ul>
-
-        <li>
-            python
-        </li>
-        <li>
-            css
-        </li>
-        <li>
-            javascript
-        </li>
-
-    </ul>
-    <ol class="orderedlist" type="i">
-        <a href="h1" target="_top">
-            <li>
-                Aravind</li>
-            <li>lokesh</li>
-    </ol><!--ordered list is called as ol tag-->
-    <ol id="orderedlist" type="i">
-
-        <li class="aravind">
-            Aravind</li>
-        <li><img src="/startup-india-logo-gradient-circle.png" alt=""></li>
-    </ol>
-    </a>
-
-
-
-    <table border="10px">
-        <tr>
-            <th>
-                name
-            </th>
-            <th>Age</th>
-        </tr>
-        <tr>
-            <td>Aravind</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>Lokesh</td>
-            <td>16</td>
-        </tr>
-    </table>
-    <ol class="nth">
-        <li>
-            aravindjogi
-        </li>
-        <li>age is 23
-
-        </li>
-        <li>gender is male</li>
-        <li>core knlowdge </li>
-    </ol>
-    <table id="images">
-        <tr>
-            <td id="imgfam">
-                <img src="/fam.jpg" alt="no iamge">
-            </td>
-        </tr>
-
-        <div class="hreff">
-            <!-- this is for only style refernce which can perform some operations such as 
-             work like a hover but based up on click ,open,close it can chaneg the styles for that we are using this a tag 
-             -->
-            <a href="http://127.0.0.1:5500/index.html">Job Poratl </a>
-            <br>
-            <a href="https://tai.thetapacademy.com/courses/67e14442bfdbaf48c76c82bf">tai-</a>
+    <!-- About Section -->
+    <section id="about" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">About Me</h2>
+      <div class="neumorphic rounded-lg p-8 max-w-2xl mx-auto">
+        <p><strong>Native Place:</strong> Hyderabad, Telangana</p>
+        <p><strong>Education:</strong> B.Tech in Computer Science</p>
+        <p><strong>Profession:</strong> Full-Stack Developer & IoT Enthusiast</p>
+        <p><strong>Bio:</strong> I specialize in building web applications and IoT solutions, with experience in quality assurance at Guts Electro Mech, focusing on in-process quality and pre-delivery inspection.</p>
+        <h3 class="text-xl font-semibold mt-4">Career Timeline</h3>
+        <div class="relative border-l-4 border-teal-500 pl-6 mt-4" id="timeline">
+          <div class="mb-4 relative timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="font-semibold">2022: B.Tech Completion</p>
+            <p>Graduated with a degree in Computer Science.</p>
+          </div>
+          <div class="mb-4 relative timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="font-semibold">2023: Quality Assurance at Guts Electro Mech</p>
+            <p>Ensured product quality through rigorous testing.</p>
+          </div>
+          <div class="relative timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="font-semibold">2025: Full-Stack Developer</p>
+            <p>Building job portals and IoT systems.</p>
+          </div>
         </div>
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold">Current Weather in Hyderabad</h3>
+          <p><strong>Temperature:</strong> <span id="weather-temp">28°C</span> <button id="toggle-unit" class="text-sm underline">Toggle °F</button></p>
+          <p><strong>Condition:</strong> <span id="weather-condition">Sunny</span></p>
+        </div>
+      </div>
+    </section>
 
-    </table>
+    <!-- Skills Section -->
+    <section id="skills" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="100" data-skill="HTML & CSS">
+          <p class="font-semibold">HTML & CSS <span class="text-sm text-gray-500">(90%)</span></p>
+          <div class="progress-bar" style="background-position: -90% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Coursera</div>
+          <div class="star-rating mt-2" data-skill="HTML & CSS">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="200" data-skill="JavaScript">
+          <p class="font-semibold">JavaScript <span class="text-sm text-gray-500">(85%)</span></p>
+          <div class="progress-bar" style="background-position: -85% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by freeCodeCamp</div>
+          <div class="star-rating mt-2" data-skill="JavaScript">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="300" data-skill="React.js">
+          <p class="font-semibold">React.js <span class="text-sm text-gray-500">(80%)</span></p>
+          <div class="progress-bar" style="background-position: -80% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Udemy</div>
+          <div class="star-rating mt-2" data-skill="React.js">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="400" data-skill="Node.js">
+          <p class="font-semibold">Node.js <span class="text-sm text-gray-500">(75%)</span></p>
+          <div class="progress-bar" style="background-position: -75% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by LinkedIn Learning</div>
+          <div class="star-rating mt-2" data-skill="Node.js">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="500" data-skill="ESP32 & Arduino">
+          <p class="font-semibold">ESP32 & Arduino <span class="text-sm text-gray-500">(70%)</span></p>
+          <div class="progress-bar" style="background-position: -70% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Arduino</div>
+          <div class="star-rating mt-2" data-skill="ESP32 & Arduino">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="600" data-skill="Quality Assurance">
+          <p class="font-semibold">Quality Assurance <span class="text-sm text-gray-500">(85%)</span></p>
+          <div class="progress-bar" style="background-position: -85% 0;"></div>
+          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by ISTQB</div>
+          <div class="star-rating mt-2" data-skill="Quality Assurance">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="actionstwo" id="actionstwo">
-        <!-- this is a psuedo class where we can style some attributes like a pro level in this we can perform the hover like feature i.e while click it can change one color to another color ,if it is rest postion it changes one color to another,if it can do any function agsin u=it conme in to rest postion it can perform another functio-->
-        <a href="http://127.0.0.1:2500/index.html">Job Poratl </a>
-        <br>
-        <a href=" https://ui.aceternity.com/">tai-</a>
-        <br>
-        <a href="https://tai.thetapacademy.co">tai-</a>
+    <!-- Projects Section -->
+    <section id="projects" class="section py-12 parallax" style="background-image: url('https://via.placeholder.com/1920x1080?text=Projects+Background')" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Projects</h2>
+      <div class="max-w-4xl mx-auto mb-6 flex space-x-4">
+        <select id="project-filter" class="p-2 rounded neumorphic" aria-label="Project category">
+          <option value="">All Categories</option>
+          <option value="Web">Web</option>
+          <option value="IoT">IoT</option>
+        </select>
+        <select id="project-sort" class="p-2 rounded neumorphic" aria-label="Sort projects">
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="date-desc">Newest First</option>
+          <option value="date-asc">Oldest First</option>
+        </select>
+      </div>
+      <div class="swiper max-w-4xl mx-auto">
+        <div class="swiper-wrapper" id="project-list">
+          <div class="swiper-slide project-card" data-category="Web" data-name="Job Portal" data-date="2025-06-01" data-tech="React, Node.js, MongoDB" data-duration="3 months" data-link="https://example.com/job-portal">
+            <div class="neumorphic rounded-lg p-6 cursor-pointer" onclick="openProjectModal('Job Portal', 'A responsive job search platform with advanced filtering.', 'React, Node.js, MongoDB', '3 months', 'https://example.com/job-portal')">
+              <h3 class="text-xl font-semibold">Job Portal</h3>
+              <p>A responsive job search platform with advanced filtering.</p>
+              <div class="mt-4">
+                <video src="https://via.placeholder.com/300x200.mp4?text=Job+Portal+Demo" controls class="w-full h-48 rounded-lg" aria-label="Job Portal Demo"></video>
+              </div>
+              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+            </div>
+          </div>
+          <div class="swiper-slide project-card" data-category="IoT" data-name="IoT Smart Home" data-date="2025-03-15" data-tech="ESP32, MQTT, Node.js" data-duration="4 months" data-link="https://example.com/iot-home">
+            <div class="neumorphic rounded-lg p-6 cursor-pointer" onclick="openProjectModal('IoT Smart Home', 'ESP32-based home automation with sensor integration.', 'ESP32, MQTT, Node.js', '4 months', 'https://example.com/iot-home')">
+              <h3 class="text-xl font-semibold">IoT Smart Home</h3>
+              <p>ESP32-based home automation with sensor integration.</p>
+              <div class="mt-4">
+                <video src="https://via.placeholder.com/300x200.mp4?text=IoT+Demo" controls class="w-full h-48 rounded-lg" aria-label="IoT Demo"></video>
+              </div>
+              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+            </div>
+          </div>
+          <div class="swiper-slide project-card" data-category="IoT" data-name="ESP32 Dashboard" data-date="2025-01-10" data-tech="ESP32, Node.js, Chart.js" data-duration="2 months" data-link="https://example.com/esp32-dashboard">
+            <div class="neumorphic rounded-lg p-6 cursor-pointer" onclick="openProjectModal('ESP32 Dashboard', 'Real-time sensor monitoring with Node.js.', 'ESP32, Node.js, Chart.js', '2 months', 'https://example.com/esp32-dashboard')">
+              <h3 class="text-xl font-semibold">ESP32 Dashboard</h3>
+              <p>Real-time sensor monitoring with Node.js.</p>
+              <div class="mt-4">
+                <video src="https://via.placeholder.com/300x200.mp4?text=Dashboard+Demo" controls class="w-full h-48 rounded-lg" aria-label="Dashboard Demo"></video>
+              </div>
+              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- Job Portal Section -->
+    <section id="jobs" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Job Portal</h2>
+      <div class="max-w-4xl mx-auto mb-6 flex space-x-4">
+        <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-2 rounded neumorphic" aria-label="Filter jobs">
+        <select id="job-category" class="p-2 rounded neumorphic" aria-label="Job category">
+          <option value="">All Categories</option>
+          <option value="Frontend Developer">Frontend Developer</option>
+          <option value="IoT Engineer">IoT Engineer</option>
+          <option value="Quality Analyst">Quality Analyst</option>
+        </select>
+      </div>
+      <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4 job-card" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl font-semibold">Frontend Developer</h3>
+          <p>Develop responsive web interfaces using React.</p>
+          <button class="btn-primary mt-4" onclick="applyJob('Frontend Developer')">Apply Now</button>
+          <button class="btn-primary mt-2" onclick="saveJob('Frontend Developer')">Save Job</button>
+          <p class="text-sm mt-2">Status: <span id="status-Frontend Developer">Not Applied</span></p>
+        </div>
+        <div class="neumorphic rounded-lg p-4 job-card" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl font-semibold">IoT Engineer</h3>
+          <p>Design IoT solutions with ESP32.</p>
+          <button class="btn-primary mt-4" onclick="applyJob('IoT Engineer')">Apply Now</button>
+          <button class="btn-primary mt-2" onclick="saveJob('IoT Engineer')">Save Job</button>
+          <p class="text-sm mt-2">Status: <span id="status-IoT Engineer">Not Applied</span></p>
+        </div>
+        <div class="neumorphic rounded-lg p-4 job-card" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl font-semibold">Quality Analyst</h3>
+          <p>Ensure product quality through testing.</p>
+          <button class="btn-primary mt-4" onclick="applyJob('Quality Analyst')">Apply Now</button>
+          <button class="btn-primary mt-2" onclick="saveJob('Quality Analyst')">Save Job</button>
+          <p class="text-sm mt-2">Status: <span id="status-Quality Analyst">Not Applied</span></p>
+        </div>
+      </div>
+      <div class="max-w-4xl mx-auto mt-6">
+        <h3 class="text-xl font-semibold">Saved Jobs</h3>
+        <ul id="saved-jobs" class="space-y-2"></ul>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Photo Gallery</h2>
+      <div class="max-w-4xl mx-auto mb-6">
+        <input type="file" id="photo-upload" accept="image/*" multiple class="w-full p-2 rounded neumorphic" aria-label="Upload photos">
+        <select id="image-filter" class="mt-2 p-2 rounded neumorphic" aria-label="Image filter">
+          <option value="none">No Filter</option>
+          <option value="grayscale">Grayscale</option>
+          <option value="sepia">Sepia</option>
+        </select>
+        <div id="photo-preview" class="mt-4 hidden flex flex-wrap gap-4"></div>
+        <button onclick="addToGallery()" class="btn-primary mt-4 hidden" id="add-to-gallery">Add to Gallery</button>
+      </div>
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <img src="https://via.placeholder.com/300?text=Project+1" alt="Project 1" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://via.placeholder.com/300?text=Project+2" alt="Project 2" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://via.placeholder.com/300?text=IoT+Setup" alt="IoT Setup" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300">
+      </div>
+      <div id="lightbox" class="hidden lightbox">
+        <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl cursor-pointer" aria-label="Close lightbox">×</span>
+        <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <img id="lightbox-img" class="max-w-[90%] max-h-[80%]" alt="Lightbox Image">
+        <div class="flex space-x-4 mt-4">
+          <button onclick="downloadImage()" class="btn-primary text-sm" aria-label="Download image">Download</button>
+          <button onclick="shareImage()" class="btn-primary text-sm" aria-label="Share image">Share</button>
+        </div>
+        <button onclick="nextImage()" class="absolute right-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        <p id="lightbox-caption" class="text-white mt-2"></p>
+      </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Analytics</h2>
+      <div id="analytics-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <p class="text-center">Developer access required</p>
+        <input id="dev-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Developer username">
+        <input id="dev-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Developer password">
+        <button id="dev-login-btn" class="w-full btn-primary">Login</button>
+      </div>
+      <div id="analytics-content" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto">
+        <canvas id="profile-chart" class="w-full h-64 mb-4"></canvas>
+        <div id="skill-ratings" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4"></div>
+        <button id="download-analytics" class="btn-primary mt-4">Download Report</button>
+      </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Developer Chat</h2>
+      <div id="chat-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <p class="text-center">Developer access required</p>
+        <input id="chat-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Chat username">
+        <input id="chat-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Chat password">
+        <button id="chat-login-btn" class="w-full btn-primary">Login</button>
+      </div>
+      <div id="chat-content" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto">
+        <div id="chat-messages" class="h-64 overflow-y-auto mb-4 p-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+        <p id="typing-indicator" class="text-sm text-gray-500 hidden">Someone is typing...</p>
+        <div class="flex space-x-2">
+          <input id="chat-input" type="text" placeholder="Type a message..." class="w-full p-2 rounded neumorphic" aria-label="Chat message">
+          <button id="emoji-picker" class="btn-primary p-2"><i class="fas fa-smile"></i></button>
+        </div>
+        <div id="emoji-panel" class="hidden grid grid-cols-5 gap-2 mt-2 p-2 bg-gray-200 dark:bg-gray-700 rounded">
+          <button class="emoji-btn">😊</button>
+          <button class="emoji-btn">🚀</button>
+          <button class="emoji-btn">👍</button>
+          <button class="emoji-btn">🔥</button>
+          <button class="emoji-btn">🎉</button>
+        </div>
+        <button id="chat-send" class="w-full btn-primary mt-2">Send</button>
+      </div>
+    </section>
+
+    <!-- IoT Control Section -->
+    <section id="iot" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">IoT Control Panel</h2>
+      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <p><strong>LED Status:</strong> <span id="led-status">Off</span></p>
+        <button id="toggle-led" class="btn-primary mt-4">Toggle LED</button>
+        <p><strong>Temperature:</strong> <span id="iot-temp">25°C</span></p>
+        <p><strong>Humidity:</strong> <span id="iot-humidity">60%</span></p>
+        <canvas id="energy-chart" class="w-full h-32 mt-4"></canvas>
+        <button id="iot-refresh" class="btn-primary mt-4">Refresh Data</button>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Testimonials</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
+          <p>"Aravind's job portal streamlined our hiring process!"</p>
+          <p class="text-sm mt-2">— John Doe, HR Manager</p>
+        </div>
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
+          <p>"His IoT solutions are innovative and reliable."</p>
+          <p class="text-sm mt-2">— Jane Smith, Tech Lead</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Snippets Section -->
+    <section id="codesnippets" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Code Snippets</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl font-semibold">ESP32 LED Control</h3>
+          <pre><code class="language-arduino">
+void setup() {
+  pinMode(2, OUTPUT);
+}
+void loop() {
+  digitalWrite(2, HIGH);
+  delay(1000);
+  digitalWrite(2, LOW);
+  delay(1000);
+}
+          </code></pre>
+          <button onclick="copyCode(this)" class="btn-primary mt-2">Copy Code</button>
+        </div>
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl font-semibold">React Component</h3>
+          <pre><code class="language-jsx">
+import React from 'react';
+const HelloWorld = () => {
+  return <div>Hello, World!</div>;
+};
+export default HelloWorld;
+          </code></pre>
+          <button onclick="copyCode(this)" class="btn-primary mt-2">Copy Code</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Achievements</h2>
+      <div id="achievements-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <p class="text-center">Developer access required</p>
+        <input id="ach-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Achievements username">
+        <input id="ach-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Achievements password">
+        <button id="ach-login-btn" class="w-full btn-primary">Login</button>
+      </div>
+      <div id="achievements-content" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-6">
+        <div class="neumorphic rounded-lg p-4 achievement" data-id="messages" data-aos="fade-up" data-aos-delay="100">
+          <p class="font-semibold">10 Messages Sent</p>
+          <p class="text-sm">Send 10 messages in chat.</p>
+        </div>
+        <div class="neumorphic rounded-lg p-4 achievement" data-id="ideas" data-aos="fade-up" data-aos-delay="200">
+          <p class="font-semibold">5 Ideas Submitted</p>
+          <p class="text-sm">Submit 5 ideas.</p>
+        </div>
+        <div class="neumorphic rounded-lg p-4 achievement" data-id="jobs" data-aos="fade-up" data-aos-delay="300">
+          <p class="font-semibold">3 Jobs Applied</p>
+          <p class="text-sm">Apply to 3 jobs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Feed Section -->
+    <section id="social" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Social Feed</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
+          <p>Just launched my new job portal! 🚀 #WebDev</p>
+          <p class="text-sm text-gray-400">Posted on X, July 2025</p>
+        </div>
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
+          <p>Exploring ESP32 for IoT projects. Any tips? #IoT</p>
+          <p class="text-sm text-gray-400">Posted on X, June 2025</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideas Section -->
+    <section id="ideas" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Submit an Idea</h2>
+      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <form id="idea-form" class="space-y-4">
+          <input id="idea-title" type="text" placeholder="Idea Title" class="w-full p-2 rounded neumorphic" aria-label="Idea title" required>
+          <textarea id="idea-description" placeholder="Describe your idea..." class="w-full p-2 rounded neumorphic" rows="4" aria-label="Idea description" required></textarea>
+          <button type="submit" class="w-full btn-primary">Submit Idea</button>
+        </form>
+      </div>
+      <div id="ideas-admin" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto mt-6">
+        <h3 class="text-xl font-semibold mb-4">Admin: Manage Ideas</h3>
+        <input id="ideas-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Ideas admin username">
+        <input id="ideas-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Ideas admin password">
+        <button id="ideas-login-btn" class="w-full btn-primary mb-4">Login</button>
+        <div id="ideas-list" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Blog</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl font-semibold">ESP32 in IoT</h3>
+          <p>Building smart systems with ESP32.</p>
+          <button class="btn-primary mt-4" onclick="likePost(0)">Like (<span id="like-0">0</span>)</button>
+          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
+          <p class="text-sm mt-2">Comments: <span id="comment-0">Great post!</span></p>
+        </div>
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl font-semibold">UI Trends 2025</h3>
+          <p>Exploring neumorphism and animations.</p>
+          <button class="btn-primary mt-4" onclick="likePost(1)">Like (<span id="like-1">0</span>)</button>
+          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
+          <p class="text-sm mt-2">Comments: <span id="comment-1">Insightful!</span></p>
+        </div>
+        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl font-semibold">Quality Assurance</h3>
+          <p>Best practices for QA in tech.</p>
+          <button class="btn-primary mt-4" onclick="likePost(2)">Like (<span id="like-2">0</span>)</button>
+          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
+          <p class="text-sm mt-2">Comments: <span id="comment-2">Very useful!</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Newsletter Signup</h2>
+      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <form id="newsletter-form" class="space-y-4">
+          <input id="newsletter-email" type="email" placeholder="Your Email" class="w-full p-2 rounded neumorphic" aria-label="Newsletter email" required>
+          <button type="submit" class="w-full btn-primary">Subscribe</button>
+        </form>
+        <form id="unsubscribe-form" class="space-y-4 mt-4">
+          <input id="unsubscribe-email" type="email" placeholder="Email to Unsubscribe" class="w-full p-2 rounded neumorphic" aria-label="Unsubscribe email" required>
+          <button type="submit" class="w-full btn-primary">Unsubscribe</button>
+        </form>
+        <div id="newsletter-list" class="mt-4 hidden">
+          <h3 class="text-xl font-semibold">Subscribers</h3>
+          <ul id="subscribers" class="space-y-2"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-12" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-6">Contact</h2>
+      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
+        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-teal-500" aria-label="Copy phone number">9381329751</span></p>
+        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-teal-500" aria-label="Copy email">aravind@example.com</span></p>
+        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-teal-500" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
+        <p><strong>GitHub:</strong> <a href="#" class="hover:text-teal-500" aria-label="GitHub profile">github.com/aravind</a></p>
+        <form id="contact-form" class="mt-6 space-y-4">
+          <input id="form-name" type="text" placeholder="Your Name" class="w-full p-2 rounded neumorphic" aria-label="Contact name" required>
+          <input id="form-email" type="email" placeholder="Your Email" class="w-full p-2 rounded neumorphic" aria-label="Contact email" required>
+          <textarea id="form-message" placeholder="Your Message" class="w-full p-2 rounded neumorphic" rows="4" aria-label="Contact message" required></textarea>
+          <div class="flex items-center space-x-2">
+            <p id="captcha-question" class="text-sm"></p>
+            <input id="captcha-answer" type="number" placeholder="Answer" class="w-20 p-2 rounded neumorphic" aria-label="CAPTCHA answer" required>
+          </div>
+          <button type="submit" class="w-full btn-primary">Send Message</button>
+        </form>
+      </div>
+      <div id="theme-customizer" class="hidden neumorphic rounded-lg p-6 max-w-md mx-auto mt-6">
+        <p class="text-center">Developer Theme Customizer</p>
+        <input id="theme-color" type="color" value="#14b8a6" class="w-full p-2 mb-4 rounded" aria-label="Theme color">
+        <label><input id="auto-theme" type="checkbox" class="mr-2">Auto-toggle dark mode</label>
+        <button id="theme-apply" class="w-full btn-primary mt-2">Apply Color</button>
+      </div>
+      <div id="toast-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
+    <div class="flex justify-center space-x-4 mb-4">
+      <a href="#" class="hover:text-teal-500" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+      <a href="#" class="hover:text-teal-500" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+      <a href="#" class="hover:text-teal-500" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
     </div>
-    <div>
-        <p class="how"> this page was developed by aravind</p>
-    </div>
-    <div>
-        <!--one expmaple for taget,visted,active-->
-        <h1 id="link2">header1</h1>
-        <p id="para2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi sit magnam blanditiis natus
-            rerum
-            laudantium dolores enim, incidunt, quos illo hic ratione! Exercitationem quibusdam voluptates asperiores et
-            saepe dolores?</p>
-        <h1 id="link3">header2</h1>
-        <p id="para3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, repellat optio, vel sunt enim
-            hic autem
-            rem mollitia aperiam modi provident quo est consectetur in, explicabo error? Voluptatum, obcaecati
-            architecto!</p>
-        <h1 id="link4">header1</h1>
-        <p id="para4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum modi sit magnam blanditiis natus
-            rerum
-            laudantium dolores enim, incidunt, quos illo hic ratione! Exercitationem quibusdam voluptates asperiores et
-            saepe dolores?</p>
-        <h1 id="link5">header2</h1>
-        <p id="para5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, repellat optio, vel sunt enim
-            hic autem
-            rem mollitia aperiam modi provident quo est consectetur in, explicabo error? Voluptatum, obcaecati
-            architecto!</p>
+    <p>© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
+  </footer>
 
+  <script>
+    // Initialize AOS
+    try {
+      AOS.init({ duration: 800, once: true });
+    } catch (e) {
+      console.error("AOS initialization failed:", e);
+      showToast("Animation library failed to load.", true);
+    }
 
-    </div>
+    // Initialize Swiper
+    try {
+      new Swiper('.swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        autoplay: { delay: 5000 },
+        breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
+      });
+    } catch (e) {
+      console.error("Swiper initialization failed:", e);
+      showToast("Carousel failed to load.", true);
+    }
+
+    // Initialize Highlight.js
+    try {
+      hljs.highlightAll();
+    } catch (e) {
+      console.error("Highlight.js initialization failed:", e);
+      showToast("Code highlighting failed.", true);
+    }
+
+    // Theme Toggle
+    const body = document.getElementById("body");
+    const themeToggle = document.getElementById("theme-toggle");
+    const autoTheme = document.getElementById("auto-theme");
+    let isDark = localStorage.getItem("theme") === "dark";
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+    function updateTheme() {
+      isDark = autoTheme.checked ? prefersDark.matches : (localStorage.getItem("theme") === "dark");
+      body.classList.toggle("dark", isDark);
+      themeToggle.innerHTML = `<i class="fas fa-${isDark ? 'sun' : 'moon'}"></i>`;
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+    if (!localStorage.getItem("theme")) {
+      isDark = prefersDark.matches;
+    }
+    updateTheme();
+    themeToggle.addEventListener("click", () => {
+      if (!autoTheme.checked) {
+        isDark = !isDark;
+        updateTheme();
+      }
+    });
+    autoTheme.addEventListener("change", updateTheme);
+    prefersDark.addEventListener("change", updateTheme);
+
+    // Theme Customizer
+    const themeCustomizer = document.getElementById("theme-customizer");
+    const themeColor = document.getElementById("theme-color");
+    const themeApply = document.getElementById("theme-apply");
+    themeApply.addEventListener("click", () => {
+      document.documentElement.style.setProperty('--primary-color', themeColor.value);
+      showToast("Theme color updated!");
+    });
+
+    // Voice Control
+    const voiceControl = document.getElementById("voice-control");
+    voiceControl.addEventListener("click", () => {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript.toLowerCase();
+        const sectionMap = {
+          'home': 'home', 'about': 'about', 'skills': 'skills', 'projects': 'projects',
+          'jobs': 'jobs', 'gallery': 'gallery', 'analytics': 'analytics', 'chat': 'chat',
+          'iot': 'iot', 'testimonials': 'testimonials', 'code snippets': 'codesnippets',
+          'achievements': 'achievements', 'social': 'social', 'ideas': 'ideas',
+          'blog': 'blog', 'newsletter': 'newsletter', 'contact': 'contact'
+        };
+        for (const [key, section] of Object.entries(sectionMap)) {
+          if (command.includes(key)) {
+            showSection(section);
+            showToast(`Navigated to ${key}`);
+            return;
+          }
+        }
+        showToast("Command not recognized.", true);
+      };
+      recognition.onerror = () => showToast("Voice recognition failed.", true);
+      recognition.start();
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const navLinks = document.getElementById("nav-links");
+    mobileMenuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("hidden");
+      mobileMenuBtn.innerHTML = navLinks.classList.contains("hidden")
+        ? '<i class="fas fa-bars"></i>'
+        : '<i class="fas fa-times"></i>';
+    });
+
+    // Section Navigation
+    const sections = document.querySelectorAll(".section");
+    const navLinksList = document.querySelectorAll(".nav-link");
+    function showSection(sectionId) {
+      sections.forEach(section => {
+        section.classList.remove("active", "fade-in");
+        section.style.transform = "translateY(20px)";
+      });
+      const targetSection = document.getElementById(sectionId);
+      targetSection.classList.add("active", "fade-in");
+      targetSection.style.transform = "translateY(0)";
+      navLinksList.forEach(link => link.classList.remove("text-teal-500"));
+      document.querySelector(`[data-section="${sectionId}"]`).classList.add("text-teal-500");
+      window.scrollTo({ top: targetSection.offsetTop - 80, behavior: "smooth" });
+    }
+    navLinksList.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute("data-section");
+        showSection(sectionId);
+        if (!navLinks.classList.contains("hidden")) {
+          navLinks.classList.add("hidden");
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
+    });
+    showSection("home");
+
+    // Sticky Navbar Shadow
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("navbar-shadow", window.scrollY > 0);
+    });
+
+    // Timeline Animation
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const dot = entry.target.querySelector(".timeline-dot");
+        dot.classList.toggle("visible", entry.isIntersecting);
+      });
+    }, { threshold: 0.5 });
+    timelineItems.forEach(item => observer.observe(item));
+
+    // Search Bar
+    const searchBar = document.getElementById("search-bar");
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase();
+      const searchItems = [
+        { section: "home", content: "Jogi Bala Venkata Aravind Web Developer IoT Innovator UI Designer QA Specialist" },
+        { section: "about", content: "Hyderabad Telangana B.Tech Computer Science Full-Stack Developer IoT Enthusiast Quality Assurance Guts Electro Mech" },
+        { section: "skills", content: "HTML CSS JavaScript React.js Node.js ESP32 Arduino Quality Assurance" },
+        { section: "projects", content: "Job Portal IoT Smart Home ESP32 Dashboard" },
+        { section: "jobs", content: "Frontend Developer IoT Engineer Quality Analyst" },
+        { section: "gallery", content: "Project 1 Project 2 IoT Setup" },
+        { section: "analytics", content: "Analytics Profile Views Skill Ratings" },
+        { section: "chat", content: "Developer Chat" },
+        { section: "iot", content: "IoT Control LED Temperature Humidity Energy" },
+        { section: "testimonials", content: "Testimonials Job Portal IoT Solutions" },
+        { section: "codesnippets", content: "ESP32 LED Control React Component" },
+        { section: "achievements", content: "Achievements Messages Ideas Jobs" },
+        { section: "social", content: "Social Feed Twitter X Job Portal IoT" },
+        { section: "ideas", content: "Submit Idea" },
+        { section: "blog", content: "ESP32 IoT UI Trends 2025 Quality Assurance" },
+        { section: "newsletter", content: "Newsletter Signup Unsubscribe" },
+        { section: "contact", content: "Contact Phone Email LinkedIn GitHub" }
+      ];
+      const results = searchItems.filter(item => item.content.toLowerCase().includes(query));
+      if (query) {
+        showToast(`Found ${results.length} matching sections.`);
+        if (results.length > 0) showSection(results[0].section);
+      }
+    });
+
+    // Typed Animation
+    const typed = document.getElementById("typed");
+    const texts = ["Web Developer", "IoT Innovator", "UI Designer", "QA Specialist"];
+    let index = 0, charIndex = 0, isDeleting = false, text = "";
+    function type() {
+      if (index >= texts.length) index = 0;
+      text = texts[index];
+      if (!isDeleting && charIndex < text.length) {
+        typed.textContent = text.slice(0, ++charIndex);
+        setTimeout(type, 100);
+      } else if (isDeleting && charIndex > 0) {
+        typed.textContent = text.slice(0, --charIndex);
+        setTimeout(type, 50);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) index++;
+        setTimeout(type, isDeleting ? 1000 : 2000);
+      }
+    }
+    try {
+      type();
+    } catch (e) {
+      console.error("Typed animation failed:", e);
+      typed.textContent = "Web Developer";
+    }
+
+    // Visitor Counter
+    const visitorCounter = document.getElementById("visitor-counter");
+    let visitors = parseInt(localStorage.getItem("visitors") || "1");
+    visitorCounter.textContent = visitors;
+    setInterval(() => {
+      visitors += Math.random() > 0.7 ? 1 : 0;
+      visitorCounter.textContent = visitors;
+      localStorage.setItem("visitors", visitors);
+      visitorCounter.classList.add("animate-pulse");
+      setTimeout(() => visitorCounter.classList.remove("animate-pulse"), 500);
+    }, 10000);
+
+    // Weather Widget
+    const weatherTemp = document.getElementById("weather-temp");
+    const weatherCondition = document.getElementById("weather-condition");
+    const toggleUnit = document.getElementById("toggle-unit");
+    let isCelsius = true;
+    const mockWeather = { tempC: 28, condition: "Sunny" };
+    toggleUnit.addEventListener("click", () => {
+      isCelsius = !isCelsius;
+      weatherTemp.textContent = isCelsius
+        ? `${mockWeather.tempC}°C`
+        : `${Math.round(mockWeather.tempC * 9/5 + 32)}°F`;
+      toggleUnit.textContent = `Toggle ${isCelsius ? '°F' : '°C'}`;
+      showToast(`Temperature unit changed to ${isCelsius ? 'Celsius' : 'Fahrenheit'}`);
+    });
+
+    // Toast Notification
+    const toastContainer = document.getElementById("toast-container");
+    function showToast(message, isError = false) {
+      const toast = document.createElement("div");
+      toast.className = `bg-${isError ? 'red' : 'teal'}-500 text-white px-4 py-2 rounded-lg shadow-lg toast`;
+      toast.textContent = message;
+      toast.style.opacity = "0";
+      toast.style.transform = "translate(-50%, -20px)";
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "1";
+        toast.style.transform = "translate(-50%, 0)";
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translate(-50%, -20px)";
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
+      }, 10);
+    }
+
+    // Copy to Clipboard
+    function copyToClipboard(text) {
+      try {
+        navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!"));
+      } catch (e) {
+        console.error("Clipboard access failed:", e);
+        showToast("Clipboard access failed!", true);
+      }
+    }
+
+    // Contact Form with CAPTCHA
+    const contactForm = document.getElementById("contact-form");
+    const captchaQuestion = document.getElementById("captcha-question");
+    const captchaAnswer = document.getElementById("captcha-answer");
+    let captchaResult;
+    function generateCaptcha() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      captchaResult = num1 + num2;
+      captchaQuestion.textContent = `${num1} + ${num2} = ?`;
+    }
+    generateCaptcha();
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("form-name").value;
+      const email = document.getElementById("form-email").value;
+      const message = document.getElementById("form-message").value;
+      const answer = parseInt(captchaAnswer.value);
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
+        showToast("Name should contain only letters and spaces.", true);
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Invalid email address.", true);
+        return;
+      }
+      if (message.length < 10) {
+        showToast("Message must be at least 10 characters.", true);
+        return;
+      }
+      if (answer !== captchaResult) {
+        showToast("Incorrect CAPTCHA answer.", true);
+        generateCaptcha();
+        captchaAnswer.value = "";
+        return;
+      }
+      showToast("Message sent successfully!");
+      contactForm.reset();
+      generateCaptcha();
+      checkAchievements();
+    });
+
+    // Skill Rating
+    let skillRatings = JSON.parse(localStorage.getItem("skill-ratings")) || {
+      "HTML & CSS": [], "JavaScript": [], "React.js": [], "Node.js": [], "ESP32 & Arduino": [], "Quality Assurance": []
+    };
+    document.querySelectorAll(".star-rating i").forEach(star => {
+      star.addEventListener("click", (e) => {
+        const skill = e.target.parentElement.getAttribute("data-skill");
+        const rating = Array.from(e.target.parentElement.children).indexOf(e.target) + 1;
+        skillRatings[skill].push(rating);
+        localStorage.setItem("skill-ratings", JSON.stringify(skillRatings));
+        updateStarRating(skill, rating);
+        showToast(`Rated ${skill} ${rating} stars!`);
+      });
+    });
+    function updateStarRating(skill, rating) {
+      const stars = document.querySelector(`.star-rating[data-skill="${skill}"]`).children;
+      for (let i = 0; i < 5; i++) {
+        stars[i].className = i < rating ? "fas fa-star text-yellow-400" : "fas fa-star text-gray-400";
+      }
+    }
+
+    // Project Modal
+    function openProjectModal(title, description, tech, duration, link) {
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-description").textContent = description;
+      document.getElementById("modal-tech").innerHTML = `<strong>Tech Stack:</strong> ${tech}`;
+      document.getElementById("modal-duration").innerHTML = `<strong>Duration:</strong> ${duration}`;
+      document.getElementById("modal-link").href = link;
+      document.getElementById("project-modal").classList.remove("hidden");
+      document.addEventListener("keydown", handleModalKeys);
+    }
+    function closeProjectModal() {
+      document.getElementById("project-modal").classList.add("hidden");
+      document.removeEventListener("keydown", handleModalKeys);
+    }
+    function handleModalKeys(e) {
+      if (e.key === "Escape") closeProjectModal();
+    }
+
+    // Job Filter
+    const jobFilter = document.getElementById("job-filter");
+    const jobCategory = document.getElementById("job-category");
+    const jobCards = document.querySelectorAll(".job-card");
+    function filterJobs() {
+      const filter = jobFilter.value.toLowerCase();
+      const category = jobCategory.value;
+      jobCards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const cardCategory = card.getAttribute("data-category");
+                const matches = (filter === "" || title.includes(filter)) && (category === "" || cardCategory === category);
+        card.classList.toggle("hidden", !matches);
+      });
+    }
+    jobFilter.addEventListener("input", filterJobs);
+    jobCategory.addEventListener("change", filterJobs);
+
+    // Job Application and Save
+    let savedJobs = JSON.parse(localStorage.getItem("saved-jobs")) || [];
+    let appliedJobs = JSON.parse(localStorage.getItem("jobs-applied")) || [];
+    window.applyJob = (title) => {
+      if (!appliedJobs.includes(title)) {
+        appliedJobs.push(title);
+        localStorage.setItem("jobs-applied", JSON.stringify(appliedJobs));
+        document.getElementById(`status-${title}`).textContent = "Applied";
+        showToast(`Applied for ${title}!`);
+        checkAchievements();
+      } else {
+        showToast("Already applied for this job.", true);
+      }
+    };
+    window.saveJob = (title) => {
+      if (!savedJobs.includes(title)) {
+        savedJobs.push(title);
+        localStorage.setItem("saved-jobs", JSON.stringify(savedJobs));
+        renderSavedJobs();
+        showToast(`Saved ${title}!`);
+      } else {
+        showToast("Job already saved.", true);
+      }
+    };
+    function renderSavedJobs() {
+      const savedJobsList = document.getElementById("saved-jobs");
+      savedJobsList.innerHTML = "";
+      savedJobs.forEach(job => {
+        const li = document.createElement("li");
+        li.className = "neumorphic p-2 rounded";
+        li.innerHTML = `${job} <button class="text-red-400 hover:text-red-600 ml-2" onclick="removeSavedJob('${job}')" aria-label="Remove saved job">Remove</button>`;
+        savedJobsList.appendChild(li);
+      });
+    }
+    window.removeSavedJob = (title) => {
+      savedJobs = savedJobs.filter(job => job !== title);
+      localStorage.setItem("saved-jobs", JSON.stringify(savedJobs));
+      renderSavedJobs();
+      showToast(`Removed ${title} from saved jobs.`);
+    };
+    renderSavedJobs();
+
+    // Project Filter and Sort
+    const projectFilter = document.getElementById("project-filter");
+    const projectSort = document.getElementById("project-sort");
+    const projectCards = document.querySelectorAll(".project-card");
+    function filterAndSortProjects() {
+      const filter = projectFilter.value;
+      const sort = projectSort.value;
+      const projects = Array.from(projectCards);
+      projects.forEach(card => {
+        const category = card.getAttribute("data-category");
+        card.classList.toggle("hidden", filter && category !== filter);
+      });
+      const visibleProjects = projects.filter(card => !card.classList.contains("hidden"));
+      visibleProjects.sort((a, b) => {
+        const nameA = a.getAttribute("data-name");
+        const nameB = b.getAttribute("data-name");
+        const dateA = new Date(a.getAttribute("data-date"));
+        const dateB = new Date(b.getAttribute("data-date"));
+        if (sort === "name-asc") return nameA.localeCompare(nameB);
+        if (sort === "name-desc") return nameB.localeCompare(nameA);
+        if (sort === "date-asc") return dateA - dateB;
+        return dateB - dateA;
+      });
+      const projectList = document.getElementById("project-list");
+      projectList.innerHTML = "";
+      visibleProjects.forEach(card => projectList.appendChild(card));
+      try {
+        const swiper = document.querySelector('.swiper').swiper;
+        swiper.update();
+      } catch (e) {
+        console.error("Swiper update failed:", e);
+      }
+    }
+    projectFilter.addEventListener("change", filterAndSortProjects);
+    projectSort.addEventListener("change", filterAndSortProjects);
+
+    // Gallery Lightbox
+    let currentImageIndex = 0;
+    const galleryImages = document.querySelectorAll("#gallery-grid img");
+    function openLightbox(src, alt, index) {
+      currentImageIndex = index;
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxCaption = document.getElementById("lightbox-caption");
+      lightboxImg.src = src;
+      lightboxCaption.textContent = alt;
+      lightbox.classList.remove("hidden");
+      document.addEventListener("keydown", handleLightboxKeys);
+    }
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.add("hidden");
+      document.removeEventListener("keydown", handleLightboxKeys);
+    }
+    function handleLightboxKeys(e) {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prevImage();
+      if (e.key === "ArrowRight") nextImage();
+    }
+    window.prevImage = () => {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      const img = galleryImages[currentImageIndex];
+      document.getElementById("lightbox-img").src = img.src;
+      document.getElementById("lightbox-caption").textContent = img.alt;
+    };
+    window.nextImage = () => {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      const img = galleryImages[currentImageIndex];
+      document.getElementById("lightbox-img").src = img.src;
+      document.getElementById("lightbox-caption").textContent = img.alt;
+    };
+    window.downloadImage = () => {
+      const img = document.getElementById("lightbox-img");
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = img.alt;
+      link.click();
+      showToast("Image downloaded!");
+    };
+    window.shareImage = () => {
+      const img = document.getElementById("lightbox-img");
+      if (navigator.share) {
+        navigator.share({
+          title: img.alt,
+          url: img.src
+        }).then(() => showToast("Image shared!"));
+      } else {
+        copyToClipboard(img.src);
+        showToast("Image URL copied to clipboard!");
+      }
+    };
+
+    // Photo Upload
+    const photoUpload = document.getElementById("photo-upload");
+    const photoPreview = document.getElementById("photo-preview");
+    const addToGalleryBtn = document.getElementById("add-to-gallery");
+    const imageFilter = document.getElementById("image-filter");
+    let uploadedImages = [];
+    photoUpload.addEventListener("change", () => {
+      uploadedImages = Array.from(photoUpload.files).filter(file => file.type.startsWith("image/"));
+      photoPreview.innerHTML = "";
+      photoPreview.classList.remove("hidden");
+      addToGalleryBtn.classList.remove("hidden");
+      uploadedImages.forEach((file, index) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.className = `w-24 h-24 object-cover rounded-lg ${imageFilter.value}`;
+        img.alt = `Uploaded Image ${index + 1}`;
+        photoPreview.appendChild(img);
+      });
+    });
+    imageFilter.addEventListener("change", () => {
+      photoPreview.querySelectorAll("img").forEach(img => {
+        img.className = `w-24 h-24 object-cover rounded-lg ${imageFilter.value}`;
+      });
+    });
+    window.addToGallery = () => {
+      uploadedImages.forEach((file, index) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.alt = `Uploaded Image ${galleryImages.length + index + 1}`;
+        img.className = `rounded-lg object-cover w-full h-48 neumorphic cursor-pointer ${imageFilter.value}`;
+        img.onclick = () => openLightbox(img.src, img.alt, galleryImages.length + index);
+        document.getElementById("gallery-grid").appendChild(img);
+      });
+      galleryImages = document.querySelectorAll("#gallery-grid img");
+      photoPreview.classList.add("hidden");
+      addToGalleryBtn.classList.add("hidden");
+      photoUpload.value = "";
+      uploadedImages = [];
+      showToast("Images added to gallery!");
+    };
+
+    // Code Snippet Copy
+    window.copyCode = (button) => {
+      const code = button.previousElementSibling.querySelector("code").textContent;
+      copyToClipboard(code);
+    };
+
+    // Analytics Login
+    const analyticsLogin = document.getElementById("analytics-login");
+    const analyticsContent = document.getElementById("analytics-content");
+    const devLoginBtn = document.getElementById("dev-login-btn");
+    const devUsername = document.getElementById("dev-username");
+    const devPassword = document.getElementById("dev-password");
+    devLoginBtn.addEventListener("click", () => {
+      if (devUsername.value === "Tinju" && devPassword.value === "Tinju@2001") {
+        analyticsLogin.classList.add("hidden");
+        analyticsContent.classList.remove("hidden");
+        themeCustomizer.classList.remove("hidden");
+        showToast("Analytics access granted!");
+        renderAnalyticsChart();
+        renderSkillRatings();
+      } else {
+        showToast("Invalid credentials.", true);
+      }
+    });
+
+    // Analytics Chart
+    function renderAnalyticsChart() {
+      try {
+        const ctx = document.getElementById("profile-chart").getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            datasets: [{
+              label: "Profile Views",
+              data: [50, 100, 150, 200, 250, 300, 350],
+              borderColor: "#14b8a6",
+              backgroundColor: "rgba(20, 184, 166, 0.2)",
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      } catch (e) {
+        console.error("Chart rendering failed:", e);
+        showToast("Failed to render analytics chart.", true);
+      }
+    }
+
+    // Skill Ratings Display
+    function renderSkillRatings() {
+      const ratingsContainer = document.getElementById("skill-ratings");
+      ratingsContainer.innerHTML = "";
+      for (const [skill, ratings] of Object.entries(skillRatings)) {
+        const avgRating = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "No ratings";
+        const div = document.createElement("div");
+        div.className = "neumorphic rounded-lg p-4";
+        div.innerHTML = `<p><strong>${skill}</strong>: ${avgRating} stars (${ratings.length} ratings)</p>`;
+        ratingsContainer.appendChild(div);
+      }
+    }
+
+    // Download Analytics Report
+    const downloadAnalytics = document.getElementById("download-analytics");
+    downloadAnalytics.addEventListener("click", () => {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text("Portfolio Analytics Report", 10, 10);
+        doc.text("Profile Views (2025):", 10, 20);
+        doc.text("Jan: 50 | Feb: 100 | Mar: 150 | Apr: 200", 10, 30);
+        doc.text("May: 250 | Jun: 300 | Jul: 350", 10, 40);
+        let y = 50;
+        doc.text("Skill Ratings:", 10, y);
+        for (const [skill, ratings] of Object.entries(skillRatings)) {
+          const avgRating = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : "No ratings";
+          doc.text(`${skill}: ${avgRating} stars (${ratings.length} ratings)`, 10, y + 10);
+          y += 10;
+        }
+        doc.save("analytics-report.pdf");
+        showToast("Analytics report downloaded!");
+      } catch (e) {
+        console.error("PDF generation failed:", e);
+        showToast("Failed to download analytics report.", true);
+      }
+    });
+
+    // Chat System
+    const chatLogin = document.getElementById("chat-login");
+    const chatContent = document.getElementById("chat-content");
+    const chatLoginBtn = document.getElementById("chat-login-btn");
+    const chatUsername = document.getElementById("chat-username");
+    const chatPassword = document.getElementById("chat-password");
+    const chatInput = document.getElementById("chat-input");
+    const chatMessages = document.getElementById("chat-messages");
+    const chatSend = document.getElementById("chat-send");
+    const emojiPicker = document.getElementById("emoji-picker");
+    const emojiPanel = document.getElementById("emoji-panel");
+    const typingIndicator = document.getElementById("typing-indicator");
+    let messages = JSON.parse(localStorage.getItem("chat-messages")) || [];
+    let messageCount = messages.filter(m => m.sender === "Tinju").length;
+
+    chatLoginBtn.addEventListener("click", () => {
+      if (chatUsername.value === "Tinju" && chatPassword.value === "Tinju@2001") {
+        chatLogin.classList.add("hidden");
+        chatContent.classList.remove("hidden");
+        showToast("Chat access granted!");
+        renderMessages();
+      } else {
+        showToast("Invalid credentials.", true);
+      }
+    });
+
+    function renderMessages() {
+      chatMessages.innerHTML = "";
+      messages.forEach((msg, index) => {
+        const div = document.createElement("div");
+        div.className = `chat-message ${msg.sender === "Tinju" ? "sent" : "received"}`;
+        if (msg.pinned) div.classList.add("pinned");
+        div.innerHTML = `
+          <p><strong>${msg.sender}:</strong> ${msg.text}</p>
+          <span class="read-status text-xs text-gray-400">${msg.read ? "Read" : "Unread"}</span>
+          <button class="delete-btn text-red-400 hover:text-red-600" onclick="deleteMessage(${index})" aria-label="Delete message"><i class="fas fa-trash"></i></button>
+          <button class="pin-btn text-yellow-400 hover:text-yellow-600" onclick="pinMessage(${index})" aria-label="Pin message"><i class="fas fa-thumbtack"></i></button>
+        `;
+        chatMessages.appendChild(div);
+      });
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    chatInput.addEventListener("input", () => {
+      typingIndicator.classList.remove("hidden");
+      setTimeout(() => typingIndicator.classList.add("hidden"), 1000);
+    });
+
+    emojiPicker.addEventListener("click", () => {
+      emojiPanel.classList.toggle("hidden");
+    });
+
+    document.querySelectorAll(".emoji-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        chatInput.value += btn.textContent;
+        emojiPanel.classList.add("hidden");
+      });
+    });
+
+    chatSend.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (text) {
+        messages.push({ sender: "Tinju", text, read: false, pinned: false });
+        messageCount++;
+        localStorage.setItem("chat-messages", JSON.stringify(messages));
+        renderMessages();
+        chatInput.value = "";
+        showToast("Message sent!");
+        checkAchievements();
+        setTimeout(() => {
+          messages.push({ sender: "Bot", text: "Thanks for your message!", read: true, pinned: false });
+          localStorage.setItem("chat-messages", JSON.stringify(messages));
+          renderMessages();
+        }, 1000);
+      }
+    }
+
+    window.deleteMessage = (index) => {
+      messages.splice(index, 1);
+      messageCount = messages.filter(m => m.sender === "Tinju").length;
+      localStorage.setItem("chat-messages", JSON.stringify(messages));
+      renderMessages();
+      showToast("Message deleted!");
+      checkAchievements();
+    };
+
+    window.pinMessage = (index) => {
+      messages[index].pinned = !messages[index].pinned;
+      localStorage.setItem("chat-messages", JSON.stringify(messages));
+      renderMessages();
+      showToast(messages[index].pinned ? "Message pinned!" : "Message unpinned!");
+    };
+
+    // IoT Control
+    const ledStatus = document.getElementById("led-status");
+    const toggleLed = document.getElementById("toggle-led");
+    const iotTemp = document.getElementById("iot-temp");
+    const iotHumidity = document.getElementById("iot-humidity");
+    const iotRefresh = document.getElementById("iot-refresh");
+    let ledOn = false;
+
+    toggleLed.addEventListener("click", () => {
+      ledOn = !ledOn;
+      ledStatus.textContent = ledOn ? "On" : "Off";
+      ledStatus.classList.toggle("text-green-500", ledOn);
+      ledStatus.classList.toggle("text-red-500", !ledOn);
+      showToast(`LED turned ${ledOn ? "on" : "off"}!`);
+    });
+
+    iotRefresh.addEventListener("click", () => {
+      const temp = (Math.random() * 5 + 25).toFixed(1);
+      const humidity = (Math.random() * 20 + 50).toFixed(1);
+      iotTemp.textContent = `${temp}°C`;
+      iotHumidity.textContent = `${humidity}%`;
+      showToast("IoT data refreshed!");
+      updateEnergyChart();
+    });
+
+    function updateEnergyChart() {
+      try {
+        const ctx = document.getElementById("energy-chart").getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+            datasets: [{
+              label: "Energy Usage (kWh)",
+              data: [10, 12, 8, 15, 11],
+              backgroundColor: "#14b8a6",
+              borderColor: "#14b8a6",
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      } catch (e) {
+        console.error("Energy chart rendering failed:", e);
+        showToast("Failed to render energy chart.", true);
+      }
+    }
+    updateEnergyChart();
+
+    // Achievements
+    const achLogin = document.getElementById("achievements-login");
+    const achContent = document.getElementById("achievements-content");
+    const achLoginBtn = document.getElementById("ach-login-btn");
+    const achUsername = document.getElementById("ach-username");
+    const achPassword = document.getElementById("ach-password");
+    let ideasCount = JSON.parse(localStorage.getItem("ideas"))?.length || 0;
+    let jobsApplied = appliedJobs.length;
+
+    achLoginBtn.addEventListener("click", () => {
+      if (achUsername.value === "Tinju" && achPassword.value === "Tinju@2001") {
+        achLogin.classList.add("hidden");
+        achContent.classList.remove("hidden");
+        showToast("Achievements access granted!");
+        checkAchievements();
+      } else {
+        showToast("Invalid credentials.", true);
+      }
+    });
+
+    function checkAchievements() {
+      jobsApplied = appliedJobs.length;
+      const achievements = [
+        { id: "messages", condition: () => messageCount >= 10 },
+        { id: "ideas", condition: () => ideasCount >= 5 },
+        { id: "jobs", condition: () => jobsApplied >= 3 }
+      ];
+      achievements.forEach(ach => {
+        const element = document.querySelector(`.achievement[data-id="${ach.id}"]`);
+        if (ach.condition()) {
+          element.classList.add("unlocked");
+        } else {
+          element.classList.remove("unlocked");
+        }
+      });
+    }
+
+    // Ideas Submission
+    const ideaForm = document.getElementById("idea-form");
+    const ideasList = document.getElementById("ideas-list");
+    const ideasLogin = document.getElementById("ideas-admin");
+    const ideasLoginBtn = document.getElementById("ideas-login-btn");
+    const ideasUsername = document.getElementById("ideas-username");
+    const ideasPassword = document.getElementById("ideas-password");
+    let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+
+    ideaForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = document.getElementById("idea-title").value;
+      const description = document.getElementById("idea-description").value;
+      ideas.push({ title, description });
+      ideasCount = ideas.length;
+      localStorage.setItem("ideas", JSON.stringify(ideas));
+      ideaForm.reset();
+      showToast("Idea submitted!");
+      checkAchievements();
+    });
+
+    ideasLoginBtn.addEventListener("click", () => {
+      if (ideasUsername.value === "Tinju" && ideasPassword.value === "Tinju@2001") {
+        ideasLogin.classList.add("hidden");
+        renderIdeas();
+        showToast("Ideas admin access granted!");
+      } else {
+        showToast("Invalid credentials.", true);
+      }
+    });
+
+    function renderIdeas() {
+      ideasList.innerHTML = "";
+      ideas.forEach((idea, index) => {
+        const div = document.createElement("div");
+        div.className = "neumorphic p-4 rounded-lg";
+        div.innerHTML = `
+          <p><strong>${idea.title}</strong></p>
+          <p>${idea.description}</p>
+          <button class="text-red-400 hover:text-red-600 mt-2" onclick="deleteIdea(${index})" aria-label="Delete idea">Delete</button>
+        `;
+        ideasList.appendChild(div);
+      });
+    }
+
+    window.deleteIdea = (index) => {
+      ideas.splice(index, 1);
+      ideasCount = ideas.length;
+      localStorage.setItem("ideas", JSON.stringify(ideas));
+      renderIdeas();
+      showToast("Idea deleted!");
+      checkAchievements();
+    };
+
+    // Blog Likes
+    let likes = JSON.parse(localStorage.getItem("likes")) || [0, 0, 0];
+    window.likePost = (index) => {
+      likes[index]++;
+      localStorage.setItem("likes", JSON.stringify(likes));
+      document.getElementById(`like-${index}`).textContent = likes[index];
+      showToast("Post liked!");
+    };
+
+    // Newsletter Signup and Unsubscribe
+    const newsletterForm = document.getElementById("newsletter-form");
+    const unsubscribeForm = document.getElementById("unsubscribe-form");
+    const newsletterList = document.getElementById("newsletter-list");
+    const subscribersList = document.getElementById("subscribers");
+    let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
+
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("newsletter-email").value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Invalid email address.", true);
+        return;
+      }
+      if (!subscribers.includes(email)) {
+        subscribers.push(email);
+        localStorage.setItem("subscribers", JSON.stringify(subscribers));
+        showToast("Subscribed to newsletter!");
+        if (devUsername.value === "Tinju" && devPassword.value === "Tinju@2001") {
+          newsletterList.classList.remove("hidden");
+          renderSubscribers();
+        }
+      } else {
+        showToast("Email already subscribed.", true);
+      }
+      newsletterForm.reset();
+    });
+
+    unsubscribeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("unsubscribe-email").value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Invalid email address.", true);
+        return;
+      }
+      const index = subscribers.indexOf(email);
+      if (index !== -1) {
+        subscribers.splice(index, 1);
+        localStorage.setItem("subscribers", JSON.stringify(subscribers));
+        showToast("Unsubscribed from newsletter!");
+        if (devUsername.value === "Tinju" && devPassword.value === "Tinju@2001") {
+          renderSubscribers();
+        }
+      } else {
+        showToast("Email not found in subscribers.", true);
+      }
+      unsubscribeForm.reset();
+    });
+
+    function renderSubscribers() {
+      subscribersList.innerHTML = "";
+      subscribers.forEach(email => {
+        const li = document.createElement("li");
+        li.className = "neumorphic p-2 rounded";
+        li.textContent = email;
+        subscribersList.appendChild(li);
+      });
+      newsletterList.classList.toggle("hidden", subscribers.length === 0);
+    }
+
+    // Download Portfolio
+    const downloadPortfolio = document.getElementById("download-portfolio");
+    downloadPortfolio.addEventListener("click", () => {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text("Jogi Bala Venkata Aravind - Portfolio", 10, 10);
+        doc.text("Full-Stack Developer & IoT Enthusiast", 10, 20);
+        doc.text("Skills: HTML, CSS, JavaScript, React, Node.js, ESP32", 10, 30);
+        doc.text("Projects: Job Portal, IoT Smart Home, ESP32 Dashboard", 10, 40);
+        doc.text("Contact: aravind@example.com | 9381329751", 10, 50);
+        doc.save("portfolio.pdf");
+        showToast("Portfolio downloaded!");
+      } catch (e) {
+        console.error("Portfolio PDF generation failed:", e);
+        showToast("Failed to download portfolio.", true);
+      }
+    });
+
+    // Back to Top
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("hidden", window.scrollY < 300);
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Hide Loading Spinner
+    window.addEventListener("load", () => {
+      try {
+        const loadingSpinner = document.getElementById("loading");
+        loadingSpinner.classList.add("hidden");
+        console.log("Spinner hidden on load");
+      } catch (e) {
+        console.error("Error hiding spinner:", e);
+        showToast("Failed to hide loading spinner.", true);
+      }
+    });
+
+    // Fallback: Hide spinner after 3 seconds
+    setTimeout(() => {
+      const loadingSpinner = document.getElementById("loading");
+      if (!loadingSpinner.classList.contains("hidden")) {
+        loadingSpinner.classList.add("hidden");
+        console.log("Spinner hidden via fallback timeout");
+        showToast("Loading spinner hidden (fallback).");
+      }
+    }, 3000);
+  </script>
 </body>
-
 </html>
