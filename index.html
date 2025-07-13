@@ -1,1561 +1,5305 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Jogi Bala Venkata Aravind, a full-stack developer specializing in web development, IoT, and job portal solutions.">
-  <meta name="keywords" content="portfolio, web developer, IoT, ESP32, job portal, Hyderabad, quality assurance">
-  <meta name="author" content="Jogi Bala Venkata Aravind">
-  <title>Jogi Bala Venkata Aravind - Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/monokai-sublime.min.css">
-  <style>
-    :root {
-      --primary-color: #14b8a6;
-      --secondary-color: #f43f5e;
-      --bg-color: #e5e7eb;
-      --text-color: #1f2937;
-      --card-bg: #e5e7eb;
-    }
-    .dark {
-      --bg-color: #1f2937;
-      --text-color: #f3f4f6;
-      --card-bg: #374151;
-    }
-    body {
-      background: var(--bg-color);
-      color: var(--text-color);
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    .neumorphic {
-      background: var(--card-bg);
-      box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.5);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-    .neumorphic:hover {
-      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), -4px -4px 8px rgba(255, 255, 255, 0.7);
-      transform: translateY(-2px);
-    }
-    .btn-primary {
-      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-    }
-    .btn-primary:hover::after {
-      width: 200px;
-      height: 200px;
-    }
-    .btn-primary:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-    .section {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .section.active {
-      display: block;
-      opacity: 1;
-    }
-    .fade-in {
-      animation: fadeIn 0.5s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .spinner {
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-top: 4px solid var(--primary-color);
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .parallax {
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
-    }
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-    .chat-message {
-      max-width: 70%;
-      margin: 10px;
-      padding: 10px 20px;
-      border-radius: 12px;
-      position: relative;
-      transition: transform 0.2s ease;
-    }
-    .chat-message.sent {
-      background: var(--primary-color);
-      margin-left: auto;
-    }
-    .chat-message.received {
-      background: var(--secondary-color);
-    }
-    .chat-message .delete-btn, .chat-message .read-status, .chat-message .pin-btn {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .chat-message:hover .delete-btn, .chat-message:hover .read-status, .chat-message:hover .pin-btn {
-      opacity: 1;
-    }
-    .chat-message.pinned {
-      border: 2px solid var(--secondary-color);
-    }
-    .timeline-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--primary-color);
-      border-radius: 50%;
-      position: absolute;
-      left: -6px;
-      top: 0;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    .progress-bar {
-      background: linear-gradient(to right, var(--primary-color) 50%, var(--card-bg) 50%);
-      background-size: 200% 100%;
-      background-position: 0 0;
-      height: 8px;
-      border-radius: 4px;
-      transition: background-position 1s ease;
-    }
-    .progress-bar:hover {
-      background-position: 100% 0;
-    }
-    .tooltip {
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .progress-container:hover .tooltip {
-      visibility: visible;
-      opacity: 1;
-    }
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .toast {
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      z-index: 1000;
-    }
-    pre code {
-      border-radius: 8px;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-    .achievement {
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
-    }
-    .achievement.unlocked {
-      opacity: 1;
-      animation: bounce 0.5s ease;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-  </style>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ambulance Tracker</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+
+            --primary: #2563eb;
+
+            --primary-dark: #1e40af;
+
+            --accent: #059669;
+
+            --neutral: #d1d5db;
+
+            --text: #1f2937;
+
+            --error: #dc2626;
+
+            --bg-light: #f3f4f6;
+
+            --bg-dark: #111827;
+
+            --text-dark: #e5e7eb;
+
+            --shadow: 0 6px 12px rgba(0,0,0,0.15);
+
+            --success: #16a34a;
+
+            --warning: #d97706;
+
+        }
+
+        * {
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            font-family: 'Roboto', sans-serif;
+
+            margin: 0;
+
+            padding: 0;
+
+            background-color: var(--bg-light);
+
+            color: var(--text);
+
+            transition: background-color 0.3s, color 0.3s;
+
+        }
+
+        body.dark-mode {
+
+            background-color: var(--bg-dark);
+
+            color: var(--text-dark);
+
+        }
+
+        h1, h2, h3 {
+
+            font-family: 'Montserrat', sans-serif;
+
+            font-weight: 700;
+
+        }
+
+        .navbar {
+
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+
+            padding: 1rem;
+
+            box-shadow: var(--shadow);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+
+        }
+
+        .navbar-container {
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+        .navbar ul {
+
+            list-style: none;
+
+            margin: 0;
+
+            padding: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1.5rem;
+
+        }
+
+        .navbar a, .navbar .dropdown-toggle {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 500;
+
+            font-size: 1rem;
+
+            padding: 0.5rem 1rem;
+
+            border-radius: 0.5rem;
+
+            transition: background 0.3s, transform 0.2s;
+
+            cursor: pointer;
+
+        }
+
+        .navbar a:hover, .navbar .dropdown-toggle:hover {
+
+            background: var(--primary-dark);
+
+            transform: scale(1.05);
+
+        }
+
+        .dropdown {
+
+            position: relative;
+
+        }
+
+        .dropdown-menu {
+
+            display: none;
+
+            position: absolute;
+
+            top: 100%;
+
+            right: 0;
+
+            background: white;
+
+            border-radius: 0.5rem;
+
+            box-shadow: var(--shadow);
+
+            min-width: 180px;
+
+            z-index: 1001;
+
+            animation: slideIn 0.2s ease;
+
+        }
+
+        body.dark-mode .dropdown-menu {
+
+            background: #1f2937;
+
+        }
+
+        .dropdown-menu a, .dropdown-menu span {
+
+            display: block;
+
+            padding: 0.75rem 1rem;
+
+            color: var(--text);
+
+            text-decoration: none;
+
+            font-size: 0.875rem;
+
+        }
+
+        body.dark-mode .dropdown-menu a, body.dark-mode .dropdown-menu span {
+
+            color: var(--text-dark);
+
+        }
+
+        .dropdown-menu a:hover {
+
+            background: var(--neutral);
+
+        }
+
+        body.dark-mode .dropdown-menu a:hover {
+
+            background: #374151;
+
+        }
+
+        .dropdown:hover .dropdown-menu {
+
+            display: block;
+
+        }
+
+        .hamburger {
+
+            display: none;
+
+            font-size: 1.5rem;
+
+            color: white;
+
+            cursor: pointer;
+
+        }
+
+        .container {
+
+            max-width: 1280px;
+
+            margin: 2rem auto;
+
+            padding: 0 1rem;
+
+            animation: fadeIn 0.5s ease;
+
+        }
+
+        .header {
+
+            text-align: center;
+
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+
+            color: white;
+
+            padding: 2.5rem;
+
+            border-radius: 1rem;
+
+            margin-bottom: 2rem;
+
+            box-shadow: var(--shadow);
+
+        }
+
+        .form-container, .tracker-container, .dashboard-container, .admin-container {
+
+            background: white;
+
+            padding: 2rem;
+
+            border-radius: 1rem;
+
+            box-shadow: var(--shadow);
+
+            margin-bottom: 2rem;
+
+            transition: transform 0.3s;
+
+        }
+
+        body.dark-mode .form-container, body.dark-mode .tracker-container,
+
+        body.dark-mode .dashboard-container, body.dark-mode .admin-container {
+
+            background: #1f2937;
+
+        }
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 1rem;
+
+        }
+
+        input, select, button, textarea {
+
+            padding: 0.75rem;
+
+            margin: 0.25rem 0;
+
+            border: 1px solid var(--neutral);
+
+            border-radius: 0.5rem;
+
+            font-size: 0.9375rem;
+
+            width: 100%;
+
+            transition: border-color 0.3s, box-shadow 0.3s;
+
+        }
+
+        body.dark-mode input, body.dark-mode select, body.dark-mode button, body.dark-mode textarea {
+
+            border-color: #374151;
+
+            background: #1f2937;
+
+            color: var(--text-dark);
+
+        }
+
+        input:focus, select:focus, textarea:focus {
+
+            border-color: var(--primary);
+
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+
+            outline: none;
+
+        }
+
+        button {
+
+            background: var(--primary);
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-weight: 500;
+
+            padding: 0.75rem 1.5rem;
+
+            border-radius: 0.5rem;
+
+            transition: background 0.3s, transform 0.2s;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        button:hover {
+
+            background: var(--primary-dark);
+
+            transform: scale(1.03);
+
+        }
+
+        button:disabled {
+
+            background: #6b7280;
+
+            cursor: not-allowed;
+
+        }
+
+        button.loading::after {
+
+            content: '';
+
+            display: inline-block;
+
+            width: 1rem;
+
+            height: 1rem;
+
+            border: 2px solid white;
+
+            border-top: 2px solid transparent;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+
+            margin-left: 0.5rem;
+
+        }
+
+        .emergency-btn, .sos-btn {
+
+            background: var(--error);
+
+        }
+
+        .emergency-btn:hover, .sos-btn:hover {
+
+            background: #b91c1c;
+
+        }
+
+        .call-btn {
+
+            background: var(--accent);
+
+        }
+
+        .call-btn:hover {
+
+            background: #047857;
+
+        }
+
+        .theme-toggle {
+
+            background: #4b5563;
+
+            padding: 0.5rem 1rem;
+
+        }
+
+        .theme-toggle:hover {
+
+            background: #374151;
+
+        }
+
+        #map, #driverMap {
+
+            height: 500px;
+
+            width: 100%;
+
+            margin-top: 1.5rem;
+
+            border-radius: 1rem;
+
+            border: 1px solid var(--neutral);
+
+            box-shadow: var(--shadow);
+
+        }
+
+        body.dark-mode #map, body.dark-mode #driverMap {
+
+            border-color: #374151;
+
+        }
+
+        .map-controls {
+
+            margin: 1rem 0;
+
+            display: flex;
+
+            gap: 0.75rem;
+
+            flex-wrap: wrap;
+
+        }
+
+        .driver-info, .dashboard, .admin-panel, .distance-info, .location-history,
+
+        .feedback-panel, .profile-card, .booking-card, .message-inbox, .chat-container,
+
+        .settings-panel, .emergency-contacts {
+
+            margin-top: 1.5rem;
+
+            padding: 1.5rem;
+
+            background: var(--neutral);
+
+            border-radius: 0.75rem;
+
+            font-size: 0.875rem;
+
+            animation: fadeIn 0.5s ease;
+
+        }
+
+        body.dark-mode .driver-info, body.dark-mode .dashboard, body.dark-mode .admin-panel,
+
+        body.dark-mode .distance-info, body.dark-mode .location-history, body.dark-mode .feedback-panel,
+
+        body.dark-mode .profile-card, body.dark-mode .booking-card, body.dark-mode .message-inbox,
+
+        body.dark-mode .chat-container, body.dark-mode .settings-panel, body.dark-mode .emergency-contacts {
+
+            background: #374151;
+
+        }
+
+        .dashboard table, .admin-panel table, .location-history table, .feedback-panel table,
+
+        .message-inbox table, .chat-container table, .emergency-contacts table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 0.875rem;
+
+        }
+
+        .dashboard th, .dashboard td, .admin-panel th, .admin-panel td,
+
+        .location-history th, .location-history td, .feedback-panel th, .feedback-panel td,
+
+        .message-inbox th, .message-inbox td, .chat-container th, .chat-container td,
+
+        .emergency-contacts th, .emergency-contacts td {
+
+            border: 1px solid var(--neutral);
+
+            padding: 0.75rem;
+
+            text-align: left;
+
+        }
+
+        body.dark-mode .dashboard th, body.dark-mode .dashboard td,
+
+        body.dark-mode .admin-panel th, body.dark-mode .admin-panel td,
+
+        body.dark-mode .location-history th, body.dark-mode .location-history td,
+
+        body.dark-mode .feedback-panel th, body.dark-mode .feedback-panel td,
+
+        body.dark-mode .message-inbox th, body.dark-mode .message-inbox td,
+
+        body.dark-mode .chat-container th, body.dark-mode .chat-container td,
+
+        body.dark-mode .emergency-contacts th, body.dark-mode .emergency-contacts td {
+
+            border-color: #4b5563;
+
+        }
+
+        .dashboard th, .admin-panel th, .message-inbox th, .chat-container th,
+
+        .emergency-contacts th {
+
+            background: var(--primary);
+
+            color: white;
+
+            font-weight: 500;
+
+        }
+
+        .status-online { color: var(--accent); }
+
+        .status-offline { color: #6b7280; }
+
+        .status-available { color: var(--accent); }
+
+        .status-busy { color: var(--warning); }
+
+        .hidden {
+
+            display: none;
+
+        }
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(0,0,0,0.7);
+
+            z-index: 2000;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        .modal-content {
+
+            background: white;
+
+            padding: 2rem;
+
+            border-radius: 1rem;
+
+            max-width: 600px;
+
+            width: 90%;
+
+            text-align: center;
+
+            box-shadow: var(--shadow);
+
+            animation: slideIn 0.3s ease;
+
+            position: relative;
+
+        }
+
+        body.dark-mode .modal-content {
+
+            background: #1f2937;
+
+        }
+
+        .modal-content button {
+
+            margin: 0.5rem;
+
+        }
+
+        .notification {
+
+            position: fixed;
+
+            top: 1rem;
+
+            right: 1rem;
+
+            background: var(--primary);
+
+            color: white;
+
+            padding: 1rem 1.5rem;
+
+            border-radius: 0.5rem;
+
+            box-shadow: var(--shadow);
+
+            z-index: 1500;
+
+            display: none;
+
+            animation: slideInRight 0.3s ease;
+
+            max-width: 320px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+        .notification.success {
+
+            background: var(--success);
+
+        }
+
+        .notification.error {
+
+            background: var(--error);
+
+        }
+
+        .notification .icon {
+
+            font-size: 1.25rem;
+
+        }
+
+        .notification .close-btn {
+
+            cursor: pointer;
+
+            margin-left: auto;
+
+            font-weight: bold;
+
+        }
+
+        .tooltip {
+
+            position: relative;
+
+            display: inline-block;
+
+        }
+
+        .tooltip .tooltiptext {
+
+            visibility: hidden;
+
+            width: 120px;
+
+            background: var(--bg-dark);
+
+            color: var(--text-dark);
+
+            text-align: center;
+
+            border-radius: 0.5rem;
+
+            padding: 0.5rem;
+
+            position: absolute;
+
+            z-index: 1;
+
+            bottom: 125%;
+
+            left: 50%;
+
+            margin-left: -60px;
+
+            opacity: 0;
+
+            transition: opacity 0.3s;
+
+        }
+
+        .tooltip:hover .tooltiptext {
+
+            visibility: visible;
+
+            opacity: 1;
+
+        }
+
+        .profile-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+            padding: 1.5rem;
+
+            background: linear-gradient(135deg, var(--neutral), white);
+
+            border-radius: 0.75rem;
+
+        }
+
+        body.dark-mode .profile-card {
+
+            background: linear-gradient(135deg, #374151, #1f2937);
+
+        }
+
+        .profile-card img {
+
+            width: 80px;
+
+            height: 80px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid var(--primary);
+
+        }
+
+        .booking-card {
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr;
+
+            gap: 1rem;
+
+            align-items: center;
+
+        }
+
+        .chat-container {
+
+            max-height: 300px;
+
+            overflow-y: auto;
+
+        }
+
+        .chat-message {
+
+            margin: 0.5rem 0;
+
+            padding: 0.75rem;
+
+            border-radius: 0.5rem;
+
+            max-width: 80%;
+
+        }
+
+        .chat-message.sent {
+
+            background: var(--primary);
+
+            color: white;
+
+            margin-left: auto;
+
+            border-bottom-right-radius: 0;
+
+        }
+
+        .chat-message.received {
+
+            background: var(--neutral);
+
+            margin-right: auto;
+
+            border-bottom-left-radius: 0;
+
+        }
+
+        body.dark-mode .chat-message.received {
+
+            background: #4b5563;
+
+        }
+
+        .error-message {
+
+            color: var(--error);
+
+            font-size: 0.875rem;
+
+            margin-top: 0.25rem;
+
+            display: none;
+
+        }
+
+        .live-toggle {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin: 1rem 0;
+
+        }
+
+        .live-toggle input {
+
+            width: auto;
+
+        }
+
+        .settings-panel label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin: 0.5rem 0;
+
+        }
+
+        .profile-upload {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.5rem;
+
+        }
+
+        .rating {
+
+            display: flex;
+
+            gap: 0.25rem;
+
+        }
+
+        .rating input {
+
+            display: none;
+
+        }
+
+        .rating label {
+
+            font-size: 1.5rem;
+
+            color: #d1d5db;
+
+            cursor: pointer;
+
+        }
+
+        .rating input:checked ~ label,
+
+        .rating label:hover,
+
+        .rating label:hover ~ label {
+
+            color: #f59e0b;
+
+        }
+
+        .leaflet-marker-icon {
+
+            transition: transform 0.3s ease;
+
+        }
+
+        .leaflet-marker-icon:hover {
+
+            transform: scale(1.2);
+
+        }
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; }
+
+            to { opacity: 1; }
+
+        }
+
+        @keyframes slideIn {
+
+            from { transform: translateY(-20px); opacity: 0; }
+
+            to { transform: translateY(0); opacity: 1; }
+
+        }
+
+        @keyframes slideInRight {
+
+            from { transform: translateX(20px); opacity: 0; }
+
+            to { transform: translateX(0); opacity: 1; }
+
+        }
+
+        @keyframes spin {
+
+            to { transform: rotate(360deg); }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .navbar ul {
+
+                display: none;
+
+                flex-direction: column;
+
+                width: 100%;
+
+                background: var(--primary-dark);
+
+                padding: 1rem;
+
+                position: absolute;
+
+                top: 100%;
+
+                left: 0;
+
+            }
+
+            .navbar ul.active {
+
+                display: flex;
+
+            }
+
+            .hamburger {
+
+                display: block;
+
+            }
+
+            .form-container, .tracker-container, .dashboard-container, .admin-container {
+
+                padding: 1.5rem;
+
+            }
+
+            #map, #driverMap {
+
+                height: 400px;
+
+            }
+
+            .modal-content {
+
+                width: 95%;
+
+                padding: 1.5rem;
+
+            }
+
+            .booking-card {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .notification {
+
+                max-width: 90%;
+
+                right: 0.5rem;
+
+            }
+
+            .profile-card {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+            .profile-card img {
+
+                width: 60px;
+
+                height: 60px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
-<body class="min-h-screen transition-all duration-300" id="body">
-  <!-- Loading Spinner -->
-  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div class="spinner"></div>
-  </div>
 
-  <!-- Navbar -->
-  <nav class="neumorphic fixed w-full top-0 z-50 p-4" aria-label="Main navigation">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Aravind's Portfolio</h1>
-      <div class="flex items-center space-x-4">
-        <input id="search-bar" type="text" placeholder="Search portfolio..." class="p-2 rounded neumorphic hidden md:block" aria-label="Search portfolio">
-        <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button id="voice-control" class="text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Voice control">
-          <i class="fas fa-microphone"></i>
-        </button>
-        <button id="mobile-menu-btn" class="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-      <div id="nav-links" class="hidden md:flex space-x-4">
-        <a href="#home" class="nav-link hover:text-teal-500 transition" data-section="home" aria-label="Home">Home</a>
-        <a href="#about" class="nav-link hover:text-teal-500 transition" data-section="about" aria-label="About">About</a>
-        <a href="#skills" class="nav-link hover:text-teal-500 transition" data-section="skills" aria-label="Skills">Skills</a>
-        <a href="#projects" class="nav-link hover:text-teal-500 transition" data-section="projects" aria-label="Projects">Projects</a>
-        <a href="#jobs" class="nav-link hover:text-teal-500 transition" data-section="jobs" aria-label="Job Portal">Job Portal</a>
-        <a href="#gallery" class="nav-link hover:text-teal-500 transition" data-section="gallery" aria-label="Gallery">Gallery</a>
-        <a href="#analytics" class="nav-link hover:text-teal-500 transition" data-section="analytics" aria-label="Analytics">Analytics</a>
-        <a href="#chat" class="nav-link hover:text-teal-500 transition" data-section="chat" aria-label="Chat">Chat</a>
-        <a href="#iot" class="nav-link hover:text-teal-500 transition" data-section="iot" aria-label="IoT Control">IoT Control</a>
-        <a href="#testimonials" class="nav-link hover:text-teal-500 transition" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
-        <a href="#codesnippets" class="nav-link hover:text-teal-500 transition" data-section="codesnippets" aria-label="Code Snippets">Code Snippets</a>
-        <a href="#achievements" class="nav-link hover:text-teal-500 transition" data-section="achievements" aria-label="Achievements">Achievements</a>
-        <a href="#social" class="nav-link hover:text-teal-500 transition" data-section="social" aria-label="Social Feed">Social Feed</a>
-        <a href="#ideas" class="nav-link hover:text-teal-500 transition" data-section="ideas" aria-label="Ideas">Ideas</a>
-        <a href="#blog" class="nav-link hover:text-teal-500 transition" data-section="blog" aria-label="Blog">Blog</a>
-        <a href="#newsletter" class="nav-link hover:text-teal-500 transition" data-section="newsletter" aria-label="Newsletter">Newsletter</a>
-        <a href="#contact" class="nav-link hover:text-teal-500 transition" data-section="contact" aria-label="Contact">Contact</a>
-      </div>
+<body>
+
+    <div class="navbar" role="navigation" aria-label="Main navigation">
+
+        <div class="navbar-container">
+
+            <span class="hamburger" id="hamburger" aria-label="Toggle menu">☰</span>
+
+            <ul id="navMenu">
+
+                <li><a href="#" id="navHome">Home</a></li>
+
+                <li><a href="#" id="navLogin">Login</a></li>
+
+                <li><a href="#" id="navTracker">Track Ambulances</a></li>
+
+                <li><a href="#" id="navDashboard">Dashboard</a></li>
+
+                <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button></li>
+
+                <li class="dropdown">
+
+                    <span id="accountName" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Account</span>
+
+                    <div id="dropdownMenu" class="dropdown-menu" role="menu">
+
+                        <span id="accountDetails" aria-label="Account details"></span>
+
+                        <a href="#" id="logoutLink" style="display: none;" role="menuitem">Logout</a>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+        </div>
+
     </div>
-  </nav>
 
-  <!-- Back to Top Button -->
-  <button id="back-to-top" class="fixed bottom-4 right-4 neumorphic rounded-full p-3 hidden" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+    <div class="container">
 
-  <!-- Sections -->
-  <main class="pt-16">
-    <!-- Home Section -->
-    <section id="home" class="section min-h-screen flex items-center justify-center parallax active" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+Background')" data-aos="fade-up">
-      <div class="neumorphic rounded-lg p-8 max-w-md mx-auto">
-        <img src="https://via.placeholder.com/150" alt="Profile Photo" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-        <h2 class="text-2xl font-bold text-center">Jogi Bala Venkata Aravind</h2>
-        <p class="text-center">I am a <span id="typed" class="font-semibold"></span></p>
-        <p class="text-center mt-2">Visitors Online: <span id="visitor-counter">1</span></p>
-        <button id="download-portfolio" class="btn-primary mt-4 mx-auto block">Download Portfolio</button>
-        <div class="flex justify-center space-x-4 mt-4">
-          <a href="https://twitter.com/intent/tweet?url=https://yourportfolio.com&text=Check%20out%20my%20portfolio!" target="_blank" class="hover:text-teal-500" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://yourportfolio.com" target="_blank" class="hover:text-teal-500" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </div>
-    </section>
+        <div id="homeSection" class="header">
 
-    <!-- About Section -->
-    <section id="about" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">About Me</h2>
-      <div class="neumorphic rounded-lg p-8 max-w-2xl mx-auto">
-        <p><strong>Native Place:</strong> Hyderabad, Telangana</p>
-        <p><strong>Education:</strong> B.Tech in Computer Science</p>
-        <p><strong>Profession:</strong> Full-Stack Developer & IoT Enthusiast</p>
-        <p><strong>Bio:</strong> I specialize in building web applications and IoT solutions, with experience in quality assurance at Guts Electro Mech, focusing on in-process quality and pre-delivery inspection.</p>
-        <h3 class="text-xl font-semibold mt-4">Career Timeline</h3>
-        <div class="relative border-l-4 border-teal-500 pl-6 mt-4">
-          <div class="mb-4 relative">
-            <div class="timeline-dot"></div>
-            <p class="font-semibold">2022: B.Tech Completion</p>
-            <p>Graduated with a degree in Computer Science.</p>
-          </div>
-          <div class="mb-4 relative">
-            <div class="timeline-dot"></div>
-            <p class="font-semibold">2023: Quality Assurance at Guts Electro Mech</p>
-            <p>Ensured product quality through rigorous testing.</p>
-          </div>
-          <div class="relative">
-            <div class="timeline-dot"></div>
-            <p class="font-semibold">2025: Full-Stack Developer</p>
-            <p>Building job portals and IoT systems.</p>
-          </div>
-        </div>
-        <div class="mt-6">
-          <h3 class="text-xl font-semibold">Current Weather in Hyderabad</h3>
-          <p><strong>Temperature:</strong> <span id="weather-temp">28°C</span> <button id="toggle-unit" class="text-sm underline">Toggle °F</button></p>
-          <p><strong>Condition:</strong> <span id="weather-condition">Sunny</span></p>
-        </div>
-      </div>
-    </section>
+            <h1>Ambulance Tracker</h1>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Skills</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="100">
-          <p class="font-semibold">HTML & CSS <span class="text-sm text-gray-500">(90%)</span></p>
-          <div class="progress-bar" style="background-position: -90% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Coursera</div>
-        </div>
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="200">
-          <p class="font-semibold">JavaScript <span class="text-sm text-gray-500">(85%)</span></p>
-          <div class="progress-bar" style="background-position: -85% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by freeCodeCamp</div>
-        </div>
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="300">
-          <p class="font-semibold">React.js <span class="text-sm text-gray-500">(80%)</span></p>
-          <div class="progress-bar" style="background-position: -80% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Udemy</div>
-        </div>
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="400">
-          <p class="font-semibold">Node.js <span class="text-sm text-gray-500">(75%)</span></p>
-          <div class="progress-bar" style="background-position: -75% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by LinkedIn Learning</div>
-        </div>
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="500">
-          <p class="font-semibold">ESP32 & Arduino <span class="text-sm text-gray-500">(70%)</span></p>
-          <div class="progress-bar" style="background-position: -70% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by Arduino</div>
-        </div>
-        <div class="neumorphic rounded-lg p-4 progress-container" data-aos="zoom-in" data-aos-delay="600">
-          <p class="font-semibold">Quality Assurance <span class="text-sm text-gray-500">(85%)</span></p>
-          <div class="progress-bar" style="background-position: -85% 0;"></div>
-          <div class="tooltip absolute bg-gray-800 text-white text-xs p-2 rounded mt-2">Certified by ISTQB</div>
-        </div>
-      </div>
-    </section>
+            <p>Connect with emergency services in real-time.</p>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section py-12 parallax" style="background-image: url('https://via.placeholder.com/1920x1080?text=Projects+Background')" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Projects</h2>
-      <div class="max-w-4xl mx-auto mb-6 flex space-x-4">
-        <select id="project-filter" class="p-2 rounded neumorphic" aria-label="Project category">
-          <option value="">All Categories</option>
-          <option value="Web">Web</option>
-          <option value="IoT">IoT</option>
-        </select>
-        <select id="project-sort" class="p-2 rounded neumorphic" aria-label="Sort projects">
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="date-desc">Newest First</option>
-          <option value="date-asc">Oldest First</option>
-        </select>
-      </div>
-      <div class="swiper max-w-4xl mx-auto">
-        <div class="swiper-wrapper" id="project-list">
-          <div class="swiper-slide project-card" data-category="Web" data-name="Job Portal" data-date="2025-06-01">
-            <div class="neumorphic rounded-lg p-6">
-              <h3 class="text-xl font-semibold">Job Portal</h3>
-              <p>A responsive job search platform with advanced filtering.</p>
-              <div class="mt-4">
-                <video src="https://via.placeholder.com/300x200.mp4?text=Job+Portal+Demo" controls class="w-full h-48 rounded-lg" aria-label="Job Portal Demo"></video>
-              </div>
-              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+        </div>
+
+        <div id="loginSection" class="form-container hidden">
+
+            <h2>Login / Register</h2>
+
+            <div class="form-grid">
+
+                <div>
+
+                    <select id="accountType" aria-label="Select account type">
+
+                        <option value="user">User</option>
+
+                        <option value="driver">Driver</option>
+
+                        <option value="admin">Admin</option>
+
+                    </select>
+
+                </div>
+
+                <div id="registerFields" class="hidden">
+
+                    <input type="text" id="regName" placeholder="Full Name" aria-label="Full Name">
+
+                    <p id="regNameError" class="error-message"></p>
+
+                    <input type="file" id="regProfilePic" accept="image/jpeg,image/png" aria-label="Profile picture">
+
+                    <p id="regProfilePicError" class="error-message"></p>
+
+                    <select id="regAmbulanceType" aria-label="Ambulance Type" class="hidden">
+
+                        <option value="Basic">Basic</option>
+
+                        <option value="Advanced">Advanced</option>
+
+                        <option value="ICU">ICU</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <input type="text" id="loginId" placeholder="ID (e.g., USER001, AMB001, ADMIN)" aria-label="ID" required>
+
+                    <p id="loginIdError" class="error-message"></p>
+
+                </div>
+
+                <div>
+
+                    <input type="password" id="loginPassword" placeholder="Password" aria-label="Password" required>
+
+                    <p id="loginPasswordError" class="error-message"></p>
+
+                </div>
+
+                <div>
+
+                    <button class="tooltip" id="registerBtn">
+
+                        Register
+
+                        <span class="tooltiptext">Create a new account</span>
+
+                    </button>
+
+                    <button class="tooltip" id="loginBtn">
+
+                        Login
+
+                        <span class="tooltiptext">Sign in to your account</span>
+
+                    </button>
+
+                </div>
+
             </div>
-          </div>
-          <div class="swiper-slide project-card" data-category="IoT" data-name="IoT Smart Home" data-date="2025-03-15">
-            <div class="neumorphic rounded-lg p-6">
-              <h3 class="text-xl font-semibold">IoT Smart Home</h3>
-              <p>ESP32-based home automation with sensor integration.</p>
-              <div class="mt-4">
-                <video src="https://via.placeholder.com/300x200.mp4?text=IoT+Demo" controls class="w-full h-48 rounded-lg" aria-label="IoT Demo"></video>
-              </div>
-              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+
+            <p id="loginMessage" aria-live="polite"></p>
+
+        </div>
+
+        <div id="userSection" class="form-container hidden">
+
+            <h2>User Dashboard</h2>
+
+            <div class="profile-card">
+
+                <img id="userProfilePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="User avatar">
+
+                <div>
+
+                    <p><strong><span id="currentUserName"></span></strong></p>
+
+                    <p>ID: <span id="currentUserId"></span></p>
+
+                </div>
+
             </div>
-          </div>
-          <div class="swiper-slide project-card" data-category="IoT" data-name="ESP32 Dashboard" data-date="2025-01-10">
-            <div class="neumorphic rounded-lg p-6">
-              <h3 class="text-xl font-semibold">ESP32 Dashboard</h3>
-              <p>Real-time sensor monitoring with Node.js.</p>
-              <div class="mt-4">
-                <video src="https://via.placeholder.com/300x200.mp4?text=Dashboard+Demo" controls class="w-full h-48 rounded-lg" aria-label="Dashboard Demo"></video>
-              </div>
-              <a href="#" class="btn-primary mt-4 block text-center">View on GitHub</a>
+
+            <div class="profile-upload">
+
+                <label for="userProfileUpload">Update Profile Picture</label>
+
+                <input type="file" id="userProfileUpload" accept="image/jpeg,image/png" aria-label="Update profile picture">
+
+                <p id="userProfileUploadError" class="error-message"></p>
+
+                <button id="updateProfileBtn">Upload</button>
+
             </div>
-          </div>
-        </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </section>
 
-    <!-- Job Portal Section -->
-    <section id="jobs" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Job Portal</h2>
-      <div class="max-w-4xl mx-auto mb-6 flex space-x-4">
-        <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-2 rounded neumorphic" aria-label="Filter jobs">
-        <select id="job-category" class="p-2 rounded neumorphic" aria-label="Job category">
-          <option value="">All Categories</option>
-          <option value="Frontend Developer">Frontend Developer</option>
-          <option value="IoT Engineer">IoT Engineer</option>
-          <option value="Quality Analyst">Quality Analyst</option>
-        </select>
-      </div>
-      <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4 job-card" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">Frontend Developer</h3>
-          <p>Develop responsive web interfaces using React.</p>
-          <button class="btn-primary mt-4" onclick="applyJob('Frontend Developer')">Apply Now</button>
-          <button class="btn-primary mt-2" onclick="saveJob('Frontend Developer')">Save Job</button>
-          <p class="text-sm mt-2">Status: <span id="status-Frontend Developer">Not Applied</span></p>
-        </div>
-        <div class="neumorphic rounded-lg p-4 job-card" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">IoT Engineer</h3>
-          <p>Design IoT solutions with ESP32.</p>
-          <button class="btn-primary mt-4" onclick="applyJob('IoT Engineer')">Apply Now</button>
-          <button class="btn-primary mt-2" onclick="saveJob('IoT Engineer')">Save Job</button>
-          <p class="text-sm mt-2">Status: <span id="status-IoT Engineer">Not Applied</span></p>
-        </div>
-        <div class="neumorphic rounded-lg p-4 job-card" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-xl font-semibold">Quality Analyst</h3>
-          <p>Ensure product quality through testing.</p>
-          <button class="btn-primary mt-4" onclick="applyJob('Quality Analyst')">Apply Now</button>
-          <button class="btn-primary mt-2" onclick="saveJob('Quality Analyst')">Save Job</button>
-          <p class="text-sm mt-2">Status: <span id="status-Quality Analyst">Not Applied</span></p>
-        </div>
-      </div>
-      <div class="max-w-4xl mx-auto mt-6">
-        <h3 class="text-xl font-semibold">Saved Jobs</h3>
-        <ul id="saved-jobs" class="space-y-2"></ul>
-      </div>
-    </section>
+            <h3>Notification Settings</h3>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Photo Gallery</h2>
-      <div class="max-w-4xl mx-auto mb-6">
-        <input type="file" id="photo-upload" accept="image/*" multiple class="w-full p-2 rounded neumorphic" aria-label="Upload photos">
-        <select id="image-filter" class="mt-2 p-2 rounded neumorphic" aria-label="Image filter">
-          <option value="none">No Filter</option>
-          <option value="grayscale">Grayscale</option>
-          <option value="sepia">Sepia</option>
-        </select>
-        <div id="photo-preview" class="mt-4 hidden flex flex-wrap gap-4"></div>
-        <button onclick="addToGallery()" class="btn-primary mt-4 hidden" id="add-to-gallery">Add to Gallery</button>
-      </div>
-      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-        <img src="https://via.placeholder.com/300?text=Project+1" alt="Project 1" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://via.placeholder.com/300?text=Project+2" alt="Project 2" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://via.placeholder.com/300?text=IoT+Setup" alt="IoT Setup" class="rounded-lg object-cover w-full h-48 neumorphic cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300">
-      </div>
-      <div id="lightbox" class="hidden lightbox">
-        <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl cursor-pointer" aria-label="Close lightbox">×</span>
-        <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-        <img id="lightbox-img" class="max-w-[90%] max-h-[80%]" alt="Lightbox Image">
-        <div class="flex space-x-4 mt-4">
-          <button onclick="downloadImage()" class="btn-primary text-sm" aria-label="Download image">Download</button>
-          <button onclick="shareImage()" class="btn-primary text-sm" aria-label="Share image">Share</button>
-        </div>
-        <button onclick="nextImage()" class="absolute right-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-        <p id="lightbox-caption" class="text-white mt-2"></p>
-      </div>
-    </section>
+            <div class="settings-panel">
 
-    <!-- Analytics Section -->
-    <section id="analytics" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Analytics</h2>
-      <div id="analytics-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <p class="text-center">Developer access required</p>
-        <input id="dev-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Developer username">
-        <input id="dev-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Developer password">
-        <button id="dev-login-btn" class="w-full btn-primary">Login</button>
-      </div>
-      <div id="analytics-content" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto">
-        <canvas id="profile-chart" class="w-full h-64 mb-4"></canvas>
-        <button id="download-analytics" class="btn-primary mt-4">Download Report</button>
-      </div>
-    </section>
+                <label>
 
-    <!-- Chat Section -->
-    <section id="chat" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Developer Chat</h2>
-      <div id="chat-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <p class="text-center">Developer access required</p>
-        <input id="chat-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Chat username">
-        <input id="chat-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Chat password">
-        <button id="chat-login-btn" class="w-full btn-primary">Login</button>
-      </div>
-      <div id="chat-content" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto">
-        <div id="chat-messages" class="h-64 overflow-y-auto mb-4 p-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-        <p id="typing-indicator" class="text-sm text-gray-500 hidden">Someone is typing...</p>
-        <div class="flex space-x-2">
-          <input id="chat-input" type="text" placeholder="Type a message..." class="w-full p-2 rounded neumorphic" aria-label="Chat message">
-          <button id="emoji-picker" class="btn-primary p-2"><i class="fas fa-smile"></i></button>
-        </div>
-        <div id="emoji-panel" class="hidden grid grid-cols-5 gap-2 mt-2 p-2 bg-gray-200 dark:bg-gray-700 rounded">
-          <button class="emoji-btn">😊</button>
-          <button class="emoji-btn">🚀</button>
-          <button class="emoji-btn">👍</button>
-          <button class="emoji-btn">🔥</button>
-          <button class="emoji-btn">🎉</button>
-        </div>
-        <button id="chat-send" class="w-full btn-primary mt-2">Send</button>
-      </div>
-    </section>
+                    <input type="checkbox" id="enableNotifications" aria-label="Enable notifications">
 
-    <!-- IoT Control Section -->
-    <section id="iot" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">IoT Control Panel</h2>
-      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <p><strong>LED Status:</strong> <span id="led-status">Off</span></p>
-        <button id="toggle-led" class="btn-primary mt-4">Toggle LED</button>
-        <p><strong>Temperature:</strong> <span id="iot-temp">25°C</span></p>
-        <p><strong>Humidity:</strong> <span id="iot-humidity">60%</span></p>
-        <canvas id="energy-chart" class="w-full h-32 mt-4"></canvas>
-        <button id="iot-refresh" class="btn-primary mt-4">Refresh Data</button>
-      </div>
-    </section>
+                    Enable Notifications
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Testimonials</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
-          <p>"Aravind's job portal streamlined our hiring process!"</p>
-          <p class="text-sm mt-2">— John Doe, HR Manager</p>
-        </div>
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
-          <p>"His IoT solutions are innovative and reliable."</p>
-          <p class="text-sm mt-2">— Jane Smith, Tech Lead</p>
-        </div>
-      </div>
-    </section>
+                </label>
 
-    <!-- Code Snippets Section -->
-    <section id="codesnippets" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Code Snippets</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">ESP32 LED Control</h3>
-          <pre><code class="language-arduino">
-void setup() {
-  pinMode(2, OUTPUT);
-}
-void loop() {
-  digitalWrite(2, HIGH);
-  delay(1000);
-  digitalWrite(2, LOW);
-  delay(1000);
-}
-          </code></pre>
-          <button onclick="copyCode(this)" class="btn-primary mt-2">Copy Code</button>
-        </div>
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">React Component</h3>
-          <pre><code class="language-jsx">
-import React from 'react';
-const HelloWorld = () => {
-  return <div>Hello, World!</div>;
-};
-export default HelloWorld;
-          </code></pre>
-          <button onclick="copyCode(this)" class="btn-primary mt-2">Copy Code</button>
-        </div>
-      </div>
-    </section>
+            </div>
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Achievements</h2>
-      <div id="achievements-login" class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <p class="text-center">Developer access required</p>
-        <input id="ach-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Achievements username">
-        <input id="ach-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Achievements password">
-        <button id="ach-login-btn" class="w-full btn-primary">Login</button>
-      </div>
-      <div id="achievements-content" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-6">
-        <div class="neumorphic rounded-lg p-4 achievement" data-id="messages" data-aos="fade-up" data-aos-delay="100">
-          <p class="font-semibold">10 Messages Sent</p>
-          <p class="text-sm">Send 10 messages in chat.</p>
-        </div>
-        <div class="neumorphic rounded-lg p-4 achievement" data-id="ideas" data-aos="fade-up" data-aos-delay="200">
-          <p class="font-semibold">5 Ideas Submitted</p>
-          <p class="text-sm">Submit 5 ideas.</p>
-        </div>
-        <div class="neumorphic rounded-lg p-4 achievement" data-id="jobs" data-aos="fade-up" data-aos-delay="300">
-          <p class="font-semibold">3 Jobs Applied</p>
-          <p class="text-sm">Apply to 3 jobs.</p>
-        </div>
-      </div>
-    </section>
+            <h3>Emergency Contacts</h3>
 
-    <!-- Social Feed Section -->
-    <section id="social" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Social Feed</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
-          <p>Just launched my new job portal! 🚀 #WebDev</p>
-          <p class="text-sm text-gray-400">Posted on X, July 2025</p>
-        </div>
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
-          <p>Exploring ESP32 for IoT projects. Any tips? #IoT</p>
-          <p class="text-sm text-gray-400">Posted on X, June 2025</p>
-        </div>
-      </div>
-    </section>
+            <div class="emergency-contacts">
 
-    <!-- Ideas Section -->
-    <section id="ideas" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Submit an Idea</h2>
-      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <form id="idea-form" class="space-y-4">
-          <input id="idea-title" type="text" placeholder="Idea Title" class="w-full p-2 rounded neumorphic" aria-label="Idea title" required>
-          <textarea id="idea-description" placeholder="Describe your idea..." class="w-full p-2 rounded neumorphic" rows="4" aria-label="Idea description" required></textarea>
-          <button type="submit" class="w-full btn-primary">Submit Idea</button>
-        </form>
-      </div>
-      <div id="ideas-admin" class="hidden neumorphic rounded-lg p-6 max-w-4xl mx-auto mt-6">
-        <h3 class="text-xl font-semibold mb-4">Admin: Manage Ideas</h3>
-        <input id="ideas-username" type="text" placeholder="Username" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Ideas admin username">
-        <input id="ideas-password" type="password" placeholder="Password" class="w-full p-2 mb-4 rounded neumorphic" aria-label="Ideas admin password">
-        <button id="ideas-login-btn" class="w-full btn-primary mb-4">Login</button>
-        <div id="ideas-list" class="space-y-4"></div>
-      </div>
-    </section>
+                <input type="text" id="contactName" placeholder="Contact Name" aria-label="Contact Name">
 
-    <!-- Blog Section -->
-    <section id="blog" class="section py-12 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Blog</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">ESP32 in IoT</h3>
-          <p>Building smart systems with ESP32.</p>
-          <button class="btn-primary mt-4" onclick="likePost(0)">Like (<span id="like-0">0</span>)</button>
-          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
-          <p class="text-sm mt-2">Comments: <span id="comment-0">Great post!</span></p>
-        </div>
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">UI Trends 2025</h3>
-          <p>Exploring neumorphism and animations.</p>
-          <button class="btn-primary mt-4" onclick="likePost(1)">Like (<span id="like-1">0</span>)</button>
-          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
-          <p class="text-sm mt-2">Comments: <span id="comment-1">Insightful!</span></p>
-        </div>
-        <div class="neumorphic rounded-lg p-4" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-xl font-semibold">Quality Assurance</h3>
-          <p>Best practices for QA in tech.</p>
-          <button class="btn-primary mt-4" onclick="likePost(2)">Like (<span id="like-2">0</span>)</button>
-          <a href="#" class="btn-primary mt-2 block text-center">Read More</a>
-          <p class="text-sm mt-2">Comments: <span id="comment-2">Very useful!</span></p>
-        </div>
-      </div>
-    </section>
+                <p id="contactNameError" class="error-message"></p>
 
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Newsletter Signup</h2>
-      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <form id="newsletter-form" class="space-y-4">
-          <input id="newsletter-email" type="email" placeholder="Your Email" class="w-full p-2 rounded neumorphic" aria-label="Newsletter email" required>
-          <button type="submit" class="w-full btn-primary">Subscribe</button>
-        </form>
-        <div id="newsletter-list" class="mt-4 hidden">
-          <h3 class="text-xl font-semibold">Subscribers</h3>
-          <ul id="subscribers" class="space-y-2"></ul>
+                <input type="tel" id="contactPhone" placeholder="Phone Number" aria-label="Phone Number">
+
+                <p id="contactPhoneError" class="error-message"></p>
+
+                <button id="addContactBtn">Add Contact</button>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Phone</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="emergencyContactsTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>Emergency SOS</h3>
+
+            <button class="sos-btn tooltip" id="sosBtn">
+
+                SOS Alert
+
+                <span class="tooltiptext">Send urgent alert to nearest ambulance</span>
+
+            </button>
+
+            <h3>Find Nearest Ambulance</h3>
+
+            <select id="ambulanceTypeFilter" aria-label="Filter ambulance type">
+
+                <option value="All">All Types</option>
+
+                <option value="Basic">Basic</option>
+
+                <option value="Advanced">Advanced</option>
+
+                <option value="ICU">ICU</option>
+
+            </select>
+
+            <button class="tooltip" id="findAmbulanceBtn">
+
+                Connect to Nearest Ambulance
+
+                <span class="tooltiptext">Find the closest available ambulance</span>
+
+            </button>
+
+            <div id="bookingDetails" class="booking-card hidden"></div>
+
+            <h3>Share Live Location</h3>
+
+            <button id="toggleLocationBtn">Start Sharing Location</button>
+
+            <h3>Chat with Driver</h3>
+
+            <div id="chatContainer" class="chat-container hidden">
+
+                <div id="chatMessages"></div>
+
+                <textarea id="chatText" placeholder="Type a message..." rows="2" aria-label="Chat message"></textarea>
+
+                <button id="sendChatBtn">Send</button>
+
+            </div>
+
+            <h3>Send Message to Driver</h3>
+
+            <select id="messageDriverId" aria-label="Select driver">
+
+                <option value="">Select Driver</option>
+
+            </select>
+
+            <p id="messageDriverIdError" class="error-message"></p>
+
+            <textarea id="messageText" placeholder="Enter your message" rows="4" aria-label="Message"></textarea>
+
+            <p id="messageError" class="error-message"></p>
+
+            <button id="sendMessageBtn">Send Message</button>
+
+            <h3>Booking History</h3>
+
+            <div id="bookingHistory" class="booking-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Ambulance ID</th>
+
+                            <th>Type</th>
+
+                            <th>Timestamp</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="bookingHistoryTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>Submit Feedback</h3>
+
+            <textarea id="feedbackText" placeholder="Enter your feedback" rows="5" aria-label="Feedback"></textarea>
+
+            <div class="rating">
+
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+
+            </div>
+
+            <p id="feedbackError" class="error-message"></p>
+
+            <button id="submitFeedbackBtn">Submit Feedback</button>
+
+            <button id="userLogoutBtn">Logout</button>
+
         </div>
-      </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section py-12" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-center mb-6">Contact</h2>
-      <div class="neumorphic rounded-lg p-6 max-w-md mx-auto">
-        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-teal-500" aria-label="Copy phone number">9381329751</span></p>
-        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-teal-500" aria-label="Copy email">aravind@example.com</span></p>
-        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-teal-500" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
-        <p><strong>GitHub:</strong> <a href="#" class="hover:text-teal-500" aria-label="GitHub profile">github.com/aravind</a></p>
-        <form id="contact-form" class="mt-6 space-y-4">
-          <input id="form-name" type="text" placeholder="Your Name" class="w-full p-2 rounded neumorphic" aria-label="Contact name" required>
-          <input id="form-email" type="email" placeholder="Your Email" class="w-full p-2 rounded neumorphic" aria-label="Contact email" required>
-          <textarea id="form-message" placeholder="Your Message" class="w-full p-2 rounded neumorphic" rows="4" aria-label="Contact message" required></textarea>
-          <div class="flex items-center space-x-2">
-            <p id="captcha-question" class="text-sm"></p>
-            <input id="captcha-answer" type="number" placeholder="Answer" class="w-20 p-2 rounded neumorphic" aria-label="CAPTCHA answer" required>
-          </div>
-          <button type="submit" class="w-full btn-primary">Send Message</button>
-        </form>
-      </div>
-      <div id="theme-customizer" class="hidden neumorphic rounded-lg p-6 max-w-md mx-auto mt-6">
-        <p class="text-center">Developer Theme Customizer</p>
-        <input id="theme-color" type="color" value="#14b8a6" class="w-full p-2 mb-4 rounded" aria-label="Theme color">
-        <label><input id="auto-theme" type="checkbox" class="mr-2">Auto-toggle dark mode</label>
-        <button id="theme-apply" class="w-full btn-primary mt-2">Apply Color</button>
-      </div>
-      <div id="toast-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"></div>
-    </section>
-  </main>
+        <div id="driverSection" class="form-container hidden">
 
-  <!-- Footer -->
-  <footer class="text-center py-6 bg-gray-100 dark:bg-gray-800" data-aos="fade-up">
-    <div class="flex justify-center space-x-4 mb-4">
-      <a href="#" class="hover:text-teal-500" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-      <a href="#" class="hover:text-teal-500" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
-      <a href="#" class="hover:text-teal-500" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+            <h2>Driver Dashboard</h2>
+
+            <div class="profile-card">
+
+                <img id="driverProfilePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="Driver avatar">
+
+                <div>
+
+                    <p><strong><span id="currentDriverName"></span></strong></p>
+
+                    <p>ID: <span id="currentDriverId"></span></p>
+
+                    <p>Status: <span id="driverAvailability" class="status-available">Available</span></p>
+
+                    <p>Type: <span id="driverAmbulanceType"></span></p>
+
+                    <p>Rating: <span id="driverRating">N/A</span></p>
+
+                </div>
+
+            </div>
+
+            <div class="profile-upload">
+
+                <label for="driverProfileUpload">Update Profile Picture</label>
+
+                <input type="file" id="driverProfileUpload" accept="image/jpeg,image/png" aria-label="Update profile picture">
+
+                <p id="driverProfileUploadError" class="error-message"></p>
+
+                <button id="updateDriverProfileBtn">Upload</button>
+
+            </div>
+
+            <button id="toggleAvailabilityBtn">Toggle Availability</button>
+
+            <button id="startTrackBtn">Start Tracking</button>
+
+            <button id="stopTrackBtn" disabled>Stop Tracking</button>
+
+            <h3>User Location</h3>
+
+            <div id="driverMap" class="hidden"></div>
+
+            <h3>Messages from Users</h3>
+
+            <div id="driverMessages" class="message-inbox">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User ID</th>
+
+                            <th>Message</th>
+
+                            <th>Timestamp</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="driverMessagesTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>Chat with User</h3>
+
+            <div id="driverChatContainer" class="chat-container hidden">
+
+                <div id="driverChatMessages"></div>
+
+                <textarea id="driverChatText" placeholder="Type a message..." rows="2" aria-label="Chat message"></textarea>
+
+                <button id="sendDriverChatBtn">Send</button>
+
+            </div>
+
+            <button id="driverLogoutBtn">Logout</button>
+
+        </div>
+
+        <div id="adminSection" class="admin-container hidden">
+
+            <h2>Admin Panel</h2>
+
+            <div class="profile-card">
+
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="Admin avatar">
+
+                <div>
+
+                    <p><strong>Admin</strong></p>
+
+                    <p>ID: ADMIN</p>
+
+                </div>
+
+            </div>
+
+            <div class="admin-panel">
+
+                <h3>Analytics</h3>
+
+                <p>Active Drivers: <span id="activeDrivers">0</span> | Total Feedback: <span id="totalFeedback">0</span> | Total Messages: <span id="totalMessages">0</span> | Total Chats: <span id="totalChats">0</span></p>
+
+            </div>
+
+            <h3>Pending Driver Registrations</h3>
+
+            <div id="pendingDrivers" class="admin-panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Driver Name</th>
+
+                            <th>Driver ID</th>
+
+                            <th>Type</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="pendingTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>Approved Drivers</h3>
+
+            <div id="adminPanel" class="admin-panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Driver Name</th>
+
+                            <th>Driver ID</th>
+
+                            <th>Type</th>
+
+                            <th>Status</th>
+
+                            <th>Availability</th>
+
+                            <th>Rating</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="adminTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>Location History</h3>
+
+            <div id="locationHistory" class="location-history">
+
+                <button class="tooltip" id="exportHistoryBtn">
+
+                    Export History (CSV)
+
+                    <span class="tooltiptext">Download location data</span>
+
+                </button>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Driver ID</th>
+
+                            <th>Latitude</th>
+
+                            <th>Longitude</th>
+
+                            <th>Timestamp</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="historyTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>User Feedback</h3>
+
+            <div id="feedbackPanel" class="feedback-panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User ID</th>
+
+                            <th>Driver ID</th>
+
+                            <th>Feedback</th>
+
+                            <th>Rating</th>
+
+                            <th>Timestamp</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="feedbackTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>User-Driver Messages</h3>
+
+            <div id="messagePanel" class="message-inbox">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User ID</th>
+
+                            <th>Driver ID</th>
+
+                            <th>Message</th>
+
+                            <th>Timestamp</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="messageTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <h3>User-Driver Chats</h3>
+
+            <div id="chatPanel" class="chat-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User ID</th>
+
+                            <th>Driver ID</th>
+
+                            <th>Message</th>
+
+                            <th>Timestamp</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="chatTable"></tbody>
+
+                </table>
+
+            </div>
+
+            <button id="adminLogoutBtn">Logout</button>
+
+        </div>
+
+        <div id="trackerSection" class="form-container hidden">
+
+            <h2>Track Ambulance</h2>
+
+            <div class="form-grid">
+
+                <input type="text" id="trackId" placeholder="Enter Ambulance ID (e.g., AMB001)" aria-label="Ambulance ID">
+
+                <p id="trackIdError" class="error-message"></p>
+
+                <div>
+
+                    <button id="trackBtn">Track</button>
+
+                    <button class="emergency-btn" id="callEmergencyBtn">Emergency Contact</button>
+
+                </div>
+
+            </div>
+
+            <div class="map-controls">
+
+                <button id="zoomUserBtn" disabled>Zoom to User</button>
+
+                <button id="zoomAmbulanceBtn" disabled>Zoom to Ambulance</button>
+
+                <select id="routeType" aria-label="Select route type">
+
+                    <option value="fastest">Fastest Route</option>
+
+                    <option value="shortest">Shortest Route</option>
+
+                </select>
+
+                <label class="live-toggle">
+
+                    <input type="checkbox" id="liveTracking"> Live Tracking
+
+                </label>
+
+                <label class="live-toggle">
+
+                    <input type="checkbox" id="weatherOverlay"> Show Weather
+
+                </label>
+
+            </div>
+
+            <div id="distanceInfo" class="distance-info hidden"></div>
+
+            <div id="map"></div>
+
+            <div id="driverInfo" class="driver-info hidden"></div>
+
+        </div>
+
+        <div id="dashboardSection" class="dashboard-container hidden">
+
+            <h2>Active Ambulances</h2>
+
+            <div id="dashboard" class="dashboard">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Driver Name</th>
+
+                            <th>Ambulance ID</th>
+
+                            <th>Type</th>
+
+                            <th>Latitude</th>
+
+                            <th>Longitude</th>
+
+                            <th>Last Updated</th>
+
+                            <th>Status</th>
+
+                            <th>Availability</th>
+
+                            <th>Rating</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="dashboardTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
     </div>
-    <p>© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
-  </footer>
 
-  <script>
-    // Initialize AOS
-    try {
-      AOS.init({ duration: 800, once: true });
-    } catch (e) {
-      console.error("AOS initialization failed:", e);
-      showToast("Animation library failed to load.", true);
-    }
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modalMessage" tabindex="-1">
 
-    // Initialize Swiper
-    try {
-      new Swiper('.swiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        pagination: { el: '.swiper-pagination', clickable: true },
-        autoplay: { delay: 5000 },
-        breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
-      });
-    } catch (e) {
-      console.error("Swiper initialization failed:", e);
-      showToast("Carousel failed to load.", true);
-    }
+        <div class="modal-content" role="document">
 
-    // Initialize Highlight.js
-    try {
-      hljs.highlightAll();
-    } catch (e) {
-      console.error("Highlight.js initialization failed:", e);
-      showToast("Code highlighting failed.", true);
-    }
+            <p id="modalMessage" aria-live="assertive"></p>
 
-    // Theme Toggle
-    const body = document.getElementById("body");
-    const themeToggle = document.getElementById("theme-toggle");
-    const autoTheme = document.getElementById("auto-theme");
-    let isDark = localStorage.getItem("theme") === "dark";
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-    function updateTheme() {
-      isDark = autoTheme.checked ? prefersDark.matches : (localStorage.getItem("theme") === "dark");
-      body.classList.toggle("dark", isDark);
-      themeToggle.innerHTML = `<i class="fas fa-${isDark ? 'sun' : 'moon'}"></i>`;
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    }
-    if (!localStorage.getItem("theme")) {
-      isDark = prefersDark.matches;
-    }
-    updateTheme();
-    themeToggle.addEventListener("click", () => {
-      if (!autoTheme.checked) {
-        isDark = !isDark;
-        updateTheme();
-      }
-    });
-    autoTheme.addEventListener("change", updateTheme);
-    prefersDark.addEventListener("change", updateTheme);
+            <button id="modalCloseBtn" aria-label="Close modal">OK</button>
 
-    // Theme Customizer
-    const themeCustomizer = document.getElementById("theme-customizer");
-    const themeColor = document.getElementById("theme-color");
-    const themeApply = document.getElementById("theme-apply");
-    themeApply.addEventListener("click", () => {
-      document.documentElement.style.setProperty('--primary-color', themeColor.value);
-      showToast("Theme color updated!");
-    });
+            <div id="modalActions" class="hidden">
 
-    // Voice Control
-    const voiceControl = document.getElementById("voice-control");
-    voiceControl.addEventListener("click", () => {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.onresult = (event) => {
-        const command = event.results[0][0].transcript.toLowerCase();
-        const sectionMap = {
-          'home': 'home', 'about': 'about', 'skills': 'skills', 'projects': 'projects',
-          'jobs': 'jobs', 'gallery': 'gallery', 'analytics': 'analytics', 'chat': 'chat',
-          'iot': 'iot', 'testimonials': 'testimonials', 'code snippets': 'codesnippets',
-          'achievements': 'achievements', 'social': 'social', 'ideas': 'ideas',
-          'blog': 'blog', 'newsletter': 'newsletter', 'contact': 'contact'
+                <button id="confirmBookingBtn" class="tooltip">
+
+                    Confirm Booking
+
+                    <span class="tooltiptext">Book this ambulance</span>
+
+                </button>
+
+                <button id="cancelBookingBtn" aria-label="Cancel booking">Cancel</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="notification" class="notification" aria-live="polite">
+
+        <span id="notificationIcon" class="icon"></span>
+
+        <p id="notificationMessage"></p>
+
+        <span class="close-btn" id="closeNotificationBtn">×</span>
+
+    </div>
+
+
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+
+        // Initialize localStorage
+
+        let drivers = JSON.parse(localStorage.getItem('drivers')) || {};
+
+        let pendingDrivers = JSON.parse(localStorage.getItem('pendingDrivers')) || {};
+
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+
+        let trackingData = JSON.parse(localStorage.getItem('trackingData')) || {};
+
+        let locationHistory = JSON.parse(localStorage.getItem('locationHistory')) || {};
+
+        let feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+
+        let driverAvailability = JSON.parse(localStorage.getItem('driverAvailability')) || {};
+
+        let mapSettings = JSON.parse(localStorage.getItem('mapSettings')) || { routeType: 'fastest', zoom: 13 };
+
+        let bookingHistory = JSON.parse(localStorage.getItem('bookingHistory')) || {};
+
+        let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+        let chats = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
+        let userLocations = JSON.parse(localStorage.getItem('userLocations')) || {};
+
+        let notificationSettings = JSON.parse(localStorage.getItem('notificationSettings')) || { enabled: true };
+
+        const adminCredentials = { username: 'ADMIN', password: 'admin123' };
+
+        let watchId = null;
+
+        let map = null;
+
+        let driverMap = null;
+
+        let ambulanceMarker = null;
+
+        let userMarker = null;
+
+        let userLocation = null;
+
+        let routeControl = null;
+
+        let weatherLayer = null;
+
+        let isLoggedIn = false;
+
+        let loggedInType = null;
+
+        let loggedInId = null;
+
+        let loggedInName = null;
+
+        let liveTrackingInterval = null;
+
+        let nearestAmbulance = null;
+
+        let locationSharingInterval = null;
+
+
+
+        // Default placeholder image (1x1 gray pixel)
+
+        const defaultProfilePic = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC';
+
+
+
+        // Simulated weather data
+
+        const weatherData = {
+
+            'rain': { icon: '🌧️', desc: 'Rain may delay travel.' },
+
+            'clear': { icon: '☀️', desc: 'Clear conditions.' },
+
+            'clouds': { icon: '☁️', desc: 'Cloudy, no major impact.' }
+
         };
-        for (const [key, section] of Object.entries(sectionMap)) {
-          if (command.includes(key)) {
-            showSection(section);
-            showToast(`Navigated to ${key}`);
-            return;
-          }
+
+
+
+        // Error logging
+
+        function logError(message, error) {
+
+            console.error(`[${new Date().toISOString()}] ${message}`, error);
+
+            if (notificationSettings.enabled) {
+
+                showNotification(`Error: ${message}. Check console.`, 'error', '⚠️');
+
+            } else {
+
+                showModal(`Error: ${message}. Check console.`);
+
+            }
+
         }
-        showToast("Command not recognized.", true);
-      };
-      recognition.onerror = () => showToast("Voice recognition failed.", true);
-      recognition.start();
-    });
 
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const navLinks = document.getElementById("nav-links");
-    mobileMenuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("hidden");
-      mobileMenuBtn.innerHTML = navLinks.classList.contains("hidden")
-        ? '<i class="fas fa-bars"></i>'
-        : '<i class="fas fa-times"></i>';
-    });
 
-    // Section Navigation
-    const sections = document.querySelectorAll(".section");
-    const navLinksList = document.querySelectorAll(".nav-link");
-    function showSection(sectionId) {
-      sections.forEach(section => section.classList.remove("active", "fade-in"));
-      const targetSection = document.getElementById(sectionId);
-      targetSection.classList.add("active", "fade-in");
-      navLinksList.forEach(link => link.classList.remove("text-teal-500"));
-      document.querySelector(`[data-section="${sectionId}"]`).classList.add("text-teal-500");
-      window.scrollTo({ top: targetSection.offsetTop - 80, behavior: "smooth" });
-    }
-    navLinksList.forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const sectionId = link.getAttribute("data-section");
-        showSection(sectionId);
-        if (!navLinks.classList.contains("hidden")) {
-          navLinks.classList.add("hidden");
-          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+
+        // Validate input
+
+        function validateInput(id, value, fieldName) {
+
+            const errorElement = document.getElementById(`${id}Error`);
+
+            if (!value.trim()) {
+
+                if (errorElement) {
+
+                    errorElement.textContent = `${fieldName} is required.`;
+
+                    errorElement.style.display = 'block';
+
+                } else {
+
+                    console.warn(`Error element ${id}Error not found`);
+
+                }
+
+                return false;
+
+            }
+
+            if (errorElement) {
+
+                errorElement.style.display = 'none';
+
+            }
+
+            return true;
+
         }
-      });
-    });
-    showSection("home");
 
-    // Search Bar
-    const searchBar = document.getElementById("search-bar");
-    searchBar.addEventListener("input", () => {
-      const query = searchBar.value.toLowerCase();
-      const searchItems = [
-        { section: "home", content: "Jogi Bala Venkata Aravind Web Developer IoT Innovator UI Designer QA Specialist" },
-        { section: "about", content: "Hyderabad Telangana B.Tech Computer Science Full-Stack Developer IoT Enthusiast Quality Assurance Guts Electro Mech" },
-        { section: "skills", content: "HTML CSS JavaScript React.js Node.js ESP32 Arduino Quality Assurance" },
-        { section: "projects", content: "Job Portal IoT Smart Home ESP32 Dashboard" },
-        { section: "jobs", content: "Frontend Developer IoT Engineer Quality Analyst" },
-        { section: "gallery", content: "Project 1 Project 2 IoT Setup" },
-        { section: "analytics", content: "Analytics Profile Views" },
-        { section: "chat", content: "Developer Chat" },
-        { section: "iot", content: "IoT Control LED Temperature Humidity Energy" },
-        { section: "testimonials", content: "Testimonials Job Portal IoT Solutions" },
-        { section: "codesnippets", content: "ESP32 LED Control React Component" },
-        { section: "achievements", content: "Achievements Messages Ideas Jobs" },
-        { section: "social", content: "Social Feed Twitter X Job Portal IoT" },
-        { section: "ideas", content: "Submit Idea" },
-        { section: "blog", content: "ESP32 IoT UI Trends 2025 Quality Assurance" },
-        { section: "newsletter", content: "Newsletter Signup" },
-        { section: "contact", content: "Contact Phone Email LinkedIn GitHub" }
-      ];
-      const results = searchItems.filter(item => item.content.toLowerCase().includes(query));
-      if (query) {
-        showToast(`Found ${results.length} matching sections.`);
-        if (results.length > 0) showSection(results[0].section);
-      }
-    });
 
-    // Typed Animation
-    const typed = document.getElementById("typed");
-    const texts = ["Web Developer", "IoT Innovator", "UI Designer", "QA Specialist"];
-    let index = 0, charIndex = 0, isDeleting = false, text = "";
-    function type() {
-      if (index >= texts.length) index = 0;
-      text = texts[index];
-      if (!isDeleting && charIndex < text.length) {
-        typed.textContent = text.slice(0, ++charIndex);
-        setTimeout(type, 100);
-      } else if (isDeleting && charIndex > 0) {
-        typed.textContent = text.slice(0, --charIndex);
-        setTimeout(type, 50);
-      } else {
-        isDeleting = !isDeleting;
-        if (!isDeleting) index++;
-        setTimeout(type, isDeleting ? 1000 : 2000);
-      }
-    }
-    try {
-      type();
-    } catch (e) {
-      console.error("Typed animation failed:", e);
-      typed.textContent = "Web Developer";
-    }
 
-    // Visitor Counter
-    const visitorCounter = document.getElementById("visitor-counter");
-    let visitors = parseInt(localStorage.getItem("visitors") || "1");
-    visitorCounter.textContent = visitors;
-    setInterval(() => {
-      visitors += Math.random() > 0.7 ? 1 : 0;
-      visitorCounter.textContent = visitors;
-      localStorage.setItem("visitors", visitors);
-      visitorCounter.classList.add("animate-pulse");
-      setTimeout(() => visitorCounter.classList.remove("animate-pulse"), 500);
-    }, 10000);
+        // Validate image
 
-    // Weather Widget
-    const weatherTemp = document.getElementById("weather-temp");
-    const weatherCondition = document.getElementById("weather-condition");
-    const toggleUnit = document.getElementById("toggle-unit");
-    let isCelsius = true;
-    const mockWeather = { tempC: 28, condition: "Sunny" };
-    toggleUnit.addEventListener("click", () => {
-      isCelsius = !isCelsius;
-      weatherTemp.textContent = isCelsius
-        ? `${mockWeather.tempC}°C`
-        : `${Math.round(mockWeather.tempC * 9/5 + 32)}°F`;
-      toggleUnit.textContent = `Toggle ${isCelsius ? '°F' : '°C'}`;
-      showToast(`Temperature unit changed to ${isCelsius ? 'Celsius' : 'Fahrenheit'}`);
-    });
+        function validateImage(file, errorId, maxSizeKB = 500) {
 
-    // Toast Notification
-    const toastContainer = document.getElementById("toast-container");
-    function showToast(message, isError = false) {
-      const toast = document.createElement("div");
-      toast.className = `bg-${isError ? 'red' : 'teal'}-500 text-white px-4 py-2 rounded-lg shadow-lg toast`;
-      toast.textContent = message;
-      toast.style.opacity = "0";
-      toast.style.transform = "translate(-50%, -20px)";
-      toastContainer.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = "1";
-        toast.style.transform = "translate(-50%, 0)";
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          toast.style.transform = "translate(-50%, -20px)";
-          setTimeout(() => toast.remove(), 500);
-        }, 3000);
-      }, 10);
-    }
+            const errorElement = document.getElementById(errorId);
 
-    // Copy to Clipboard
-    function copyToClipboard(text) {
-      try {
-        navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!"));
-      } catch (e) {
-        console.error("Clipboard access failed:", e);
-        showToast("Clipboard access failed!", true);
-      }
-    }
+            if (!file) {
 
-    // Contact Form with CAPTCHA
-    const contactForm = document.getElementById("contact-form");
-    const captchaQuestion = document.getElementById("captcha-question");
-    const captchaAnswer = document.getElementById("captcha-answer");
-    let captchaResult;
-    function generateCaptcha() {
-      const num1 = Math.floor(Math.random() * 10) + 1;
-      const num2 = Math.floor(Math.random() * 10) + 1;
-      captchaResult = num1 + num2;
-      captchaQuestion.textContent = `${num1} + ${num2} = ?`;
-    }
-    generateCaptcha();
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("form-name").value;
-      const email = document.getElementById("form-email").value;
-      const message = document.getElementById("form-message").value;
-      const answer = parseInt(captchaAnswer.value);
-      if (!/^[a-zA-Z\s]+$/.test(name)) {
-        showToast("Name should contain only letters and spaces.", true);
-        return;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("Invalid email address.", true);
-        return;
-      }
-      if (message.length < 10) {
-        showToast("Message must be at least 10 characters.", true);
-        return;
-      }
-      if (answer !== captchaResult) {
-        showToast("Incorrect CAPTCHA answer.", true);
-        generateCaptcha();
-        captchaAnswer.value = "";
-        return;
-      }
-      showToast("Message sent successfully!");
-      contactForm.reset();
-      generateCaptcha();
-      checkAchievements();
-    });
+                if (errorElement) {
 
-    // Job Filter
-    const jobFilter = document.getElementById("job-filter");
-    const jobCategory = document.getElementById("job-category");
-    const jobCards = document.querySelectorAll(".job-card");
-    function filterJobs() {
-      const filter = jobFilter.value.toLowerCase();
-      const category = jobCategory.value;
-      jobCards.forEach(card => {
-        const title = card.querySelector("h3").textContent.toLowerCase();
-        const cardCategory = card.getAttribute("data-category");
-        const matchesFilter = title.includes(filter);
-        const matchesCategory = !category || cardCategory === category;
-        card.style.display = matchesFilter && matchesCategory ? "block" : "none";
-      });
-    }
-    jobFilter.addEventListener("input", filterJobs);
-    jobCategory.addEventListener("change", filterJobs);
+                    errorElement.textContent = 'Please select an image.';
 
-    // Job Application and Save
-    let savedJobs = JSON.parse(localStorage.getItem("saved-jobs")) || [];
-    function applyJob(jobTitle) {
-      const status = document.getElementById(`status-${jobTitle}`);
-      status.textContent = "Applied";
-      status.classList.add("text-green-500");
-      showToast(`Applied for ${jobTitle}!`);
-      checkAchievements();
-    }
-    function saveJob(jobTitle) {
-      if (!savedJobs.includes(jobTitle)) {
-        savedJobs.push(jobTitle);
-        localStorage.setItem("saved-jobs", JSON.stringify(savedJobs));
-        renderSavedJobs();
-        showToast(`Saved ${jobTitle}!`);
-      } else {
-        showToast(`${jobTitle} is already saved.`, true);
-      }
-    }
-    function renderSavedJobs() {
-      const savedJobsList = document.getElementById("saved-jobs");
-      savedJobsList.innerHTML = "";
-      savedJobs.forEach(job => {
-        const li = document.createElement("li");
-        li.className = "flex justify-between";
-        li.innerHTML = `
-          ${job}
-          <button class="text-red-400 hover:text-red-600" onclick="removeSavedJob('${job}')" aria-label="Remove saved job">Remove</button>
-        `;
-        savedJobsList.appendChild(li);
-      });
-    }
-    window.removeSavedJob = (jobTitle) => {
-      savedJobs = savedJobs.filter(job => job !== jobTitle);
-      localStorage.setItem("saved-jobs", JSON.stringify(savedJobs));
-      renderSavedJobs();
-      showToast(`${jobTitle} removed from saved jobs.`);
-    };
-    renderSavedJobs();
+                    errorElement.style.display = 'block';
 
-    // Project Filter and Sort
-    const projectFilter = document.getElementById("project-filter");
-    const projectSort = document.getElementById("project-sort");
-    const projectList = document.getElementById("project-list");
-    const projectCards = Array.from(projectList.querySelectorAll(".project-card"));
-    function updateProjects() {
-      const filter = projectFilter.value;
-      const sort = projectSort.value;
-      let filtered = projectCards.filter(card => !filter || card.getAttribute("data-category") === filter);
-      if (sort === "name-asc") {
-        filtered.sort((a, b) => a.getAttribute("data-name").localeCompare(b.getAttribute("data-name")));
-      } else if (sort === "name-desc") {
-        filtered.sort((a, b) => b.getAttribute("data-name").localeCompare(a.getAttribute("data-name")));
-      } else if (sort === "date-desc") {
-        filtered.sort((a, b) => new Date(b.getAttribute("data-date")) - new Date(a.getAttribute("data-date")));
-      } else if (sort === "date-asc") {
-        filtered.sort((a, b) => new Date(a.getAttribute("data-date")) - new Date(b.getAttribute("data-date")));
-      }
-      projectList.innerHTML = "";
-      filtered.forEach(card => projectList.appendChild(card));
-    }
-    projectFilter.addEventListener("change", updateProjects);
-    projectSort.addEventListener("change", updateProjects);
+                }
 
-    // Gallery Upload and Lightbox
-    const galleryImages = [
-      { src: "https://via.placeholder.com/300?text=Project+1", alt: "Project 1" },
-      { src: "https://via.placeholder.com/300?text=Project+2", alt: "Project 2" },
-      { src: "https://via.placeholder.com/300?text=IoT+Setup", alt: "IoT Setup" }
-    ];
-    let currentImageIndex = 0;
-    const photoUpload = document.getElementById("photo-upload");
-    const photoPreview = document.getElementById("photo-preview");
-    const addToGalleryBtn = document.getElementById("add-to-gallery");
-    const galleryGrid = document.getElementById("gallery-grid");
-    const imageFilter = document.getElementById("image-filter");
-    photoUpload.addEventListener("change", (e) => {
-      photoPreview.innerHTML = "";
-      const files = Array.from(e.target.files);
-      if (files.every(file => file.type.startsWith("image/"))) {
-        files.forEach(file => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const img = document.createElement("img");
-            img.src = reader.result;
-            img.alt = file.name;
-            img.className = "w-24 h-24 rounded-lg object-cover";
-            photoPreview.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-        });
-        photoPreview.classList.remove("hidden");
-        addToGalleryBtn.classList.remove("hidden");
-      } else {
-        showToast("Please upload valid images.", true);
-      }
-    });
-    imageFilter.addEventListener("change", () => {
-      const filter = imageFilter.value;
-      galleryGrid.querySelectorAll("img").forEach(img => {
-        img.style.filter = filter === "none" ? "" : filter;
-      });
-    });
-    function addToGallery() {
-      const previews = photoPreview.querySelectorAll("img");
-      previews.forEach(preview => {
-        galleryImages.push({ src: preview.src, alt: preview.alt });
-        const img = document.createElement("img");
-        img.src = preview.src;
-        img.alt = preview.alt;
-        img.className = `rounded-lg object-cover w-full h-48 neumorphic cursor-pointer filter-${imageFilter.value}`;
-        img.setAttribute("data-aos", "fade-up");
-        img.setAttribute("data-aos-delay", (galleryImages.length * 100).toString());
-        img.onclick = () => openLightbox(img.src, img.alt, galleryImages.length - 1);
-        galleryGrid.appendChild(img);
-      });
-      photoPreview.classList.add("hidden");
-      addToGalleryBtn.classList.add("hidden");
-      photoUpload.value = "";
-      showToast("Photos added to gallery!");
-    }
-    function openLightbox(src, alt, index) {
-      currentImageIndex = index;
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      const lightboxCaption = document.getElementById("lightbox-caption");
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
-      lightboxCaption.textContent = alt;
-      lightbox.classList.remove("hidden");
-      document.addEventListener("keydown", handleLightboxKeys);
-    }
-    function closeLightbox() {
-      document.getElementById("lightbox").classList.add("hidden");
-      document.removeEventListener("keydown", handleLightboxKeys);
-    }
-    function prevImage() {
-      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-      const { src, alt } = galleryImages[currentImageIndex];
-      document.getElementById("lightbox-img").src = src;
-      document.getElementById("lightbox-img").alt = alt;
-      document.getElementById("lightbox-caption").textContent = alt;
-    }
-    function nextImage() {
-      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-      const { src, alt } = galleryImages[currentImageIndex];
-      document.getElementById("lightbox-img").src = src;
-      document.getElementById("lightbox-img").alt = alt;
-      document.getElementById("lightbox-caption").textContent = alt;
-    }
-    function downloadImage() {
-      const { src, alt } = galleryImages[currentImageIndex];
-      const link = document.createElement("a");
-      link.href = src;
-      link.download = alt;
-      link.click();
-      showToast("Image downloaded!");
-    }
-    function shareImage() {
-      const { src } = galleryImages[currentImageIndex];
-      copyToClipboard(src);
-      showToast("Image URL copied for sharing!");
-    }
-    function handleLightboxKeys(e) {
-      if (e.key === "Escape") closeLightbox();
-      else if (e.key === "ArrowLeft") prevImage();
-      else if (e.key === "ArrowRight") nextImage();
-    }
+                return false;
 
-    // Code Snippet Copy
-    window.copyCode = (button) => {
-      const code = button.previousElementSibling.querySelector("code").textContent;
-      copyToClipboard(code);
-    };
+            }
 
-        // Analytics Login
-    const analyticsLogin = document.getElementById("analytics-login");
-    const analyticsContent = document.getElementById("analytics-content");
-    const devLoginBtn = document.getElementById("dev-login-btn");
-    const devUsername = document.getElementById("dev-username");
-    const devPassword = document.getElementById("dev-password");
-    devLoginBtn.addEventListener("click", () => {
-      if (devUsername.value === "Tinju" && devPassword.value === "Tinju@2001") {
-        analyticsLogin.classList.add("hidden");
-        analyticsContent.classList.remove("hidden");
-        showToast("Analytics access granted!");
-        renderAnalyticsChart();
-      } else {
-        showToast("Invalid credentials.", true);
-      }
-    });
+            if (!['image/jpeg', 'image/png'].includes(file.type)) {
 
-    // Analytics Chart
-    function renderAnalyticsChart() {
-      const ctx = document.getElementById("profile-chart").getContext("2d");
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-          datasets: [{
-            label: "Profile Views",
-            data: [50, 100, 150, 200, 250, 300, 350],
-            borderColor: "#14b8a6",
-            backgroundColor: "rgba(20, 184, 166, 0.2)",
-            fill: true,
-            tension: 0.4
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: { beginAtZero: true }
-          }
+                if (errorElement) {
+
+                    errorElement.textContent = 'Only JPEG or PNG allowed.';
+
+                    errorElement.style.display = 'block';
+
+                }
+
+                return false;
+
+            }
+
+            if (file.size > maxSizeKB * 1024) {
+
+                if (errorElement) {
+
+                    errorElement.textContent = `Image must be under ${maxSizeKB}KB.`;
+
+                    errorElement.style.display = 'block';
+
+                }
+
+                return false;
+
+            }
+
+            if (errorElement) {
+
+                errorElement.style.display = 'none';
+
+            }
+
+            return true;
+
         }
-      });
-    }
 
-    // Download Analytics Report
-    const downloadAnalytics = document.getElementById("download-analytics");
-    downloadAnalytics.addEventListener("click", () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("Portfolio Analytics Report", 10, 10);
-      doc.text("Profile Views (2025):", 10, 20);
-      doc.text("Jan: 50 | Feb: 100 | Mar: 150 | Apr: 200", 10, 30);
-      doc.text("May: 250 | Jun: 300 | Jul: 350", 10, 40);
-      doc.save("analytics-report.pdf");
-      showToast("Analytics report downloaded!");
-    });
 
-    // Chat System
-    const chatLogin = document.getElementById("chat-login");
-    const chatContent = document.getElementById("chat-content");
-    const chatLoginBtn = document.getElementById("chat-login-btn");
-    const chatUsername = document.getElementById("chat-username");
-    const chatPassword = document.getElementById("chat-password");
-    const chatInput = document.getElementById("chat-input");
-    const chatMessages = document.getElementById("chat-messages");
-    const chatSend = document.getElementById("chat-send");
-    const emojiPicker = document.getElementById("emoji-picker");
-    const emojiPanel = document.getElementById("emoji-panel");
-    const typingIndicator = document.getElementById("typing-indicator");
-    let messages = JSON.parse(localStorage.getItem("chat-messages")) || [];
-    let messageCount = messages.filter(m => m.sender === "Tinju").length;
 
-    chatLoginBtn.addEventListener("click", () => {
-      if (chatUsername.value === "Tinju" && chatPassword.value === "Tinju@2001") {
-        chatLogin.classList.add("hidden");
-        chatContent.classList.remove("hidden");
-        showToast("Chat access granted!");
-        renderMessages();
-      } else {
-        showToast("Invalid credentials.", true);
-      }
-    });
+        // Initialize maps
 
-    function renderMessages() {
-      chatMessages.innerHTML = "";
-      messages.forEach((msg, index) => {
-        const div = document.createElement("div");
-        div.className = `chat-message ${msg.sender === "Tinju" ? "sent" : "received"}`;
-        if (msg.pinned) div.classList.add("pinned");
-        div.innerHTML = `
-          <p><strong>${msg.sender}:</strong> ${msg.text}</p>
-          <span class="read-status text-xs text-gray-400">${msg.read ? "Read" : "Unread"}</span>
-          <button class="delete-btn text-red-400 hover:text-red-600" onclick="deleteMessage(${index})" aria-label="Delete message"><i class="fas fa-trash"></i></button>
-          <button class="pin-btn text-yellow-400 hover:text-yellow-600" onclick="pinMessage(${index})" aria-label="Pin message"><i class="fas fa-thumbtack"></i></button>
-        `;
-        chatMessages.appendChild(div);
-      });
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+        function initMap(lat = 0, lng = 0, mapId = 'map') {
 
-    chatInput.addEventListener("input", () => {
-      typingIndicator.classList.remove("hidden");
-      setTimeout(() => typingIndicator.classList.add("hidden"), 1000);
-    });
+            try {
 
-    emojiPicker.addEventListener("click", () => {
-      emojiPanel.classList.toggle("hidden");
-    });
+                const targetMap = mapId === 'map' ? map : driverMap;
 
-    document.querySelectorAll(".emoji-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        chatInput.value += btn.textContent;
-        emojiPanel.classList.add("hidden");
-      });
-    });
+                if (targetMap) {
 
-    chatSend.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
+                    targetMap.off();
 
-    function sendMessage() {
-      const text = chatInput.value.trim();
-      if (text) {
-        messages.push({ sender: "Tinju", text, read: false, pinned: false });
-        messageCount++;
-        localStorage.setItem("chat-messages", JSON.stringify(messages));
-        renderMessages();
-        chatInput.value = "";
-        showToast("Message sent!");
-        checkAchievements();
-        setTimeout(() => {
-          messages.push({ sender: "Bot", text: "Thanks for your message!", read: true, pinned: false });
-          localStorage.setItem("chat-messages", JSON.stringify(messages));
-          renderMessages();
-        }, 1000);
-      }
-    }
+                    targetMap.remove();
 
-    window.deleteMessage = (index) => {
-      messages.splice(index, 1);
-      messageCount = messages.filter(m => m.sender === "Tinju").length;
-      localStorage.setItem("chat-messages", JSON.stringify(messages));
-      renderMessages();
-      showToast("Message deleted!");
-      checkAchievements();
-    };
+                }
 
-    window.pinMessage = (index) => {
-      messages[index].pinned = !messages[index].pinned;
-      localStorage.setItem("chat-messages", JSON.stringify(messages));
-      renderMessages();
-      showToast(messages[index].pinned ? "Message pinned!" : "Message unpinned!");
-    };
+                const newMap = L.map(mapId, { scrollWheelZoom: false }).setView([lat, lng], mapSettings.zoom);
 
-    // IoT Control
-    const ledStatus = document.getElementById("led-status");
-    const toggleLed = document.getElementById("toggle-led");
-    const iotTemp = document.getElementById("iot-temp");
-    const iotHumidity = document.getElementById("iot-humidity");
-    const iotRefresh = document.getElementById("iot-refresh");
-    let ledOn = false;
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 
-    toggleLed.addEventListener("click", () => {
-      ledOn = !ledOn;
-      ledStatus.textContent = ledOn ? "On" : "Off";
-      ledStatus.classList.toggle("text-green-500", ledOn);
-      ledStatus.classList.toggle("text-red-500", !ledOn);
-      showToast(`LED turned ${ledOn ? "on" : "off"}!`);
-    });
+                    attribution: '© OpenStreetMap, © CartoDB'
 
-    iotRefresh.addEventListener("click", () => {
-      const temp = (Math.random() * 5 + 25).toFixed(1);
-      const humidity = (Math.random() * 20 + 50).toFixed(1);
-      iotTemp.textContent = `${temp}°C`;
-      iotHumidity.textContent = `${humidity}%`;
-      showToast("IoT data refreshed!");
-      updateEnergyChart();
-    });
+                }).addTo(newMap);
 
-    function updateEnergyChart() {
-      const ctx = document.getElementById("energy-chart").getContext("2d");
-      new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-          datasets: [{
-            label: "Energy Usage (kWh)",
-            data: [10, 12, 8, 15, 11],
-            backgroundColor: "#14b8a6",
-            borderColor: "#14b8a6",
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: { beginAtZero: true }
-          }
+                newMap.whenReady(() => {
+
+                    newMap.scrollWheelZoom.enable();
+
+                });
+
+                if (mapId === 'map') {
+
+                    map = newMap;
+
+                    if (!ambulanceMarker) {
+
+                        ambulanceMarker = L.marker([lat, lng], {
+
+                            icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41] })
+
+                        }).addTo(map);
+
+                    }
+
+                    document.getElementById('zoomAmbulanceBtn').disabled = false;
+
+                } else {
+
+                    driverMap = newMap;
+
+                }
+
+                newMap.on('zoomend', () => {
+
+                    mapSettings.zoom = newMap.getZoom();
+
+                    localStorage.setItem('mapSettings', JSON.stringify(mapSettings));
+
+                });
+
+            } catch (error) {
+
+                logError(`Map initialization failed for ${mapId}`, error);
+
+            }
+
         }
-      });
-    }
-    updateEnergyChart();
 
-    // Achievements
-    const achLogin = document.getElementById("achievements-login");
-    const achContent = document.getElementById("achievements-content");
-    const achLoginBtn = document.getElementById("ach-login-btn");
-    const achUsername = document.getElementById("ach-username");
-    const achPassword = document.getElementById("ach-password");
-    let ideasCount = JSON.parse(localStorage.getItem("ideas"))?.length || 0;
-    let jobsApplied = JSON.parse(localStorage.getItem("jobs-applied"))?.length || 0;
 
-    achLoginBtn.addEventListener("click", () => {
-      if (achUsername.value === "Tinju" && achPassword.value === "Tinju@2001") {
-        achLogin.classList.add("hidden");
-        achContent.classList.remove("hidden");
-        showToast("Achievements access granted!");
-        checkAchievements();
-      } else {
-        showToast("Invalid credentials.", true);
-      }
-    });
 
-    function checkAchievements() {
-      const achievements = [
-        { id: "messages", condition: () => messageCount >= 10 },
-        { id: "ideas", condition: () => ideasCount >= 5 },
-        { id: "jobs", condition: () => jobsApplied >= 3 }
-      ];
-      achievements.forEach(ach => {
-        const element = document.querySelector(`.achievement[data-id="${ach.id}"]`);
-        if (ach.condition()) {
-          element.classList.add("unlocked");
-        } else {
-          element.classList.remove("unlocked");
+        // Toggle weather overlay
+
+        function toggleWeatherOverlay() {
+
+            try {
+
+                const isChecked = document.getElementById('weatherOverlay').checked;
+
+                if (isChecked && map) {
+
+                    if (!weatherLayer) {
+
+                        weatherLayer = L.tileLayer('https://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=fakekey', {
+
+                            opacity: 0.5
+
+                        }).addTo(map);
+
+                        showNotification('Weather overlay enabled: Clear conditions.', 'info', weatherData.clear.icon);
+
+                    }
+
+                } else if (weatherLayer && map) {
+
+                    map.removeLayer(weatherLayer);
+
+                    weatherLayer = null;
+
+                    showNotification('Weather overlay disabled.', 'info', 'ℹ️');
+
+                }
+
+            } catch (error) {
+
+                logError('Toggle weather overlay failed', error);
+
+            }
+
         }
-      });
-    }
 
-    // Ideas Submission
-    const ideaForm = document.getElementById("idea-form");
-    const ideasList = document.getElementById("ideas-list");
-    const ideasLogin = document.getElementById("ideas-admin");
-    const ideasLoginBtn = document.getElementById("ideas-login-btn");
-    const ideasUsername = document.getElementById("ideas-username");
-    const ideasPassword = document.getElementById("ideas-password");
-    let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
-    ideaForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const title = document.getElementById("idea-title").value;
-      const description = document.getElementById("idea-description").value;
-      ideas.push({ title, description });
-      ideasCount = ideas.length;
-      localStorage.setItem("ideas", JSON.stringify(ideas));
-      ideaForm.reset();
-      showToast("Idea submitted!");
-      checkAchievements();
-    });
 
-    ideasLoginBtn.addEventListener("click", () => {
-      if (ideasUsername.value === "Tinju" && ideasPassword.value === "Tinju@2001") {
-        ideasLogin.classList.add("hidden");
-        renderIdeas();
-        showToast("Ideas admin access granted!");
-      } else {
-        showToast("Invalid credentials.", true);
-      }
-    });
+        // Show section
 
-    function renderIdeas() {
-      ideasList.innerHTML = "";
-      ideas.forEach((idea, index) => {
-        const div = document.createElement("div");
-        div.className = "neumorphic p-4 rounded-lg";
-        div.innerHTML = `
-          <p><strong>${idea.title}</strong></p>
-          <p>${idea.description}</p>
-          <button class="text-red-400 hover:text-red-600 mt-2" onclick="deleteIdea(${index})" aria-label="Delete idea">Delete</button>
-        `;
-        ideasList.appendChild(div);
-      });
-    }
+        function showSection(sectionId) {
 
-    window.deleteIdea = (index) => {
-      ideas.splice(index, 1);
-      ideasCount = ideas.length;
-      localStorage.setItem("ideas", JSON.stringify(ideas));
-      renderIdeas();
-      showToast("Idea deleted!");
-      checkAchievements();
-    };
+            try {
 
-    // Blog Likes
-    let likes = JSON.parse(localStorage.getItem("likes")) || [0, 0, 0];
-    function likePost(index) {
-      likes[index]++;
-      localStorage.setItem("likes", JSON.stringify(likes));
-      document.getElementById(`like-${index}`).textContent = likes[index];
-      showToast("Post liked!");
-    }
+                const sections = ['homeSection', 'loginSection', 'userSection', 'driverSection', 'adminSection', 'trackerSection', 'dashboardSection'];
 
-    // Newsletter Signup
-    const newsletterForm = document.getElementById("newsletter-form");
-    const newsletterList = document.getElementById("newsletter-list");
-    const subscribersList = document.getElementById("subscribers");
-    let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
+                sections.forEach(id => {
 
-    newsletterForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("newsletter-email").value;
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("Invalid email address.", true);
-        return;
-      }
-      if (!subscribers.includes(email)) {
-        subscribers.push(email);
-        localStorage.setItem("subscribers", JSON.stringify(subscribers));
-        showToast("Subscribed to newsletter!");
-        if (devUsername.value === "Tinju" && devPassword.value === "Tinju@2001") {
-          newsletterList.classList.remove("hidden");
-          renderSubscribers();
+                    const section = document.getElementById(id);
+
+                    if (section) section.classList.add('hidden');
+
+                });
+
+                const sectionElement = document.getElementById(sectionId);
+
+                if (sectionElement) {
+
+                    sectionElement.classList.remove('hidden');
+
+                    if (sectionId === 'trackerSection') {
+
+                        const trackId = document.getElementById('trackId').value;
+
+                        if (trackId && trackingData[trackId]) trackAmbulance();
+
+                        document.getElementById('routeType').value = mapSettings.routeType;
+
+                    }
+
+                    if (sectionId === 'dashboardSection') updateDashboard();
+
+                    if (sectionId === 'adminSection') updateAdminPanel();
+
+                    if (sectionId === 'userSection') {
+
+                        updateBookingHistory();
+
+                        updateMessageDriverList();
+
+                        updateChat();
+
+                        updateEmergencyContacts();
+
+                        document.getElementById('enableNotifications').checked = notificationSettings.enabled;
+
+                    }
+
+                    if (sectionId === 'driverSection') {
+
+                        updateDriverMessages();
+
+                        updateDriverMap();
+
+                        updateDriverChat();
+
+                    }
+
+                }
+
+                toggleMenu(false);
+
+            } catch (error) {
+
+                logError('Section switch failed', error);
+
+            }
+
         }
-      } else {
-        showToast("Email already subscribed.", true);
-      }
-      newsletterForm.reset();
-    });
 
-    function renderSubscribers() {
-      subscribersList.innerHTML = "";
-      subscribers.forEach(email => {
-        const li = document.createElement("li");
-        li.textContent = email;
-        subscribersList.appendChild(li);
-      });
+
+
+        // Toggle mobile menu
+
+        function toggleMenu(force = null) {
+
+            const menu = document.getElementById('navMenu');
+
+            if (force !== null) {
+
+                menu.classList.toggle('active', force);
+
+            } else {
+
+                menu.classList.toggle('active');
+
+            }
+
+        }
+
+
+
+        // Show modal
+
+        function showModal(message, actions = false) {
+
+            const modal = document.getElementById('modal');
+
+            const modalMessage = document.getElementById('modalMessage');
+
+            const modalActions = document.getElementById('modalActions');
+
+            const closeBtn = document.getElementById('modalCloseBtn');
+
+            if (!modal || !modalMessage || !modalActions || !closeBtn) {
+
+                console.error('Modal elements not found');
+
+                return;
+
+            }
+
+            modalMessage.textContent = message;
+
+            modalActions.classList.toggle('hidden', !actions);
+
+            modal.style.display = 'flex';
+
+            closeBtn.focus();
+
+
+
+            const focusableElements = modal.querySelectorAll('button');
+
+            const firstElement = focusableElements[0];
+
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+
+
+            modal.addEventListener('keydown', function trapFocus(e) {
+
+                if (e.key === 'Tab') {
+
+                    if (e.shiftKey) {
+
+                        if (document.activeElement === firstElement) {
+
+                            e.preventDefault();
+
+                            lastElement.focus();
+
+                        }
+
+                    } else {
+
+                        if (document.activeElement === lastElement) {
+
+                            e.preventDefault();
+
+                            firstElement.focus();
+
+                        }
+
+                    }
+
+                }
+
+                if (e.key === 'Escape') closeModal();
+
+            }, { once: true });
+
+        }
+
+
+
+        // Close modal
+
+        function closeModal() {
+
+            const modal = document.getElementById('modal');
+
+            if (modal) {
+
+                modal.style.display = 'none';
+
+                document.getElementById('modalActions').classList.add('hidden');
+
+                nearestAmbulance = null;
+
+            }
+
+        }
+
+
+
+        // Show notification
+
+        function showNotification(message, type = 'info', icon = 'ℹ️') {
+
+            if (!notificationSettings.enabled) return;
+
+            const notification = document.getElementById('notification');
+
+            const messageElement = document.getElementById('notificationMessage');
+
+            const iconElement = document.getElementById('notificationIcon');
+
+            if (!notification || !messageElement || !iconElement) return;
+
+            messageElement.textContent = message;
+
+            iconElement.textContent = icon;
+
+            notification.classList.remove('success', 'error');
+
+            if (type === 'success') notification.classList.add('success');
+
+            else if (type === 'error') notification.classList.add('error');
+
+            notification.style.display = 'flex';
+
+            setTimeout(hideNotification, 5000);
+
+        }
+
+
+
+        // Hide notification
+
+        function hideNotification() {
+
+            const notification = document.getElementById('notification');
+
+            if (notification) notification.style.display = 'none';
+
+        }
+
+
+
+        // Toggle notifications
+
+        function toggleNotifications() {
+
+            notificationSettings.enabled = document.getElementById('enableNotifications').checked;
+
+            localStorage.setItem('notificationSettings', JSON.stringify(notificationSettings));
+
+            showNotification(`Notifications ${notificationSettings.enabled ? 'enabled' : 'disabled'}.`, 'success', '✅');
+
+        }
+
+
+
+        // Update navbar
+
+        function updateNavbar() {
+
+            try {
+
+                const accountName = document.getElementById('accountName');
+
+                const accountDetails = document.getElementById('accountDetails');
+
+                const logoutLink = document.getElementById('logoutLink');
+
+                if (isLoggedIn) {
+
+                    accountName.textContent = loggedInName || 'Account';
+
+                    accountDetails.textContent = loggedInId ? `ID: ${loggedInId}` : '';
+
+                    logoutLink.style.display = 'block';
+
+                    accountName.onclick = null;
+
+                } else {
+
+                    accountName.textContent = 'Account';
+
+                    accountDetails.textContent = '';
+
+                    logoutLink.style.display = 'none';
+
+                    accountName.onclick = () => showSection('loginSection');
+
+                }
+
+            } catch (error) {
+
+                logError('Nav update failed', error);
+
+            }
+
+        }
+
+
+
+        // Toggle login fields
+
+        function toggleLoginFields() {
+
+            try {
+
+                const accountType = document.getElementById('accountType').value;
+
+                const registerFields = document.getElementById('registerFields');
+
+                const ambulanceTypeField = document.getElementById('regAmbulanceType');
+
+                const profilePicField = document.getElementById('regProfilePic');
+
+                registerFields.classList.toggle('hidden', accountType === 'admin');
+
+                ambulanceTypeField.classList.toggle('hidden', accountType !== 'driver');
+
+                profilePicField.classList.toggle('hidden', accountType === 'admin');
+
+            } catch (error) {
+
+                logError('Toggle login fields failed', error);
+
+            }
+
+        }
+
+
+
+        // Calculate distance
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+
+            try {
+
+                const R = 6371;
+
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+
+                const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+
+                          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+
+                          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+                return (R * c).toFixed(2);
+
+            } catch (error) {
+
+                logError('Distance calculation failed', error);
+
+                return 0;
+
+            }
+
+        }
+
+
+
+        // Estimate ETA
+
+        function estimateETA(distance) {
+
+            try {
+
+                const speed = 40;
+
+                const hours = distance / speed;
+
+                const minutes = Math.ceil(hours * 60);
+
+                return minutes > 0 ? `${minutes} min` : '<1 min';
+
+            } catch (error) {
+
+                logError('ETA calculation failed', error);
+
+                return 'N/A';
+
+            }
+
+        }
+
+
+
+        // Get user location
+
+        function getUserLocation(callback) {
+
+            if (!navigator.geolocation) {
+
+                showModal('Geolocation not supported by your browser.');
+
+                callback(null);
+
+                return;
+
+            }
+
+            navigator.geolocation.getCurrentPosition(
+
+                position => {
+
+                    userLocation = {
+
+                        latitude: position.coords.latitude,
+
+                        longitude: position.coords.longitude,
+
+                    };
+
+                    callback(userLocation);
+
+                    document.getElementById('zoomUserBtn').disabled = false;
+
+                },
+
+                error => {
+
+                    let message = 'Failed to fetch location.';
+
+                    if (error.code === 1) message = 'Location access denied. Please enable location services.';
+
+                    else if (error.code === 3) message = 'Location request timed out. Please check your network.';
+
+                    logError('User location fetch failed', error);
+
+                    showModal(message);
+
+                    callback(null);
+
+                },
+
+                { enableHighAccuracy: true, timeout: 15000 }
+
+            );
+
+        }
+
+
+
+        // Update profile picture
+
+        async function updateProfilePic(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const fileInput = document.getElementById('userProfileUpload');
+
+                const file = fileInput.files[0];
+
+                if (!validateImage(file, 'userProfileUploadError')) return;
+
+
+
+                const reader = new FileReader();
+
+                reader.onload = () => {
+
+                    users[loggedInId].profilePic = reader.result;
+
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    document.getElementById('userProfilePic').src = reader.result;
+
+                    showNotification('Profile picture updated.', 'success', '✅');
+
+                };
+
+                reader.onerror = () => {
+
+                    showNotification('Failed to load profile picture.', 'error', '❌');
+
+                };
+
+                reader.readAsDataURL(file);
+
+            } catch (error) {
+
+                logError('Profile picture update failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Update driver profile picture
+
+        async function updateDriverProfilePic(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const fileInput = document.getElementById('driverProfileUpload');
+
+                const file = fileInput.files[0];
+
+                if (!validateImage(file, 'driverProfileUploadError')) return;
+
+
+
+                const reader = new FileReader();
+
+                reader.onload = () => {
+
+                    drivers[loggedInId].profilePic = reader.result;
+
+                    localStorage.setItem('drivers', JSON.stringify(drivers));
+
+                    document.getElementById('driverProfilePic').src = reader.result;
+
+                    showNotification('Profile picture updated.', 'success', '✅');
+
+                };
+
+                reader.onerror = () => {
+
+                    showNotification('Failed to load profile picture.', 'error', '❌');
+
+                };
+
+                reader.readAsDataURL(file);
+
+            } catch (error) {
+
+                logError('Driver profile picture update failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Add emergency contact
+
+        async function addEmergencyContact(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const name = document.getElementById('contactName').value.trim();
+
+                const phone = document.getElementById('contactPhone').value.trim();
+
+                if (!validateInput('contactName', name, 'Contact Name') ||
+
+                    !validateInput('contactPhone', phone, 'Phone Number')) return;
+
+
+
+                if (!users[loggedInId].emergencyContacts) users[loggedInId].emergencyContacts = [];
+
+                users[loggedInId].emergencyContacts.push({ name, phone });
+
+                if (users[loggedInId].emergencyContacts.length > 5) users[loggedInId].emergencyContacts.shift();
+
+                localStorage.setItem('users', JSON.stringify(users));
+
+                document.getElementById('contactName').value = '';
+
+                document.getElementById('contactPhone').value = '';
+
+                updateEmergencyContacts();
+
+                showNotification('Emergency contact added.', 'success', '✅');
+
+            } catch (error) {
+
+                logError('Add emergency contact failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Update emergency contacts
+
+        function updateEmergencyContacts() {
+
+            try {
+
+                const tbody = document.getElementById('emergencyContactsTable');
+
+                tbody.innerHTML = '';
+
+                const contacts = users[loggedInId]?.emergencyContacts || [];
+
+                contacts.forEach((contact, index) => {
+
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+
+                        <td>${contact.name}</td>
+
+                        <td>${contact.phone}</td>
+
+                        <td><button class="delete-contact-btn" data-index="${index}">Delete</button></td>
+
+                    `;
+
+                    tbody.appendChild(row);
+
+                });
+
+                document.querySelectorAll('.delete-contact-btn').forEach(btn => {
+
+                    btn.addEventListener('click', () => deleteEmergencyContact(parseInt(btn.dataset.index)));
+
+                });
+
+            } catch (error) {
+
+                logError('Update emergency contacts failed', error);
+
+            }
+
+        }
+
+
+
+        // Delete emergency contact
+
+        function deleteEmergencyContact(index) {
+
+            try {
+
+                users[loggedInId].emergencyContacts.splice(index, 1);
+
+                localStorage.setItem('users', JSON.stringify(users));
+
+                updateEmergencyContacts();
+
+                showNotification('Emergency contact deleted.', 'success', '✅');
+
+            } catch (error) {
+
+                logError('Delete emergency contact failed', error);
+
+            }
+
+        }
+
+
+
+        // Send SOS
+
+        async function sendSOS(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                if (!isLoggedIn || loggedInType !== 'user') {
+
+                    showModal('Please log in as a user.');
+
+                    return;
+
+                }
+
+                await findNearestAmbulance(true);
+
+                messages.push({
+
+                    userId: loggedInId,
+
+                    driverId: nearestAmbulance?.id || 'ALL',
+
+                    message: 'Urgent: Immediate assistance needed!',
+
+                    timestamp: new Date().toISOString()
+
+                });
+
+                if (messages.length > 50) messages.shift();
+
+                localStorage.setItem('messages', JSON.stringify(messages));
+
+                updateDriverMessages();
+
+                updateAdminPanel();
+
+                const contacts = users[loggedInId]?.emergencyContacts || [];
+
+                contacts.forEach(contact => {
+
+                    showNotification(`Simulated SOS call to ${contact.name} (${contact.phone}).`, 'success', '📞');
+
+                });
+
+                showNotification('SOS alert sent to nearest ambulance.', 'success', '🚨');
+
+            } catch (error) {
+
+                logError('SOS failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Find nearest ambulance
+
+        async function findNearestAmbulance(isAuto = false) {
+
+            const button = event?.target;
+
+            try {
+
+                if (button) button.classList.add('loading');
+
+                if (!isLoggedIn || loggedInType !== 'user') {
+
+                    showModal('Please log in as a user.');
+
+                    return;
+
+                }
+
+
+
+                const ambulanceType = document.getElementById('ambulanceTypeFilter').value;
+
+
+
+                getUserLocation(userLoc => {
+
+                    if (!userLoc) return;
+
+
+
+                    let nearest = null;
+
+                    let minDistance = Infinity;
+
+                    Object.entries(trackingData).forEach(([id, data]) => {
+
+                        if (driverAvailability[id] === 'Available' && data.latitude && data.longitude &&
+
+                            (ambulanceType === 'All' || drivers[id]?.ambulanceType === ambulanceType)) {
+
+                            const distance = calculateDistance(
+
+                                userLoc.latitude, userLoc.longitude,
+
+                                data.latitude, data.longitude
+
+                            );
+
+                            if (distance < minDistance) {
+
+                                minDistance = distance;
+
+                                nearest = { id, data, distance };
+
+                            }
+
+                        }
+
+                    });
+
+
+
+                    if (!nearest) {
+
+                        showModal('No available ambulances found.');
+
+                        return;
+
+                    }
+
+
+
+                    const eta = estimateETA(nearest.distance);
+
+                    nearestAmbulance = { ...nearest, eta };
+
+                    const avgRating = calculateDriverRating(nearest.id);
+
+                    const bookingDetails = document.getElementById('bookingDetails');
+
+                    bookingDetails.innerHTML = `
+
+                        <div>
+
+                            <h4>Ambulance Details</h4>
+
+                            <p><strong>Driver:</strong> ${nearest.data.name || 'N/A'}</p>
+
+                            <p><strong>ID:</strong> ${nearest.id}</p>
+
+                            <p><strong>Type:</strong> ${drivers[nearest.id]?.ambulanceType || 'N/A'}</p>
+
+                            <p><strong>Distance:</strong> ${nearest.distance} km</p>
+
+                            <p><strong>ETA:</strong> ${eta}</p>
+
+                            <p><strong>Rating:</strong> ${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</p>
+
+                        </div>
+
+                        <div>
+
+                            <button class="call-btn tooltip" onclick="callAmbulance('${nearest.id}')">
+
+                                Call Driver
+
+                                <span class="tooltiptext">Contact the driver</span>
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                    bookingDetails.classList.remove('hidden');
+
+                    if (!isAuto) {
+
+                        showModal(`Nearest ambulance found: ${nearest.id} (${nearest.distance} km, ETA: ${eta}). Confirm booking?`, true);
+
+                    }
+
+                });
+
+            } catch (error) {
+
+                logError('Find nearest ambulance failed', error);
+
+            } finally {
+
+                if (button) button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Confirm booking
+
+        async function confirmBooking() {
+
+            const button = document.getElementById('confirmBookingBtn');
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                if (!nearestAmbulance) {
+
+                    showModal('No ambulance selected.');
+
+                    return;
+
+                }
+
+
+
+                const userId = loggedInId;
+
+                const ambulanceId = nearestAmbulance.id;
+
+                const timestamp = new Date().toISOString();
+
+                if (!bookingHistory[userId]) bookingHistory[userId] = [];
+
+                bookingHistory[userId].push({
+
+                    ambulanceId,
+
+                    ambulanceType: drivers[ambulanceId]?.ambulanceType || 'N/A',
+
+                    timestamp,
+
+                    status: 'Confirmed'
+
+                });
+
+                if (bookingHistory[userId].length > 50) bookingHistory[userId].shift();
+
+                localStorage.setItem('bookingHistory', JSON.stringify(bookingHistory));
+
+                updateBooking();
+
+                updateChat();
+
+                showModal(`Ambulance ${ambulanceId} booked successfully!`);
+
+                document.getElementById('trackId').value = ambulanceId;
+
+                showSection('trackerSection');
+
+                await trackAmbulance();
+
+            } catch (error) {
+
+                logError('Confirm booking failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Call ambulance
+
+        async function callAmbulance(driverId) {
+
+            const button = event?.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                if (!isLoggedIn) {
+
+                    showModal('Please log in to make a call.');
+
+                    return;
+
+                }
+
+                showNotification(`Simulated call to driver ${driverId}.`, 'success', '📞');
+
+            } catch (error) {
+
+                logError('Call ambulance failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Toggle location sharing
+
+        async function toggleLocationSharing(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                if (!isLoggedIn || loggedInType !== 'user') {
+
+                    showModal('Please log in as a user.');
+
+                    return;
+
+                }
+
+                if (locationSharingInterval) {
+
+                    clearInterval(locationSharingInterval);
+
+                    locationSharingInterval = null;
+
+                    delete userLocations[loggedInId];
+
+                    localStorage.setItem('userLocations', JSON.stringify(userLocations));
+
+                    button.textContent = 'Start Sharing Location';
+
+                    showNotification('Location sharing stopped.', 'info', 'ℹ️');
+
+                } else {
+
+                    getUserLocation(userLoc => {
+
+                        if (!userLoc) return;
+
+                        userLocations[loggedInId] = {
+
+                            latitude: userLoc.latitude,
+
+                            longitude: userLoc.longitude,
+
+                            timestamp: new Date().toISOString()
+
+                        };
+
+                        localStorage.setItem('userLocations', JSON.stringify(userLocations));
+
+                        locationSharingInterval = setInterval(() => {
+
+                            getUserLocation(loc => {
+
+                                if (loc) {
+
+                                    userLocations[loggedInId] = {
+
+                                        latitude: loc.latitude,
+
+                                        longitude: loc.longitude,
+
+                                        timestamp: new Date().toISOString()
+
+                                    };
+
+                                    localStorage.setItem('userLocations', JSON.stringify(userLocations));
+
+                                }
+
+                            });
+
+                        }, 10000);
+
+                        button.textContent = 'Stop Sharing Location';
+
+                        showNotification('Location sharing started.', 'success', '📍');
+
+                    });
+
+                }
+
+            } catch (error) {
+
+                logError('Toggle location sharing failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Send message
+
+        async function sendMessage(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const driverId = document.getElementById('messageDriverId').value;
+
+                const messageText = document.getElementById('messageText').value.trim();
+
+
+
+                if (!validateInput('messageDriverId', driverId, 'Driver ID') ||
+
+                    !validateInput('messageText', messageText, 'Message')) return;
+
+
+
+                if (!drivers[driverId]) {
+
+                    showModal('Invalid driver ID.');
+
+                    return;
+
+                }
+
+
+
+                messages.push({
+
+                    userId: loggedInId,
+
+                    driverId,
+
+                    message: messageText,
+
+                    timestamp: new Date().toISOString()
+
+                });
+
+                if (messages.length > 50) messages.shift();
+
+                localStorage.setItem('messages', JSON.stringify(messages));
+
+                document.getElementById('messageText').value = '';
+
+                document.getElementById('messageError').style.display = 'none';
+
+                updateDriverMessages();
+
+                if (loggedInType === 'admin') updateAdminPanel();
+
+                showNotification('Message sent successfully.', 'success', '✉️');
+
+            } catch (error) {
+
+                logError('Send message failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Send chat message
+
+        async function sendChatMessage(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const messageText = document.getElementById('chatText').value.trim();
+
+                const userId = loggedInId;
+
+                const driverId = bookingHistory[userId]?.slice(-1)[0]?.ambulanceId;
+
+
+
+                if (!driverId) {
+
+                    showModal('No active booking found. Book an ambulance first.');
+
+                    return;
+
+                }
+
+
+
+                if (!validateInput('chatText', messageText, 'Message')) return;
+
+
+
+                chats.push({
+
+                    userId,
+
+                    driverId,
+
+                    message: messageText,
+
+                    sender: userId,
+
+                    timestamp: new Date().toISOString()
+
+                });
+
+                if (chats.length > 50) chats.shift();
+
+                localStorage.setItem('chatHistory', JSON.stringify(chats));
+
+                document.getElementById('chatText').value = '';
+
+                updateChat();
+
+                updateDriverChat();
+
+                updateAdminPanel();
+
+                showNotification('Chat message sent.', 'success', '💬');
+
+            } catch (error) {
+
+                logError('Send chat message failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Send driver chat message
+
+        async function sendDriverChatMessage(event) {
+
+            const button = event.target;
+
+            if (!button) return;
+
+            try {
+
+                button.classList.add('loading');
+
+                const messageText = document.getElementById('driverChatText').value.trim();
+
+                const driverId = loggedInId;
+
+                const userId = chats.find(chat => chat.driverId === driverId && chat.userId !== driverId)?.userId;
+
+
+
+                if (!userId) {
+
+                    showModal('No active chat with user.');
+
+                    return;
+
+                }
+
+
+
+                if (!validateInput('driverChatText', messageText, 'Message')) return;
+
+
+
+                chats.push({
+
+                    userId,
+
+                    driverId,
+
+                    message: messageText,
+
+                    sender: driverId,
+
+                    timestamp: new Date().toISOString()
+
+                });
+
+                if (chats.length > 50) chats.shift();
+
+                localStorage.setItem('chatHistory', JSON.stringify(chats));
+
+                document.getElementById('driverChatText').value = '';
+
+                updateChat();
+
+                updateDriverChat();
+
+                updateAdminPanel();
+
+                showNotification('Chat message sent.', 'success', '💬');
+
+            } catch (error) {
+
+                logError('Send driver chat message failed', error);
+
+            } finally {
+
+                button.classList.remove('loading');
+
+            }
+
+        }
+
+
+
+        // Update chat
+
+        function updateChat() {
+
+            try {
+
+                const chatContainer = document.getElementById('chatContainer');
+
+                const messagesDiv = document.getElementById('chatMessages');
+
+                const userId = loggedInId;
+
+                const driverId = bookingHistory[userId]?.slice(-1)[0]?.ambulanceId;
+
+
+
+                if (!driverId) {
+
+                    chatContainer.classList.add('hidden');
+
+                    return;
+
+                }
+
+
+
+                chatContainer.classList.remove('hidden');
+
+                messagesDiv.innerHTML = '';
+
+                chats.filter(chat => chat.userId === userId && chat.driverId === driverId).forEach(msg => {
+
+                    const msgDiv = document.createElement('div');
+
+                    msgDiv.className = `chat-message ${msg.sender === userId ? 'sent' : 'received'}`;
+
+                    msgDiv.textContent = `${msg.sender === userId ? 'You' : 'Driver'} : ${msg.message} (${new Date(msg.timestamp).toLocaleTimeString()})`;
+
+                    messagesDiv.appendChild(msgDiv);
+
+                });
+
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            } catch (error) {
+
+                logError('Update chat failed', error);
+
+            }
+
+        }
+
+
+
+        
+
+
+
+    // Update driver chat
+
+    function updateDriverChat() {
+
+        try {
+
+            const chatContainer = document.getElementById('driverChatContainer');
+
+            const messagesDiv = document.getElementById('driverChatMessages');
+
+            const driverId = loggedInId;
+
+            const userId = chats.find(chat => chat.driverId === driverId && chat.userId !== driverId)?.userId;
+
+
+
+            if (!userId) {
+
+                chatContainer.classList.add('hidden');
+
+                return;
+
+            }
+
+
+
+            chatContainer.classList.remove('hidden');
+
+            messagesDiv.innerHTML = '';
+
+            chats.filter(chat => chat.driverId === driverId && chat.userId === userId).forEach(msg => {
+
+                const msgDiv = document.createElement('div');
+
+                msgDiv.className = `chat-message ${msg.sender === driverId ? 'sent' : 'received'}`;
+
+                msgDiv.textContent = `${msg.sender === driverId ? 'You' : 'User'} : ${msg.message} (${new Date(msg.timestamp).toLocaleTimeString()})`;
+
+                messagesDiv.appendChild(msgDiv);
+
+            });
+
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        } catch (error) {
+
+            logError('Update driver chat failed', error);
+
+        }
+
     }
 
-    // Download Portfolio
-    const downloadPortfolio = document.getElementById("download-portfolio");
-    downloadPortfolio.addEventListener("click", () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("Jogi Bala Venkata Aravind - Portfolio", 10, 10);
-      doc.text("Full-Stack Developer & IoT Enthusiast", 10, 20);
-      doc.text("Skills: HTML, CSS, JavaScript, React, Node.js, ESP32", 10, 30);
-      doc.text("Projects: Job Portal, IoT Smart Home, ESP32 Dashboard", 10, 40);
-      doc.text("Contact: aravind@example.com | 9381329751", 10, 50);
-      doc.save("portfolio.pdf");
-      showToast("Portfolio downloaded!");
+
+
+    // Update driver messages
+
+    function updateDriverMessages() {
+
+        try {
+
+            const tbody = document.getElementById('driverMessagesTable');
+
+            tbody.innerHTML = '';
+
+            messages.filter(msg => msg.driverId === loggedInId).forEach(msg => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${msg.userId}</td>
+
+                    <td>${msg.message}</td>
+
+                    <td>${new Date(msg.timestamp).toLocaleString()}</td>
+
+                `;
+
+                tbody.appendChild(row);
+
+            });
+
+        } catch (error) {
+
+            logError('Update driver messages failed', error);
+
+        }
+
+    }
+
+
+
+    // Update booking history
+
+    function updateBookingHistory() {
+
+        try {
+
+            const tbody = document.getElementById('bookingHistoryTable');
+
+            tbody.innerHTML = '';
+
+            const userBookings = bookingHistory[loggedInId] || [];
+
+            userBookings.forEach(booking => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${booking.ambulanceId}</td>
+
+                    <td>${booking.ambulanceType}</td>
+
+                    <td>${new Date(booking.timestamp).toLocaleString()}</td>
+
+                    <td>${booking.status}</td>
+
+                `;
+
+                tbody.appendChild(row);
+
+            });
+
+        } catch (error) {
+
+            logError('Update booking history failed', error);
+
+        }
+
+    }
+
+
+
+    // Update message driver list
+
+    function updateMessageDriverList() {
+
+        try {
+
+            const select = document.getElementById('messageDriverId');
+
+            select.innerHTML = '<option value="">Select Driver</option>';
+
+            Object.keys(drivers).forEach(id => {
+
+                const option = document.createElement('option');
+
+                option.value = id;
+
+                option.textContent = `${id} (${drivers[id].name})`;
+
+                select.appendChild(option);
+
+            });
+
+        } catch (error) {
+
+            logError('Update message driver list failed', error);
+
+        }
+
+    }
+
+
+
+    // Register account
+
+    async function registerAccount(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            const accountType = document.getElementById('accountType').value;
+
+            const loginId = document.getElementById('loginId').value.trim();
+
+            const password = document.getElementById('loginPassword').value;
+
+            const name = document.getElementById('regName').value.trim();
+
+            const profilePicInput = document.getElementById('regProfilePic');
+
+            const ambulanceType = document.getElementById('regAmbulanceType').value;
+
+
+
+            if (!validateInput('loginId', loginId, 'ID') ||
+
+                !validateInput('loginPassword', password, 'Password')) return;
+
+
+
+            if (accountType !== 'admin') {
+
+                if (!validateInput('regName', name, 'Name')) return;
+
+                if (profilePicInput.files.length && !validateImage(profilePicInput.files[0], 'regProfilePicError')) return;
+
+            }
+
+
+
+            if ((accountType === 'user' && users[loginId]) ||
+
+                (accountType === 'driver' && (drivers[loginId] || pendingDrivers[loginId])) ||
+
+                (accountType === 'admin' && loginId !== adminCredentials.username)) {
+
+                showModal('ID already exists or invalid admin ID.');
+
+                return;
+
+            }
+
+
+
+            let profilePic = defaultProfilePic;
+
+            if (profilePicInput.files.length) {
+
+                const reader = new FileReader();
+
+                await new Promise(resolve => {
+
+                    reader.onload = () => {
+
+                        profilePic = reader.result;
+
+                        resolve();
+
+                    };
+
+                    reader.readAsDataURL(profilePicInput.files[0]);
+
+                });
+
+            }
+
+
+
+            if (accountType === 'user') {
+
+                users[loginId] = { name, password, profilePic, emergencyContacts: [] };
+
+                localStorage.setItem('users', JSON.stringify(users));
+
+                showNotification('User registered successfully.', 'success', '✅');
+
+            } else if (accountType === 'driver') {
+
+                pendingDrivers[loginId] = { name, password, profilePic, ambulanceType };
+
+                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
+
+                showNotification('Driver registration submitted for approval.', 'success', '✅');
+
+            } else {
+
+                if (loginId === adminCredentials.username && password === adminCredentials.password) {
+
+                    showNotification('Admin logged in.', 'success', '✅');
+
+                } else {
+
+                    showModal('Invalid admin credentials.');
+
+                    return;
+
+                }
+
+            }
+
+
+
+            document.getElementById('loginId').value = '';
+
+            document.getElementById('loginPassword').value = '';
+
+            document.getElementById('regName').value = '';
+
+            profilePicInput.value = '';
+
+        } catch (error) {
+
+            logError('Registration failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Login account
+
+    async function loginAccount(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            const accountType = document.getElementById('accountType').value;
+
+            const loginId = document.getElementById('loginId').value.trim();
+
+            const password = document.getElementById('loginPassword').value;
+
+
+
+            if (!validateInput('loginId', loginId, 'ID') ||
+
+                !validateInput('loginPassword', password, 'Password')) return;
+
+
+
+            let success = false;
+
+            if (accountType === 'user' && users[loginId] && users[loginId].password === password) {
+
+                isLoggedIn = true;
+
+                loggedInType = 'user';
+
+                loggedInId = loginId;
+
+                loggedInName = users[loginId].name;
+
+                document.getElementById('currentUserId').textContent = loginId;
+
+                document.getElementById('currentUserName').textContent = loggedInName;
+
+                document.getElementById('userProfilePic').src = users[loginId].profilePic || defaultProfilePic;
+
+                showSection('userSection');
+
+                success = true;
+
+            } else if (accountType === 'driver' && drivers[loginId] && drivers[loginId].password === password) {
+
+                isLoggedIn = true;
+
+                loggedInType = 'driver';
+
+                loggedInId = loginId;
+
+                loggedInName = drivers[loginId].name;
+
+                document.getElementById('currentDriverId').textContent = loginId;
+
+                document.getElementById('currentDriverName').textContent = loggedInName;
+
+                document.getElementById('driverProfilePic').src = drivers[loginId].profilePic || defaultProfilePic;
+
+                document.getElementById('driverAmbulanceType').textContent = drivers[loginId].ambulanceType || 'N/A';
+
+                document.getElementById('driverAvailability').textContent = driverAvailability[loginId] || 'Available';
+
+                document.getElementById('driverAvailability').className = driverAvailability[loginId] === 'Available' ? 'status-available' : 'status-busy';
+
+                document.getElementById('driverRating').textContent = calculateDriverRating(loginId).toFixed(1) || 'N/A';
+
+                showSection('driverSection');
+
+                success = true;
+
+            } else if (accountType === 'admin' && loginId === adminCredentials.username && password === adminCredentials.password) {
+
+                isLoggedIn = true;
+
+                loggedInType = 'admin';
+
+                loggedInId = loginId;
+
+                loggedInName = 'Admin';
+
+                showSection('adminSection');
+
+                success = true;
+
+            }
+
+
+
+            if (success) {
+
+                updateNavbar();
+
+                document.getElementById('loginId').value = '';
+
+                document.getElementById('loginPassword').value = '';
+
+                showNotification('Login successful.', 'success', '✅');
+
+            } else {
+
+                showModal('Invalid credentials or pending driver approval.');
+
+            }
+
+        } catch (error) {
+
+            logError('Login failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Logout
+
+    function logout() {
+
+        try {
+
+            isLoggedIn = false;
+
+            loggedInType = null;
+
+            loggedInId = null;
+
+            loggedInName = null;
+
+            if (watchId) {
+
+                navigator.geolocation.clearWatch(watchId);
+
+                watchId = null;
+
+            }
+
+            if (liveTrackingInterval) {
+
+                clearInterval(liveTrackingInterval);
+
+                liveTrackingInterval = null;
+
+            }
+
+            if (locationSharingInterval) {
+
+                clearInterval(locationSharingInterval);
+
+                locationSharingInterval = null;
+
+            }
+
+            updateNavbar();
+
+            showSection('homeSection');
+
+            showNotification('Logged out successfully.', 'success', '✅');
+
+        } catch (error) {
+
+            logError('Logout failed', error);
+
+        }
+
+    }
+
+
+
+    // Submit feedback
+
+    async function submitFeedback(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            const feedbackText = document.getElementById('feedbackText').value.trim();
+
+            const rating = document.querySelector('input[name="rating"]:checked')?.value;
+
+            const driverId = bookingHistory[loggedInId]?.slice(-1)[0]?.ambulanceId;
+
+
+
+            if (!validateInput('feedbackText', feedbackText, 'Feedback') || !rating) {
+
+                document.getElementById('feedbackError').textContent = 'Feedback and rating are required.';
+
+                document.getElementById('feedbackError').style.display = 'block';
+
+                return;
+
+            }
+
+
+
+            if (!driverId) {
+
+                showModal('No recent booking found to provide feedback.');
+
+                return;
+
+            }
+
+
+
+            feedbackData.push({
+
+                userId: loggedInId,
+
+                driverId,
+
+                feedback: feedbackText,
+
+                rating: parseInt(rating),
+
+                timestamp: new Date().toISOString()
+
+            });
+
+            if (feedbackData.length > 50) feedbackData.shift();
+
+            localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
+
+            document.getElementById('feedbackText').value = '';
+
+            document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
+
+            document.getElementById('feedbackError').style.display = 'none';
+
+            updateAdminPanel();
+
+            showNotification('Feedback submitted successfully.', 'success', '⭐');
+
+        } catch (error) {
+
+            logError('Feedback submission failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Calculate driver rating
+
+    function calculateDriverRating(driverId) {
+
+        try {
+
+            const ratings = feedbackData.filter(f => f.driverId === driverId).map(f => f.rating);
+
+            return ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 0;
+
+        } catch (error) {
+
+            logError('Calculate driver rating failed', error);
+
+            return 0;
+
+        }
+
+    }
+
+
+
+    // Track ambulance
+
+    async function trackAmbulance(event) {
+
+        const button = event?.target;
+
+        try {
+
+            if (button) button.classList.add('loading');
+
+            const trackId = document.getElementById('trackId').value.trim().toUpperCase();
+
+            if (!validateInput('trackId', trackId, 'Ambulance ID')) return;
+
+
+
+            if (!trackingData[trackId] || !drivers[trackId]) {
+
+                showModal('Ambulance ID not found.');
+
+                return;
+
+            }
+
+
+
+            getUserLocation(async userLoc => {
+
+                if (!userLoc) return;
+
+
+
+                if (!map) initMap(userLoc.latitude, userLoc.longitude);
+
+
+
+                if (userMarker) map.removeLayer(userMarker);
+
+                userMarker = L.marker([userLoc.latitude, userLoc.longitude], {
+
+                    icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', iconSize: [25, 41], iconAnchor: [12, 41] })
+
+                }).addTo(map).bindPopup('Your Location').openPopup();
+
+
+
+                const data = trackingData[trackId];
+
+                if (ambulanceMarker) {
+
+                    ambulanceMarker.setLatLng([data.latitude, data.longitude]);
+
+                } else {
+
+                    ambulanceMarker = L.marker([data.latitude, data.longitude], {
+
+                        icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41] })
+
+                    }).addTo(map);
+
+                }
+
+                ambulanceMarker.bindPopup(`Ambulance ${trackId}`).openPopup();
+
+
+
+                const distance = calculateDistance(userLoc.latitude, userLoc.longitude, data.latitude, data.longitude);
+
+                const eta = estimateETA(distance);
+
+                document.getElementById('distanceInfo').innerHTML = `
+
+                    <p><strong>Distance:</strong> ${distance} km</p>
+
+                    <p><strong>ETA:</strong> ${eta}</p>
+
+                    <p><strong>Last Updated:</strong> ${new Date(data.timestamp).toLocaleString()}</p>
+
+                `;
+
+                document.getElementById('distanceInfo').classList.remove('hidden');
+
+
+
+                document.getElementById('driverInfo').innerHTML = `
+
+                    <p><strong>Driver:</strong> ${data.name || 'N/A'}</p>
+
+                    <p><strong>Ambulance ID:</strong> ${trackId}</p>
+
+                    <p><strong>Type:</strong> ${drivers[trackId].ambulanceType || 'N/A'}</p>
+
+                    <p><strong>Availability:</strong> <span class="${driverAvailability[trackId] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[trackId] || 'Unknown'}</span></p>
+
+                    <p><strong>Rating:</strong> ${calculateDriverRating(trackId).toFixed(1) || 'N/A'} ★</p>
+
+                `;
+
+                document.getElementById('driverInfo').classList.remove('hidden');
+
+
+
+                if (routeControl) {
+
+                    try {
+
+                        map.removeControl(routeControl);
+
+                    } catch (e) {
+
+                        console.warn('Route control removal failed', e);
+
+                    }
+
+                }
+
+
+
+                try {
+
+                    routeControl = L.Routing.control({
+
+                        waypoints: [
+
+                            L.latLng(userLoc.latitude, userLoc.longitude),
+
+                            L.latLng(data.latitude, data.longitude)
+
+                        ],
+
+                        routeWhileDragging: false,
+
+                        show: false,
+
+                        createMarker: () => null,
+
+                        router: L.Routing.osrmv1({
+
+                            // For production, replace with your OSRM server or paid service
+
+                            serviceUrl: 'https://router.project-osrm.org/route/v1'
+
+                        }),
+
+                        lineOptions: { styles: [{ color: '#2563eb', weight: 5 }] }
+
+                    }).addTo(map);
+
+                } catch (error) {
+
+                    console.warn('OSRM routing failed, falling back to straight line', error);
+
+                    L.polyline([
+
+                        [userLoc.latitude, userLoc.longitude],
+
+                        [data.latitude, data.longitude]
+
+                    ], { color: '#2563eb', weight: 5 }).addTo(map);
+
+                }
+
+
+
+                if (document.getElementById('liveTracking').checked && !liveTrackingInterval) {
+
+                    toggleLiveTracking();
+
+                }
+
+            });
+
+        } catch (error) {
+
+            logError('Track ambulance failed', error);
+
+        } finally {
+
+            if (button) button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Toggle live tracking
+
+    function toggleLiveTracking() {
+
+        try {
+
+            const liveTracking = document.getElementById('liveTracking').checked;
+
+            if (liveTracking && !liveTrackingInterval) {
+
+                liveTrackingInterval = setInterval(() => trackAmbulance(), 10000);
+
+                showNotification('Live tracking enabled.', 'success', '📍');
+
+            } else if (!liveTracking && liveTrackingInterval) {
+
+                clearInterval(liveTrackingInterval);
+
+                liveTrackingInterval = null;
+
+                showNotification('Live tracking disabled.', 'info', 'ℹ️');
+
+            }
+
+        } catch (error) {
+
+            logError('Toggle live tracking failed', error);
+
+        }
+
+    }
+
+
+
+    // Zoom to user
+
+    function zoomToUser(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            if (!userLocation || !map) return;
+
+            map.setView([userLocation.latitude, userLocation.longitude], mapSettings.zoom);
+
+        } catch (error) {
+
+            logError('Zoom to user failed', error);
+
+        }
+
+    }
+
+
+
+    // Zoom to ambulance
+
+    function zoomToAmbulance(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            const trackId = document.getElementById('trackId').value.trim();
+
+            if (!trackingData[trackId] || !map) return;
+
+            const data = trackingData[trackId];
+
+            map.setView([data.latitude, data.longitude], mapSettings.zoom);
+
+        } catch (error) {
+
+            logError('Zoom to ambulance failed', error);
+
+        }
+
+    }
+
+
+
+    // Call emergency
+
+    async function callEmergency(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            const contacts = users[loggedInId]?.emergencyContacts || [];
+
+            if (contacts.length === 0) {
+
+                showModal('No emergency contacts found.');
+
+                return;
+
+            }
+
+            contacts.forEach(contact => {
+
+                showNotification(`Simulated emergency call to ${contact.name} (${contact.phone}).`, 'success', '📞');
+
+            });
+
+        } catch (error) {
+
+            logError('Call emergency failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Start tracking
+
+    async function startTracking(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            if (!isLoggedIn || loggedInType !== 'driver') {
+
+                showModal('Please log in as a driver.');
+
+                return;
+
+            }
+
+
+
+            if (watchId) {
+
+                showModal('Tracking already active.');
+
+                return;
+
+            }
+
+
+
+            navigator.geolocation.watchPosition(
+
+                position => {
+
+                    const lat = position.coords.latitude;
+
+                    const lng = position.coords.longitude;
+
+                    trackingData[loggedInId] = {
+
+                        latitude: lat,
+
+                        longitude: lng,
+
+                        name: loggedInName,
+
+                        timestamp: new Date().toISOString()
+
+                    };
+
+                    if (!locationHistory[loggedInId]) locationHistory[loggedInId] = [];
+
+                    locationHistory[loggedInId].push({
+
+                        latitude: lat,
+
+                        longitude: lng,
+
+                        timestamp: new Date().toISOString()
+
+                    });
+
+                    if (locationHistory[loggedInId].length > 50) locationHistory[loggedInId].shift();
+
+                    localStorage.setItem('trackingData', JSON.stringify(trackingData));
+
+                    localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
+
+                    updateDashboard();
+
+                    updateAdminPanel();
+
+                },
+
+                error => {
+
+                    logError('Tracking failed', error);
+
+                    showModal('Failed to track location.');
+
+                },
+
+                { enableHighAccuracy: true, timeout: 15000 }
+
+            );
+
+            watchId = true;
+
+            document.getElementById('startTrackBtn').disabled = true;
+
+            document.getElementById('stopTrackBtn').disabled = false;
+
+            showNotification('Tracking started.', 'success', '📍');
+
+        } catch (error) {
+
+            logError('Start tracking failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Stop tracking
+
+    function stopTracking() {
+
+        try {
+
+            if (watchId) {
+
+                navigator.geolocation.clearWatch(watchId);
+
+                watchId = null;
+
+            }
+
+            delete trackingData[loggedInId];
+
+            localStorage.setItem('trackingData', JSON.stringify(trackingData));
+
+            document.getElementById('startTrackBtn').disabled = false;
+
+            document.getElementById('stopTrackBtn').disabled = true;
+
+            showNotification('Tracking stopped.', 'success', '✅');
+
+        } catch (error) {
+
+            logError('Stop tracking failed', error);
+
+        }
+
+    }
+
+
+
+    // Toggle availability
+
+    async function toggleAvailability(event) {
+
+        const button = event.target;
+
+        if (!button) return;
+
+        try {
+
+            button.classList.add('loading');
+
+            if (!isLoggedIn || loggedInType !== 'driver') {
+
+                showModal('Please log in as a driver.');
+
+                return;
+
+            }
+
+
+
+            driverAvailability[loggedInId] = driverAvailability[loggedInId] === 'Available' ? 'Busy' : 'Available';
+
+            localStorage.setItem('driverAvailability', JSON.stringify(driverAvailability));
+
+            document.getElementById('driverAvailability').textContent = driverAvailability[loggedInId];
+
+            document.getElementById('driverAvailability').className = driverAvailability[loggedInId] === 'Available' ? 'status-available' : 'status-busy';
+
+            updateDashboard();
+
+            updateAdminPanel();
+
+            showNotification(`Availability set to ${driverAvailability[loggedInId]}.`, 'success', '✅');
+
+        } catch (error) {
+
+            logError('Toggle availability failed', error);
+
+        } finally {
+
+            button.classList.remove('loading');
+
+        }
+
+    }
+
+
+
+    // Update driver map
+
+    function updateDriverMap() {
+
+        try {
+
+            if (!driverMap) {
+
+                initMap(0, 0, 'driverMap');
+
+                document.getElementById('driverMap').classList.remove('hidden');
+
+            }
+
+
+
+            getUserLocation(userLoc => {
+
+                if (!userLoc) return;
+
+
+
+                if (userMarker) driverMap.removeLayer(userMarker);
+
+                userMarker = L.marker([userLoc.latitude, userLoc.longitude], {
+
+                    icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', iconSize: [25, 41], iconAnchor: [12, 41] })
+
+                }).addTo(driverMap).bindPopup('User Location');
+
+
+
+                const userBookings = bookingHistory[loggedInId] || [];
+
+                const latestBooking = userBookings[userBookings.length - 1];
+
+                if (!latestBooking) return;
+
+
+
+                const userId = Object.keys(bookingHistory).find(uid => bookingHistory[uid].some(b => b.ambulanceId === loggedInId && b.status === 'Confirmed'));
+
+                const userLocData = userLocations[userId];
+
+                if (userLocData) {
+
+                    userMarker.setLatLng([userLocData.latitude, userLocData.longitude]);
+
+                    if (routeControl) {
+
+                        try {
+
+                            driverMap.removeControl(routeControl);
+
+                        } catch (e) {
+
+                            console.warn('Route control removal failed', e);
+
+                        }
+
+                    }
+
+                    try {
+
+                        routeControl = L.Routing.control({
+
+                            waypoints: [
+
+                                L.latLng(userLoc.latitude, userLoc.longitude),
+
+                                L.latLng(userLocData.latitude, userLocData.longitude)
+
+                            ],
+
+                            routeWhileDragging: false,
+
+                            show: false,
+
+                            createMarker: () => null,
+
+                            router: L.Routing.osrmv1({
+
+                                // For production, replace with your OSRM server or paid service
+
+                                serviceUrl: 'https://router.project-osrm.org/route/v1'
+
+                            }),
+
+                            lineOptions: { styles: [{ color: '#2563eb', weight: 5 }] }
+
+                        }).addTo(driverMap);
+
+                    } catch (error) {
+
+                        console.warn('OSRM routing failed, falling back to straight line', error);
+
+                        L.polyline([
+
+                            [userLoc.latitude, userLoc.longitude],
+
+                            [userLocData.latitude, userLocData.longitude]
+
+                        ], { color: '#2563eb', weight: 5 }).addTo(driverMap);
+
+                    }
+
+                }
+
+            });
+
+        } catch (error) {
+
+            logError('Update driver map failed', error);
+
+        }
+
+    }
+
+
+
+    // Update dashboard
+
+    function updateDashboard() {
+
+        try {
+
+            const tbody = document.getElementById('dashboardTable');
+
+            tbody.innerHTML = '';
+
+            Object.entries(trackingData).forEach(([id, data]) => {
+
+                const row = document.createElement('tr');
+
+                const avgRating = calculateDriverRating(id);
+
+                row.innerHTML = `
+
+                    <td>${data.name || 'N/A'}</td>
+
+                    <td>${id}</td>
+
+                    <td>${drivers[id]?.ambulanceType || 'N/A'}</td>
+
+                    <td>${data.latitude.toFixed(4)}</td>
+
+                    <td>${data.longitude.toFixed(4)}</td>
+
+                    <td>${new Date(data.timestamp).toLocaleString()}</td>
+
+                    <td><span class="status-online">Online</span></td>
+
+                    <td><span class="${driverAvailability[id] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[id] || 'Unknown'}</span></td>
+
+                    <td>${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</td>
+
+                    <td><button onclick="document.getElementById('trackId').value = '${id}'; showSection('trackerSection'); trackAmbulance();">Track</button></td>
+
+                `;
+
+                tbody.appendChild(row);
+
+            });
+
+        } catch (error) {
+
+            logError('Update dashboard failed', error);
+
+        }
+
+    }
+
+
+
+    // Update admin panel
+
+    function updateAdminPanel() {
+
+        try {
+
+            const pendingTbody = document.getElementById('pendingTable');
+
+            const adminTbody = document.getElementById('adminTable');
+
+            const historyTbody = document.getElementById('historyTable');
+
+            const feedbackTbody = document.getElementById('feedbackTable');
+
+            const messageTbody = document.getElementById('messageTable');
+
+            const chatTbody = document.getElementById('chatTable');
+
+
+
+            pendingTbody.innerHTML = '';
+
+            Object.entries(pendingDrivers).forEach(([id, data]) => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${data.name}</td>
+
+                    <td>${id}</td>
+
+                    <td>${data.ambulanceType}</td>
+
+                    <td>
+
+                        <button onclick="approveDriver('${id}')">Approve</button>
+
+                        <button onclick="rejectDriver('${id}')">Reject</button>
+
+                    </td>
+
+                `;
+
+                pendingTbody.appendChild(row);
+
+            });
+
+
+
+            adminTbody.innerHTML = '';
+
+            Object.entries(drivers).forEach(([id, data]) => {
+
+                const row = document.createElement('tr');
+
+                const avgRating = calculateDriverRating(id);
+
+                row.innerHTML = `
+
+                    <td>${data.name}</td>
+
+                    <td>${id}</td>
+
+                    <td>${data.ambulanceType}</td>
+
+                    <td><span class="${trackingData[id] ? 'status-online' : 'status-offline'}">${trackingData[id] ? 'Online' : 'Offline'}</span></td>
+
+                    <td><span class="${driverAvailability[id] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[id] || 'Unknown'}</span></td>
+
+                    <td>${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</td>
+
+                    <td><button onclick="removeDriver('${id}')">Remove</button></td>
+
+                `;
+
+                adminTbody.appendChild(row);
+
+            });
+
+
+
+            historyTbody.innerHTML = '';
+
+            Object.entries(locationHistory).forEach(([id, locations]) => {
+
+                locations.forEach(loc => {
+
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+
+                        <td>${id}</td>
+
+                        <td>${loc.latitude.toFixed(4)}</td>
+
+                        <td>${loc.longitude.toFixed(4)}</td>
+
+                        <td>${new Date(loc.timestamp).toLocaleString()}</td>
+
+                    `;
+
+                    historyTbody.appendChild(row);
+
+                });
+
+            });
+
+
+
+            feedbackTbody.innerHTML = '';
+
+            feedbackData.forEach(f => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${f.userId}</td>
+
+                    <td>${f.driverId}</td>
+
+                    <td>${f.feedback}</td>
+
+                    <td>${f.rating} ★</td>
+
+                    <td>${new Date(f.timestamp).toLocaleString()}</td>
+
+                `;
+
+                feedbackTbody.appendChild(row);
+
+            });
+
+
+
+            messageTbody.innerHTML = '';
+
+            messages.forEach(msg => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${msg.userId}</td>
+
+                    <td>${msg.driverId}</td>
+
+                    <td>${msg.message}</td>
+
+                    <td>${new Date(msg.timestamp).toLocaleString()}</td>
+
+                `;
+
+                messageTbody.appendChild(row);
+
+            });
+
+
+
+            chatTbody.innerHTML = '';
+
+            chats.forEach(chat => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+
+                    <td>${chat.userId}</td>
+
+                    <td>${chat.driverId}</td>
+
+                    <td>${chat.message} (from ${chat.sender})</td>
+
+                    <td>${new Date(chat.timestamp).toLocaleString()}</td>
+
+                `;
+
+                chatTbody.appendChild(row);
+
+            });
+
+
+
+            document.getElementById('activeDrivers').textContent = Object.keys(trackingData).length;
+
+            document.getElementById('totalFeedback').textContent = feedbackData.length;
+
+            document.getElementById('totalMessages').textContent = messages.length;
+
+            document.getElementById('totalChats').textContent = chats.length;
+
+        } catch (error) {
+
+            logError('Update admin panel failed', error);
+
+        }
+
+    }
+
+
+
+    // Approve driver
+
+    function approveDriver(driverId) {
+
+        try {
+
+            if (pendingDrivers[driverId]) {
+
+                drivers[driverId] = pendingDrivers[driverId];
+
+                delete pendingDrivers[driverId];
+
+                localStorage.setItem('drivers', JSON.stringify(drivers));
+
+                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
+
+                updateAdminPanel();
+
+                showNotification(`Driver ${driverId} approved.`, 'success', '✅');
+
+            }
+
+        } catch (error) {
+
+            logError('Approve driver failed', error);
+
+        }
+
+    }
+
+
+
+    // Reject driver
+
+    function rejectDriver(driverId) {
+
+        try {
+
+            if (pendingDrivers[driverId]) {
+
+                delete pendingDrivers[driverId];
+
+                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
+
+                updateAdminPanel();
+
+                showNotification(`Driver ${driverId} rejected.`, 'success', '✅');
+
+            }
+
+        } catch (error) {
+
+            logError('Reject driver failed', error);
+
+        }
+
+    }
+
+
+
+    // Remove driver
+
+    function removeDriver(driverId) {
+
+        try {
+
+            delete drivers[driverId];
+
+            delete trackingData[driverId];
+
+            delete driverAvailability[driverId];
+
+            delete locationHistory[driverId];
+
+            localStorage.setItem('drivers', JSON.stringify(drivers));
+
+            localStorage.setItem('trackingData', JSON.stringify(trackingData));
+
+            localStorage.setItem('driverAvailability', JSON.stringify(driverAvailability));
+
+            localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
+
+            updateAdminPanel();
+
+            showNotification(`Driver ${driverId} removed.`, 'success', '✅');
+
+        } catch (error) {
+
+            logError('Remove driver failed', error);
+
+        }
+
+    }
+
+
+
+    // Export history
+
+    function exportHistory() {
+
+        try {
+
+            let csv = 'Driver ID,Latitude,Longitude,Timestamp\n';
+
+            Object.entries(locationHistory).forEach(([id, locations]) => {
+
+                locations.forEach(loc => {
+
+                    csv += `${id},${loc.latitude},${loc.longitude},${loc.timestamp}\n`;
+
+                });
+
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+
+            a.href = url;
+
+            a.download = 'location_history.csv';
+
+            a.click();
+
+            URL.revokeObjectURL(url);
+
+            showNotification('History exported.', 'success', '✅');
+
+        } catch (error) {
+
+            logError('Export history failed', error);
+
+        }
+
+    }
+
+
+
+    // Update booking
+
+    function updateBooking() {
+
+        try {
+
+            updateBookingHistory();
+
+            document.getElementById('chatContainer').classList.remove('hidden');
+
+        } catch (error) {
+
+            logError('Update booking failed', error);
+
+        }
+
+    }
+
+
+
+    // Toggle theme
+
+    function toggleTheme() {
+
+        try {
+
+            document.body.classList.toggle('dark-mode');
+
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
+            document.getElementById('themeToggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+
+        } catch (error) {
+
+            logError('Toggle theme failed', error);
+
+        }
+
+    }
+
+
+
+    // Initialize app
+
+    function initApp() {
+
+        try {
+
+            if (localStorage.getItem('theme') === 'dark') {
+
+                document.body.classList.add('dark-mode');
+
+                document.getElementById('themeToggle').textContent = '☀️';
+
+            }
+
+            updateNavbar();
+
+            showSection('homeSection');
+
+            document.getElementById('accountType').addEventListener('change', toggleLoginFields);
+
+            toggleLoginFields();
+
+        } catch (error) {
+
+            logError('App initialization failed', error);
+
+        }
+
+    }
+
+
+
+    // Event listeners
+
+    document.getElementById('hamburger').addEventListener('click', () => toggleMenu());
+
+    document.getElementById('navHome').addEventListener('click', () => showSection('homeSection'));
+
+    document.getElementById('navLogin').addEventListener('click', () => showSection('loginSection'));
+
+    document.getElementById('navTracker').addEventListener('click', () => showSection('trackerSection'));
+
+    document.getElementById('navDashboard').addEventListener('click', () => showSection('dashboardSection'));
+
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+    document.getElementById('logoutLink').addEventListener('click', logout);
+
+    document.getElementById('registerBtn').addEventListener('click', registerAccount);
+
+    document.getElementById('loginBtn').addEventListener('click', loginAccount);
+
+    document.getElementById('userLogoutBtn').addEventListener('click', logout);
+
+    document.getElementById('driverLogoutBtn').addEventListener('click', logout);
+
+    document.getElementById('adminLogoutBtn').addEventListener('click', logout);
+
+    document.getElementById('trackBtn').addEventListener('click', trackAmbulance);
+
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+
+    document.getElementById('confirmBookingBtn').addEventListener('click', confirmBooking);
+
+    document.getElementById('cancelBookingBtn').addEventListener('click', closeModal);
+
+    document.getElementById('closeNotificationBtn').addEventListener('click', hideNotification);
+
+    document.getElementById('routeType').addEventListener('change', () => {
+
+        mapSettings.routeType = document.getElementById('routeType').value;
+
+        localStorage.setItem('mapSettings', JSON.stringify(mapSettings));
+
+        trackAmbulance();
+
     });
 
-    // Back to Top
-    const backToTop = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      backToTop.classList.toggle("hidden", window.scrollY < 300);
-    });
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    document.getElementById('liveTracking').addEventListener('change', toggleLiveTracking);
 
-    // Hide Loading Spinner
-    window.addEventListener("load", () => {
-      document.getElementById("loading").classList.add("hidden");
-    });
-  </script>
+    document.getElementById('weatherOverlay').addEventListener('change', toggleWeatherOverlay);
+
+    document.getElementById('exportHistoryBtn').addEventListener('click', exportHistory);
+
+    document.getElementById('sosBtn').addEventListener('click', sendSOS);
+
+    document.getElementById('findAmbulanceBtn').addEventListener('click', findNearestAmbulance);
+
+    document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+
+    document.getElementById('submitFeedbackBtn').addEventListener('click', submitFeedback);
+
+    document.getElementById('zoomUserBtn').addEventListener('click', zoomToUser);
+
+    document.getElementById('zoomAmbulanceBtn').addEventListener('click', zoomToAmbulance);
+
+    document.getElementById('callEmergencyBtn').addEventListener('click', callEmergency);
+
+    document.getElementById('startTrackBtn').addEventListener('click', startTracking);
+
+    document.getElementById('stopTrackBtn').addEventListener('click', stopTracking);
+
+    document.getElementById('toggleAvailabilityBtn').addEventListener('click', toggleAvailability);
+
+    document.getElementById('enableNotifications').addEventListener('change', toggleNotifications);
+
+    document.getElementById('toggleLocationBtn').addEventListener('click', toggleLocationSharing);
+
+    document.getElementById('addContactBtn').addEventListener('click', addEmergencyContact);
+
+    document.getElementById('updateProfileBtn').addEventListener('click', updateProfilePic);
+
+    document.getElementById('updateDriverProfileBtn').addEventListener('click', updateDriverProfilePic);
+
+    document.getElementById('sendChatBtn').addEventListener('click', sendChatMessage);
+
+    document.getElementById('sendDriverChatBtn').addEventListener('click', sendDriverChatMessage);
+
+
+
+    // Initialize
+
+    initApp();
+
+</script>
+
 </body>
-</html>
+
+  </html>
