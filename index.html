@@ -1,5305 +1,1104 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ambulance Tracker</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <style>
-
-        :root {
-
-            --primary: #2563eb;
-
-            --primary-dark: #1e40af;
-
-            --accent: #059669;
-
-            --neutral: #d1d5db;
-
-            --text: #1f2937;
-
-            --error: #dc2626;
-
-            --bg-light: #f3f4f6;
-
-            --bg-dark: #111827;
-
-            --text-dark: #e5e7eb;
-
-            --shadow: 0 6px 12px rgba(0,0,0,0.15);
-
-            --success: #16a34a;
-
-            --warning: #d97706;
-
-        }
-
-        * {
-
-            box-sizing: border-box;
-
-        }
-
-        body {
-
-            font-family: 'Roboto', sans-serif;
-
-            margin: 0;
-
-            padding: 0;
-
-            background-color: var(--bg-light);
-
-            color: var(--text);
-
-            transition: background-color 0.3s, color 0.3s;
-
-        }
-
-        body.dark-mode {
-
-            background-color: var(--bg-dark);
-
-            color: var(--text-dark);
-
-        }
-
-        h1, h2, h3 {
-
-            font-family: 'Montserrat', sans-serif;
-
-            font-weight: 700;
-
-        }
-
-        .navbar {
-
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-
-            padding: 1rem;
-
-            box-shadow: var(--shadow);
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 1000;
-
-        }
-
-        .navbar-container {
-
-            max-width: 1280px;
-
-            margin: 0 auto;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-        }
-
-        .navbar ul {
-
-            list-style: none;
-
-            margin: 0;
-
-            padding: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 1.5rem;
-
-        }
-
-        .navbar a, .navbar .dropdown-toggle {
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: 500;
-
-            font-size: 1rem;
-
-            padding: 0.5rem 1rem;
-
-            border-radius: 0.5rem;
-
-            transition: background 0.3s, transform 0.2s;
-
-            cursor: pointer;
-
-        }
-
-        .navbar a:hover, .navbar .dropdown-toggle:hover {
-
-            background: var(--primary-dark);
-
-            transform: scale(1.05);
-
-        }
-
-        .dropdown {
-
-            position: relative;
-
-        }
-
-        .dropdown-menu {
-
-            display: none;
-
-            position: absolute;
-
-            top: 100%;
-
-            right: 0;
-
-            background: white;
-
-            border-radius: 0.5rem;
-
-            box-shadow: var(--shadow);
-
-            min-width: 180px;
-
-            z-index: 1001;
-
-            animation: slideIn 0.2s ease;
-
-        }
-
-        body.dark-mode .dropdown-menu {
-
-            background: #1f2937;
-
-        }
-
-        .dropdown-menu a, .dropdown-menu span {
-
-            display: block;
-
-            padding: 0.75rem 1rem;
-
-            color: var(--text);
-
-            text-decoration: none;
-
-            font-size: 0.875rem;
-
-        }
-
-        body.dark-mode .dropdown-menu a, body.dark-mode .dropdown-menu span {
-
-            color: var(--text-dark);
-
-        }
-
-        .dropdown-menu a:hover {
-
-            background: var(--neutral);
-
-        }
-
-        body.dark-mode .dropdown-menu a:hover {
-
-            background: #374151;
-
-        }
-
-        .dropdown:hover .dropdown-menu {
-
-            display: block;
-
-        }
-
-        .hamburger {
-
-            display: none;
-
-            font-size: 1.5rem;
-
-            color: white;
-
-            cursor: pointer;
-
-        }
-
-        .container {
-
-            max-width: 1280px;
-
-            margin: 2rem auto;
-
-            padding: 0 1rem;
-
-            animation: fadeIn 0.5s ease;
-
-        }
-
-        .header {
-
-            text-align: center;
-
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-
-            color: white;
-
-            padding: 2.5rem;
-
-            border-radius: 1rem;
-
-            margin-bottom: 2rem;
-
-            box-shadow: var(--shadow);
-
-        }
-
-        .form-container, .tracker-container, .dashboard-container, .admin-container {
-
-            background: white;
-
-            padding: 2rem;
-
-            border-radius: 1rem;
-
-            box-shadow: var(--shadow);
-
-            margin-bottom: 2rem;
-
-            transition: transform 0.3s;
-
-        }
-
-        body.dark-mode .form-container, body.dark-mode .tracker-container,
-
-        body.dark-mode .dashboard-container, body.dark-mode .admin-container {
-
-            background: #1f2937;
-
-        }
-
-        .form-grid {
-
-            display: grid;
-
-            grid-template-columns: 1fr;
-
-            gap: 1rem;
-
-        }
-
-        input, select, button, textarea {
-
-            padding: 0.75rem;
-
-            margin: 0.25rem 0;
-
-            border: 1px solid var(--neutral);
-
-            border-radius: 0.5rem;
-
-            font-size: 0.9375rem;
-
-            width: 100%;
-
-            transition: border-color 0.3s, box-shadow 0.3s;
-
-        }
-
-        body.dark-mode input, body.dark-mode select, body.dark-mode button, body.dark-mode textarea {
-
-            border-color: #374151;
-
-            background: #1f2937;
-
-            color: var(--text-dark);
-
-        }
-
-        input:focus, select:focus, textarea:focus {
-
-            border-color: var(--primary);
-
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-
-            outline: none;
-
-        }
-
-        button {
-
-            background: var(--primary);
-
-            color: white;
-
-            border: none;
-
-            cursor: pointer;
-
-            font-weight: 500;
-
-            padding: 0.75rem 1.5rem;
-
-            border-radius: 0.5rem;
-
-            transition: background 0.3s, transform 0.2s;
-
-            position: relative;
-
-            overflow: hidden;
-
-        }
-
-        button:hover {
-
-            background: var(--primary-dark);
-
-            transform: scale(1.03);
-
-        }
-
-        button:disabled {
-
-            background: #6b7280;
-
-            cursor: not-allowed;
-
-        }
-
-        button.loading::after {
-
-            content: '';
-
-            display: inline-block;
-
-            width: 1rem;
-
-            height: 1rem;
-
-            border: 2px solid white;
-
-            border-top: 2px solid transparent;
-
-            border-radius: 50%;
-
-            animation: spin 0.8s linear infinite;
-
-            margin-left: 0.5rem;
-
-        }
-
-        .emergency-btn, .sos-btn {
-
-            background: var(--error);
-
-        }
-
-        .emergency-btn:hover, .sos-btn:hover {
-
-            background: #b91c1c;
-
-        }
-
-        .call-btn {
-
-            background: var(--accent);
-
-        }
-
-        .call-btn:hover {
-
-            background: #047857;
-
-        }
-
-        .theme-toggle {
-
-            background: #4b5563;
-
-            padding: 0.5rem 1rem;
-
-        }
-
-        .theme-toggle:hover {
-
-            background: #374151;
-
-        }
-
-        #map, #driverMap {
-
-            height: 500px;
-
-            width: 100%;
-
-            margin-top: 1.5rem;
-
-            border-radius: 1rem;
-
-            border: 1px solid var(--neutral);
-
-            box-shadow: var(--shadow);
-
-        }
-
-        body.dark-mode #map, body.dark-mode #driverMap {
-
-            border-color: #374151;
-
-        }
-
-        .map-controls {
-
-            margin: 1rem 0;
-
-            display: flex;
-
-            gap: 0.75rem;
-
-            flex-wrap: wrap;
-
-        }
-
-        .driver-info, .dashboard, .admin-panel, .distance-info, .location-history,
-
-        .feedback-panel, .profile-card, .booking-card, .message-inbox, .chat-container,
-
-        .settings-panel, .emergency-contacts {
-
-            margin-top: 1.5rem;
-
-            padding: 1.5rem;
-
-            background: var(--neutral);
-
-            border-radius: 0.75rem;
-
-            font-size: 0.875rem;
-
-            animation: fadeIn 0.5s ease;
-
-        }
-
-        body.dark-mode .driver-info, body.dark-mode .dashboard, body.dark-mode .admin-panel,
-
-        body.dark-mode .distance-info, body.dark-mode .location-history, body.dark-mode .feedback-panel,
-
-        body.dark-mode .profile-card, body.dark-mode .booking-card, body.dark-mode .message-inbox,
-
-        body.dark-mode .chat-container, body.dark-mode .settings-panel, body.dark-mode .emergency-contacts {
-
-            background: #374151;
-
-        }
-
-        .dashboard table, .admin-panel table, .location-history table, .feedback-panel table,
-
-        .message-inbox table, .chat-container table, .emergency-contacts table {
-
-            width: 100%;
-
-            border-collapse: collapse;
-
-            font-size: 0.875rem;
-
-        }
-
-        .dashboard th, .dashboard td, .admin-panel th, .admin-panel td,
-
-        .location-history th, .location-history td, .feedback-panel th, .feedback-panel td,
-
-        .message-inbox th, .message-inbox td, .chat-container th, .chat-container td,
-
-        .emergency-contacts th, .emergency-contacts td {
-
-            border: 1px solid var(--neutral);
-
-            padding: 0.75rem;
-
-            text-align: left;
-
-        }
-
-        body.dark-mode .dashboard th, body.dark-mode .dashboard td,
-
-        body.dark-mode .admin-panel th, body.dark-mode .admin-panel td,
-
-        body.dark-mode .location-history th, body.dark-mode .location-history td,
-
-        body.dark-mode .feedback-panel th, body.dark-mode .feedback-panel td,
-
-        body.dark-mode .message-inbox th, body.dark-mode .message-inbox td,
-
-        body.dark-mode .chat-container th, body.dark-mode .chat-container td,
-
-        body.dark-mode .emergency-contacts th, body.dark-mode .emergency-contacts td {
-
-            border-color: #4b5563;
-
-        }
-
-        .dashboard th, .admin-panel th, .message-inbox th, .chat-container th,
-
-        .emergency-contacts th {
-
-            background: var(--primary);
-
-            color: white;
-
-            font-weight: 500;
-
-        }
-
-        .status-online { color: var(--accent); }
-
-        .status-offline { color: #6b7280; }
-
-        .status-available { color: var(--accent); }
-
-        .status-busy { color: var(--warning); }
-
-        .hidden {
-
-            display: none;
-
-        }
-
-        .modal {
-
-            display: none;
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            width: 100%;
-
-            height: 100%;
-
-            background: rgba(0,0,0,0.7);
-
-            z-index: 2000;
-
-            justify-content: center;
-
-            align-items: center;
-
-        }
-
-        .modal-content {
-
-            background: white;
-
-            padding: 2rem;
-
-            border-radius: 1rem;
-
-            max-width: 600px;
-
-            width: 90%;
-
-            text-align: center;
-
-            box-shadow: var(--shadow);
-
-            animation: slideIn 0.3s ease;
-
-            position: relative;
-
-        }
-
-        body.dark-mode .modal-content {
-
-            background: #1f2937;
-
-        }
-
-        .modal-content button {
-
-            margin: 0.5rem;
-
-        }
-
-        .notification {
-
-            position: fixed;
-
-            top: 1rem;
-
-            right: 1rem;
-
-            background: var(--primary);
-
-            color: white;
-
-            padding: 1rem 1.5rem;
-
-            border-radius: 0.5rem;
-
-            box-shadow: var(--shadow);
-
-            z-index: 1500;
-
-            display: none;
-
-            animation: slideInRight 0.3s ease;
-
-            max-width: 320px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 0.5rem;
-
-        }
-
-        .notification.success {
-
-            background: var(--success);
-
-        }
-
-        .notification.error {
-
-            background: var(--error);
-
-        }
-
-        .notification .icon {
-
-            font-size: 1.25rem;
-
-        }
-
-        .notification .close-btn {
-
-            cursor: pointer;
-
-            margin-left: auto;
-
-            font-weight: bold;
-
-        }
-
-        .tooltip {
-
-            position: relative;
-
-            display: inline-block;
-
-        }
-
-        .tooltip .tooltiptext {
-
-            visibility: hidden;
-
-            width: 120px;
-
-            background: var(--bg-dark);
-
-            color: var(--text-dark);
-
-            text-align: center;
-
-            border-radius: 0.5rem;
-
-            padding: 0.5rem;
-
-            position: absolute;
-
-            z-index: 1;
-
-            bottom: 125%;
-
-            left: 50%;
-
-            margin-left: -60px;
-
-            opacity: 0;
-
-            transition: opacity 0.3s;
-
-        }
-
-        .tooltip:hover .tooltiptext {
-
-            visibility: visible;
-
-            opacity: 1;
-
-        }
-
-        .profile-card {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 1rem;
-
-            padding: 1.5rem;
-
-            background: linear-gradient(135deg, var(--neutral), white);
-
-            border-radius: 0.75rem;
-
-        }
-
-        body.dark-mode .profile-card {
-
-            background: linear-gradient(135deg, #374151, #1f2937);
-
-        }
-
-        .profile-card img {
-
-            width: 80px;
-
-            height: 80px;
-
-            border-radius: 50%;
-
-            object-fit: cover;
-
-            border: 2px solid var(--primary);
-
-        }
-
-        .booking-card {
-
-            display: grid;
-
-            grid-template-columns: 2fr 1fr;
-
-            gap: 1rem;
-
-            align-items: center;
-
-        }
-
-        .chat-container {
-
-            max-height: 300px;
-
-            overflow-y: auto;
-
-        }
-
-        .chat-message {
-
-            margin: 0.5rem 0;
-
-            padding: 0.75rem;
-
-            border-radius: 0.5rem;
-
-            max-width: 80%;
-
-        }
-
-        .chat-message.sent {
-
-            background: var(--primary);
-
-            color: white;
-
-            margin-left: auto;
-
-            border-bottom-right-radius: 0;
-
-        }
-
-        .chat-message.received {
-
-            background: var(--neutral);
-
-            margin-right: auto;
-
-            border-bottom-left-radius: 0;
-
-        }
-
-        body.dark-mode .chat-message.received {
-
-            background: #4b5563;
-
-        }
-
-        .error-message {
-
-            color: var(--error);
-
-            font-size: 0.875rem;
-
-            margin-top: 0.25rem;
-
-            display: none;
-
-        }
-
-        .live-toggle {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 0.5rem;
-
-            margin: 1rem 0;
-
-        }
-
-        .live-toggle input {
-
-            width: auto;
-
-        }
-
-        .settings-panel label {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 0.5rem;
-
-            margin: 0.5rem 0;
-
-        }
-
-        .profile-upload {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 0.5rem;
-
-        }
-
-        .rating {
-
-            display: flex;
-
-            gap: 0.25rem;
-
-        }
-
-        .rating input {
-
-            display: none;
-
-        }
-
-        .rating label {
-
-            font-size: 1.5rem;
-
-            color: #d1d5db;
-
-            cursor: pointer;
-
-        }
-
-        .rating input:checked ~ label,
-
-        .rating label:hover,
-
-        .rating label:hover ~ label {
-
-            color: #f59e0b;
-
-        }
-
-        .leaflet-marker-icon {
-
-            transition: transform 0.3s ease;
-
-        }
-
-        .leaflet-marker-icon:hover {
-
-            transform: scale(1.2);
-
-        }
-
-        @keyframes fadeIn {
-
-            from { opacity: 0; }
-
-            to { opacity: 1; }
-
-        }
-
-        @keyframes slideIn {
-
-            from { transform: translateY(-20px); opacity: 0; }
-
-            to { transform: translateY(0); opacity: 1; }
-
-        }
-
-        @keyframes slideInRight {
-
-            from { transform: translateX(20px); opacity: 0; }
-
-            to { transform: translateX(0); opacity: 1; }
-
-        }
-
-        @keyframes spin {
-
-            to { transform: rotate(360deg); }
-
-        }
-
-        @media (max-width: 768px) {
-
-            .navbar ul {
-
-                display: none;
-
-                flex-direction: column;
-
-                width: 100%;
-
-                background: var(--primary-dark);
-
-                padding: 1rem;
-
-                position: absolute;
-
-                top: 100%;
-
-                left: 0;
-
-            }
-
-            .navbar ul.active {
-
-                display: flex;
-
-            }
-
-            .hamburger {
-
-                display: block;
-
-            }
-
-            .form-container, .tracker-container, .dashboard-container, .admin-container {
-
-                padding: 1.5rem;
-
-            }
-
-            #map, #driverMap {
-
-                height: 400px;
-
-            }
-
-            .modal-content {
-
-                width: 95%;
-
-                padding: 1.5rem;
-
-            }
-
-            .booking-card {
-
-                grid-template-columns: 1fr;
-
-            }
-
-            .notification {
-
-                max-width: 90%;
-
-                right: 0.5rem;
-
-            }
-
-            .profile-card {
-
-                flex-direction: column;
-
-                text-align: center;
-
-            }
-
-            .profile-card img {
-
-                width: 60px;
-
-                height: 60px;
-
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Jogi Bala Venkata Aravind, a full-stack developer specializing in web development, IoT, and job portal solutions.">
+  <meta name="keywords" content="portfolio, web developer, IoT, ESP32, job portal, Hyderabad, quality assurance">
+  <meta name="author" content="Jogi Bala Venkata Aravind">
+  <!-- Open Graph and Twitter Card -->
+  <meta property="og:title" content="Jogi Bala Venkata Aravind - Portfolio">
+  <meta property="og:description" content="Portfolio of Jogi Bala Venkata Aravind, a full-stack developer specializing in web development, IoT, and job portal solutions.">
+  <meta property="og:image" content="https://your-domain.com/profile-image.jpg">
+  <meta property="og:url" content="https://your-domain.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Jogi Bala Venkata Aravind - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    :root {
+      --primary-color: #3b82f6; /* Blue for professional look */
+      --secondary-color: #60a5fa;
+    }
+    body {
+      background: #f9fafb;
+      color: #1f2937;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .dark-mode {
+      background: #1f2937;
+      color: #f9fafb;
+    }
+    .card {
+      background: linear-gradient(145deg, #ffffff, #f0f4f8);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+    }
+    .dark-mode .card {
+      background: linear-gradient(145deg, #374151, #2d3748);
+      border: 1px solid #4b5563;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    .btn {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.2s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #2563eb, #3b82f6);
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+    }
+    .btn:hover::after {
+      width: 400px;
+      height: 400px;
+    }
+    .section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      padding: 2rem 1rem;
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .progress-bar {
+      height: 10px;
+      background: var(--primary-color);
+      border-radius: 5px;
+      transition: width 1s ease-in-out;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+    .spinner.active {
+      display: block;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .parallax {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .parallax::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(2px);
+    }
+    .nav-links {
+      transition: transform 0.3s ease-in-out;
+    }
+    .nav-links.open {
+      transform: translateX(0);
+    }
+    .typed::after {
+      content: '|';
+      display: inline;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .data-update {
+      transition: all 0.3s ease;
+    }
+    .data-update.active {
+      transform: scale(1.1);
+      color: var(--primary-color);
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--primary-color);
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border: 2px solid var(--primary-color);
+      border-radius: 50%;
+    }
+    /* Responsive Styling */
+    @media (max-width: 640px) {
+      body {
+        font-size: 0.9rem;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+      .card {
+        padding: 1rem;
+      }
+      .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+      .section {
+        padding: 1.5rem 0.5rem;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 75%;
+        max-width: 300px;
+        background: #ffffff;
+        backdrop-filter: blur(10px);
+        transform: translateX(100%);
+        flex-direction: column;
+        padding: 2rem;
+        z-index: 50;
+      }
+      .dark-mode .nav-links {
+        background: #1f2937;
+      }
+      .nav-links.open {
+        transform: translateX(0);
+      }
+      .parallax {
+        background-attachment: scroll;
+      }
+      .grid-cols-2, .grid-cols-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      body {
+        font-size: 1rem;
+      }
+      .container {
+        padding: 0 2rem;
+      }
+      .card {
+        padding: 1.25rem;
+      }
+      .btn {
+        padding: 0.75rem 1.25rem;
+      }
+      .section {
+        padding: 2rem 1rem;
+      }
+    }
+    @media (min-width: 1025px) {
+      body {
+        font-size: 1.1rem;
+      }
+      .container {
+        padding: 0 4rem;
+      }
+      .card {
+        padding: 1.5rem;
+      }
+      .btn {
+        padding: 0.75rem 2rem;
+      }
+    }
+  </style>
 </head>
+<body class="min-h-screen transition-colors duration-300" id="body">
+  <!-- Loading Spinner -->
+  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-black/70 z-50">
+    <div class="spinner active"></div>
+  </div>
 
-<body>
-
-    <div class="navbar" role="navigation" aria-label="Main navigation">
-
-        <div class="navbar-container">
-
-            <span class="hamburger" id="hamburger" aria-label="Toggle menu">☰</span>
-
-            <ul id="navMenu">
-
-                <li><a href="#" id="navHome">Home</a></li>
-
-                <li><a href="#" id="navLogin">Login</a></li>
-
-                <li><a href="#" id="navTracker">Track Ambulances</a></li>
-
-                <li><a href="#" id="navDashboard">Dashboard</a></li>
-
-                <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button></li>
-
-                <li class="dropdown">
-
-                    <span id="accountName" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Account</span>
-
-                    <div id="dropdownMenu" class="dropdown-menu" role="menu">
-
-                        <span id="accountDetails" aria-label="Account details"></span>
-
-                        <a href="#" id="logoutLink" style="display: none;" role="menuitem">Logout</a>
-
-                    </div>
-
-                </li>
-
-            </ul>
-
-        </div>
-
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 z-50 bg-white/95 dark:bg-gray-800/95 border-b border-gray-200 dark:border-gray-700 p-4 backdrop-blur-sm" aria-label="Main navigation">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl sm:text-3xl font-bold">Aravind's Portfolio</h1>
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="text-gray-800 dark:text-white focus:outline-none p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-800 dark:text-white focus:outline-none p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div id="nav-links" class="nav-links hidden md:flex space-x-4 md:space-x-6">
+        <a href="#home" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="home" aria-label="Home">Home</a>
+        <a href="#about" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="about" aria-label="About">About</a>
+        <a href="#skills" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="skills" aria-label="Skills">Skills</a>
+        <a href="#projects" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="projects" aria-label="Projects">Projects</a>
+        <a href="#jobs" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="jobs" aria-label="Job Portal">Job Portal</a>
+        <a href="#gallery" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="gallery" aria-label="Gallery">Gallery</a>
+        <a href="#testimonials" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
+        <a href="#blog" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="blog" aria-label="Blog">Blog</a>
+        <a href="#resume" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="resume" aria-label="Resume">Resume</a>
+        <a href="#contact" class="nav-link hover:text-blue-500 dark:hover:text-blue-400 transition font-medium" data-section="contact" aria-label="Contact">Contact</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="container">
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top hidden btn rounded-full p-3" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-        <div id="homeSection" class="header">
+  <!-- Sections -->
+  <main class="pt-16">
+    <!-- Home Section -->
+    <section id="home" class="section min-h-screen flex items-center justify-center parallax active" style="background-image: url('https://via.placeholder.com/1920x1080?text=Hero+Background')" data-aos="fade-up">
+      <div class="card rounded-lg p-6 sm:p-8 max-w-md mx-auto z-10">
+        <img src="https://via.placeholder.com/150" alt="Profile Photo" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-4 object-cover border-4 border-white dark:border-gray-700">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center">Jogi Bala Venkata Aravind</h2>
+        <p class="text-center text-gray-600 dark:text-gray-300 text-base sm:text-lg">I am a <span id="typed" class="typed font-semibold"></span></p>
+        <a href="#resume" class="block mt-4 text-center text-blue-500 dark:text-blue-400 hover:underline font-medium">Download Resume</a>
+      </div>
+    </section>
 
-            <h1>Ambulance Tracker</h1>
-
-            <p>Connect with emergency services in real-time.</p>
-
+    <!-- About Section with Timeline -->
+    <section id="about" class="section py-12 sm:py-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">About Me</h2>
+      <div class="card rounded-lg p-6 sm:p-8 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p class="mb-2"><strong>Native Place:</strong> Hyderabad, Telangana</p>
+            <p class="mb-2"><strong>Education:</strong> B.Tech in Computer Science</p>
+            <p class="mb-2"><strong>Profession:</strong> Aspiring Full-Stack Developer</p>
+            <p class="mb-2"><strong>Bio:</strong> Passionate about creating intuitive web applications and IoT solutions, with experience in quality assurance at Guts Electro Mech, focusing on in-process quality and pre-delivery inspection.</p>
+            <h3 class="text-xl sm:text-2xl font-semibold mt-4">About My Work</h3>
+            <p class="text-gray-600 dark:text-gray-300">Building innovative job portal solutions and IoT projects to connect talent with opportunities and enhance smart systems, leveraging modern web technologies and user-centric design.</p>
+          </div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-semibold mb-4">My Journey</h3>
+            <div class="space-y-4">
+              <div class="timeline-item relative pl-10 pb-4" data-aos="fade-up" data-aos-delay="100">
+                <p class="font-semibold">2018 - B.Tech in Computer Science</p>
+                <p class="text-gray-600 dark:text-gray-300">Graduated from [University Name] with a focus on software development and IoT.</p>
+              </div>
+              <div class="timeline-item relative pl-10 pb-4" data-aos="fade-up" data-aos-delay="200">
+                <p class="font-semibold">2019-2021 - Quality Assurance at Guts Electro Mech</p>
+                <p class="text-gray-600 dark:text-gray-300">Ensured product quality through in-process inspections and pre-delivery checks.</p>
+              </div>
+              <div class="timeline-item relative pl-10" data-aos="fade-up" data-aos-delay="300">
+                <p class="font-semibold">2022-Present - Full-Stack Developer</p>
+                <p class="text-gray-600 dark:text-gray-300">Developing web and IoT solutions, including job portals and smart home systems.</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div id="loginSection" class="form-container hidden">
-
-            <h2>Login / Register</h2>
-
-            <div class="form-grid">
-
-                <div>
-
-                    <select id="accountType" aria-label="Select account type">
-
-                        <option value="user">User</option>
-
-                        <option value="driver">Driver</option>
-
-                        <option value="admin">Admin</option>
-
-                    </select>
-
-                </div>
-
-                <div id="registerFields" class="hidden">
-
-                    <input type="text" id="regName" placeholder="Full Name" aria-label="Full Name">
-
-                    <p id="regNameError" class="error-message"></p>
-
-                    <input type="file" id="regProfilePic" accept="image/jpeg,image/png" aria-label="Profile picture">
-
-                    <p id="regProfilePicError" class="error-message"></p>
-
-                    <select id="regAmbulanceType" aria-label="Ambulance Type" class="hidden">
-
-                        <option value="Basic">Basic</option>
-
-                        <option value="Advanced">Advanced</option>
-
-                        <option value="ICU">ICU</option>
-
-                    </select>
-
-                </div>
-
-                <div>
-
-                    <input type="text" id="loginId" placeholder="ID (e.g., USER001, AMB001, ADMIN)" aria-label="ID" required>
-
-                    <p id="loginIdError" class="error-message"></p>
-
-                </div>
-
-                <div>
-
-                    <input type="password" id="loginPassword" placeholder="Password" aria-label="Password" required>
-
-                    <p id="loginPasswordError" class="error-message"></p>
-
-                </div>
-
-                <div>
-
-                    <button class="tooltip" id="registerBtn">
-
-                        Register
-
-                        <span class="tooltiptext">Create a new account</span>
-
-                    </button>
-
-                    <button class="tooltip" id="loginBtn">
-
-                        Login
-
-                        <span class="tooltiptext">Sign in to your account</span>
-
-                    </button>
-
-                </div>
-
+    <!-- Skills Section -->
+    <section id="skills" class="section py-12 sm:py-16 bg-gray-100 dark:bg-gray-900" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Skills</h2>
+      <div class="max-w-4xl mx-auto">
+        <canvas id="skills-chart" class="mb-6 sm:mb-8" role="img" aria-label="Bar chart of skill proficiency"></canvas>
+        <div class="space-y-4">
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="100">
+            <p class="font-semibold">HTML & CSS</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 90%"></div>
             </div>
-
-            <p id="loginMessage" aria-live="polite"></p>
-
+          </div>
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
+            <p class="font-semibold">JavaScript</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="300">
+            <p class="font-semibold">React.js</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="400">
+            <p class="font-semibold">Node.js</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="500">
+            <p class="font-semibold">Arduino & ESP32</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="600">
+            <p class="font-semibold">Quality Assurance</p>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded h-2" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar h-2 rounded" style="width: 85%"></div>
+            </div>
+          </div>
         </div>
-
-        <div id="userSection" class="form-container hidden">
-
-            <h2>User Dashboard</h2>
-
-            <div class="profile-card">
-
-                <img id="userProfilePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="User avatar">
-
-                <div>
-
-                    <p><strong><span id="currentUserName"></span></strong></p>
-
-                    <p>ID: <span id="currentUserId"></span></p>
-
-                </div>
-
-            </div>
-
-            <div class="profile-upload">
-
-                <label for="userProfileUpload">Update Profile Picture</label>
-
-                <input type="file" id="userProfileUpload" accept="image/jpeg,image/png" aria-label="Update profile picture">
-
-                <p id="userProfileUploadError" class="error-message"></p>
-
-                <button id="updateProfileBtn">Upload</button>
-
-            </div>
-
-            <h3>Notification Settings</h3>
-
-            <div class="settings-panel">
-
-                <label>
-
-                    <input type="checkbox" id="enableNotifications" aria-label="Enable notifications">
-
-                    Enable Notifications
-
-                </label>
-
-            </div>
-
-            <h3>Emergency Contacts</h3>
-
-            <div class="emergency-contacts">
-
-                <input type="text" id="contactName" placeholder="Contact Name" aria-label="Contact Name">
-
-                <p id="contactNameError" class="error-message"></p>
-
-                <input type="tel" id="contactPhone" placeholder="Phone Number" aria-label="Phone Number">
-
-                <p id="contactPhoneError" class="error-message"></p>
-
-                <button id="addContactBtn">Add Contact</button>
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Name</th>
-
-                            <th>Phone</th>
-
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="emergencyContactsTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>Emergency SOS</h3>
-
-            <button class="sos-btn tooltip" id="sosBtn">
-
-                SOS Alert
-
-                <span class="tooltiptext">Send urgent alert to nearest ambulance</span>
-
-            </button>
-
-            <h3>Find Nearest Ambulance</h3>
-
-            <select id="ambulanceTypeFilter" aria-label="Filter ambulance type">
-
-                <option value="All">All Types</option>
-
-                <option value="Basic">Basic</option>
-
-                <option value="Advanced">Advanced</option>
-
-                <option value="ICU">ICU</option>
-
-            </select>
-
-            <button class="tooltip" id="findAmbulanceBtn">
-
-                Connect to Nearest Ambulance
-
-                <span class="tooltiptext">Find the closest available ambulance</span>
-
-            </button>
-
-            <div id="bookingDetails" class="booking-card hidden"></div>
-
-            <h3>Share Live Location</h3>
-
-            <button id="toggleLocationBtn">Start Sharing Location</button>
-
-            <h3>Chat with Driver</h3>
-
-            <div id="chatContainer" class="chat-container hidden">
-
-                <div id="chatMessages"></div>
-
-                <textarea id="chatText" placeholder="Type a message..." rows="2" aria-label="Chat message"></textarea>
-
-                <button id="sendChatBtn">Send</button>
-
-            </div>
-
-            <h3>Send Message to Driver</h3>
-
-            <select id="messageDriverId" aria-label="Select driver">
-
-                <option value="">Select Driver</option>
-
-            </select>
-
-            <p id="messageDriverIdError" class="error-message"></p>
-
-            <textarea id="messageText" placeholder="Enter your message" rows="4" aria-label="Message"></textarea>
-
-            <p id="messageError" class="error-message"></p>
-
-            <button id="sendMessageBtn">Send Message</button>
-
-            <h3>Booking History</h3>
-
-            <div id="bookingHistory" class="booking-card">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Ambulance ID</th>
-
-                            <th>Type</th>
-
-                            <th>Timestamp</th>
-
-                            <th>Status</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="bookingHistoryTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>Submit Feedback</h3>
-
-            <textarea id="feedbackText" placeholder="Enter your feedback" rows="5" aria-label="Feedback"></textarea>
-
-            <div class="rating">
-
-                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-
-                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-
-                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-
-                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-
-                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-
-            </div>
-
-            <p id="feedbackError" class="error-message"></p>
-
-            <button id="submitFeedbackBtn">Submit Feedback</button>
-
-            <button id="userLogoutBtn">Logout</button>
-
+      </div>
+    </section>
+
+    <!-- Projects Section with Filtering -->
+    <section id="projects" class="section py-12 sm:py-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Projects</h2>
+      <div class="max-w-4xl mx-auto mb-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+        <input id="project-filter" type="text" placeholder="Filter projects by title..." class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white" aria-label="Filter projects">
+        <select id="project-category" class="p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white" aria-label="Project category">
+          <option value="">All Categories</option>
+          <option value="Web">Web</option>
+          <option value="IoT">IoT</option>
+        </select>
+      </div>
+      <div id="project-listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div class="card rounded-lg p-4 sm:p-6 project-card" data-category="Web" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl sm:text-2xl font-semibold">Job Portal</h3>
+          <p class="text-gray-600 dark:text-gray-300">A responsive job search platform with advanced filtering and user authentication.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">View Project</a>
         </div>
-
-        <div id="driverSection" class="form-container hidden">
-
-            <h2>Driver Dashboard</h2>
-
-            <div class="profile-card">
-
-                <img id="driverProfilePic" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="Driver avatar">
-
-                <div>
-
-                    <p><strong><span id="currentDriverName"></span></strong></p>
-
-                    <p>ID: <span id="currentDriverId"></span></p>
-
-                    <p>Status: <span id="driverAvailability" class="status-available">Available</span></p>
-
-                    <p>Type: <span id="driverAmbulanceType"></span></p>
-
-                    <p>Rating: <span id="driverRating">N/A</span></p>
-
-                </div>
-
-            </div>
-
-            <div class="profile-upload">
-
-                <label for="driverProfileUpload">Update Profile Picture</label>
-
-                <input type="file" id="driverProfileUpload" accept="image/jpeg,image/png" aria-label="Update profile picture">
-
-                <p id="driverProfileUploadError" class="error-message"></p>
-
-                <button id="updateDriverProfileBtn">Upload</button>
-
-            </div>
-
-            <button id="toggleAvailabilityBtn">Toggle Availability</button>
-
-            <button id="startTrackBtn">Start Tracking</button>
-
-            <button id="stopTrackBtn" disabled>Stop Tracking</button>
-
-            <h3>User Location</h3>
-
-            <div id="driverMap" class="hidden"></div>
-
-            <h3>Messages from Users</h3>
-
-            <div id="driverMessages" class="message-inbox">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>User ID</th>
-
-                            <th>Message</th>
-
-                            <th>Timestamp</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="driverMessagesTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>Chat with User</h3>
-
-            <div id="driverChatContainer" class="chat-container hidden">
-
-                <div id="driverChatMessages"></div>
-
-                <textarea id="driverChatText" placeholder="Type a message..." rows="2" aria-label="Chat message"></textarea>
-
-                <button id="sendDriverChatBtn">Send</button>
-
-            </div>
-
-            <button id="driverLogoutBtn">Logout</button>
-
+        <div class="card rounded-lg p-4 sm:p-6 project-card" data-category="IoT" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl sm:text-2xl font-semibold">IoT Smart Home</h3>
+          <p class="text-gray-600 dark:text-gray-300">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">View Project</a>
         </div>
-
-        <div id="adminSection" class="admin-container hidden">
-
-            <h2>Admin Panel</h2>
-
-            <div class="profile-card">
-
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC" alt="Admin avatar">
-
-                <div>
-
-                    <p><strong>Admin</strong></p>
-
-                    <p>ID: ADMIN</p>
-
-                </div>
-
-            </div>
-
-            <div class="admin-panel">
-
-                <h3>Analytics</h3>
-
-                <p>Active Drivers: <span id="activeDrivers">0</span> | Total Feedback: <span id="totalFeedback">0</span> | Total Messages: <span id="totalMessages">0</span> | Total Chats: <span id="totalChats">0</span></p>
-
-            </div>
-
-            <h3>Pending Driver Registrations</h3>
-
-            <div id="pendingDrivers" class="admin-panel">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Driver Name</th>
-
-                            <th>Driver ID</th>
-
-                            <th>Type</th>
-
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="pendingTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>Approved Drivers</h3>
-
-            <div id="adminPanel" class="admin-panel">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Driver Name</th>
-
-                            <th>Driver ID</th>
-
-                            <th>Type</th>
-
-                            <th>Status</th>
-
-                            <th>Availability</th>
-
-                            <th>Rating</th>
-
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="adminTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>Location History</h3>
-
-            <div id="locationHistory" class="location-history">
-
-                <button class="tooltip" id="exportHistoryBtn">
-
-                    Export History (CSV)
-
-                    <span class="tooltiptext">Download location data</span>
-
-                </button>
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Driver ID</th>
-
-                            <th>Latitude</th>
-
-                            <th>Longitude</th>
-
-                            <th>Timestamp</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="historyTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>User Feedback</h3>
-
-            <div id="feedbackPanel" class="feedback-panel">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>User ID</th>
-
-                            <th>Driver ID</th>
-
-                            <th>Feedback</th>
-
-                            <th>Rating</th>
-
-                            <th>Timestamp</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="feedbackTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>User-Driver Messages</h3>
-
-            <div id="messagePanel" class="message-inbox">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>User ID</th>
-
-                            <th>Driver ID</th>
-
-                            <th>Message</th>
-
-                            <th>Timestamp</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="messageTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <h3>User-Driver Chats</h3>
-
-            <div id="chatPanel" class="chat-container">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>User ID</th>
-
-                            <th>Driver ID</th>
-
-                            <th>Message</th>
-
-                            <th>Timestamp</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="chatTable"></tbody>
-
-                </table>
-
-            </div>
-
-            <button id="adminLogoutBtn">Logout</button>
-
+        <div class="card rounded-lg p-4 sm:p-6 project-card" data-category="Web" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl sm:text-2xl font-semibold">ESP32 Sensor Dashboard</h3>
+          <p class="text-gray-600 dark:text-gray-300">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">View Project</a>
         </div>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-semibold text-center mt-8 sm:mt-10">ESP32 Live Demo</h3>
+      <div class="card rounded-lg p-6 sm:p-8 max-w-md mx-auto" data-aos="fade-up">
+        <p><strong>Temperature:</strong> <span id="esp32-temp" class="data-update">25°C</span></p>
+        <p><strong>Humidity:</strong> <span id="esp32-humidity" class="data-update">60%</span></p>
+        <button id="esp32-refresh" class="btn rounded px-4 py-2 mt-4">Refresh Data</button>
+      </div>
+    </section>
 
-        <div id="trackerSection" class="form-container hidden">
-
-            <h2>Track Ambulance</h2>
-
-            <div class="form-grid">
-
-                <input type="text" id="trackId" placeholder="Enter Ambulance ID (e.g., AMB001)" aria-label="Ambulance ID">
-
-                <p id="trackIdError" class="error-message"></p>
-
-                <div>
-
-                    <button id="trackBtn">Track</button>
-
-                    <button class="emergency-btn" id="callEmergencyBtn">Emergency Contact</button>
-
-                </div>
-
-            </div>
-
-            <div class="map-controls">
-
-                <button id="zoomUserBtn" disabled>Zoom to User</button>
-
-                <button id="zoomAmbulanceBtn" disabled>Zoom to Ambulance</button>
-
-                <select id="routeType" aria-label="Select route type">
-
-                    <option value="fastest">Fastest Route</option>
-
-                    <option value="shortest">Shortest Route</option>
-
-                </select>
-
-                <label class="live-toggle">
-
-                    <input type="checkbox" id="liveTracking"> Live Tracking
-
-                </label>
-
-                <label class="live-toggle">
-
-                    <input type="checkbox" id="weatherOverlay"> Show Weather
-
-                </label>
-
-            </div>
-
-            <div id="distanceInfo" class="distance-info hidden"></div>
-
-            <div id="map"></div>
-
-            <div id="driverInfo" class="driver-info hidden"></div>
-
+    <!-- Job Portal Section -->
+    <section id="jobs" class="section py-12 sm:py-16 bg-gray-100 dark:bg-gray-900" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Job Portal</h2>
+      <div class="max-w-4xl mx-auto mb-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+        <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white" aria-label="Filter jobs">
+        <select id="job-category" class="p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white" aria-label="Job category">
+          <option value="">All Categories</option>
+          <option value="Frontend Developer">Frontend Developer</option>
+          <option value="IoT Engineer">IoT Engineer</option>
+          <option value="Quality Analyst">Quality Analyst</option>
+        </select>
+      </div>
+      <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div class="card rounded-lg p-4 sm:p-6 job-card" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl sm:text-2xl font-semibold">Frontend Developer</h3>
+          <p class="text-gray-600 dark:text-gray-300">Develop responsive web interfaces using React and Tailwind CSS.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Apply Now</a>
         </div>
-
-        <div id="dashboardSection" class="dashboard-container hidden">
-
-            <h2>Active Ambulances</h2>
-
-            <div id="dashboard" class="dashboard">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Driver Name</th>
-
-                            <th>Ambulance ID</th>
-
-                            <th>Type</th>
-
-                            <th>Latitude</th>
-
-                            <th>Longitude</th>
-
-                            <th>Last Updated</th>
-
-                            <th>Status</th>
-
-                            <th>Availability</th>
-
-                            <th>Rating</th>
-
-                            <th>Action</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="dashboardTable"></tbody>
-
-                </table>
-
-            </div>
-
+        <div class="card rounded-lg p-4 sm:p-6 job-card" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl sm:text-2xl font-semibold">IoT Engineer</h3>
+          <p class="text-gray-600 dark:text-gray-300">Design and implement IoT solutions with ESP32 and Arduino.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Apply Now</a>
         </div>
+        <div class="card rounded-lg p-4 sm:p-6 job-card" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl sm:text-2xl font-semibold">Quality Analyst</h3>
+          <p class="text-gray-600 dark:text-gray-300">Ensure product quality through in-process and pre-delivery inspections.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Apply Now</a>
+        </div>
+      </div>
+    </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section py-12 sm:py-16 bg-gray-50 dark:bg-gray-800" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Testimonials</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="100">
+          <p class="text-gray-600 dark:text-gray-300 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
+          <p class="font-semibold mt-2">John Doe, Project Manager</p>
+        </div>
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
+          <p class="text-gray-600 dark:text-gray-300 italic">"His IoT solutions brought our smart home project to life with innovative design."</p>
+          <p class="font-semibold mt-2">Jane Smith, IoT Lead</p>
+        </div>
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="300">
+          <p class="text-gray-600 dark:text-gray-300 italic">"Aravind's attention to detail in quality assurance ensured top-notch product delivery."</p>
+          <p class="font-semibold mt-2">Alex Brown, QA Supervisor</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section id="blog" class="section py-12 sm:py-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Blog</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl sm:text-2xl font-semibold">Building a Job Portal with React</h3>
+          <p class="text-gray-600 dark:text-gray-300">A deep dive into creating a responsive job portal using React and Tailwind CSS.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Read More</a>
+        </div>
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl sm:text-2xl font-semibold">IoT with ESP32</h3>
+          <p class="text-gray-600 dark:text-gray-300">How to integrate ESP32 with web dashboards for real-time sensor data.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Read More</a>
+        </div>
+        <div class="card rounded-lg p-4 sm:p-6" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl sm:text-2xl font-semibold">Quality Assurance Best Practices</h3>
+          <p class="text-gray-600 dark:text-gray-300">Tips for ensuring high-quality deliverables in tech projects.</p>
+          <a href="#" class="text-blue-500 dark:text-blue-400 hover:underline">Read More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="section py-12 sm:py-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Photo Gallery</h2>
+      <div class="max-w-4xl mx-auto mb-6">
+        <input type="file" id="photo-upload" accept="image/*" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white" aria-label="Upload photo">
+        <div id="photo-preview" class="mt-4 hidden">
+          <img id="preview-img" class="w-32 h-32 rounded-lg object-cover" alt="Photo Preview">
+          <button onclick="addToGallery()" class="mt-2 btn rounded px-4 py-2">Add to Gallery</button>
+        </div>
+      </div>
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <img src="https://via.placeholder.com/300?text=Project+1" alt="Project 1" loading="lazy" role="img" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://via.placeholder.com/300?text=Project+2" alt="Project 2" loading="lazy" role="img" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://via.placeholder.com/300?text=IoT+Setup" alt="IoT Setup" loading="lazy" role="img" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300">
+      </div>
+      <div id="lightbox" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-[2000]">
+        <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl sm:text-3xl cursor-pointer hover:text-gray-300" aria-label="Close lightbox">×</span>
+        <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl sm:text-3xl cursor-pointer hover:text-gray-300" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <img id="lightbox-img" class="max-w-[90%] max-h-[90%] rounded-lg" alt="Lightbox Image">
+        <button onclick="nextImage()" class="absolute right-4 top-1/2 text-white text-2xl sm:text-3xl cursor-pointer hover:text-gray-300" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        <p id="lightbox-caption" class="text-white mt-2 text-center"></p>
+      </div>
+    </section>
+
+    <!-- Resume Builder Section -->
+    <section id="resume" class="section py-12 sm:py-16 bg-gray-100 dark:bg-gray-900" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Resume Builder</h2>
+      <div class="card rounded-lg p-6 sm:p-8 max-w-2xl mx-auto">
+        <form id="resume-form" class="space-y-4">
+          <input id="resume-name" type="text" placeholder="Full Name" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" aria-label="Resume name" required>
+          <input id="resume-email" type="email" placeholder="Email" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" aria-label="Resume email" required>
+          <textarea id="resume-experience" placeholder="Experience (e.g., Guts Electro Mech - Quality Assurance)" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" rows="4" aria-label="Resume experience" required></textarea>
+          <textarea id="resume-skills" placeholder="Skills (e.g., JavaScript, ESP32)" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" rows="4" aria-label="Resume skills" required></textarea>
+          <button type="submit" class="w-full p-2 btn rounded" aria-label="Preview resume">Preview Resume</button>
+        </form>
+        <div id="resume-preview" class="mt-6 hidden">
+          <h3 class="text-xl sm:text-2xl font-semibold">Resume Preview</h3>
+          <p><strong>Name:</strong> <span id="preview-name"></span></p>
+          <p><strong>Email:</strong> <span id="preview-email"></span></p>
+          <p><strong>Experience:</strong> <span id="preview-experience"></span></p>
+          <p><strong>Skills:</strong> <span id="preview-skills"></span></p>
+          <a id="resume-download" href="#resume" download class="block mt-4 text-center text-blue-500 dark:text-blue-400 hover:underline">Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-12 sm:py-16" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Contact</h2>
+      <div class="card rounded-lg p-6 sm:p-8 max-w-md mx-auto">
+        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-blue-500 dark:hover:text-blue-400" aria-label="Copy phone number">9381329751</span></p>
+        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-blue-500 dark:hover:text-blue-400" aria-label="Copy email">aravind@example.com</span></p>
+        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
+        <p><strong>GitHub:</strong> <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400" aria-label="GitHub profile">github.com/aravind</a></p>
+        <div id="qr-code" class="mt-4 flex justify-center"></div>
+        <div class="mt-4">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.486671!3d17.385044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99e8e6b7c7ad%3A0x1e8b7f6a2b3c4d5e!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1698765432109!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map of Hyderabad"></iframe>
+        </div>
+        <form id="contact-form" class="mt-6 space-y-4" action="https://formspree.io/f/your-form-id" method="POST">
+          <input type="hidden" name="_subject" value="New Contact Form Submission">
+          <input id="form-name" type="text" placeholder="Your Name" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" aria-label="Contact name" required>
+          <input id="form-email" type="email" placeholder="Your Email" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" aria-label="Contact email" required>
+          <textarea id="form-message" placeholder="Your Message" class="w-full p-2 rounded bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500" rows="4" aria-label="Contact message" required></textarea>
+          <button type="submit" class="w-full p-2 btn rounded" id="contact-submit" aria-label="Send message">Send Message</button>
+        </form>
+      </div>
+      <div id="toast-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-gray-100 dark:bg-gray-900" data-aos="fade-up">
+    <div class="flex justify-center space-x-4 sm:space-x-6 mb-4">
+      <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400 transition p-2" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+      <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400 transition p-2" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+      <a href="#" class="hover:text-blue-500 dark:hover:text-blue-400 transition p-2" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
     </div>
-
-    <div id="modal" class="modal" role="dialog" aria-labelledby="modalMessage" tabindex="-1">
-
-        <div class="modal-content" role="document">
-
-            <p id="modalMessage" aria-live="assertive"></p>
-
-            <button id="modalCloseBtn" aria-label="Close modal">OK</button>
-
-            <div id="modalActions" class="hidden">
-
-                <button id="confirmBookingBtn" class="tooltip">
-
-                    Confirm Booking
-
-                    <span class="tooltiptext">Book this ambulance</span>
-
-                </button>
-
-                <button id="cancelBookingBtn" aria-label="Cancel booking">Cancel</button>
-
-            </div>
-
-        </div>
-
+    <div class="flex justify-center space-x-4 sm:space-x-6 mb-4">
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://your-domain.com" class="btn rounded px-4 py-2" aria-label="Share on LinkedIn">Share on LinkedIn</a>
+      <a href="https://twitter.com/intent/tweet?url=https://your-domain.com&text=Check out my portfolio!" class="btn rounded px-4 py-2" aria-label="Share on Twitter">Share on Twitter</a>
     </div>
-
-    <div id="notification" class="notification" aria-live="polite">
-
-        <span id="notificationIcon" class="icon"></span>
-
-        <p id="notificationMessage"></p>
-
-        <span class="close-btn" id="closeNotificationBtn">×</span>
-
-    </div>
-
-
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-
-    <script>
-
-        // Initialize localStorage
-
-        let drivers = JSON.parse(localStorage.getItem('drivers')) || {};
-
-        let pendingDrivers = JSON.parse(localStorage.getItem('pendingDrivers')) || {};
-
-        let users = JSON.parse(localStorage.getItem('users')) || {};
-
-        let trackingData = JSON.parse(localStorage.getItem('trackingData')) || {};
-
-        let locationHistory = JSON.parse(localStorage.getItem('locationHistory')) || {};
-
-        let feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
-
-        let driverAvailability = JSON.parse(localStorage.getItem('driverAvailability')) || {};
-
-        let mapSettings = JSON.parse(localStorage.getItem('mapSettings')) || { routeType: 'fastest', zoom: 13 };
-
-        let bookingHistory = JSON.parse(localStorage.getItem('bookingHistory')) || {};
-
-        let messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-        let chats = JSON.parse(localStorage.getItem('chatHistory')) || [];
-
-        let userLocations = JSON.parse(localStorage.getItem('userLocations')) || {};
-
-        let notificationSettings = JSON.parse(localStorage.getItem('notificationSettings')) || { enabled: true };
-
-        const adminCredentials = { username: 'ADMIN', password: 'admin123' };
-
-        let watchId = null;
-
-        let map = null;
-
-        let driverMap = null;
-
-        let ambulanceMarker = null;
-
-        let userMarker = null;
-
-        let userLocation = null;
-
-        let routeControl = null;
-
-        let weatherLayer = null;
-
-        let isLoggedIn = false;
-
-        let loggedInType = null;
-
-        let loggedInId = null;
-
-        let loggedInName = null;
-
-        let liveTrackingInterval = null;
-
-        let nearestAmbulance = null;
-
-        let locationSharingInterval = null;
-
-
-
-        // Default placeholder image (1x1 gray pixel)
-
-        const defaultProfilePic = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAATSURBVHjaYmAYBaNgFIyCUTAKAAQYACZ1A+U3AAAAAElFTkSuQmCC';
-
-
-
-        // Simulated weather data
-
-        const weatherData = {
-
-            'rain': { icon: '🌧️', desc: 'Rain may delay travel.' },
-
-            'clear': { icon: '☀️', desc: 'Clear conditions.' },
-
-            'clouds': { icon: '☁️', desc: 'Cloudy, no major impact.' }
-
-        };
-
-
-
-        // Error logging
-
-        function logError(message, error) {
-
-            console.error(`[${new Date().toISOString()}] ${message}`, error);
-
-            if (notificationSettings.enabled) {
-
-                showNotification(`Error: ${message}. Check console.`, 'error', '⚠️');
-
-            } else {
-
-                showModal(`Error: ${message}. Check console.`);
-
-            }
-
-        }
-
-
-
-        // Validate input
-
-        function validateInput(id, value, fieldName) {
-
-            const errorElement = document.getElementById(`${id}Error`);
-
-            if (!value.trim()) {
-
-                if (errorElement) {
-
-                    errorElement.textContent = `${fieldName} is required.`;
-
-                    errorElement.style.display = 'block';
-
-                } else {
-
-                    console.warn(`Error element ${id}Error not found`);
-
-                }
-
-                return false;
-
-            }
-
-            if (errorElement) {
-
-                errorElement.style.display = 'none';
-
-            }
-
-            return true;
-
-        }
-
-
-
-        // Validate image
-
-        function validateImage(file, errorId, maxSizeKB = 500) {
-
-            const errorElement = document.getElementById(errorId);
-
-            if (!file) {
-
-                if (errorElement) {
-
-                    errorElement.textContent = 'Please select an image.';
-
-                    errorElement.style.display = 'block';
-
-                }
-
-                return false;
-
-            }
-
-            if (!['image/jpeg', 'image/png'].includes(file.type)) {
-
-                if (errorElement) {
-
-                    errorElement.textContent = 'Only JPEG or PNG allowed.';
-
-                    errorElement.style.display = 'block';
-
-                }
-
-                return false;
-
-            }
-
-            if (file.size > maxSizeKB * 1024) {
-
-                if (errorElement) {
-
-                    errorElement.textContent = `Image must be under ${maxSizeKB}KB.`;
-
-                    errorElement.style.display = 'block';
-
-                }
-
-                return false;
-
-            }
-
-            if (errorElement) {
-
-                errorElement.style.display = 'none';
-
-            }
-
-            return true;
-
-        }
-
-
-
-        // Initialize maps
-
-        function initMap(lat = 0, lng = 0, mapId = 'map') {
-
-            try {
-
-                const targetMap = mapId === 'map' ? map : driverMap;
-
-                if (targetMap) {
-
-                    targetMap.off();
-
-                    targetMap.remove();
-
-                }
-
-                const newMap = L.map(mapId, { scrollWheelZoom: false }).setView([lat, lng], mapSettings.zoom);
-
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-
-                    attribution: '© OpenStreetMap, © CartoDB'
-
-                }).addTo(newMap);
-
-                newMap.whenReady(() => {
-
-                    newMap.scrollWheelZoom.enable();
-
-                });
-
-                if (mapId === 'map') {
-
-                    map = newMap;
-
-                    if (!ambulanceMarker) {
-
-                        ambulanceMarker = L.marker([lat, lng], {
-
-                            icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41] })
-
-                        }).addTo(map);
-
-                    }
-
-                    document.getElementById('zoomAmbulanceBtn').disabled = false;
-
-                } else {
-
-                    driverMap = newMap;
-
-                }
-
-                newMap.on('zoomend', () => {
-
-                    mapSettings.zoom = newMap.getZoom();
-
-                    localStorage.setItem('mapSettings', JSON.stringify(mapSettings));
-
-                });
-
-            } catch (error) {
-
-                logError(`Map initialization failed for ${mapId}`, error);
-
-            }
-
-        }
-
-
-
-        // Toggle weather overlay
-
-        function toggleWeatherOverlay() {
-
-            try {
-
-                const isChecked = document.getElementById('weatherOverlay').checked;
-
-                if (isChecked && map) {
-
-                    if (!weatherLayer) {
-
-                        weatherLayer = L.tileLayer('https://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=fakekey', {
-
-                            opacity: 0.5
-
-                        }).addTo(map);
-
-                        showNotification('Weather overlay enabled: Clear conditions.', 'info', weatherData.clear.icon);
-
-                    }
-
-                } else if (weatherLayer && map) {
-
-                    map.removeLayer(weatherLayer);
-
-                    weatherLayer = null;
-
-                    showNotification('Weather overlay disabled.', 'info', 'ℹ️');
-
-                }
-
-            } catch (error) {
-
-                logError('Toggle weather overlay failed', error);
-
-            }
-
-        }
-
-
-
-        // Show section
-
-        function showSection(sectionId) {
-
-            try {
-
-                const sections = ['homeSection', 'loginSection', 'userSection', 'driverSection', 'adminSection', 'trackerSection', 'dashboardSection'];
-
-                sections.forEach(id => {
-
-                    const section = document.getElementById(id);
-
-                    if (section) section.classList.add('hidden');
-
-                });
-
-                const sectionElement = document.getElementById(sectionId);
-
-                if (sectionElement) {
-
-                    sectionElement.classList.remove('hidden');
-
-                    if (sectionId === 'trackerSection') {
-
-                        const trackId = document.getElementById('trackId').value;
-
-                        if (trackId && trackingData[trackId]) trackAmbulance();
-
-                        document.getElementById('routeType').value = mapSettings.routeType;
-
-                    }
-
-                    if (sectionId === 'dashboardSection') updateDashboard();
-
-                    if (sectionId === 'adminSection') updateAdminPanel();
-
-                    if (sectionId === 'userSection') {
-
-                        updateBookingHistory();
-
-                        updateMessageDriverList();
-
-                        updateChat();
-
-                        updateEmergencyContacts();
-
-                        document.getElementById('enableNotifications').checked = notificationSettings.enabled;
-
-                    }
-
-                    if (sectionId === 'driverSection') {
-
-                        updateDriverMessages();
-
-                        updateDriverMap();
-
-                        updateDriverChat();
-
-                    }
-
-                }
-
-                toggleMenu(false);
-
-            } catch (error) {
-
-                logError('Section switch failed', error);
-
-            }
-
-        }
-
-
-
-        // Toggle mobile menu
-
-        function toggleMenu(force = null) {
-
-            const menu = document.getElementById('navMenu');
-
-            if (force !== null) {
-
-                menu.classList.toggle('active', force);
-
-            } else {
-
-                menu.classList.toggle('active');
-
-            }
-
-        }
-
-
-
-        // Show modal
-
-        function showModal(message, actions = false) {
-
-            const modal = document.getElementById('modal');
-
-            const modalMessage = document.getElementById('modalMessage');
-
-            const modalActions = document.getElementById('modalActions');
-
-            const closeBtn = document.getElementById('modalCloseBtn');
-
-            if (!modal || !modalMessage || !modalActions || !closeBtn) {
-
-                console.error('Modal elements not found');
-
-                return;
-
-            }
-
-            modalMessage.textContent = message;
-
-            modalActions.classList.toggle('hidden', !actions);
-
-            modal.style.display = 'flex';
-
-            closeBtn.focus();
-
-
-
-            const focusableElements = modal.querySelectorAll('button');
-
-            const firstElement = focusableElements[0];
-
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-
-
-            modal.addEventListener('keydown', function trapFocus(e) {
-
-                if (e.key === 'Tab') {
-
-                    if (e.shiftKey) {
-
-                        if (document.activeElement === firstElement) {
-
-                            e.preventDefault();
-
-                            lastElement.focus();
-
-                        }
-
-                    } else {
-
-                        if (document.activeElement === lastElement) {
-
-                            e.preventDefault();
-
-                            firstElement.focus();
-
-                        }
-
-                    }
-
-                }
-
-                if (e.key === 'Escape') closeModal();
-
-            }, { once: true });
-
-        }
-
-
-
-        // Close modal
-
-        function closeModal() {
-
-            const modal = document.getElementById('modal');
-
-            if (modal) {
-
-                modal.style.display = 'none';
-
-                document.getElementById('modalActions').classList.add('hidden');
-
-                nearestAmbulance = null;
-
-            }
-
-        }
-
-
-
-        // Show notification
-
-        function showNotification(message, type = 'info', icon = 'ℹ️') {
-
-            if (!notificationSettings.enabled) return;
-
-            const notification = document.getElementById('notification');
-
-            const messageElement = document.getElementById('notificationMessage');
-
-            const iconElement = document.getElementById('notificationIcon');
-
-            if (!notification || !messageElement || !iconElement) return;
-
-            messageElement.textContent = message;
-
-            iconElement.textContent = icon;
-
-            notification.classList.remove('success', 'error');
-
-            if (type === 'success') notification.classList.add('success');
-
-            else if (type === 'error') notification.classList.add('error');
-
-            notification.style.display = 'flex';
-
-            setTimeout(hideNotification, 5000);
-
-        }
-
-
-
-        // Hide notification
-
-        function hideNotification() {
-
-            const notification = document.getElementById('notification');
-
-            if (notification) notification.style.display = 'none';
-
-        }
-
-
-
-        // Toggle notifications
-
-        function toggleNotifications() {
-
-            notificationSettings.enabled = document.getElementById('enableNotifications').checked;
-
-            localStorage.setItem('notificationSettings', JSON.stringify(notificationSettings));
-
-            showNotification(`Notifications ${notificationSettings.enabled ? 'enabled' : 'disabled'}.`, 'success', '✅');
-
-        }
-
-
-
-        // Update navbar
-
-        function updateNavbar() {
-
-            try {
-
-                const accountName = document.getElementById('accountName');
-
-                const accountDetails = document.getElementById('accountDetails');
-
-                const logoutLink = document.getElementById('logoutLink');
-
-                if (isLoggedIn) {
-
-                    accountName.textContent = loggedInName || 'Account';
-
-                    accountDetails.textContent = loggedInId ? `ID: ${loggedInId}` : '';
-
-                    logoutLink.style.display = 'block';
-
-                    accountName.onclick = null;
-
-                } else {
-
-                    accountName.textContent = 'Account';
-
-                    accountDetails.textContent = '';
-
-                    logoutLink.style.display = 'none';
-
-                    accountName.onclick = () => showSection('loginSection');
-
-                }
-
-            } catch (error) {
-
-                logError('Nav update failed', error);
-
-            }
-
-        }
-
-
-
-        // Toggle login fields
-
-        function toggleLoginFields() {
-
-            try {
-
-                const accountType = document.getElementById('accountType').value;
-
-                const registerFields = document.getElementById('registerFields');
-
-                const ambulanceTypeField = document.getElementById('regAmbulanceType');
-
-                const profilePicField = document.getElementById('regProfilePic');
-
-                registerFields.classList.toggle('hidden', accountType === 'admin');
-
-                ambulanceTypeField.classList.toggle('hidden', accountType !== 'driver');
-
-                profilePicField.classList.toggle('hidden', accountType === 'admin');
-
-            } catch (error) {
-
-                logError('Toggle login fields failed', error);
-
-            }
-
-        }
-
-
-
-        // Calculate distance
-
-        function calculateDistance(lat1, lon1, lat2, lon2) {
-
-            try {
-
-                const R = 6371;
-
-                const dLat = (lat2 - lat1) * Math.PI / 180;
-
-                const dLon = (lon2 - lon1) * Math.PI / 180;
-
-                const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-
-                          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-
-                          Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-                return (R * c).toFixed(2);
-
-            } catch (error) {
-
-                logError('Distance calculation failed', error);
-
-                return 0;
-
-            }
-
-        }
-
-
-
-        // Estimate ETA
-
-        function estimateETA(distance) {
-
-            try {
-
-                const speed = 40;
-
-                const hours = distance / speed;
-
-                const minutes = Math.ceil(hours * 60);
-
-                return minutes > 0 ? `${minutes} min` : '<1 min';
-
-            } catch (error) {
-
-                logError('ETA calculation failed', error);
-
-                return 'N/A';
-
-            }
-
-        }
-
-
-
-        // Get user location
-
-        function getUserLocation(callback) {
-
-            if (!navigator.geolocation) {
-
-                showModal('Geolocation not supported by your browser.');
-
-                callback(null);
-
-                return;
-
-            }
-
-            navigator.geolocation.getCurrentPosition(
-
-                position => {
-
-                    userLocation = {
-
-                        latitude: position.coords.latitude,
-
-                        longitude: position.coords.longitude,
-
-                    };
-
-                    callback(userLocation);
-
-                    document.getElementById('zoomUserBtn').disabled = false;
-
-                },
-
-                error => {
-
-                    let message = 'Failed to fetch location.';
-
-                    if (error.code === 1) message = 'Location access denied. Please enable location services.';
-
-                    else if (error.code === 3) message = 'Location request timed out. Please check your network.';
-
-                    logError('User location fetch failed', error);
-
-                    showModal(message);
-
-                    callback(null);
-
-                },
-
-                { enableHighAccuracy: true, timeout: 15000 }
-
-            );
-
-        }
-
-
-
-        // Update profile picture
-
-        async function updateProfilePic(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const fileInput = document.getElementById('userProfileUpload');
-
-                const file = fileInput.files[0];
-
-                if (!validateImage(file, 'userProfileUploadError')) return;
-
-
-
-                const reader = new FileReader();
-
-                reader.onload = () => {
-
-                    users[loggedInId].profilePic = reader.result;
-
-                    localStorage.setItem('users', JSON.stringify(users));
-
-                    document.getElementById('userProfilePic').src = reader.result;
-
-                    showNotification('Profile picture updated.', 'success', '✅');
-
-                };
-
-                reader.onerror = () => {
-
-                    showNotification('Failed to load profile picture.', 'error', '❌');
-
-                };
-
-                reader.readAsDataURL(file);
-
-            } catch (error) {
-
-                logError('Profile picture update failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Update driver profile picture
-
-        async function updateDriverProfilePic(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const fileInput = document.getElementById('driverProfileUpload');
-
-                const file = fileInput.files[0];
-
-                if (!validateImage(file, 'driverProfileUploadError')) return;
-
-
-
-                const reader = new FileReader();
-
-                reader.onload = () => {
-
-                    drivers[loggedInId].profilePic = reader.result;
-
-                    localStorage.setItem('drivers', JSON.stringify(drivers));
-
-                    document.getElementById('driverProfilePic').src = reader.result;
-
-                    showNotification('Profile picture updated.', 'success', '✅');
-
-                };
-
-                reader.onerror = () => {
-
-                    showNotification('Failed to load profile picture.', 'error', '❌');
-
-                };
-
-                reader.readAsDataURL(file);
-
-            } catch (error) {
-
-                logError('Driver profile picture update failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Add emergency contact
-
-        async function addEmergencyContact(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const name = document.getElementById('contactName').value.trim();
-
-                const phone = document.getElementById('contactPhone').value.trim();
-
-                if (!validateInput('contactName', name, 'Contact Name') ||
-
-                    !validateInput('contactPhone', phone, 'Phone Number')) return;
-
-
-
-                if (!users[loggedInId].emergencyContacts) users[loggedInId].emergencyContacts = [];
-
-                users[loggedInId].emergencyContacts.push({ name, phone });
-
-                if (users[loggedInId].emergencyContacts.length > 5) users[loggedInId].emergencyContacts.shift();
-
-                localStorage.setItem('users', JSON.stringify(users));
-
-                document.getElementById('contactName').value = '';
-
-                document.getElementById('contactPhone').value = '';
-
-                updateEmergencyContacts();
-
-                showNotification('Emergency contact added.', 'success', '✅');
-
-            } catch (error) {
-
-                logError('Add emergency contact failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Update emergency contacts
-
-        function updateEmergencyContacts() {
-
-            try {
-
-                const tbody = document.getElementById('emergencyContactsTable');
-
-                tbody.innerHTML = '';
-
-                const contacts = users[loggedInId]?.emergencyContacts || [];
-
-                contacts.forEach((contact, index) => {
-
-                    const row = document.createElement('tr');
-
-                    row.innerHTML = `
-
-                        <td>${contact.name}</td>
-
-                        <td>${contact.phone}</td>
-
-                        <td><button class="delete-contact-btn" data-index="${index}">Delete</button></td>
-
-                    `;
-
-                    tbody.appendChild(row);
-
-                });
-
-                document.querySelectorAll('.delete-contact-btn').forEach(btn => {
-
-                    btn.addEventListener('click', () => deleteEmergencyContact(parseInt(btn.dataset.index)));
-
-                });
-
-            } catch (error) {
-
-                logError('Update emergency contacts failed', error);
-
-            }
-
-        }
-
-
-
-        // Delete emergency contact
-
-        function deleteEmergencyContact(index) {
-
-            try {
-
-                users[loggedInId].emergencyContacts.splice(index, 1);
-
-                localStorage.setItem('users', JSON.stringify(users));
-
-                updateEmergencyContacts();
-
-                showNotification('Emergency contact deleted.', 'success', '✅');
-
-            } catch (error) {
-
-                logError('Delete emergency contact failed', error);
-
-            }
-
-        }
-
-
-
-        // Send SOS
-
-        async function sendSOS(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                if (!isLoggedIn || loggedInType !== 'user') {
-
-                    showModal('Please log in as a user.');
-
-                    return;
-
-                }
-
-                await findNearestAmbulance(true);
-
-                messages.push({
-
-                    userId: loggedInId,
-
-                    driverId: nearestAmbulance?.id || 'ALL',
-
-                    message: 'Urgent: Immediate assistance needed!',
-
-                    timestamp: new Date().toISOString()
-
-                });
-
-                if (messages.length > 50) messages.shift();
-
-                localStorage.setItem('messages', JSON.stringify(messages));
-
-                updateDriverMessages();
-
-                updateAdminPanel();
-
-                const contacts = users[loggedInId]?.emergencyContacts || [];
-
-                contacts.forEach(contact => {
-
-                    showNotification(`Simulated SOS call to ${contact.name} (${contact.phone}).`, 'success', '📞');
-
-                });
-
-                showNotification('SOS alert sent to nearest ambulance.', 'success', '🚨');
-
-            } catch (error) {
-
-                logError('SOS failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Find nearest ambulance
-
-        async function findNearestAmbulance(isAuto = false) {
-
-            const button = event?.target;
-
-            try {
-
-                if (button) button.classList.add('loading');
-
-                if (!isLoggedIn || loggedInType !== 'user') {
-
-                    showModal('Please log in as a user.');
-
-                    return;
-
-                }
-
-
-
-                const ambulanceType = document.getElementById('ambulanceTypeFilter').value;
-
-
-
-                getUserLocation(userLoc => {
-
-                    if (!userLoc) return;
-
-
-
-                    let nearest = null;
-
-                    let minDistance = Infinity;
-
-                    Object.entries(trackingData).forEach(([id, data]) => {
-
-                        if (driverAvailability[id] === 'Available' && data.latitude && data.longitude &&
-
-                            (ambulanceType === 'All' || drivers[id]?.ambulanceType === ambulanceType)) {
-
-                            const distance = calculateDistance(
-
-                                userLoc.latitude, userLoc.longitude,
-
-                                data.latitude, data.longitude
-
-                            );
-
-                            if (distance < minDistance) {
-
-                                minDistance = distance;
-
-                                nearest = { id, data, distance };
-
-                            }
-
-                        }
-
-                    });
-
-
-
-                    if (!nearest) {
-
-                        showModal('No available ambulances found.');
-
-                        return;
-
-                    }
-
-
-
-                    const eta = estimateETA(nearest.distance);
-
-                    nearestAmbulance = { ...nearest, eta };
-
-                    const avgRating = calculateDriverRating(nearest.id);
-
-                    const bookingDetails = document.getElementById('bookingDetails');
-
-                    bookingDetails.innerHTML = `
-
-                        <div>
-
-                            <h4>Ambulance Details</h4>
-
-                            <p><strong>Driver:</strong> ${nearest.data.name || 'N/A'}</p>
-
-                            <p><strong>ID:</strong> ${nearest.id}</p>
-
-                            <p><strong>Type:</strong> ${drivers[nearest.id]?.ambulanceType || 'N/A'}</p>
-
-                            <p><strong>Distance:</strong> ${nearest.distance} km</p>
-
-                            <p><strong>ETA:</strong> ${eta}</p>
-
-                            <p><strong>Rating:</strong> ${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</p>
-
-                        </div>
-
-                        <div>
-
-                            <button class="call-btn tooltip" onclick="callAmbulance('${nearest.id}')">
-
-                                Call Driver
-
-                                <span class="tooltiptext">Contact the driver</span>
-
-                            </button>
-
-                        </div>
-
-                    `;
-
-                    bookingDetails.classList.remove('hidden');
-
-                    if (!isAuto) {
-
-                        showModal(`Nearest ambulance found: ${nearest.id} (${nearest.distance} km, ETA: ${eta}). Confirm booking?`, true);
-
-                    }
-
-                });
-
-            } catch (error) {
-
-                logError('Find nearest ambulance failed', error);
-
-            } finally {
-
-                if (button) button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Confirm booking
-
-        async function confirmBooking() {
-
-            const button = document.getElementById('confirmBookingBtn');
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                if (!nearestAmbulance) {
-
-                    showModal('No ambulance selected.');
-
-                    return;
-
-                }
-
-
-
-                const userId = loggedInId;
-
-                const ambulanceId = nearestAmbulance.id;
-
-                const timestamp = new Date().toISOString();
-
-                if (!bookingHistory[userId]) bookingHistory[userId] = [];
-
-                bookingHistory[userId].push({
-
-                    ambulanceId,
-
-                    ambulanceType: drivers[ambulanceId]?.ambulanceType || 'N/A',
-
-                    timestamp,
-
-                    status: 'Confirmed'
-
-                });
-
-                if (bookingHistory[userId].length > 50) bookingHistory[userId].shift();
-
-                localStorage.setItem('bookingHistory', JSON.stringify(bookingHistory));
-
-                updateBooking();
-
-                updateChat();
-
-                showModal(`Ambulance ${ambulanceId} booked successfully!`);
-
-                document.getElementById('trackId').value = ambulanceId;
-
-                showSection('trackerSection');
-
-                await trackAmbulance();
-
-            } catch (error) {
-
-                logError('Confirm booking failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Call ambulance
-
-        async function callAmbulance(driverId) {
-
-            const button = event?.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                if (!isLoggedIn) {
-
-                    showModal('Please log in to make a call.');
-
-                    return;
-
-                }
-
-                showNotification(`Simulated call to driver ${driverId}.`, 'success', '📞');
-
-            } catch (error) {
-
-                logError('Call ambulance failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Toggle location sharing
-
-        async function toggleLocationSharing(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                if (!isLoggedIn || loggedInType !== 'user') {
-
-                    showModal('Please log in as a user.');
-
-                    return;
-
-                }
-
-                if (locationSharingInterval) {
-
-                    clearInterval(locationSharingInterval);
-
-                    locationSharingInterval = null;
-
-                    delete userLocations[loggedInId];
-
-                    localStorage.setItem('userLocations', JSON.stringify(userLocations));
-
-                    button.textContent = 'Start Sharing Location';
-
-                    showNotification('Location sharing stopped.', 'info', 'ℹ️');
-
-                } else {
-
-                    getUserLocation(userLoc => {
-
-                        if (!userLoc) return;
-
-                        userLocations[loggedInId] = {
-
-                            latitude: userLoc.latitude,
-
-                            longitude: userLoc.longitude,
-
-                            timestamp: new Date().toISOString()
-
-                        };
-
-                        localStorage.setItem('userLocations', JSON.stringify(userLocations));
-
-                        locationSharingInterval = setInterval(() => {
-
-                            getUserLocation(loc => {
-
-                                if (loc) {
-
-                                    userLocations[loggedInId] = {
-
-                                        latitude: loc.latitude,
-
-                                        longitude: loc.longitude,
-
-                                        timestamp: new Date().toISOString()
-
-                                    };
-
-                                    localStorage.setItem('userLocations', JSON.stringify(userLocations));
-
-                                }
-
-                            });
-
-                        }, 10000);
-
-                        button.textContent = 'Stop Sharing Location';
-
-                        showNotification('Location sharing started.', 'success', '📍');
-
-                    });
-
-                }
-
-            } catch (error) {
-
-                logError('Toggle location sharing failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Send message
-
-        async function sendMessage(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const driverId = document.getElementById('messageDriverId').value;
-
-                const messageText = document.getElementById('messageText').value.trim();
-
-
-
-                if (!validateInput('messageDriverId', driverId, 'Driver ID') ||
-
-                    !validateInput('messageText', messageText, 'Message')) return;
-
-
-
-                if (!drivers[driverId]) {
-
-                    showModal('Invalid driver ID.');
-
-                    return;
-
-                }
-
-
-
-                messages.push({
-
-                    userId: loggedInId,
-
-                    driverId,
-
-                    message: messageText,
-
-                    timestamp: new Date().toISOString()
-
-                });
-
-                if (messages.length > 50) messages.shift();
-
-                localStorage.setItem('messages', JSON.stringify(messages));
-
-                document.getElementById('messageText').value = '';
-
-                document.getElementById('messageError').style.display = 'none';
-
-                updateDriverMessages();
-
-                if (loggedInType === 'admin') updateAdminPanel();
-
-                showNotification('Message sent successfully.', 'success', '✉️');
-
-            } catch (error) {
-
-                logError('Send message failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Send chat message
-
-        async function sendChatMessage(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const messageText = document.getElementById('chatText').value.trim();
-
-                const userId = loggedInId;
-
-                const driverId = bookingHistory[userId]?.slice(-1)[0]?.ambulanceId;
-
-
-
-                if (!driverId) {
-
-                    showModal('No active booking found. Book an ambulance first.');
-
-                    return;
-
-                }
-
-
-
-                if (!validateInput('chatText', messageText, 'Message')) return;
-
-
-
-                chats.push({
-
-                    userId,
-
-                    driverId,
-
-                    message: messageText,
-
-                    sender: userId,
-
-                    timestamp: new Date().toISOString()
-
-                });
-
-                if (chats.length > 50) chats.shift();
-
-                localStorage.setItem('chatHistory', JSON.stringify(chats));
-
-                document.getElementById('chatText').value = '';
-
-                updateChat();
-
-                updateDriverChat();
-
-                updateAdminPanel();
-
-                showNotification('Chat message sent.', 'success', '💬');
-
-            } catch (error) {
-
-                logError('Send chat message failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Send driver chat message
-
-        async function sendDriverChatMessage(event) {
-
-            const button = event.target;
-
-            if (!button) return;
-
-            try {
-
-                button.classList.add('loading');
-
-                const messageText = document.getElementById('driverChatText').value.trim();
-
-                const driverId = loggedInId;
-
-                const userId = chats.find(chat => chat.driverId === driverId && chat.userId !== driverId)?.userId;
-
-
-
-                if (!userId) {
-
-                    showModal('No active chat with user.');
-
-                    return;
-
-                }
-
-
-
-                if (!validateInput('driverChatText', messageText, 'Message')) return;
-
-
-
-                chats.push({
-
-                    userId,
-
-                    driverId,
-
-                    message: messageText,
-
-                    sender: driverId,
-
-                    timestamp: new Date().toISOString()
-
-                });
-
-                if (chats.length > 50) chats.shift();
-
-                localStorage.setItem('chatHistory', JSON.stringify(chats));
-
-                document.getElementById('driverChatText').value = '';
-
-                updateChat();
-
-                updateDriverChat();
-
-                updateAdminPanel();
-
-                showNotification('Chat message sent.', 'success', '💬');
-
-            } catch (error) {
-
-                logError('Send driver chat message failed', error);
-
-            } finally {
-
-                button.classList.remove('loading');
-
-            }
-
-        }
-
-
-
-        // Update chat
-
-        function updateChat() {
-
-            try {
-
-                const chatContainer = document.getElementById('chatContainer');
-
-                const messagesDiv = document.getElementById('chatMessages');
-
-                const userId = loggedInId;
-
-                const driverId = bookingHistory[userId]?.slice(-1)[0]?.ambulanceId;
-
-
-
-                if (!driverId) {
-
-                    chatContainer.classList.add('hidden');
-
-                    return;
-
-                }
-
-
-
-                chatContainer.classList.remove('hidden');
-
-                messagesDiv.innerHTML = '';
-
-                chats.filter(chat => chat.userId === userId && chat.driverId === driverId).forEach(msg => {
-
-                    const msgDiv = document.createElement('div');
-
-                    msgDiv.className = `chat-message ${msg.sender === userId ? 'sent' : 'received'}`;
-
-                    msgDiv.textContent = `${msg.sender === userId ? 'You' : 'Driver'} : ${msg.message} (${new Date(msg.timestamp).toLocaleTimeString()})`;
-
-                    messagesDiv.appendChild(msgDiv);
-
-                });
-
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-            } catch (error) {
-
-                logError('Update chat failed', error);
-
-            }
-
-        }
-
-
-
-        
-
-
-
-    // Update driver chat
-
-    function updateDriverChat() {
-
-        try {
-
-            const chatContainer = document.getElementById('driverChatContainer');
-
-            const messagesDiv = document.getElementById('driverChatMessages');
-
-            const driverId = loggedInId;
-
-            const userId = chats.find(chat => chat.driverId === driverId && chat.userId !== driverId)?.userId;
-
-
-
-            if (!userId) {
-
-                chatContainer.classList.add('hidden');
-
-                return;
-
-            }
-
-
-
-            chatContainer.classList.remove('hidden');
-
-            messagesDiv.innerHTML = '';
-
-            chats.filter(chat => chat.driverId === driverId && chat.userId === userId).forEach(msg => {
-
-                const msgDiv = document.createElement('div');
-
-                msgDiv.className = `chat-message ${msg.sender === driverId ? 'sent' : 'received'}`;
-
-                msgDiv.textContent = `${msg.sender === driverId ? 'You' : 'User'} : ${msg.message} (${new Date(msg.timestamp).toLocaleTimeString()})`;
-
-                messagesDiv.appendChild(msgDiv);
-
-            });
-
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-        } catch (error) {
-
-            logError('Update driver chat failed', error);
-
-        }
-
+    <p class="text-gray-600 dark:text-gray-300">© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Initialize AOS
+    try {
+      AOS.init({ duration: 800, once: true });
+    } catch (e) {
+      console.error("AOS initialization failed:", e);
+      showToast("Animation library failed to load.", true);
     }
 
-
-
-    // Update driver messages
-
-    function updateDriverMessages() {
-
-        try {
-
-            const tbody = document.getElementById('driverMessagesTable');
-
-            tbody.innerHTML = '';
-
-            messages.filter(msg => msg.driverId === loggedInId).forEach(msg => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${msg.userId}</td>
-
-                    <td>${msg.message}</td>
-
-                    <td>${new Date(msg.timestamp).toLocaleString()}</td>
-
-                `;
-
-                tbody.appendChild(row);
-
-            });
-
-        } catch (error) {
-
-            logError('Update driver messages failed', error);
-
-        }
-
-    }
-
-
-
-    // Update booking history
-
-    function updateBookingHistory() {
-
-        try {
-
-            const tbody = document.getElementById('bookingHistoryTable');
-
-            tbody.innerHTML = '';
-
-            const userBookings = bookingHistory[loggedInId] || [];
-
-            userBookings.forEach(booking => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${booking.ambulanceId}</td>
-
-                    <td>${booking.ambulanceType}</td>
-
-                    <td>${new Date(booking.timestamp).toLocaleString()}</td>
-
-                    <td>${booking.status}</td>
-
-                `;
-
-                tbody.appendChild(row);
-
-            });
-
-        } catch (error) {
-
-            logError('Update booking history failed', error);
-
-        }
-
-    }
-
-
-
-    // Update message driver list
-
-    function updateMessageDriverList() {
-
-        try {
-
-            const select = document.getElementById('messageDriverId');
-
-            select.innerHTML = '<option value="">Select Driver</option>';
-
-            Object.keys(drivers).forEach(id => {
-
-                const option = document.createElement('option');
-
-                option.value = id;
-
-                option.textContent = `${id} (${drivers[id].name})`;
-
-                select.appendChild(option);
-
-            });
-
-        } catch (error) {
-
-            logError('Update message driver list failed', error);
-
-        }
-
-    }
-
-
-
-    // Register account
-
-    async function registerAccount(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            const accountType = document.getElementById('accountType').value;
-
-            const loginId = document.getElementById('loginId').value.trim();
-
-            const password = document.getElementById('loginPassword').value;
-
-            const name = document.getElementById('regName').value.trim();
-
-            const profilePicInput = document.getElementById('regProfilePic');
-
-            const ambulanceType = document.getElementById('regAmbulanceType').value;
-
-
-
-            if (!validateInput('loginId', loginId, 'ID') ||
-
-                !validateInput('loginPassword', password, 'Password')) return;
-
-
-
-            if (accountType !== 'admin') {
-
-                if (!validateInput('regName', name, 'Name')) return;
-
-                if (profilePicInput.files.length && !validateImage(profilePicInput.files[0], 'regProfilePicError')) return;
-
-            }
-
-
-
-            if ((accountType === 'user' && users[loginId]) ||
-
-                (accountType === 'driver' && (drivers[loginId] || pendingDrivers[loginId])) ||
-
-                (accountType === 'admin' && loginId !== adminCredentials.username)) {
-
-                showModal('ID already exists or invalid admin ID.');
-
-                return;
-
-            }
-
-
-
-            let profilePic = defaultProfilePic;
-
-            if (profilePicInput.files.length) {
-
-                const reader = new FileReader();
-
-                await new Promise(resolve => {
-
-                    reader.onload = () => {
-
-                        profilePic = reader.result;
-
-                        resolve();
-
-                    };
-
-                    reader.readAsDataURL(profilePicInput.files[0]);
-
-                });
-
-            }
-
-
-
-            if (accountType === 'user') {
-
-                users[loginId] = { name, password, profilePic, emergencyContacts: [] };
-
-                localStorage.setItem('users', JSON.stringify(users));
-
-                showNotification('User registered successfully.', 'success', '✅');
-
-            } else if (accountType === 'driver') {
-
-                pendingDrivers[loginId] = { name, password, profilePic, ambulanceType };
-
-                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
-
-                showNotification('Driver registration submitted for approval.', 'success', '✅');
-
-            } else {
-
-                if (loginId === adminCredentials.username && password === adminCredentials.password) {
-
-                    showNotification('Admin logged in.', 'success', '✅');
-
-                } else {
-
-                    showModal('Invalid admin credentials.');
-
-                    return;
-
-                }
-
-            }
-
-
-
-            document.getElementById('loginId').value = '';
-
-            document.getElementById('loginPassword').value = '';
-
-            document.getElementById('regName').value = '';
-
-            profilePicInput.value = '';
-
-        } catch (error) {
-
-            logError('Registration failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Login account
-
-    async function loginAccount(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            const accountType = document.getElementById('accountType').value;
-
-            const loginId = document.getElementById('loginId').value.trim();
-
-            const password = document.getElementById('loginPassword').value;
-
-
-
-            if (!validateInput('loginId', loginId, 'ID') ||
-
-                !validateInput('loginPassword', password, 'Password')) return;
-
-
-
-            let success = false;
-
-            if (accountType === 'user' && users[loginId] && users[loginId].password === password) {
-
-                isLoggedIn = true;
-
-                loggedInType = 'user';
-
-                loggedInId = loginId;
-
-                loggedInName = users[loginId].name;
-
-                document.getElementById('currentUserId').textContent = loginId;
-
-                document.getElementById('currentUserName').textContent = loggedInName;
-
-                document.getElementById('userProfilePic').src = users[loginId].profilePic || defaultProfilePic;
-
-                showSection('userSection');
-
-                success = true;
-
-            } else if (accountType === 'driver' && drivers[loginId] && drivers[loginId].password === password) {
-
-                isLoggedIn = true;
-
-                loggedInType = 'driver';
-
-                loggedInId = loginId;
-
-                loggedInName = drivers[loginId].name;
-
-                document.getElementById('currentDriverId').textContent = loginId;
-
-                document.getElementById('currentDriverName').textContent = loggedInName;
-
-                document.getElementById('driverProfilePic').src = drivers[loginId].profilePic || defaultProfilePic;
-
-                document.getElementById('driverAmbulanceType').textContent = drivers[loginId].ambulanceType || 'N/A';
-
-                document.getElementById('driverAvailability').textContent = driverAvailability[loginId] || 'Available';
-
-                document.getElementById('driverAvailability').className = driverAvailability[loginId] === 'Available' ? 'status-available' : 'status-busy';
-
-                document.getElementById('driverRating').textContent = calculateDriverRating(loginId).toFixed(1) || 'N/A';
-
-                showSection('driverSection');
-
-                success = true;
-
-            } else if (accountType === 'admin' && loginId === adminCredentials.username && password === adminCredentials.password) {
-
-                isLoggedIn = true;
-
-                loggedInType = 'admin';
-
-                loggedInId = loginId;
-
-                loggedInName = 'Admin';
-
-                showSection('adminSection');
-
-                success = true;
-
-            }
-
-
-
-            if (success) {
-
-                updateNavbar();
-
-                document.getElementById('loginId').value = '';
-
-                document.getElementById('loginPassword').value = '';
-
-                showNotification('Login successful.', 'success', '✅');
-
-            } else {
-
-                showModal('Invalid credentials or pending driver approval.');
-
-            }
-
-        } catch (error) {
-
-            logError('Login failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Logout
-
-    function logout() {
-
-        try {
-
-            isLoggedIn = false;
-
-            loggedInType = null;
-
-            loggedInId = null;
-
-            loggedInName = null;
-
-            if (watchId) {
-
-                navigator.geolocation.clearWatch(watchId);
-
-                watchId = null;
-
-            }
-
-            if (liveTrackingInterval) {
-
-                clearInterval(liveTrackingInterval);
-
-                liveTrackingInterval = null;
-
-            }
-
-            if (locationSharingInterval) {
-
-                clearInterval(locationSharingInterval);
-
-                locationSharingInterval = null;
-
-            }
-
-            updateNavbar();
-
-            showSection('homeSection');
-
-            showNotification('Logged out successfully.', 'success', '✅');
-
-        } catch (error) {
-
-            logError('Logout failed', error);
-
-        }
-
-    }
-
-
-
-    // Submit feedback
-
-    async function submitFeedback(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            const feedbackText = document.getElementById('feedbackText').value.trim();
-
-            const rating = document.querySelector('input[name="rating"]:checked')?.value;
-
-            const driverId = bookingHistory[loggedInId]?.slice(-1)[0]?.ambulanceId;
-
-
-
-            if (!validateInput('feedbackText', feedbackText, 'Feedback') || !rating) {
-
-                document.getElementById('feedbackError').textContent = 'Feedback and rating are required.';
-
-                document.getElementById('feedbackError').style.display = 'block';
-
-                return;
-
-            }
-
-
-
-            if (!driverId) {
-
-                showModal('No recent booking found to provide feedback.');
-
-                return;
-
-            }
-
-
-
-            feedbackData.push({
-
-                userId: loggedInId,
-
-                driverId,
-
-                feedback: feedbackText,
-
-                rating: parseInt(rating),
-
-                timestamp: new Date().toISOString()
-
-            });
-
-            if (feedbackData.length > 50) feedbackData.shift();
-
-            localStorage.setItem('feedbackData', JSON.stringify(feedbackData));
-
-            document.getElementById('feedbackText').value = '';
-
-            document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
-
-            document.getElementById('feedbackError').style.display = 'none';
-
-            updateAdminPanel();
-
-            showNotification('Feedback submitted successfully.', 'success', '⭐');
-
-        } catch (error) {
-
-            logError('Feedback submission failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Calculate driver rating
-
-    function calculateDriverRating(driverId) {
-
-        try {
-
-            const ratings = feedbackData.filter(f => f.driverId === driverId).map(f => f.rating);
-
-            return ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 0;
-
-        } catch (error) {
-
-            logError('Calculate driver rating failed', error);
-
-            return 0;
-
-        }
-
-    }
-
-
-
-    // Track ambulance
-
-    async function trackAmbulance(event) {
-
-        const button = event?.target;
-
-        try {
-
-            if (button) button.classList.add('loading');
-
-            const trackId = document.getElementById('trackId').value.trim().toUpperCase();
-
-            if (!validateInput('trackId', trackId, 'Ambulance ID')) return;
-
-
-
-            if (!trackingData[trackId] || !drivers[trackId]) {
-
-                showModal('Ambulance ID not found.');
-
-                return;
-
-            }
-
-
-
-            getUserLocation(async userLoc => {
-
-                if (!userLoc) return;
-
-
-
-                if (!map) initMap(userLoc.latitude, userLoc.longitude);
-
-
-
-                if (userMarker) map.removeLayer(userMarker);
-
-                userMarker = L.marker([userLoc.latitude, userLoc.longitude], {
-
-                    icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', iconSize: [25, 41], iconAnchor: [12, 41] })
-
-                }).addTo(map).bindPopup('Your Location').openPopup();
-
-
-
-                const data = trackingData[trackId];
-
-                if (ambulanceMarker) {
-
-                    ambulanceMarker.setLatLng([data.latitude, data.longitude]);
-
-                } else {
-
-                    ambulanceMarker = L.marker([data.latitude, data.longitude], {
-
-                        icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41] })
-
-                    }).addTo(map);
-
-                }
-
-                ambulanceMarker.bindPopup(`Ambulance ${trackId}`).openPopup();
-
-
-
-                const distance = calculateDistance(userLoc.latitude, userLoc.longitude, data.latitude, data.longitude);
-
-                const eta = estimateETA(distance);
-
-                document.getElementById('distanceInfo').innerHTML = `
-
-                    <p><strong>Distance:</strong> ${distance} km</p>
-
-                    <p><strong>ETA:</strong> ${eta}</p>
-
-                    <p><strong>Last Updated:</strong> ${new Date(data.timestamp).toLocaleString()}</p>
-
-                `;
-
-                document.getElementById('distanceInfo').classList.remove('hidden');
-
-
-
-                document.getElementById('driverInfo').innerHTML = `
-
-                    <p><strong>Driver:</strong> ${data.name || 'N/A'}</p>
-
-                    <p><strong>Ambulance ID:</strong> ${trackId}</p>
-
-                    <p><strong>Type:</strong> ${drivers[trackId].ambulanceType || 'N/A'}</p>
-
-                    <p><strong>Availability:</strong> <span class="${driverAvailability[trackId] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[trackId] || 'Unknown'}</span></p>
-
-                    <p><strong>Rating:</strong> ${calculateDriverRating(trackId).toFixed(1) || 'N/A'} ★</p>
-
-                `;
-
-                document.getElementById('driverInfo').classList.remove('hidden');
-
-
-
-                if (routeControl) {
-
-                    try {
-
-                        map.removeControl(routeControl);
-
-                    } catch (e) {
-
-                        console.warn('Route control removal failed', e);
-
-                    }
-
-                }
-
-
-
-                try {
-
-                    routeControl = L.Routing.control({
-
-                        waypoints: [
-
-                            L.latLng(userLoc.latitude, userLoc.longitude),
-
-                            L.latLng(data.latitude, data.longitude)
-
-                        ],
-
-                        routeWhileDragging: false,
-
-                        show: false,
-
-                        createMarker: () => null,
-
-                        router: L.Routing.osrmv1({
-
-                            // For production, replace with your OSRM server or paid service
-
-                            serviceUrl: 'https://router.project-osrm.org/route/v1'
-
-                        }),
-
-                        lineOptions: { styles: [{ color: '#2563eb', weight: 5 }] }
-
-                    }).addTo(map);
-
-                } catch (error) {
-
-                    console.warn('OSRM routing failed, falling back to straight line', error);
-
-                    L.polyline([
-
-                        [userLoc.latitude, userLoc.longitude],
-
-                        [data.latitude, data.longitude]
-
-                    ], { color: '#2563eb', weight: 5 }).addTo(map);
-
-                }
-
-
-
-                if (document.getElementById('liveTracking').checked && !liveTrackingInterval) {
-
-                    toggleLiveTracking();
-
-                }
-
-            });
-
-        } catch (error) {
-
-            logError('Track ambulance failed', error);
-
-        } finally {
-
-            if (button) button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Toggle live tracking
-
-    function toggleLiveTracking() {
-
-        try {
-
-            const liveTracking = document.getElementById('liveTracking').checked;
-
-            if (liveTracking && !liveTrackingInterval) {
-
-                liveTrackingInterval = setInterval(() => trackAmbulance(), 10000);
-
-                showNotification('Live tracking enabled.', 'success', '📍');
-
-            } else if (!liveTracking && liveTrackingInterval) {
-
-                clearInterval(liveTrackingInterval);
-
-                liveTrackingInterval = null;
-
-                showNotification('Live tracking disabled.', 'info', 'ℹ️');
-
-            }
-
-        } catch (error) {
-
-            logError('Toggle live tracking failed', error);
-
-        }
-
-    }
-
-
-
-    // Zoom to user
-
-    function zoomToUser(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            if (!userLocation || !map) return;
-
-            map.setView([userLocation.latitude, userLocation.longitude], mapSettings.zoom);
-
-        } catch (error) {
-
-            logError('Zoom to user failed', error);
-
-        }
-
-    }
-
-
-
-    // Zoom to ambulance
-
-    function zoomToAmbulance(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            const trackId = document.getElementById('trackId').value.trim();
-
-            if (!trackingData[trackId] || !map) return;
-
-            const data = trackingData[trackId];
-
-            map.setView([data.latitude, data.longitude], mapSettings.zoom);
-
-        } catch (error) {
-
-            logError('Zoom to ambulance failed', error);
-
-        }
-
-    }
-
-
-
-    // Call emergency
-
-    async function callEmergency(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            const contacts = users[loggedInId]?.emergencyContacts || [];
-
-            if (contacts.length === 0) {
-
-                showModal('No emergency contacts found.');
-
-                return;
-
-            }
-
-            contacts.forEach(contact => {
-
-                showNotification(`Simulated emergency call to ${contact.name} (${contact.phone}).`, 'success', '📞');
-
-            });
-
-        } catch (error) {
-
-            logError('Call emergency failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Start tracking
-
-    async function startTracking(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            if (!isLoggedIn || loggedInType !== 'driver') {
-
-                showModal('Please log in as a driver.');
-
-                return;
-
-            }
-
-
-
-            if (watchId) {
-
-                showModal('Tracking already active.');
-
-                return;
-
-            }
-
-
-
-            navigator.geolocation.watchPosition(
-
-                position => {
-
-                    const lat = position.coords.latitude;
-
-                    const lng = position.coords.longitude;
-
-                    trackingData[loggedInId] = {
-
-                        latitude: lat,
-
-                        longitude: lng,
-
-                        name: loggedInName,
-
-                        timestamp: new Date().toISOString()
-
-                    };
-
-                    if (!locationHistory[loggedInId]) locationHistory[loggedInId] = [];
-
-                    locationHistory[loggedInId].push({
-
-                        latitude: lat,
-
-                        longitude: lng,
-
-                        timestamp: new Date().toISOString()
-
-                    });
-
-                    if (locationHistory[loggedInId].length > 50) locationHistory[loggedInId].shift();
-
-                    localStorage.setItem('trackingData', JSON.stringify(trackingData));
-
-                    localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
-
-                    updateDashboard();
-
-                    updateAdminPanel();
-
-                },
-
-                error => {
-
-                    logError('Tracking failed', error);
-
-                    showModal('Failed to track location.');
-
-                },
-
-                { enableHighAccuracy: true, timeout: 15000 }
-
-            );
-
-            watchId = true;
-
-            document.getElementById('startTrackBtn').disabled = true;
-
-            document.getElementById('stopTrackBtn').disabled = false;
-
-            showNotification('Tracking started.', 'success', '📍');
-
-        } catch (error) {
-
-            logError('Start tracking failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Stop tracking
-
-    function stopTracking() {
-
-        try {
-
-            if (watchId) {
-
-                navigator.geolocation.clearWatch(watchId);
-
-                watchId = null;
-
-            }
-
-            delete trackingData[loggedInId];
-
-            localStorage.setItem('trackingData', JSON.stringify(trackingData));
-
-            document.getElementById('startTrackBtn').disabled = false;
-
-            document.getElementById('stopTrackBtn').disabled = true;
-
-            showNotification('Tracking stopped.', 'success', '✅');
-
-        } catch (error) {
-
-            logError('Stop tracking failed', error);
-
-        }
-
-    }
-
-
-
-    // Toggle availability
-
-    async function toggleAvailability(event) {
-
-        const button = event.target;
-
-        if (!button) return;
-
-        try {
-
-            button.classList.add('loading');
-
-            if (!isLoggedIn || loggedInType !== 'driver') {
-
-                showModal('Please log in as a driver.');
-
-                return;
-
-            }
-
-
-
-            driverAvailability[loggedInId] = driverAvailability[loggedInId] === 'Available' ? 'Busy' : 'Available';
-
-            localStorage.setItem('driverAvailability', JSON.stringify(driverAvailability));
-
-            document.getElementById('driverAvailability').textContent = driverAvailability[loggedInId];
-
-            document.getElementById('driverAvailability').className = driverAvailability[loggedInId] === 'Available' ? 'status-available' : 'status-busy';
-
-            updateDashboard();
-
-            updateAdminPanel();
-
-            showNotification(`Availability set to ${driverAvailability[loggedInId]}.`, 'success', '✅');
-
-        } catch (error) {
-
-            logError('Toggle availability failed', error);
-
-        } finally {
-
-            button.classList.remove('loading');
-
-        }
-
-    }
-
-
-
-    // Update driver map
-
-    function updateDriverMap() {
-
-        try {
-
-            if (!driverMap) {
-
-                initMap(0, 0, 'driverMap');
-
-                document.getElementById('driverMap').classList.remove('hidden');
-
-            }
-
-
-
-            getUserLocation(userLoc => {
-
-                if (!userLoc) return;
-
-
-
-                if (userMarker) driverMap.removeLayer(userMarker);
-
-                userMarker = L.marker([userLoc.latitude, userLoc.longitude], {
-
-                    icon: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', iconSize: [25, 41], iconAnchor: [12, 41] })
-
-                }).addTo(driverMap).bindPopup('User Location');
-
-
-
-                const userBookings = bookingHistory[loggedInId] || [];
-
-                const latestBooking = userBookings[userBookings.length - 1];
-
-                if (!latestBooking) return;
-
-
-
-                const userId = Object.keys(bookingHistory).find(uid => bookingHistory[uid].some(b => b.ambulanceId === loggedInId && b.status === 'Confirmed'));
-
-                const userLocData = userLocations[userId];
-
-                if (userLocData) {
-
-                    userMarker.setLatLng([userLocData.latitude, userLocData.longitude]);
-
-                    if (routeControl) {
-
-                        try {
-
-                            driverMap.removeControl(routeControl);
-
-                        } catch (e) {
-
-                            console.warn('Route control removal failed', e);
-
-                        }
-
-                    }
-
-                    try {
-
-                        routeControl = L.Routing.control({
-
-                            waypoints: [
-
-                                L.latLng(userLoc.latitude, userLoc.longitude),
-
-                                L.latLng(userLocData.latitude, userLocData.longitude)
-
-                            ],
-
-                            routeWhileDragging: false,
-
-                            show: false,
-
-                            createMarker: () => null,
-
-                            router: L.Routing.osrmv1({
-
-                                // For production, replace with your OSRM server or paid service
-
-                                serviceUrl: 'https://router.project-osrm.org/route/v1'
-
-                            }),
-
-                            lineOptions: { styles: [{ color: '#2563eb', weight: 5 }] }
-
-                        }).addTo(driverMap);
-
-                    } catch (error) {
-
-                        console.warn('OSRM routing failed, falling back to straight line', error);
-
-                        L.polyline([
-
-                            [userLoc.latitude, userLoc.longitude],
-
-                            [userLocData.latitude, userLocData.longitude]
-
-                        ], { color: '#2563eb', weight: 5 }).addTo(driverMap);
-
-                    }
-
-                }
-
-            });
-
-        } catch (error) {
-
-            logError('Update driver map failed', error);
-
-        }
-
-    }
-
-
-
-    // Update dashboard
-
-    function updateDashboard() {
-
-        try {
-
-            const tbody = document.getElementById('dashboardTable');
-
-            tbody.innerHTML = '';
-
-            Object.entries(trackingData).forEach(([id, data]) => {
-
-                const row = document.createElement('tr');
-
-                const avgRating = calculateDriverRating(id);
-
-                row.innerHTML = `
-
-                    <td>${data.name || 'N/A'}</td>
-
-                    <td>${id}</td>
-
-                    <td>${drivers[id]?.ambulanceType || 'N/A'}</td>
-
-                    <td>${data.latitude.toFixed(4)}</td>
-
-                    <td>${data.longitude.toFixed(4)}</td>
-
-                    <td>${new Date(data.timestamp).toLocaleString()}</td>
-
-                    <td><span class="status-online">Online</span></td>
-
-                    <td><span class="${driverAvailability[id] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[id] || 'Unknown'}</span></td>
-
-                    <td>${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</td>
-
-                    <td><button onclick="document.getElementById('trackId').value = '${id}'; showSection('trackerSection'); trackAmbulance();">Track</button></td>
-
-                `;
-
-                tbody.appendChild(row);
-
-            });
-
-        } catch (error) {
-
-            logError('Update dashboard failed', error);
-
-        }
-
-    }
-
-
-
-    // Update admin panel
-
-    function updateAdminPanel() {
-
-        try {
-
-            const pendingTbody = document.getElementById('pendingTable');
-
-            const adminTbody = document.getElementById('adminTable');
-
-            const historyTbody = document.getElementById('historyTable');
-
-            const feedbackTbody = document.getElementById('feedbackTable');
-
-            const messageTbody = document.getElementById('messageTable');
-
-            const chatTbody = document.getElementById('chatTable');
-
-
-
-            pendingTbody.innerHTML = '';
-
-            Object.entries(pendingDrivers).forEach(([id, data]) => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${data.name}</td>
-
-                    <td>${id}</td>
-
-                    <td>${data.ambulanceType}</td>
-
-                    <td>
-
-                        <button onclick="approveDriver('${id}')">Approve</button>
-
-                        <button onclick="rejectDriver('${id}')">Reject</button>
-
-                    </td>
-
-                `;
-
-                pendingTbody.appendChild(row);
-
-            });
-
-
-
-            adminTbody.innerHTML = '';
-
-            Object.entries(drivers).forEach(([id, data]) => {
-
-                const row = document.createElement('tr');
-
-                const avgRating = calculateDriverRating(id);
-
-                row.innerHTML = `
-
-                    <td>${data.name}</td>
-
-                    <td>${id}</td>
-
-                    <td>${data.ambulanceType}</td>
-
-                    <td><span class="${trackingData[id] ? 'status-online' : 'status-offline'}">${trackingData[id] ? 'Online' : 'Offline'}</span></td>
-
-                    <td><span class="${driverAvailability[id] === 'Available' ? 'status-available' : 'status-busy'}">${driverAvailability[id] || 'Unknown'}</span></td>
-
-                    <td>${avgRating ? avgRating.toFixed(1) + ' ★' : 'No ratings'}</td>
-
-                    <td><button onclick="removeDriver('${id}')">Remove</button></td>
-
-                `;
-
-                adminTbody.appendChild(row);
-
-            });
-
-
-
-            historyTbody.innerHTML = '';
-
-            Object.entries(locationHistory).forEach(([id, locations]) => {
-
-                locations.forEach(loc => {
-
-                    const row = document.createElement('tr');
-
-                    row.innerHTML = `
-
-                        <td>${id}</td>
-
-                        <td>${loc.latitude.toFixed(4)}</td>
-
-                        <td>${loc.longitude.toFixed(4)}</td>
-
-                        <td>${new Date(loc.timestamp).toLocaleString()}</td>
-
-                    `;
-
-                    historyTbody.appendChild(row);
-
-                });
-
-            });
-
-
-
-            feedbackTbody.innerHTML = '';
-
-            feedbackData.forEach(f => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${f.userId}</td>
-
-                    <td>${f.driverId}</td>
-
-                    <td>${f.feedback}</td>
-
-                    <td>${f.rating} ★</td>
-
-                    <td>${new Date(f.timestamp).toLocaleString()}</td>
-
-                `;
-
-                feedbackTbody.appendChild(row);
-
-            });
-
-
-
-            messageTbody.innerHTML = '';
-
-            messages.forEach(msg => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${msg.userId}</td>
-
-                    <td>${msg.driverId}</td>
-
-                    <td>${msg.message}</td>
-
-                    <td>${new Date(msg.timestamp).toLocaleString()}</td>
-
-                `;
-
-                messageTbody.appendChild(row);
-
-            });
-
-
-
-            chatTbody.innerHTML = '';
-
-            chats.forEach(chat => {
-
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-
-                    <td>${chat.userId}</td>
-
-                    <td>${chat.driverId}</td>
-
-                    <td>${chat.message} (from ${chat.sender})</td>
-
-                    <td>${new Date(chat.timestamp).toLocaleString()}</td>
-
-                `;
-
-                chatTbody.appendChild(row);
-
-            });
-
-
-
-            document.getElementById('activeDrivers').textContent = Object.keys(trackingData).length;
-
-            document.getElementById('totalFeedback').textContent = feedbackData.length;
-
-            document.getElementById('totalMessages').textContent = messages.length;
-
-            document.getElementById('totalChats').textContent = chats.length;
-
-        } catch (error) {
-
-            logError('Update admin panel failed', error);
-
-        }
-
-    }
-
-
-
-    // Approve driver
-
-    function approveDriver(driverId) {
-
-        try {
-
-            if (pendingDrivers[driverId]) {
-
-                drivers[driverId] = pendingDrivers[driverId];
-
-                delete pendingDrivers[driverId];
-
-                localStorage.setItem('drivers', JSON.stringify(drivers));
-
-                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
-
-                updateAdminPanel();
-
-                showNotification(`Driver ${driverId} approved.`, 'success', '✅');
-
-            }
-
-        } catch (error) {
-
-            logError('Approve driver failed', error);
-
-        }
-
-    }
-
-
-
-    // Reject driver
-
-    function rejectDriver(driverId) {
-
-        try {
-
-            if (pendingDrivers[driverId]) {
-
-                delete pendingDrivers[driverId];
-
-                localStorage.setItem('pendingDrivers', JSON.stringify(pendingDrivers));
-
-                updateAdminPanel();
-
-                showNotification(`Driver ${driverId} rejected.`, 'success', '✅');
-
-            }
-
-        } catch (error) {
-
-            logError('Reject driver failed', error);
-
-        }
-
-    }
-
-
-
-    // Remove driver
-
-    function removeDriver(driverId) {
-
-        try {
-
-            delete drivers[driverId];
-
-            delete trackingData[driverId];
-
-            delete driverAvailability[driverId];
-
-            delete locationHistory[driverId];
-
-            localStorage.setItem('drivers', JSON.stringify(drivers));
-
-            localStorage.setItem('trackingData', JSON.stringify(trackingData));
-
-            localStorage.setItem('driverAvailability', JSON.stringify(driverAvailability));
-
-            localStorage.setItem('locationHistory', JSON.stringify(locationHistory));
-
-            updateAdminPanel();
-
-            showNotification(`Driver ${driverId} removed.`, 'success', '✅');
-
-        } catch (error) {
-
-            logError('Remove driver failed', error);
-
-        }
-
-    }
-
-
-
-    // Export history
-
-    function exportHistory() {
-
-        try {
-
-            let csv = 'Driver ID,Latitude,Longitude,Timestamp\n';
-
-            Object.entries(locationHistory).forEach(([id, locations]) => {
-
-                locations.forEach(loc => {
-
-                    csv += `${id},${loc.latitude},${loc.longitude},${loc.timestamp}\n`;
-
-                });
-
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-
-            const url = URL.createObjectURL(blob);
-
-            const a = document.createElement('a');
-
-            a.href = url;
-
-            a.download = 'location_history.csv';
-
-            a.click();
-
-            URL.revokeObjectURL(url);
-
-            showNotification('History exported.', 'success', '✅');
-
-        } catch (error) {
-
-            logError('Export history failed', error);
-
-        }
-
-    }
-
-
-
-    // Update booking
-
-    function updateBooking() {
-
-        try {
-
-            updateBookingHistory();
-
-            document.getElementById('chatContainer').classList.remove('hidden');
-
-        } catch (error) {
-
-            logError('Update booking failed', error);
-
-        }
-
-    }
-
-
-
-    // Toggle theme
-
-    function toggleTheme() {
-
-        try {
-
-            document.body.classList.toggle('dark-mode');
-
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-
-            document.getElementById('themeToggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-
-        } catch (error) {
-
-            logError('Toggle theme failed', error);
-
-        }
-
-    }
-
-
-
-    // Initialize app
-
-    function initApp() {
-
-        try {
-
-            if (localStorage.getItem('theme') === 'dark') {
-
-                document.body.classList.add('dark-mode');
-
-                document.getElementById('themeToggle').textContent = '☀️';
-
-            }
-
-            updateNavbar();
-
-            showSection('homeSection');
-
-            document.getElementById('accountType').addEventListener('change', toggleLoginFields);
-
-            toggleLoginFields();
-
-        } catch (error) {
-
-            logError('App initialization failed', error);
-
-        }
-
-    }
-
-
-
-    // Event listeners
-
-    document.getElementById('hamburger').addEventListener('click', () => toggleMenu());
-
-    document.getElementById('navHome').addEventListener('click', () => showSection('homeSection'));
-
-    document.getElementById('navLogin').addEventListener('click', () => showSection('loginSection'));
-
-    document.getElementById('navTracker').addEventListener('click', () => showSection('trackerSection'));
-
-    document.getElementById('navDashboard').addEventListener('click', () => showSection('dashboardSection'));
-
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-    document.getElementById('logoutLink').addEventListener('click', logout);
-
-    document.getElementById('registerBtn').addEventListener('click', registerAccount);
-
-    document.getElementById('loginBtn').addEventListener('click', loginAccount);
-
-    document.getElementById('userLogoutBtn').addEventListener('click', logout);
-
-    document.getElementById('driverLogoutBtn').addEventListener('click', logout);
-
-    document.getElementById('adminLogoutBtn').addEventListener('click', logout);
-
-    document.getElementById('trackBtn').addEventListener('click', trackAmbulance);
-
-    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-
-    document.getElementById('confirmBookingBtn').addEventListener('click', confirmBooking);
-
-    document.getElementById('cancelBookingBtn').addEventListener('click', closeModal);
-
-    document.getElementById('closeNotificationBtn').addEventListener('click', hideNotification);
-
-    document.getElementById('routeType').addEventListener('change', () => {
-
-        mapSettings.routeType = document.getElementById('routeType').value;
-
-        localStorage.setItem('mapSettings', JSON.stringify(mapSettings));
-
-        trackAmbulance();
-
+    // Smooth Scroll Polyfill
+    smoothScrollPolyfill.polyfill();
+
+    // Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR-GA-ID');
+
+    // Theme Toggle and Auto-Detect
+    const body = document.getElementById("body");
+    const themeToggle = document.getElementById("theme-toggle");
+    let isDark = localStorage.getItem("theme") === "dark" || (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    body.className = isDark ? "dark-mode min-h-screen transition-colors duration-300" : "min-h-screen transition-colors duration-300";
+    themeToggle.innerHTML = `<i class="fas fa-${isDark ? 'moon' : 'sun'}"></i>`;
+    themeToggle.addEventListener("click", () => {
+      isDark = !isDark;
+      body.className = isDark ? "dark-mode min-h-screen transition-colors duration-300" : "min-h-screen transition-colors duration-300";
+      themeToggle.innerHTML = `<i class="fas fa-${isDark ? 'moon' : 'sun'}"></i>`;
+      localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 
-    document.getElementById('liveTracking').addEventListener('change', toggleLiveTracking);
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const navLinks = document.getElementById("nav-links");
+    mobileMenuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("hidden");
+      navLinks.classList.toggle("open");
+      mobileMenuBtn.innerHTML = navLinks.classList.contains("hidden")
+        ? '<i class="fas fa-bars"></i>'
+        : '<i class="fas fa-times"></i>';
+    });
 
-    document.getElementById('weatherOverlay').addEventListener('change', toggleWeatherOverlay);
+    // Section Navigation with Loading Spinner
+    const sections = document.querySelectorAll(".section");
+    const navLinksList = document.querySelectorAll(".nav-link");
+    const loadingSpinner = document.getElementById("loading");
+    function showSection(sectionId) {
+      loadingSpinner.classList.remove("hidden");
+      setTimeout(() => {
+        sections.forEach(section => {
+          section.classList.remove("active", "fade-in");
+        });
+        const targetSection = document.getElementById(sectionId);
+        targetSection.classList.add("active", "fade-in");
+        navLinksList.forEach(link => link.classList.remove("text-blue-500", "dark:text-blue-400"));
+        document.querySelector(`[data-section="${sectionId}"]`).classList.add("text-blue-500", "dark:text-blue-400");
+        window.scrollTo({ top: targetSection.offsetTop - 80, behavior: "smooth" });
+        loadingSpinner.classList.add("hidden");
+        targetSection.focus();
+      }, 300);
+      if (!navLinks.classList.contains("hidden")) {
+        navLinks.classList.add("hidden");
+        navLinks.classList.remove("open");
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    }
+    navLinksList.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute("data-section");
+        showSection(sectionId);
+      });
+    });
+    showSection("home");
 
-    document.getElementById('exportHistoryBtn').addEventListener('click', exportHistory);
+    // Typed Animation
+    const typed = document.getElementById("typed");
+    const texts = ["Web Developer", "IoT Innovator", "Quality Analyst"];
+    let index = 0, charIndex = 0, isDeleting = false, text = "";
+    function type() {
+      if (index >= texts.length) index = 0;
+      text = texts[index];
+      if (!isDeleting && charIndex < text.length) {
+        typed.textContent = text.slice(0, ++charIndex);
+        setTimeout(type, 100);
+      } else if (isDeleting && charIndex > 0) {
+        typed.textContent = text.slice(0, --charIndex);
+        setTimeout(type, 50);
+      } else {
+        isDeleting = !isDeleting;
+        if (!isDeleting) index++;
+        setTimeout(type, isDeleting ? 1000 : 2000);
+      }
+    }
+    try {
+      type();
+    } catch (e) {
+      console.error("Typed animation failed:", e);
+      typed.textContent = "Web Developer";
+    }
 
-    document.getElementById('sosBtn').addEventListener('click', sendSOS);
+    // Toast Notification Queue
+    const toastContainer = document.getElementById("toast-container");
+    const toastQueue = [];
+    function showToast(message, isError = false) {
+      toastQueue.push({ message, isError });
+      if (toastQueue.length === 1) displayNextToast();
+    }
+    function displayNextToast() {
+      if (toastQueue.length === 0) return;
+      const { message, isError } = toastQueue[0];
+      const toast = document.createElement("div");
+      toast.className = `bg-${isError ? 'red' : 'blue'}-500 text-white px-4 py-2 rounded-lg shadow-lg toast`;
+      toast.textContent = message;
+      toast.style.opacity = "0";
+      toast.style.transform = "translate(-50%, -20px)";
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "1";
+        toast.style.transform = "translate(-50%, 0)";
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translate(-50%, -20px)";
+          setTimeout(() => {
+            toast.remove();
+            toastQueue.shift();
+            displayNextToast();
+          }, 500);
+        }, 3000);
+      }, 10);
+    }
 
-    document.getElementById('findAmbulanceBtn').addEventListener('click', findNearestAmbulance);
+    // Copy to Clipboard with Fallback
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Copied to clipboard!");
+        }).catch(e => {
+          console.error("Clipboard copy failed:", e);
+          showToast("Failed to copy!", true);
+        });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand("copy");
+          showToast("Copied to clipboard!");
+        } catch (e) {
+          console.error("Fallback copy failed:", e);
+          showToast("Failed to copy!", true);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
 
-    document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+    // Contact Form Submission
+    const contactForm = document.getElementById("contact-form");
+    const contactSubmit = document.getElementById("contact-submit");
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("form-name").value;
+      const email = document.getElementById("form-email").value;
+      const message = document.getElementById("form-message").value;
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
+        showToast("Name should contain only letters and spaces.", true);
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Invalid email address.", true);
+        return;
+      }
+      if (message.length < 10) {
+        showToast("Message must be at least 10 characters.", true);
+        return;
+      }
+      contactSubmit.disabled = true;
+      contactSubmit.innerHTML = '<div class="spinner active"></div>';
+      try {
+        const response = await fetch("https://formspree.io/f/your-form-id", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message })
+        });
+        if (response.ok) {
+          showToast("Message sent successfully!");
+          contactForm.reset();
+        } else {
+          showToast("Failed to send message.", true);
+        }
+      } catch (e) {
+        console.error("Form submission failed:", e);
+        showToast("Failed to send message.", true);
+      } finally {
+        contactSubmit.disabled = false;
+        contactSubmit.innerHTML = "Send Message";
+      }
+    });
 
-    document.getElementById('submitFeedbackBtn').addEventListener('click', submitFeedback);
+    // Job Filter with Debouncing
+    const jobFilter = document.getElementById("job-filter");
+    const jobCategory = document.getElementById("job-category");
+    const jobCards = document.querySelectorAll(".job-card");
+    let filterTimeout;
+    function filterJobs() {
+      clearTimeout(filterTimeout);
+      filterTimeout = setTimeout(() => {
+        const filter = jobFilter.value.toLowerCase();
+        const category = jobCategory.value;
+        jobCards.forEach(card => {
+          const title = card.querySelector("h3").textContent.toLowerCase();
+          const cardCategory = card.getAttribute("data-category");
+          const matchesFilter = title.includes(filter);
+          const matchesCategory = !category || cardCategory === category;
+          card.style.display = matchesFilter && matchesCategory ? "block" : "none";
+        });
+      }, 300);
+    }
+    jobFilter.addEventListener("input", filterJobs);
+    jobCategory.addEventListener("change", filterJobs);
 
-    document.getElementById('zoomUserBtn').addEventListener('click', zoomToUser);
+    // Project Filter with Debouncing
+    const projectFilter = document.getElementById("project-filter");
+    const projectCategory = document.getElementById("project-category");
+    const projectCards = document.querySelectorAll(".project-card");
+    let projectFilterTimeout;
+    function filterProjects() {
+      clearTimeout(projectFilterTimeout);
+      projectFilterTimeout = setTimeout(() => {
+        const filter = projectFilter.value.toLowerCase();
+        const category = projectCategory.value;
+        projectCards.forEach(card => {
+          const title = card.querySelector("h3").textContent.toLowerCase();
+          const cardCategory = card.getAttribute("data-category");
+          const matchesFilter = title.includes(filter);
+          const matchesCategory = !category || cardCategory === category;
+          card.style.display = matchesFilter && matchesCategory ? "block" : "none";
+        });
+      }, 300);
+    }
+    projectFilter.addEventListener("input", filterProjects);
+    projectCategory.addEventListener("change", filterProjects);
 
-    document.getElementById('zoomAmbulanceBtn').addEventListener('click', zoomToAmbulance);
+    // Photo Gallery Upload and Lightbox with Swipe Support
+    const galleryImages = [
+      { src: "https://via.placeholder.com/300?text=Project+1", alt: "Project 1" },
+      { src: "https://via.placeholder.com/300?text=Project+2", alt: "Project 2" },
+      { src: "https://via.placeholder.com/300?text=IoT+Setup", alt: "IoT Setup" }
+    ];
+    let currentImageIndex = 0;
+    const photoUpload = document.getElementById("photo-upload");
+    const photoPreview = document.getElementById("photo-preview");
+    const previewImg = document.getElementById("preview-img");
+    const galleryGrid = document.getElementById("gallery-grid");
+    const lightbox = document.getElementById("lightbox");
+    let touchStartX = 0;
+    let touchEndX = 0;
+    photoUpload.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          previewImg.src = reader.result;
+          previewImg.alt = file.name;
+          photoPreview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      } else {
+        showToast("Please upload a valid image.", true);
+      }
+    });
+    function addToGallery() {
+      const src = previewImg.src;
+      const alt = previewImg.alt;
+      galleryImages.push({ src, alt });
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = alt;
+      img.loading = "lazy";
+      img.role = "img";
+      img.className = "rounded-lg object-cover w-full h-48 card cursor-pointer";
+      img.setAttribute("data-aos", "fade-up");
+      img.setAttribute("data-aos-delay", (galleryImages.length * 100).toString());
+      img.onclick = () => openLightbox(src, alt, galleryImages.length - 1);
+      galleryGrid.appendChild(img);
+      photoPreview.classList.add("hidden");
+      photoUpload.value = "";
+      showToast("Photo added to gallery!");
+    }
+    function openLightbox(src, alt, index) {
+      currentImageIndex = index;
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxCaption = document.getElementById("lightbox-caption");
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightboxCaption.textContent = alt;
+      lightbox.classList.remove("hidden");
+      lightbox.focus();
+      document.addEventListener("keydown", handleLightboxKeys);
+      lightbox.addEventListener("touchstart", handleTouchStart);
+      lightbox.addEventListener("touchend", handleTouchEnd);
+    }
+    function closeLightbox() {
+      lightbox.classList.add("hidden");
+      document.removeEventListener("keydown", handleLightboxKeys);
+      lightbox.removeEventListener("touchstart", handleTouchStart);
+      lightbox.removeEventListener("touchend", handleTouchEnd);
+    }
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      const { src, alt } = galleryImages[currentImageIndex];
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox-img").alt = alt;
+      document.getElementById("lightbox-caption").textContent = alt;
+    }
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      const { src, alt } = galleryImages[currentImageIndex];
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox-img").alt = alt;
+      document.getElementById("lightbox-caption").textContent = alt;
+    }
+    function handleLightboxKeys(e) {
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowLeft") prevImage();
+      else if (e.key === "ArrowRight") nextImage();
+    }
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+    function handleTouchEnd(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextImage();
+      if (touchEndX - touchStartX > 50) prevImage();
+    }
 
-    document.getElementById('callEmergencyBtn').addEventListener('click', callEmergency);
+    // Skills Chart
+    try {
+      const ctx = document.getElementById("skills-chart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["HTML & CSS", "JavaScript", "React.js", "Node.js", "Arduino & ESP32", "Quality Assurance"],
+          datasets: [{
+            label: "Skill Proficiency",
+            data: [90, 85, 80, 75, 70, 85],
+            backgroundColor: ["#3b82f6", "#60a5fa", "#3b82f6", "#60a5fa", "#3b82f6", "#60a5fa"],
+            borderColor: ["#2563eb", "#3b82f6", "#2563eb", "#3b82f6", "#2563eb", "#3b82f6"],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: { y: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: false } },
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    } catch (e) {
+      console.error("Chart.js failed:", e);
+      showToast("Failed to load skills chart.", true);
+    }
 
-    document.getElementById('startTrackBtn').addEventListener('click', startTracking);
+    // ESP32 Live Demo (Simulated)
+    const esp32Temp = document.getElementById("esp32-temp");
+    const esp32Humidity = document.getElementById("esp32-humidity");
+    const esp32Refresh = document.getElementById("esp32-refresh");
+    function updateESP32Data() {
+      esp32Temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
+      esp32Humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
+      esp32Temp.classList.add("data-update", "active");
+      esp32Humidity.classList.add("data-update", "active");
+      setTimeout(() => {
+        esp32Temp.classList.remove("active");
+        esp32Humidity.classList.remove("active");
+      }, 300);
+    }
+    esp32Refresh.addEventListener("click", () => {
+      esp32Refresh.disabled = true;
+      esp32Refresh.innerHTML = '<div class="spinner active"></div>';
+      setTimeout(() => {
+        updateESP32Data();
+        esp32Refresh.disabled = false;
+        esp32Refresh.innerHTML = "Refresh Data";
+      }, 1000);
+    });
+    updateESP32Data();
 
-    document.getElementById('stopTrackBtn').addEventListener('click', stopTracking);
+    // Real ESP32 Data Fetch (Uncomment and replace with your API endpoint)
+    /*
+    async function fetchESP32Data() {
+      try {
+        esp32Refresh.disabled = true;
+        esp32Refresh.innerHTML = '<div class="spinner active"></div>';
+        const response = await fetch("https://your-api-endpoint/esp32/data");
+        const data = await response.json();
+        esp32Temp.textContent = `${data.temperature}°C`;
+        esp32Humidity.textContent = `${data.humidity}%`;
+        esp32Temp.classList.add("data-update", "active");
+        esp32Humidity.classList.add("data-update", "active");
+        setTimeout(() => {
+          esp32Temp.classList.remove("active");
+          esp32Humidity.classList.remove("active");
+        }, 300);
+      } catch (e) {
+        console.error("ESP32 data fetch failed:", e);
+        showToast("Failed to fetch ESP32 data!", true);
+      } finally {
+        esp32Refresh.disabled = false;
+        esp32Refresh.innerHTML = "Refresh Data";
+      }
+    }
+    esp32Refresh.addEventListener("click", fetchESP32Data);
+    */
 
-    document.getElementById('toggleAvailabilityBtn').addEventListener('click', toggleAvailability);
+    // Resume Builder with PDF Download
+    const resumeForm = document.getElementById("resume-form");
+    const resumePreview = document.getElementById("resume-preview");
+    resumeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("resume-name").value;
+      const email = document.getElementById("resume-email").value;
+      const experience = document.getElementById("resume-experience").value;
+      const skills = document.getElementById("resume-skills").value;
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
+        showToast("Name should contain only letters and spaces.", true);
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast("Invalid email address.", true);
+        return;
+      }
+      if (experience.length < 10 || skills.length < 10) {
+        showToast("Experience and skills must be at least 10 characters.", true);
+        return;
+      }
+      document.getElementById("preview-name").textContent = name;
+      document.getElementById("preview-email").textContent = email;
+      document.getElementById("preview-experience").textContent = experience;
+      document.getElementById("preview-skills").textContent = skills;
+      resumePreview.classList.remove("hidden");
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text("Resume", 10, 10);
+        doc.setFontSize(12);
+        doc.text(`Name: ${name}`, 10, 20);
+        doc.text(`Email: ${email}`, 10, 30);
+        doc.text(`Experience: ${experience}`, 10, 40, { maxWidth: 180 });
+        doc.text(`Skills: ${skills}`, 10, 60, { maxWidth: 180 });
+        const resumeDownload = document.getElementById("resume-download");
+        resumeDownload.href = doc.output("bloburl");
+        resumeDownload.download = `${name}_resume.pdf`;
+        showToast("Resume preview generated!");
+      } catch (e) {
+        console.error("PDF generation failed:", e);
+        showToast("Failed to generate resume PDF!", true);
+      }
+    });
 
-    document.getElementById('enableNotifications').addEventListener('change', toggleNotifications);
+    // QR Code Generator
+    try {
+      QRCode.toCanvas(document.getElementById("qr-code"), "mailto:aravind@example.com?subject=Contact&body=Phone: 9381329751", {
+        width: 100,
+        color: { dark: "#3b82f6", light: "#ffffff" }
+      }, (err) => {
+        if (err) {
+          console.error("QR code generation failed:", err);
+          showToast("Failed to generate QR code!", true);
+        }
+      });
+    } catch (e) {
+      console.error("QR code library failed:", e);
+      showToast("QR code library failed to load!", true);
+    }
 
-    document.getElementById('toggleLocationBtn').addEventListener('click', toggleLocationSharing);
+    // Back to Top Button
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("hidden", window.scrollY < 200);
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-    document.getElementById('addContactBtn').addEventListener('click', addEmergencyContact);
+    // Hide Loading Spinner
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loadingSpinner.classList.add("hidden");
+      }, 500);
+    });
 
-    document.getElementById('updateProfileBtn').addEventListener('click', updateProfilePic);
+    // Offline Detection
+    window.addEventListener("offline", () => {
+      showToast("You are offline! Some features may not work.", true);
+    });
 
-    document.getElementById('updateDriverProfileBtn').addEventListener('click', updateDriverProfilePic);
+    // PWA Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(e => {
+        console.error("Service worker registration failed:", e);
+      });
+    }
 
-    document.getElementById('sendChatBtn').addEventListener('click', sendChatMessage);
-
-    document.getElementById('sendDriverChatBtn').addEventListener('click', sendDriverChatMessage);
-
-
-
-    // Initialize
-
-    initApp();
-
-</script>
-
+    // Error Handling
+    window.onerror = (msg, url, lineNo, columnNo, error) => {
+      console.error("Error:", msg, "at", url, "line:", lineNo, "col:", columnNo, "Error object:", error);
+      showToast("An error occurred. Check console for details.", true);
+    };
+  </script>
 </body>
-
-  </html>
+</html>
