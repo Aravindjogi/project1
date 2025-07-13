@@ -13,7 +13,7 @@
   <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Aravind+Portfolio">
   <meta property="og:url" content="https://[your-username].github.io/[your-repo]/">
   <title>Jogi Bala Venkata Aravind - Portfolio</title>
-  <link rel="icon" type="image/png" href="https://via.placeholder.com/32?text=A">
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -21,17 +21,18 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #6d28d9; /* Vibrant purple inspired by vcard */
-      --accent-color: #14b8a6; /* Teal accent for highlights */
+      --primary-color: #6d28d9; /* Vibrant purple */
+      --accent-color: #14b8a6; /* Teal accent */
       --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       --dark-bg-gradient: linear-gradient(135deg, #1e293b, #475569);
     }
     body {
       background: var(--bg-gradient);
       color: #1e293b;
-      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
     }
     .dark-mode {
@@ -39,20 +40,20 @@
       color: #e2e8f0;
     }
     .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .dark-mode .card {
-      background: rgba(30, 41, 59, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
     }
     .btn {
       background: var(--primary-color);
@@ -87,8 +88,8 @@
     .section {
       display: none;
       opacity: 0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      padding: 3rem 1rem;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      padding: 4rem 1rem;
     }
     .section.active {
       display: block;
@@ -98,7 +99,7 @@
     .section-header {
       position: relative;
       display: inline-block;
-      animation: slideIn 0.5s ease-in-out;
+      animation: slideIn 0.6s ease-in-out;
     }
     .section-header::after {
       content: '';
@@ -111,14 +112,14 @@
       border-radius: 2px;
     }
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
+      from { opacity: 0; transform: translateX(-30px); }
       to { opacity: 1; transform: translateX(0); }
     }
     .fade-in {
-      animation: fadeIn 0.5s ease-in;
+      animation: fadeIn 0.6s ease-in;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .progress-bar {
@@ -182,18 +183,63 @@
       transform: scale(1.1);
       color: var(--accent-color);
     }
-    .cert-card, .testimonial-card {
+    .cert-card, .testimonial-card, .service-card, .blog-card {
       transition: background-color 0.3s ease;
     }
-    .cert-card:hover, .testimonial-card:hover {
-      background: rgba(255, 255, 255, 0.2);
+    .cert-card:hover, .testimonial-card:hover, .service-card:hover, .blog-card:hover {
+      background: rgba(255, 255, 255, 0.25);
     }
-    .dark-mode .cert-card:hover, .dark-mode .testimonial-card:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .dark-mode .cert-card:hover, .dark-mode .testimonial-card:hover, .dark-mode .service-card:hover, .dark-mode .blog-card:hover {
+      background: rgba(255, 255, 255, 0.15);
     }
     .chart-container {
       max-width: 500px;
       margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      height: 100%;
+      width: 4px;
+      background: var(--accent-color);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      border: 2px solid white;
+    }
+    .modal {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e5e7eb;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+    .dark-mode ::-webkit-scrollbar-track {
+      background: #475569;
+    }
+    .dark-mode ::-webkit-scrollbar-thumb {
+      background: #5b21b6;
     }
     @media (max-width: 640px) {
       .section { padding: 2rem 0.5rem; }
@@ -201,6 +247,8 @@
       .card { padding: 1rem; }
       .btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
       .navbar { padding: 1rem; }
+      .timeline::before { left: 10px; }
+      .timeline-item::before { left: 4px; }
     }
   </style>
 </head>
@@ -228,12 +276,15 @@
       <div id="nav-links" class="hidden md:flex space-x-6">
         <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="home" aria-label="Home">Home</a>
         <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="about" aria-label="About">About</a>
+        <a href="#services" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="services" aria-label="Services">Services</a>
         <a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="skills" aria-label="Skills">Skills</a>
         <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="projects" aria-label="Projects">Projects</a>
         <a href="#jobs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="jobs" aria-label="Job Portal">Job Portal</a>
+        <a href="#timeline" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="timeline" aria-label="Timeline">Timeline</a>
         <a href="#gallery" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="gallery" aria-label="Gallery">Gallery</a>
         <a href="#certifications" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="certifications" aria-label="Certifications">Certifications</a>
         <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
+        <a href="#blog" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="blog" aria-label="Blog">Blog</a>
         <a href="#resume" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="resume" aria-label="Resume">Resume</a>
         <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition" data-section="contact" aria-label="Contact">Contact</a>
       </div>
@@ -250,12 +301,13 @@
     <!-- Home Section -->
     <section id="home" class="section min-h-screen flex items-center justify-center relative active" data-aos="zoom-in">
       <div class="card p-10 max-w-lg mx-auto text-center">
-        <img src="DSC_7983.JPG" alt="Profile Photo" class="w-28 h-28 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 shadow-lg">
+        <img src="images/profile.jpg" alt="Profile Photo" class="w-28 h-28 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 shadow-lg">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Jogi Bala Venkata Aravind</h2>
         <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">I am a <span id="typed" class="typed font-semibold text-purple-600 dark:text-purple-400"></span></p>
         <div class="flex justify-center space-x-4 mt-8">
-          <a href="#resume" class="btn">Download Resume</a>
-          <button onclick="sharePortfolio()" class="btn">Share Portfolio</button>
+          <a href="#resume" class="btn" aria-label="Download Resume">Download Resume</a>
+          <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio</button>
+          <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio</button>
         </div>
       </div>
     </section>
@@ -278,8 +330,30 @@
       </div>
     </section>
 
+    <!-- Services Section -->
+    <section id="services" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-10 section-header">Services</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-code fa-2x text-purple-600 dark:text-purple-400 mb-4"></i>
+          <h3 class="text-xl font-semibold">Web Development</h3>
+          <p class="text-gray-600 dark:text-gray-300">Building responsive and scalable web applications using React, Node.js, and Tailwind CSS.</p>
+        </div>
+        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-microchip fa-2x text-purple-600 dark:text-purple-400 mb-4"></i>
+          <h3 class="text-xl font-semibold">IoT Solutions</h3>
+          <p class="text-gray-600 dark:text-gray-300">Designing smart systems with Arduino and ESP32 for automation and data monitoring.</p>
+        </div>
+        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="300">
+          <i class="fas fa-check-circle fa-2x text-purple-600 dark:text-purple-400 mb-4"></i>
+          <h3 class="text-xl font-semibold">Quality Assurance</h3>
+          <p class="text-gray-600 dark:text-gray-300">Ensuring product excellence through rigorous testing and process optimization.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Skills Section -->
-    <section id="skills" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
+    <section id="skills" class="section py-16" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Skills</h2>
       <div class="chart-container" data-aos="fade-up" data-aos-delay="100">
         <canvas id="skills-chart"></canvas>
@@ -313,35 +387,35 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section py-16" data-aos="fade-up">
+    <section id="projects" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Projects</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
           <h3 class="text-xl font-semibold">Job Portal</h3>
           <p class="text-gray-600 dark:text-gray-300">A responsive job search platform with advanced filtering and user authentication.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Project</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View Job Portal">View Project</a>
         </div>
         <div class="card p-6" data-aos="fade-up" data-aos-delay="200">
           <h3 class="text-xl font-semibold">IoT Smart Home</h3>
           <p class="text-gray-600 dark:text-gray-300">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Project</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View IoT Smart Home">View Project</a>
         </div>
         <div class="card p-6" data-aos="fade-up" data-aos-delay="300">
           <h3 class="text-xl font-semibold">ESP32 Sensor Dashboard</h3>
           <p class="text-gray-600 dark:text-gray-300">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Project</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View ESP32 Sensor Dashboard">View Project</a>
         </div>
       </div>
       <h3 class="text-xl font-semibold text-center mt-10">ESP32 Live Demo</h3>
       <div class="card p-6 max-w-md mx-auto" data-aos="fade-up">
         <p><strong>Temperature:</strong> <span id="esp32-temp" class="data-update">25°C</span></p>
         <p><strong>Humidity:</strong> <span id="esp32-humidity" class="data-update">60%</span></p>
-        <button id="esp32-refresh" class="btn mt-4">Refresh Data</button>
+        <button id="esp32-refresh" class="btn mt-4" aria-label="Refresh ESP32 Data">Refresh Data</button>
       </div>
     </section>
 
     <!-- Job Portal Section -->
-    <section id="jobs" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
+    <section id="jobs" class="section py-16" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Job Portal</h2>
       <div class="max-w-4xl mx-auto mb-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
         <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Filter jobs">
@@ -356,17 +430,38 @@
         <div class="card p-6 job-card" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
           <h3 class="text-xl font-semibold">Frontend Developer</h3>
           <p class="text-gray-600 dark:text-gray-300">Develop responsive web interfaces using React and Tailwind CSS.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">Apply Now</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="Apply for Frontend Developer">Apply Now</a>
         </div>
         <div class="card p-6 job-card" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
           <h3 class="text-xl font-semibold">IoT Engineer</h3>
           <p class="text-gray-600 dark:text-gray-300">Design and implement IoT solutions with ESP32 and Arduino.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">Apply Now</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="Apply for IoT Engineer">Apply Now</a>
         </div>
         <div class="card p-6 job-card" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
           <h3 class="text-xl font-semibold">Quality Analyst</h3>
           <p class="text-gray-600 dark:text-gray-300">Ensure product quality through in-process and pre-delivery inspections.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">Apply Now</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="Apply for Quality Analyst">Apply Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-10 section-header">Work Experience</h2>
+      <div class="max-w-3xl mx-auto relative timeline pl-12">
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="card p-6 ml-6">
+            <h3 class="text-xl font-semibold">Quality Assurance Engineer</h3>
+            <p class="text-gray-600 dark:text-gray-300">Guts Electro Mech, Hyderabad | 2021 - Present</p>
+            <p class="mt-2">Conducted in-process quality checks and pre-delivery inspections, ensuring high product standards.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="card p-6 ml-6">
+            <h3 class="text-xl font-semibold">Intern - Web Developer</h3>
+            <p class="text-gray-600 dark:text-gray-300">[Company Name], Hyderabad | 2020</p>
+            <p class="mt-2">Developed responsive web interfaces using HTML, CSS, and JavaScript.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -379,19 +474,19 @@
           <h3 class="text-xl font-semibold">Full-Stack Web Development</h3>
           <p class="text-gray-600 dark:text-gray-300">Coursera, 2023</p>
           <p>Mastered HTML, CSS, JavaScript, React, and Node.js for building scalable web applications.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Certificate</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View Full-Stack Web Development Certificate">View Certificate</a>
         </div>
         <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="200">
           <h3 class="text-xl font-semibold">IoT Fundamentals</h3>
           <p class="text-gray-600 dark:text-gray-300">Udemy, 2022</p>
           <p>Learned IoT concepts, sensor interfacing, and ESP32 programming for smart systems.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Certificate</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View IoT Fundamentals Certificate">View Certificate</a>
         </div>
         <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="300">
           <h3 class="text-xl font-semibold">Quality Assurance Professional</h3>
           <p class="text-gray-600 dark:text-gray-300">LinkedIn Learning, 2021</p>
           <p>Developed skills in quality control, testing methodologies, and process optimization.</p>
-          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline">View Certificate</a>
+          <a href="#" class="text-purple-600 dark:text-purple-400 hover:underline" aria-label="View Quality Assurance Certificate">View Certificate</a>
         </div>
       </div>
     </section>
@@ -415,22 +510,47 @@
       </div>
     </section>
 
+    <!-- Blog Section -->
+    <section id="blog" class="section py-16" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-center mb-10 section-header">Blog</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(0)" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl font-semibold">Building a Job Portal with React</h3>
+          <p class="text-gray-600 dark:text-gray-300">A step-by-step guide to creating a responsive job portal using React and Tailwind CSS.</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Published: July 10, 2025</p>
+        </div>
+        <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(1)" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl font-semibold">IoT with ESP32: A Beginner's Guide</h3>
+          <p class="text-gray-600 dark:text-gray-300">Exploring sensor interfacing and data monitoring with ESP32 for smart home solutions.</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Published: July 5, 2025</p>
+        </div>
+      </div>
+      <div id="blog-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="modal-title">
+        <div class="card p-8 max-w-lg w-full">
+          <h3 id="modal-title" class="text-xl font-semibold mb-4"></h3>
+          <p id="modal-content" class="text-gray-600 dark:text-gray-300"></p>
+          <p id="modal-date" class="text-sm text-gray-500 dark:text-gray-400 mt-2"></p>
+          <button onclick="closeBlogModal()" class="mt-6 btn w-full" aria-label="Close blog modal">Close</button>
+        </div>
+      </div>
+    </section>
+
     <!-- Photo Gallery Section -->
-    <section id="gallery" class="section py-16" data-aos="fade-up">
+    <section id="gallery" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Photo Gallery</h2>
       <div class="max-w-4xl mx-auto mb-6">
         <input type="file" id="photo-upload" accept="image/*" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Upload photo">
         <div id="photo-preview" class="mt-4 hidden">
           <img id="preview-img" class="w-24 h-24 rounded-lg object-cover" alt="Photo Preview">
-          <button onclick="addToGallery()" class="mt-2 btn">Add to Gallery</button>
+          <button onclick="addToGallery()" class="mt-2 btn" aria-label="Add to Gallery">Add to Gallery</button>
         </div>
       </div>
       <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <img src="https://via.placeholder.com/300?text=Project+1" alt="Project 1" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://via.placeholder.com/300?text=Project+2" alt="Project 2" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://via.placeholder.com/300?text=IoT+Setup" alt="IoT Setup" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300">
+        <img src="images/project1.jpg" alt="Project 1" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100">
+        <img src="images/project2.jpg" alt="Project 2" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200">
+        <img src="images/iot_setup.jpg" alt="IoT Setup" class="rounded-lg object-cover w-full h-48 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300">
       </div>
-      <div id="lightbox" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-[2000]">
+      <div id="lightbox" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
         <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl cursor-pointer" aria-label="Close lightbox">×</span>
         <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
         <img id="lightbox-img" class="max-w-[90%] max-h-[80%] rounded-lg" alt="Lightbox Image">
@@ -440,15 +560,27 @@
     </section>
 
     <!-- Resume Builder Section -->
-    <section id="resume" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
+    <section id="resume" class="section py-16" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Resume Builder</h2>
       <div class="card p-8 max-w-3xl mx-auto">
         <form id="resume-form" class="space-y-4">
-          <input id="resume-name" type="text" placeholder="Full Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Resume name" required>
-          <input id="resume-email" type="email" placeholder="Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Resume email" required>
-          <textarea id="resume-experience" placeholder="Experience (e.g., Guts Electro Mech - Quality Assurance)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="4" aria-label="Resume experience" required></textarea>
-          <textarea id="resume-skills" placeholder="Skills (e.g., JavaScript, ESP32)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="4" aria-label="Resume skills" required></textarea>
-          <button type="submit" class="w-full btn">Preview Resume</button>
+          <div>
+            <input id="resume-name" type="text" placeholder="Full Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Resume name" required>
+            <p id="name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+          </div>
+          <div>
+            <input id="resume-email" type="email" placeholder="Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Resume email" required>
+            <p id="email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+          </div>
+          <div>
+            <textarea id="resume-experience" placeholder="Experience (e.g., Guts Electro Mech - Quality Assurance)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="4" maxlength="500" aria-label="Resume experience" required></textarea>
+            <p id="experience-error" class="text-red-500 text-sm hidden">Experience must be at least 10 characters.</p>
+          </div>
+          <div>
+            <textarea id="resume-skills" placeholder="Skills (e.g., JavaScript, ESP32)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="4" maxlength="500" aria-label="Resume skills" required></textarea>
+            <p id="skills-error" class="text-red-500 text-sm hidden">Skills must be at least 10 characters.</p>
+          </div>
+          <button type="submit" class="w-full btn" aria-label="Preview Resume">Preview Resume</button>
         </form>
         <div id="resume-preview" class="mt-8 hidden">
           <h3 class="text-xl font-semibold mb-4">Resume Preview</h3>
@@ -456,13 +588,13 @@
           <p><strong>Email:</strong> <span id="preview-email"></span></p>
           <p><strong>Experience:</strong> <span id="preview-experience"></span></p>
           <p><strong>Skills:</strong> <span id="preview-skills"></span></p>
-          <button id="resume-download" class="block mt-6 btn">Download Resume (PDF)</button>
+          <button id="resume-download" class="block mt-6 btn" aria-label="Download Resume">Download Resume (PDF)</button>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section py-16" data-aos="fade-up">
+    <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-center mb-10 section-header">Contact</h2>
       <div class="card p-8 max-w-md mx-auto">
         <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400" aria-label="Copy phone number">9381329751</span></p>
@@ -474,15 +606,24 @@
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.486671!3d17.385044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99e8e6b7c7ad%3A0x1e8b7f6a2b3c4d5e!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1698765432109!5m2!1sen!2sin" width="100%" height="200" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map of Hyderabad"></iframe>
         </div>
         <form id="contact-form" class="mt-8 space-y-4">
-          <input id="form-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Contact name" required>
-          <input id="form-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Contact email" required>
-          <textarea id="form-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="5" aria-label="Contact message" required></textarea>
-          <button type="submit" class="w-full btn" id="contact-submit">Send Message</button>
+          <div>
+            <input id="form-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Contact name" required>
+            <p id="form-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+          </div>
+          <div>
+            <input id="form-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" aria-label="Contact email" required>
+            <p id="form-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+          </div>
+          <div>
+            <textarea id="form-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 border border-gray-300/50 dark:border-gray-600/50 text-gray-800 dark:text-white" rows="5" maxlength="1000" aria-label="Contact message" required></textarea>
+            <p id="form-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+          </div>
+          <button type="submit" class="w-full btn" id="contact-submit" aria-label="Send Message">Send Message</button>
         </form>
         <div class="flex justify-center space-x-4 mt-6">
-          <button onclick="sharePortfolio('twitter')" class="btn px-4 py-2"><i class="fab fa-twitter"></i></button>
-          <button onclick="sharePortfolio('linkedin')" class="btn px-4 py-2"><i class="fab fa-linkedin"></i></button>
-          <button onclick="sharePortfolio('email')" class="btn px-4 py-2"><i class="fas fa-envelope"></i></button>
+          <button onclick="sharePortfolio('twitter')" class="btn px-4 py-2" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></button>
+          <button onclick="sharePortfolio('linkedin')" class="btn px-4 py-2" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i></button>
+          <button onclick="sharePortfolio('email')" class="btn px-4 py-2" aria-label="Share via Email"><i class="fas fa-envelope"></i></button>
         </div>
       </div>
       <div id="toast-container" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"></div>
@@ -566,12 +707,15 @@
     const sectionTitles = {
       home: "Home",
       about: "About",
+      services: "Services",
       skills: "Skills",
       projects: "Projects",
       jobs: "Job Portal",
+      timeline: "Timeline",
       gallery: "Gallery",
       certifications: "Certifications",
       testimonials: "Testimonials",
+      blog: "Blog",
       resume: "Resume",
       contact: "Contact"
     };
@@ -738,26 +882,40 @@
       window.open(url, '_blank');
     }
 
-    // Contact Form Submission
+    // Contact Form Validation and Submission
     const contactForm = document.getElementById("contact-form");
     const contactSubmit = document.getElementById("contact-submit");
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("form-name").value;
-      const email = document.getElementById("form-email").value;
-      const message = document.getElementById("form-message").value;
+    const formName = document.getElementById("form-name");
+    const formEmail = document.getElementById("form-email");
+    const formMessage = document.getElementById("form-message");
+    function validateContactForm() {
+      const name = formName.value;
+      const email = formEmail.value;
+      const message = formMessage.value;
+      let isValid = true;
+      document.getElementById("form-name-error").classList.add("hidden");
+      document.getElementById("form-email-error").classList.add("hidden");
+      document.getElementById("form-message-error").classList.add("hidden");
       if (!/^[a-zA-Z\s]+$/.test(name)) {
-        showToast("Name should contain only letters and spaces.", true);
-        return;
+        document.getElementById("form-name-error").classList.remove("hidden");
+        isValid = false;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("Invalid email address.", true);
-        return;
+        document.getElementById("form-email-error").classList.remove("hidden");
+        isValid = false;
       }
       if (message.length < 10) {
-        showToast("Message must be at least 10 characters.", true);
-        return;
+        document.getElementById("form-message-error").classList.remove("hidden");
+        isValid = false;
       }
+      return isValid;
+    }
+    formName.addEventListener("input", validateContactForm);
+    formEmail.addEventListener("input", validateContactForm);
+    formMessage.addEventListener("input", validateContactForm);
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validateContactForm()) return;
       contactSubmit.disabled = true;
       contactSubmit.innerHTML = '<div class="spinner active"></div>';
       setTimeout(() => {
@@ -841,6 +999,7 @@
       lightboxCaption.textContent = alt;
       lightbox.classList.remove("hidden");
       document.addEventListener("keydown", handleLightboxKeys);
+      lightbox.focus();
     }
     function closeLightbox() {
       document.getElementById("lightbox").classList.add("hidden");
@@ -864,6 +1023,50 @@
       if (e.key === "Escape") closeLightbox();
       else if (e.key === "ArrowLeft") prevImage();
       else if (e.key === "ArrowRight") nextImage();
+    }
+
+    // Blog Modal
+    const blogPosts = [
+      {
+        title: "Building a Job Portal with React",
+        content: "In this article, I share my experience building a responsive job portal using React and Tailwind CSS. The project focused on creating a user-friendly interface with advanced filtering capabilities and secure user authentication. Key challenges included optimizing performance for large datasets and ensuring accessibility across devices.",
+        date: "July 10, 2025"
+      },
+      {
+        title: "IoT with ESP32: A Beginner's Guide",
+        content: "This guide covers the basics of IoT development using ESP32. I discuss setting up the development environment, interfacing sensors, and creating a web dashboard for real-time data monitoring. The project highlights include integrating MQTT for communication and optimizing power consumption for smart home applications.",
+        date: "July 5, 2025"
+      }
+    ];
+    function openBlogModal(index) {
+      const modal = document.getElementById("blog-modal");
+      const modalTitle = document.getElementById("modal-title");
+      const modalContent = document.getElementById("modal-content");
+      const modalDate = document.getElementById("modal-date");
+      modalTitle.textContent = blogPosts[index].title;
+      modalContent.textContent = blogPosts[index].content;
+      modalDate.textContent = `Published: ${blogPosts[index].date}`;
+      modal.classList.remove("hidden");
+      modal.style.opacity = "0";
+      modal.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        modal.style.opacity = "1";
+        modal.style.transform = "scale(1)";
+      }, 10);
+      document.addEventListener("keydown", handleModalKeys);
+      modal.focus();
+    }
+    function closeBlogModal() {
+      const modal = document.getElementById("blog-modal");
+      modal.style.opacity = "0";
+      modal.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        modal.classList.add("hidden");
+      }, 300);
+      document.removeEventListener("keydown", handleModalKeys);
+    }
+    function handleModalKeys(e) {
+      if (e.key === "Escape") closeBlogModal();
     }
 
     // ESP32 Live Demo
@@ -895,31 +1098,52 @@
     const resumeForm = document.getElementById("resume-form");
     const resumePreview = document.getElementById("resume-preview");
     const resumeDownload = document.getElementById("resume-download");
-    resumeForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    function validateResumeForm() {
       const name = document.getElementById("resume-name").value;
       const email = document.getElementById("resume-email").value;
       const experience = document.getElementById("resume-experience").value;
       const skills = document.getElementById("resume-skills").value;
+      let isValid = true;
+      document.getElementById("name-error").classList.add("hidden");
+      document.getElementById("email-error").classList.add("hidden");
+      document.getElementById("experience-error").classList.add("hidden");
+      document.getElementById("skills-error").classList.add("hidden");
       if (!/^[a-zA-Z\s]+$/.test(name)) {
-        showToast("Name should contain only letters and spaces.", true);
-        return;
+        document.getElementById("name-error").classList.remove("hidden");
+        isValid = false;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showToast("Invalid email address.", true);
-        return;
+        document.getElementById("email-error").classList.remove("hidden");
+        isValid = false;
       }
-      if (experience.length < 10 || skills.length < 10) {
-        showToast("Experience and skills must be at least 10 characters.", true);
-        return;
+      if (experience.length < 10) {
+        document.getElementById("experience-error").classList.remove("hidden");
+        isValid = false;
       }
+      if (skills.length < 10) {
+        document.getElementById("skills-error").classList.remove("hidden");
+        isValid = false;
+      }
+      return isValid;
+    }
+    document.getElementById("resume-name").addEventListener("input", validateResumeForm);
+    document.getElementById("resume-email").addEventListener("input", validateResumeForm);
+    document.getElementById("resume-experience").addEventListener("input", validateResumeForm);
+    document.getElementById("resume-skills").addEventListener("input", validateResumeForm);
+    resumeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validateResumeForm()) return;
+      const name = document.getElementById("resume-name").value;
+      const email = document.getElementById("resume-email").value;
+      const experience = document.getElementById("resume-experience").value;
+      const skills = document.getElementById("resume-skills").value;
       document.getElementById("preview-name").textContent = name;
       document.getElementById("preview-email").textContent = email;
       document.getElementById("preview-experience").textContent = experience;
       document.getElementById("preview-skills").textContent = skills;
       resumePreview.classList.remove("hidden");
 
-      // Generate LaTeX content for PDF
+      // Generate LaTeX content for Resume
       const latexContent = `
 \\documentclass[a4paper,11pt]{article}
 \\usepackage{geometry}
@@ -968,52 +1192,135 @@ ${skills.replace(/&/g, '\\&').replace(/\n/g, ', ')}
         link.href = url;
         link.download = `${name}_Resume.tex`;
         link.click();
-        showToast("Resume LaTeX file downloaded! Compile with PDFLaTeX to generate PDF.");
+        URL.revokeObjectURL(url);
       };
-      showToast("Resume preview generated!");
     });
 
-    // QR Code Generator
+    // Portfolio PDF Download
+    function downloadPortfolioPDF() {
+      const latexContent = `
+\\documentclass[a4paper,11pt]{article}
+\\usepackage{geometry}
+\\geometry{margin=1in}
+\\usepackage{parskip}
+\\usepackage{enumitem}
+\\setlist{noitemsep}
+\\usepackage{titlesec}
+\\titleformat{\\section}{\\Large\\bfseries}{\\thesection}{1em}{}
+\\usepackage{helvet}
+\\usepackage{hyperref}
+\\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\\renewcommand{\\familydefault}{\\sfdefault}
+
+\\begin{document}
+
+\\begin{center}
+  {\\Large \\textbf{Jogi Bala Venkata Aravind}}\\\\
+  \\vspace{0.2cm}
+  aravind@example.com \\hfill 9381329751 \\hfill Hyderabad, Telangana\\\\
+  \\href{https://linkedin.com/in/aravind}{LinkedIn} \\hfill \\href{https://github.com/aravind}{GitHub}
+\\end{center}
+
+\\section*{About Me}
+Passionate Full-Stack Developer specializing in web development, IoT solutions, and quality assurance. Experienced in building responsive web applications and smart systems using modern technologies.
+
+\\section*{Education}
+B.Tech in Computer Science, [Your University Name], 2020
+
+\\section*{Experience}
+\\begin{itemize}
+  \\item \\textbf{Quality Assurance Engineer}, Guts Electro Mech, Hyderabad, 2021--Present
+  \\begin{itemize}
+    \\item Conducted in-process quality checks and pre-delivery inspections.
+  \\end{itemize}
+  \\item \\textbf{Intern -- Web Developer}, [Company Name], Hyderabad, 2020
+  \\begin{itemize}
+    \\item Developed responsive web interfaces using HTML, CSS, and JavaScript.
+  \\end{itemize}
+\\end{itemize}
+
+\\section*{Projects}
+\\begin{itemize}
+  \\item \\textbf{Job Portal}: A responsive job search platform with advanced filtering and authentication.
+  \\item \\textbf{IoT Smart Home}: IoT project using Arduino and ESP32 for appliance control.
+  \\item \\textbf{ESP32 Sensor Dashboard}: Web dashboard for real-time sensor data monitoring.
+\\end{itemize}
+
+\\section*{Skills}
+HTML, CSS, JavaScript, React.js, Node.js, Arduino, ESP32, Quality Assurance
+
+\\section*{Certifications}
+\\begin{itemize}
+  \\item Full-Stack Web Development, Coursera, 2023
+  \\item IoT Fundamentals, Udemy, 2022
+  \\item Quality Assurance Professional, LinkedIn Learning, 2021
+\\end{itemize}
+
+\\end{document}
+      `;
+      const blob = new Blob([latexContent], { type: 'text/latex' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Aravind_Portfolio.tex';
+      link.click();
+      URL.revokeObjectURL(url);
+      showToast("Portfolio PDF download started!");
+    }
+
+    // QR Code for Portfolio
     try {
-      QRCode.toCanvas(document.getElementById("qr-code"), "mailto:aravind@example.com?subject=Contact&body=Phone: 9381329751", {
-        width: 100,
-        color: { dark: "#6d28d9", light: "#ffffff" }
-      }, (err) => {
-        if (err) {
-          console.error("QR code generation failed:", err);
-          showToast("Failed to generate QR code!", true);
+      QRCode.toCanvas(document.getElementById("qr-code"), portfolioUrl, {
+        width: 150,
+        color: { dark: isDark ? '#6d28d9' : '#14b8a6', light: '#ffffff' }
+      }, (error) => {
+        if (error) {
+          console.error("QR Code generation failed:", error);
+          showToast("QR Code generation failed!", true);
         }
       });
     } catch (e) {
-      console.error("QR code library failed:", e);
-      showToast("QR code library failed to load!", true);
+      console.error("QR Code library failed:", e);
+      showToast("QR Code generation failed!", true);
     }
 
     // Back to Top Button
     const backToTop = document.getElementById("back-to-top");
     window.addEventListener("scroll", () => {
-      backToTop.classList.toggle("hidden", window.scrollY < 200);
+      backToTop.classList.toggle("hidden", window.scrollY < 300);
     });
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Hide Loading Spinner
-    window.addEventListener("load", () => {
-      const loadingSpinner = document.getElementById("loading");
-      loadingSpinner.classList.add("hidden");
-    });
+    // Lazy Loading for Images
+    const images = document.querySelectorAll("img[data-src]");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute("data-src");
+          observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: "0px 0px 100px 0px" });
+    images.forEach(img => observer.observe(img));
 
-    // Offline Detection
+    // Offline Handling
     window.addEventListener("offline", () => {
-      showToast("You are offline! Some features may not work.", true);
+      showToast("You are offline. Some features may be limited.", true);
+    });
+    window.addEventListener("online", () => {
+      showToast("You are back online!");
+      updateESP32Data();
     });
 
-    // Error Handling
-    window.onerror = (msg, url, lineNo, columnNo, error) => {
-      console.error("Error:", msg, "at", url, "line:", lineNo, "col:", columnNo, "Error object:", error);
-      showToast("An error occurred. Check console for details.", true);
-    };
+    // Initial Loading Animation
+    window.addEventListener("load", () => {
+      const loading = document.getElementById("loading");
+      loading.classList.add("hidden");
+    });
   </script>
 </body>
 </html>
