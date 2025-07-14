@@ -10,19 +10,19 @@
   <meta property="og:title" content="Jogi Bala Venkata Aravind - Portfolio">
   <meta property="og:description" content="Explore the portfolio of Jogi Bala Venkata Aravind, a full-stack developer specializing in web development, IoT, and job portal solutions.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/IMG-20250421-WA0000.jpg">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Aravind+Portfolio">
   <meta property="og:url" content="https://[your-username].github.io/[your-repo]/">
   <title>Jogi Bala Venkata Aravind - Portfolio</title>
-  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=System-ui&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #6d28d9;
@@ -38,7 +38,7 @@
     body {
       background: var(--bg-gradient);
       color: var(--text-color);
-      font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+      font-family: 'Roboto', sans-serif;
       overflow-x: hidden;
       position: relative;
     }
@@ -51,21 +51,20 @@
       color: var(--text-color-sepia);
     }
     .card {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 16px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.2);
-      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .dark-mode .card, .sepia-mode .card {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+      background: rgba(30, 41, 59, 0.7);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.1);
     }
     .card:hover {
-      transform: translateY(-12px) scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.15), -8px -8px 20px rgba(255, 255, 255, 0.7);
     }
     .btn {
       background: var(--primary-color);
@@ -75,13 +74,12 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.2);
-      z-index: 1;
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), -3px -3px 6px rgba(255, 255, 255, 0.4);
     }
     .btn:hover {
       background: var(--secondary-accent);
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(255, 255, 255, 0.6);
     }
     .btn::after {
       content: '';
@@ -90,7 +88,7 @@
       left: 50%;
       width: 0;
       height: 0;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       transform: translate(-50%, -50%);
       transition: width 0.5s ease, height 0.5s ease;
@@ -102,9 +100,9 @@
     }
     .section {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      padding: 5rem 1rem;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      padding: 6rem 1rem;
       position: relative;
       background-attachment: fixed;
       background-size: cover;
@@ -117,64 +115,64 @@
     .section-header {
       position: relative;
       display: inline-block;
-      animation: slideIn 0.8s ease-in-out;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 600;
+      animation: slideIn 1s ease-in-out;
     }
     .section-header::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -8px;
       left: 0;
-      width: 80px;
-      height: 5px;
-      background: var(--accent-color);
-      border-radius: 3px;
-      transition: width 0.3s ease;
+      width: 100px;
+      height: 4px;
+      background: var(--secondary-accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
     }
     .section-header:hover::after {
-      width: 100%;
+      width: 120%;
     }
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-40px); }
+      from { opacity: 0; transform: translateX(-50px); }
       to { opacity: 1; transform: translateX(0); }
     }
     .fade-in {
-      animation: fadeIn 0.8s ease-out;
+      animation: fadeIn 1s ease-out;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(50px); }
+      from { opacity: 0; transform: translateY(60px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .progress-bar {
-      height: 10px;
+      height: 8px;
       background: var(--accent-color);
-      border-radius: 5px;
-      width: 0;
       transition: width 2s ease-in-out;
-    }
-    .progress-bar.animate {
-      width: var(--progress-width);
+      border-radius: 4px;
     }
     .back-to-top {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
+      bottom: 40px;
+      right: 40px;
       z-index: 1000;
       background: var(--primary-color);
       color: white;
-      padding: 0.8rem;
+      padding: 1rem;
       border-radius: 50%;
       transition: opacity 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    }
+    .back-to-top:hover {
+      background: var(--secondary-accent);
+      transform: scale(1.1);
     }
     .spinner {
-      border: 5px solid rgba(255, 255, 255, 0.4);
-      border-top: 5px solid var(--primary-color);
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid var(--secondary-accent);
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      animation: spin 0.8s linear infinite;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.7s linear infinite;
       display: none;
     }
     .spinner.active {
@@ -199,91 +197,76 @@
     .typed::after {
       content: '|';
       display: inline;
-      animation: blink 0.6s infinite;
+      animation: blink 0.5s infinite;
     }
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
     .data-update {
-      transition: all 0.4s ease;
+      transition: all 0.5s ease;
     }
     .data-update.active {
-      transform: scale(1.15);
+      transform: scale(1.2);
       color: var(--secondary-accent);
     }
     .cert-card, .testimonial-card, .service-card, .blog-card {
-      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      transition: background-color 0.4s ease, transform 0.4s ease;
     }
     .cert-card:hover, .testimonial-card:hover, .service-card:hover, .blog-card:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-8px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-10px) rotate(2deg);
     }
     .dark-mode .cert-card:hover, .dark-mode .testimonial-card:hover, .dark-mode .service-card:hover, .dark-mode .blog-card:hover,
     .sepia-mode .cert-card:hover, .sepia-mode .testimonial-card:hover, .sepia-mode .service-card:hover, .sepia-mode .blog-card:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
     }
     .chart-container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
     .timeline::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 25px;
+      left: 30px;
       height: 100%;
-      width: 5px;
+      width: 4px;
       background: var(--accent-color);
       border-radius: 2px;
     }
     .timeline-item {
       position: relative;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
     .timeline-item::before {
       content: '';
       position: absolute;
       top: 12px;
-      left: 18px;
-      width: 18px;
-      height: 18px;
+      left: 22px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: var(--primary-color);
-      border: 3px solid white;
+      border: 2px solid white;
       transition: transform 0.3s ease;
     }
     .timeline-item:hover::before {
-      transform: scale(1.2);
+      transform: scale(1.3);
     }
     .modal {
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .scroll-progress {
-      height: 4px;
-      background: var(--accent-color);
-      width: 0;
-      transition: width 0.2s ease;
-      position: absolute;
-      bottom: 0;
-      left: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     ::-webkit-scrollbar {
-      width: 10px;
+      width: 8px;
     }
     ::-webkit-scrollbar-track {
       background: #e5e7eb;
-      border-radius: 5px;
+      border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb {
       background: var(--primary-color);
-      border-radius: 5px;
+      border-radius: 4px;
     }
     .dark-mode ::-webkit-scrollbar-track {
       background: #475569;
@@ -296,18 +279,18 @@
     }
     .custom-cursor {
       position: fixed;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       background: var(--accent-color);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
       transition: transform 0.2s ease, opacity 0.2s ease;
       transform: translate(-50%, -50%) scale(1);
-      opacity: 0.7;
+      opacity: 0.8;
     }
     .custom-cursor.hovered {
-      transform: translate(-50%, -50%) scale(1.5);
+      transform: translate(-50%, -50%) scale(1.4);
       opacity: 1;
       background: var(--secondary-accent);
     }
@@ -317,17 +300,17 @@
     .carousel {
       position: relative;
       overflow: hidden;
-      border-radius: 16px;
-      max-width: 1000px;
+      border-radius: 12px;
+      max-width: 1100px;
       margin: 0 auto;
     }
     .carousel-inner {
       display: flex;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
     .carousel-item {
       flex: 0 0 100%;
-      padding: 1rem;
+      padding: 1.5rem;
     }
     .carousel-control {
       position: absolute;
@@ -335,44 +318,45 @@
       transform: translateY(-50%);
       background: var(--primary-color);
       color: white;
-      padding: 0.5rem;
+      padding: 0.75rem;
       border-radius: 50%;
       cursor: pointer;
       z-index: 10;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
     }
     .carousel-control:hover {
       background: var(--secondary-accent);
     }
     .carousel-control.prev {
-      left: 10px;
+      left: 15px;
     }
     .carousel-control.next {
-      right: 10px;
+      right: 15px;
     }
     .carousel-dots {
       display: flex;
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
     .carousel-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       background: #d1d5db;
       border-radius: 50%;
-      margin: 0 5px;
+      margin: 0 6px;
       cursor: pointer;
       transition: background 0.3s ease;
     }
     .carousel-dot.active {
-      background: var(--primary-color);
+      background: var(--secondary-accent);
     }
     .accordion-item {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
     .accordion-header {
       cursor: pointer;
-      padding: 1rem;
+      padding: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       display: flex;
       justify-content: space-between;
@@ -380,54 +364,69 @@
       transition: background 0.3s ease;
     }
     .accordion-header:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
     }
     .accordion-content {
       max-height: 0;
       overflow: hidden;
-      padding: 0 1rem;
-      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 1.5rem;
+      transition: max-height 0.4s ease, padding 0.4s ease;
     }
     .accordion-content.active {
-      max-height: 200px;
-      padding: 1rem;
+      max-height: 250px;
+      padding: 1.5rem;
     }
-    .skill-filter-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      transition: all 0.3s ease;
+    .skill-matrix td {
+      transition: background 0.3s ease, transform 0.3s ease;
     }
-    .skill-filter-btn.active, .skill-filter-btn:hover {
-      background: var(--secondary-accent);
-      color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .captcha-container {
+    .skill-matrix td:hover {
       background: rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
-      padding: 1rem;
+      transform: scale(1.05);
+    }
+    .dark-mode .skill-matrix td:hover, .sepia-mode .skill-matrix td:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .navbar {
+      transition: transform 0.3s ease;
+    }
+    .navbar.sticky {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .hamburger {
+      transition: transform 0.3s ease;
+    }
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    .lottie-success {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
     }
     @media (max-width: 768px) {
-      .section { padding: 3rem 0.75rem; }
-      h2 { font-size: 2rem; }
-      .card { padding: 1.5rem; }
-      .btn { padding: 0.6rem 1.2rem; font-size: 0.95rem; }
-      .navbar { padding: 1rem; }
-      .timeline::before { left: 15px; }
-      .timeline-item::before { left: 8px; }
-      .carousel-item { padding: 0.5rem; }
+      .section { padding: 4rem 0.75rem; }
+      h2 { font-size: 2.5rem; }
+      .card { padding: 1.75rem; }
+      .btn { padding: 0.7rem 1.5rem; font-size: 1rem; }
+      .navbar { padding: 1.5rem; }
+      .timeline::before { left: 20px; }
+      .timeline-item::before { left: 12px; }
+      .carousel-item { padding: 1rem; }
       .chart-container { max-width: 100%; }
-      .nav-links { flex-direction: column; background: var(--bg-gradient); padding: 1rem; }
-      .dark-mode .nav-links { background: var(--dark-bg-gradient); }
-      .sepia-mode .nav-links { background: var(--sepia-bg-gradient); }
+      .section-header { font-size: 2rem; }
     }
     @media (max-width: 640px) {
-      .grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+      .grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
       .custom-cursor { display: none; }
       body:not(.no-cursor) { cursor: auto; }
-      .nav-links a { font-size: 1.1rem; padding: 0.5rem 0; }
+      .carousel { max-width: 100%; }
     }
   </style>
 </head>
@@ -439,49 +438,50 @@
   <div id="particles-js"></div>
 
   <!-- Loading Spinner -->
-  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-black/70 z-50 hidden">
+  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-black/70 z-50">
     <div class="spinner active"></div>
   </div>
 
   <!-- Navbar -->
-  <nav class="navbar fixed w-full top-0 z-50 bg-white/90 dark:bg-gray-900/90 sepia:bg-amber-100/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 p-4" aria-label="Main navigation">
+  <nav class="fixed w-full top-0 z-50 bg-white/95 dark:bg-gray-900/95 sepia:bg-amber-100/95 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 p-4 navbar" aria-label="Main navigation">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white sepia:text-amber-900">Aravind</h1>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-montserrat">Aravind</h1>
       <div class="flex items-center space-x-4">
         <div class="relative">
           <button id="theme-toggle" class="text-gray-900 dark:text-white sepia:text-amber-900 focus:outline-none" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
           </button>
-          <div id="theme-menu" class="hidden absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 sepia:bg-amber-100 border border-gray-200 dark:border-gray-700 sepia:border-amber-200 rounded shadow-lg">
+          <div id="theme-menu" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 sepia:bg-amber-100 border border-gray-200 dark:border-gray-700 sepia:border-amber-200 rounded-lg shadow-lg">
             <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-200" data-theme="light">Light</button>
             <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-200" data-theme="dark">Dark</button>
             <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-200" data-theme="sepia">Sepia</button>
           </div>
         </div>
-        <button id="mobile-menu-btn" class="md:hidden text-gray-900 dark:text-white sepia:text-amber-900 focus:outline-none" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-900 dark:text-white sepia:text-amber-900 focus:outline-none hamburger" aria-label="Toggle menu">
+          <span class="bar block w-6 h-0.5 bg-current mb-1.5"></span>
+          <span class="bar block w-6 h-0.5 bg-current mb-1.5"></span>
+          <span class="bar block w-6 h-0.5 bg-current"></span>
         </button>
       </div>
-      <div id="nav-links" class="hidden md:flex space-x-6 nav-links">
-        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="home" aria-label="Home">Home</a>
-        <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="about" aria-label="About">About</a>
-        <a href="#services" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="services" aria-label="Services">Services</a>
-        <a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="skills" aria-label="Skills">Skills</a>
-        <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="projects" aria-label="Projects">Projects</a>
-        <a href="#jobs" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="jobs" aria-label="Job Portal">Job Portal</a>
-        <a href="#timeline" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="timeline" aria-label="Timeline">Timeline</a>
-        <a href="#gallery" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="gallery" aria-label="Gallery">Gallery</a>
-        <a href="#portfolio-pdf" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="portfolio-pdf" aria-label="Portfolio PDF">Portfolio PDF</a>
-        <a href="#certifications" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="certifications" aria-label="Certifications">Certifications</a>
-        <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
-        <a href="#blog" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="blog" aria-label="Blog">Blog</a>
-        <a href="#faq" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="faq" aria-label="FAQ">FAQ</a>
-        <a href="#newsletter" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="newsletter" aria-label="Newsletter">Newsletter</a>
-        <a href="#resume" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="resume" aria-label="Resume">Resume</a>
-        <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition" data-section="contact" aria-label="Contact">Contact</a>
+      <div id="nav-links" class="hidden md:flex space-x-6">
+        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="home" aria-label="Home">Home</a>
+        <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="about" aria-label="About">About</a>
+        <a href="#services" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="services" aria-label="Services">Services</a>
+        <a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="skills" aria-label="Skills">Skills</a>
+        <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="projects" aria-label="Projects">Projects</a>
+        <a href="#jobs" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="jobs" aria-label="Job Portal">Job Portal</a>
+        <a href="#timeline" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="timeline" aria-label="Timeline">Timeline</a>
+        <a href="#gallery" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="gallery" aria-label="Gallery">Gallery</a>
+        <a href="#resume-pdf" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="resume-pdf" aria-label="Resume PDF">Resume PDF</a>
+        <a href="#certifications" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="certifications" aria-label="Certifications">Certifications</a>
+        <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
+        <a href="#blog" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="blog" aria-label="Blog">Blog</a>
+        <a href="#faq" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="faq" aria-label="FAQ">FAQ</a>
+        <a href="#newsletter" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="newsletter" aria-label="Newsletter">Newsletter</a>
+        <a href="#resume" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="resume" aria-label="Resume">Resume</a>
+        <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600 transition font-montserrat" data-section="contact" aria-label="Contact">Contact</a>
       </div>
     </div>
-    <div class="scroll-progress" id="scroll-progress"></div>
   </nav>
 
   <!-- Back to Top Button -->
@@ -489,25 +489,26 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
-  <!-- Sections -->
+  <!-- Main Content -->
   <main class="pt-20">
     <!-- Home Section -->
-    <section id="home" class="section min-h-screen flex items-center justify-center relative active" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('assets/images/hero-bg.jpg');">
+    <section id="home" class="section min-h-screen flex items-center justify-center relative active" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/hero-bg.jpg'); background-position: center;">
       <div class="card p-12 max-w-xl mx-auto text-center">
-        <img src="assets/images/IMG-20250421-WA0000.jpg" alt="Jogi Bala Venkata Aravind" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 sepia:border-amber-200 shadow-xl" loading="lazy">
-        <h2 class="text-4xl font-bold text-gray-900 dark:text-white sepia:text-amber-900">Jogi Bala Venkata Aravind</h2>
+        <img src="images/IMG-20250421-WA0000.jpg" alt="Profile Photo" class="w-36 h-36 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 sepia:border-amber-200 shadow-xl" data-src="images/IMG-20250421-WA0000.jpg">
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-montserrat">Jogi Bala Venkata Aravind</h2>
         <p class="text-xl text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-3">I am a <span id="typed" class="typed font-semibold text-purple-600 dark:text-purple-400 sepia:text-amber-600"></span></p>
         <div class="flex justify-center space-x-4 mt-8">
-          <a href="#resume" class="btn" aria-label="Download Resume">Download Resume</a>
-          <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio</button>
+          <a href="#resume" class="btn" aria-label="Download Resume">Download Resume <span id="resume-download-count" class="text-sm ml-2">(0)</span></a>
+          <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio <span id="portfolio-download-count" class="text-sm ml-2">(0)</span></button>
           <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio</button>
         </div>
+        <p class="mt-4 text-gray-600 dark:text-gray-300 sepia:text-amber-700">Local Time: <span id="live-clock" class="font-semibold"></span> (IST, Hyderabad)</p>
       </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('assets/images/about-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">About Me</h2>
+    <section id="about" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/about-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">About Me</h2>
       <div class="card p-10 max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -524,93 +525,112 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/services-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Services</h2>
+    <section id="services" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/services-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Services</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card service-card p-8" data-aos="fade-up" data-aos-delay="100">
           <i class="fas fa-code fa-3x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-6"></i>
-          <h3 class="text-xl font-semibold">Web Development</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Web Development</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Building responsive and scalable web applications using React, Node.js, and Tailwind CSS.</p>
         </div>
         <div class="card service-card p-8" data-aos="fade-up" data-aos-delay="200">
           <i class="fas fa-microchip fa-3x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-6"></i>
-          <h3 class="text-xl font-semibold">IoT Solutions</h3>
+          <h3 class="text-xl font-semibold font-montserrat">IoT Solutions</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Designing smart systems with Arduino and ESP32 for automation and data monitoring.</p>
         </div>
         <div class="card service-card p-8" data-aos="fade-up" data-aos-delay="300">
           <i class="fas fa-check-circle fa-3x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-6"></i>
-          <h3 class="text-xl font-semibold">Quality Assurance</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Quality Assurance</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensuring product excellence through rigorous testing and process optimization.</p>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/skills-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Skills</h2>
-      <div class="max-w-5xl mx-auto mb-8 flex flex-wrap justify-center gap-4">
-        <button class="skill-filter-btn" data-filter="all" aria-label="Show all skills">All</button>
-        <button class="skill-filter-btn" data-filter="web" aria-label="Show web development skills">Web Development</button>
-        <button class="skill-filter-btn" data-filter="iot" aria-label="Show IoT skills">IoT</button>
-        <button class="skill-filter-btn" data-filter="qa" aria-label="Show QA skills">Quality Assurance</button>
-      </div>
+    <section id="skills" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/skills-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Skills</h2>
       <div class="chart-container" data-aos="fade-up" data-aos-delay="100">
         <canvas id="skills-chart"></canvas>
       </div>
-      <div id="skills-grid" class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        <div class="card p-6 skill-item" data-category="web" data-aos="fade-up" data-aos-delay="200">
-          <p class="font-semibold">HTML & CSS</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 90%"></div></div>
-        </div>
-        <div class="card p-6 skill-item" data-category="web" data-aos="fade-up" data-aos-delay="300">
-          <p class="font-semibold">JavaScript</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 85%"></div></div>
-        </div>
-        <div class="card p-6 skill-item" data-category="web" data-aos="fade-up" data-aos-delay="400">
-          <p class="font-semibold">React.js</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 80%"></div></div>
-        </div>
-        <div class="card p-6 skill-item" data-category="web" data-aos="fade-up" data-aos-delay="500">
-          <p class="font-semibold">Node.js</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 75%"></div></div>
-        </div>
-        <div class="card p-6 skill-item" data-category="iot" data-aos="fade-up" data-aos-delay="600">
-          <p class="font-semibold">Arduino & ESP32</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 70%"></div></div>
-        </div>
-        <div class="card p-6 skill-item" data-category="qa" data-aos="fade-up" data-aos-delay="700">
-          <p class="font-semibold">Quality Assurance</p>
-          <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50 rounded h-2"><div class="progress-bar h-2 rounded" style="--progress-width: 85%"></div></div>
-        </div>
+      <div class="max-w-5xl mx-auto mt-8">
+        <table class="skill-matrix w-full border-collapse" data-aos="fade-up" data-aos-delay="200">
+          <thead>
+            <tr class="bg-gray-200/50 dark:bg-gray-700/50 sepia:bg-amber-200/50">
+              <th class="p-4 text-left font-montserrat">Skill</th>
+              <th class="p-4 text-center font-montserrat">Proficiency</th>
+              <th class="p-4 text-center font-montserrat">Experience (Years)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="cursor-pointer" title="Proficient in responsive design and animations">
+              <td class="p-4">HTML & CSS</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 90%"></div></td>
+              <td class="p-4 text-center">4</td>
+            </tr>
+            <tr class="cursor-pointer" title="Advanced JavaScript with ES6+ and frameworks">
+              <td class="p-4">JavaScript</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 85%"></div></td>
+              <td class="p-4 text-center">3.5</td>
+            </tr>
+            <tr class="cursor-pointer" title="Building dynamic SPAs with React">
+              <td class="p-4">React.js</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 80%"></div></td>
+              <td class="p-4 text-center">3</td>
+            </tr>
+            <tr class="cursor-pointer" title="Server-side development with Node.js">
+              <td class="p-4">Node.js</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 75%"></div></td>
+              <td class="p-4 text-center">2.5</td>
+            </tr>
+            <tr class="cursor-pointer" title="IoT development with microcontrollers">
+              <td class="p-4">Arduino & ESP32</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 70%"></div></td>
+              <td class="p-4 text-center">2</td>
+            </tr>
+            <tr class="cursor-pointer" title="Rigorous testing and process optimization">
+              <td class="p-4">Quality Assurance</td>
+              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 85%"></div></td>
+              <td class="p-4 text-center">4</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <!-- Projects Section (Carousel) -->
-    <section id="projects" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/projects-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Projects</h2>
+    <!-- Projects Section (Carousel with Filters) -->
+    <section id="projects" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/projects-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Projects</h2>
+      <div class="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+        <select id="project-filter" class="p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Project category">
+          <option value="">All Categories</option>
+          <option value="Web Development">Web Development</option>
+          <option value="IoT">IoT</option>
+          <option value="Quality Assurance">Quality Assurance</option>
+        </select>
+      </div>
       <div class="carousel" data-aos="fade-up" data-aos-delay="100">
-        <div class="carousel-inner" id="project-carousel-inner">
-          <div class="carousel-item card p-8">
-            <h3 class="text-xl font-semibold">Job Portal</h3>
+        <div class="carousel-inner" id="carousel-inner">
+          <div class="carousel-item card p-8" data-category="Web Development">
+            <h3 class="text-xl font-semibold font-montserrat">Job Portal</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A responsive job search platform with advanced filtering and user authentication.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View Job Portal">View Project</a>
           </div>
-          <div class="carousel-item card p-8">
-            <h3 class="text-xl font-semibold">IoT Smart Home</h3>
+          <div class="carousel-item card p-8" data-category="IoT">
+            <h3 class="text-xl font-semibold font-montserrat">IoT Smart Home</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Smart Home">View Project</a>
           </div>
-          <div class="carousel-item card p-8">
-            <h3 class="text-xl font-semibold">ESP32 Sensor Dashboard</h3>
+          <div class="carousel-item card p-8" data-category="IoT">
+            <h3 class="text-xl font-semibold font-montserrat">ESP32 Sensor Dashboard</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View ESP32 Sensor Dashboard">View Project</a>
           </div>
         </div>
-        <button class="carousel-control prev" onclick="moveProjectCarousel(-1)" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-control next" onclick="moveProjectCarousel(1)" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-dots" id="project-carousel-dots"></div>
+        <button class="carousel-control prev" onclick="moveCarousel(-1)" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-control next" onclick="moveCarousel(1)" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots" id="carousel-dots"></div>
       </div>
-      <h3 class="text-xl font-semibold text-center mt-12">ESP32 Live Demo</h3>
+      <h3 class="text-xl font-semibold text-center mt-12 font-montserrat">ESP32 Live Demo</h3>
       <div class="card p-8 max-w-md mx-auto" data-aos="fade-up">
         <p><strong>Temperature:</strong> <span id="esp32-temp" class="data-update">25°C</span></p>
         <p><strong>Humidity:</strong> <span id="esp32-humidity" class="data-update">60%</span></p>
@@ -619,8 +639,8 @@
     </section>
 
     <!-- Job Portal Section -->
-    <section id="jobs" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/jobs-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Job Portal</h2>
+    <section id="jobs" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/jobs-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Job Portal</h2>
       <div class="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
         <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Filter jobs">
         <select id="job-category" class="p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Job category">
@@ -632,17 +652,17 @@
       </div>
       <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card job-card p-8" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">Frontend Developer</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Frontend Developer</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Develop responsive web interfaces using React and Tailwind CSS.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Frontend Developer">Apply Now</a>
         </div>
         <div class="card job-card p-8" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">IoT Engineer</h3>
+          <h3 class="text-xl font-semibold font-montserrat">IoT Engineer</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Design and implement IoT solutions with ESP32 and Arduino.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="Apply for IoT Engineer">Apply Now</a>
         </div>
         <div class="card job-card p-8" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-xl font-semibold">Quality Analyst</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Quality Analyst</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensure product quality through in-process and pre-delivery inspections.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Quality Analyst">Apply Now</a>
         </div>
@@ -650,19 +670,19 @@
     </section>
 
     <!-- Timeline Section -->
-    <section id="timeline" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/timeline-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Work Experience</h2>
+    <section id="timeline" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/timeline-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Work Experience</h2>
       <div class="max-w-4xl mx-auto relative timeline pl-12">
         <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
           <div class="card p-8 ml-6">
-            <h3 class="text-xl font-semibold">Quality Assurance Engineer</h3>
+            <h3 class="text-xl font-semibold font-montserrat">Quality Assurance Engineer</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Guts Electro Mech, Hyderabad | 2021 - Present</p>
             <p class="mt-2">Conducted in-process quality checks and pre-delivery inspections, ensuring high product standards.</p>
           </div>
         </div>
         <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
           <div class="card p-8 ml-6">
-            <h3 class="text-xl font-semibold">Intern - Web Developer</h3>
+            <h3 class="text-xl font-semibold font-montserrat">Intern - Web Developer</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">[Company Name], Hyderabad | 2020</p>
             <p class="mt-2">Developed responsive web interfaces using HTML, CSS, and JavaScript.</p>
           </div>
@@ -670,37 +690,39 @@
       </div>
     </section>
 
-    <!-- Portfolio PDF Section -->
-    <section id="portfolio-pdf" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/pdf-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Portfolio PDF</h2>
-      <div class="card p-10 max-w-4xl mx-auto">
-        <h3 class="text-xl font-semibold mb-4">View My Portfolio</h3>
-        <iframe src="assets/pdf/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" class="w-full h-[600px] rounded-lg border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50" title="Portfolio PDF" loading="lazy"></iframe>
-        <div class="flex justify-center space-x-4 mt-6">
-          <a href="assets/pdf/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" download class="btn" aria-label="Download Portfolio PDF">Download PDF</a>
-          <button onclick="sharePortfolioPDF()" class="btn" aria-label="Share Portfolio PDF">Share PDF</button>
+    <!-- Resume PDF Section -->
+    <section id="resume-pdf" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/resume-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Resume PDF</h2>
+      <div class="card p-10 max-w-5xl mx-auto">
+        <h3 class="text-xl font-semibold font-montserrat mb-4">View My Resume</h3>
+        <div id="pdf-container" class="relative">
+          <embed id="pdf-embed" src="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" type="application/pdf" width="100%" height="600px" class="rounded-lg" aria-label="Resume PDF viewer">
+          <div id="pdf-fallback" class="hidden text-center">
+            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-4">Your browser does not support PDF viewing. Please download the resume below.</p>
+            <a href="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" class="btn" download aria-label="Download Resume PDF">Download Resume PDF</a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/certifications-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Certifications</h2>
+    <section id="certifications" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/certifications-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Certifications</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card cert-card p-8" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">Full-Stack Web Development</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Full-Stack Web Development</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Coursera, 2023</p>
           <p>Mastered HTML, CSS, JavaScript, React, and Node.js for building scalable web applications.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View Full-Stack Web Development Certificate">View Certificate</a>
         </div>
         <div class="card cert-card p-8" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">IoT Fundamentals</h3>
+          <h3 class="text-xl font-semibold font-montserrat">IoT Fundamentals</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Udemy, 2022</p>
           <p>Learned IoT concepts, sensor interfacing, and ESP32 programming for smart systems.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Fundamentals Certificate">View Certificate</a>
         </div>
         <div class="card cert-card p-8" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-xl font-semibold">Quality Assurance Professional</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Quality Assurance Professional</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">LinkedIn Learning, 2021</p>
           <p>Developed skills in quality control, testing methodologies, and process optimization.</p>
           <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View Quality Assurance Certificate">View Certificate</a>
@@ -708,48 +730,43 @@
       </div>
     </section>
 
-    <!-- Testimonials Section (Carousel) -->
-    <section id="testimonials" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/testimonials-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Testimonials</h2>
-      <div class="carousel max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-        <div class="carousel-inner" id="testimonial-carousel-inner">
-          <div class="carousel-item card testimonial-card p-8">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
-            <p class="mt-4 font-semibold">John Doe, Project Manager</p>
-          </div>
-          <div class="carousel-item card testimonial-card p-8">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"His IoT solutions transformed our smart home project with robust sensor integration."</p>
-            <p class="mt-4 font-semibold">Jane Smith, IoT Engineer</p>
-          </div>
-          <div class="carousel-item card testimonial-card p-8">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's attention to detail in quality assurance ensured top-notch deliverables."</p>
-            <p class="mt-4 font-semibold">Emily Johnson, QA Lead</p>
-          </div>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/testimonials-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Testimonials</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="card testimonial-card p-8" data-aos="fade-up" data-aos-delay="100">
+          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
+          <p class="mt-4 font-semibold font-montserrat">John Doe, Project Manager</p>
         </div>
-        <button class="carousel-control prev" onclick="moveTestimonialCarousel(-1)" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-control next" onclick="moveTestimonialCarousel(1)" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-dots" id="testimonial-carousel-dots"></div>
+        <div class="card testimonial-card p-8" data-aos="fade-up" data-aos-delay="200">
+          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"His IoT solutions transformed our smart home project with robust sensor integration."</p>
+          <p class="mt-4 font-semibold font-montserrat">Jane Smith, IoT Engineer</p>
+        </div>
+        <div class="card testimonial-card p-8" data-aos="fade-up" data-aos-delay="300">
+          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's attention to detail in quality assurance ensured top-notch deliverables."</p>
+          <p class="mt-4 font-semibold font-montserrat">Emily Johnson, QA Lead</p>
+        </div>
       </div>
     </section>
 
     <!-- Blog Section -->
-    <section id="blog" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/blog-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Blog</h2>
+    <section id="blog" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/blog-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Blog</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card blog-card p-8 cursor-pointer" onclick="openBlogModal(0)" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-xl font-semibold">Building a Job Portal with React</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Building a Job Portal with React</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A step-by-step guide to creating a responsive job portal using React and Tailwind CSS.</p>
           <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 10, 2025</p>
         </div>
         <div class="card blog-card p-8 cursor-pointer" onclick="openBlogModal(1)" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-xl font-semibold">IoT with ESP32: A Beginner's Guide</h3>
+          <h3 class="text-xl font-semibold font-montserrat">IoT with ESP32: A Beginner's Guide</h3>
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Exploring sensor interfacing and data monitoring with ESP32 for smart home solutions.</p>
           <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 5, 2025</p>
         </div>
       </div>
       <div id="blog-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="modal-title">
         <div class="card p-10 max-w-lg w-full">
-          <h3 id="modal-title" class="text-xl font-semibold mb-4"></h3>
+          <h3 id="modal-title" class="text-xl font-semibold font-montserrat mb-4"></h3>
           <p id="modal-content" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
           <p id="modal-date" class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2"></p>
           <button onclick="closeBlogModal()" class="mt-6 btn w-full" aria-label="Close blog modal">Close</button>
@@ -758,12 +775,12 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/faq-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Frequently Asked Questions</h2>
+    <section id="faq" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/faq-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Frequently Asked Questions</h2>
       <div class="max-w-4xl mx-auto">
         <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
           <div class="accordion-header" onclick="toggleAccordion(0)" role="button" aria-expanded="false" aria-controls="accordion-content-0">
-            <span>What services do you offer?</span>
+            <span class="font-montserrat">What services do you offer?</span>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div id="accordion-content-0" class="accordion-content">
@@ -772,7 +789,7 @@
         </div>
         <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
           <div class="accordion-header" onclick="toggleAccordion(1)" role="button" aria-expanded="false" aria-controls="accordion-content-1">
-            <span>How can I contact you for a project?</span>
+            <span class="font-montserrat">How can I contact you for a project?</span>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div id="accordion-content-1" class="accordion-content">
@@ -781,7 +798,7 @@
         </div>
         <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
           <div class="accordion-header" onclick="toggleAccordion(2)" role="button" aria-expanded="false" aria-controls="accordion-content-2">
-            <span>What is your experience with IoT?</span>
+            <span class="font-montserrat">What is your experience with IoT?</span>
             <i class="fas fa-chevron-down"></i>
           </div>
           <div id="accordion-content-2" class="accordion-content">
@@ -792,8 +809,8 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section id="newsletter" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/newsletter-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Subscribe to Newsletter</h2>
+    <section id="newsletter" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/newsletter-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Subscribe to Newsletter</h2>
       <div class="card p-10 max-w-md mx-auto">
         <form id="newsletter-form" class="space-y-4">
           <div>
@@ -802,34 +819,38 @@
           </div>
           <button type="submit" class="w-full btn" aria-label="Subscribe to Newsletter">Subscribe</button>
         </form>
+        <div id="newsletter-success" class="hidden mt-4">
+          <div id="lottie-success" class="lottie-success"></div>
+          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Subscribed successfully!</p>
+        </div>
       </div>
     </section>
 
     <!-- Social Media Analytics Section -->
-    <section id="social-analytics" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/social-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Social Engagement</h2>
+    <section id="social-analytics" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/social-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Social Engagement</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="100">
           <i class="fab fa-github fa-2x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-xl font-semibold">GitHub Stars</h3>
+          <h3 class="text-xl font-semibold font-montserrat">GitHub Stars</h3>
           <p id="github-stars" class="text-3xl font-bold data-update">0</p>
         </div>
         <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="200">
           <i class="fab fa-linkedin fa-2x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-xl font-semibold">LinkedIn Followers</h3>
+          <h3 class="text-xl font-semibold font-montserrat">LinkedIn Followers</h3>
           <p id="linkedin-followers" class="text-3xl font-bold data-update">0</p>
         </div>
         <div class="card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
           <i class="fab fa-twitter fa-2x text-purple-600 dark:text-purple-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-xl font-semibold">Twitter Followers</h3>
+          <h3 class="text-xl font-semibold font-montserrat">Twitter Followers</h3>
           <p id="twitter-followers" class="text-3xl font-bold data-update">0</p>
         </div>
       </div>
     </section>
 
     <!-- Photo Gallery Section -->
-    <section id="gallery" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/gallery-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Photo Gallery</h2>
+    <section id="gallery" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/gallery-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Photo Gallery</h2>
       <div class="max-w-5xl mx-auto mb-8">
         <input type="file" id="photo-upload" accept="image/*" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Upload photo">
         <div id="photo-preview" class="mt-4 hidden">
@@ -838,22 +859,22 @@
         </div>
       </div>
       <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <img src="assets/images/IMG-20250421-WA0000.jpg" alt="Jogi Bala Venkata Aravind" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100" loading="lazy">
-        <img src="assets/images/project1.jpg" alt="Project 1" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200" loading="lazy">
-        <img src="assets/images/project2.jpg" alt="Project 2" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300" loading="lazy">
+        <img src="images/IMG-20250421-WA0000.jpg" alt="Personal Photo" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100" data-src="images/IMG-20250421-WA0000.jpg">
+        <img src="images/project1.jpg" alt="Project 1" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200" data-src="images/project1.jpg">
+        <img src="images/iot_setup.jpg" alt="IoT Setup" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300" data-src="images/iot_setup.jpg">
       </div>
       <div id="lightbox" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
         <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl cursor-pointer" aria-label="Close lightbox">×</span>
         <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
         <img id="lightbox-img" class="max-w-[90%] max-h-[80%] rounded-lg" alt="Lightbox Image">
         <button onclick="nextImage()" class="absolute right-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-        <p id="lightbox-caption" class="text-white mt-4 text-lg"></p>
+        <p id="lightbox-caption" class="text-white mt-4 text-lg font-montserrat"></p>
       </div>
     </section>
 
     <!-- Resume Builder Section -->
-    <section id="resume" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/resume-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Resume Builder</h2>
+    <section id="resume" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/resume-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Resume Builder</h2>
       <div class="card p-10 max-w-4xl mx-auto">
         <form id="resume-form" class="space-y-6">
           <div>
@@ -875,7 +896,7 @@
           <button type="submit" class="w-full btn" aria-label="Preview Resume">Preview Resume</button>
         </form>
         <div id="resume-preview" class="mt-8 hidden">
-          <h3 class="text-xl font-semibold mb-4">Resume Preview</h3>
+          <h3 class="text-xl font-semibold font-montserrat mb-4">Resume Preview</h3>
           <p><strong>Name:</strong> <span id="preview-name"></span></p>
           <p><strong>Email:</strong> <span id="preview-email"></span></p>
           <p><strong>Experience:</strong> <span id="preview-experience"></span></p>
@@ -885,81 +906,60 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('assets/images/contact-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header">Contact</h2>
-      <div class="card p-10 max-w-md mx-auto">
-        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy phone number">9381329751</span></p>
-        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy email">aravind@example.com</span></p>
-        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
-        <p><strong>GitHub:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub profile">github.com/aravind</a></p>
-        <div id="qr-code" class="mt-6 flex justify-center"></div>
-        <div class="mt-6">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.486671!3d17.385044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99e8e6b7c7ad%3A0x1e8b7f6a2b3c4d5e!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1698765432109!5m2!1sen!2sin" width="100%" height="200" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map of Hyderabad"></iframe>
-        </div>
-        <form id="contact-form" class="mt-8 space-y-6">
-          <div>
-            <input id="form-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact name" required>
-            <p id="form-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
-          </div>
-          <div>
-            <input id="form-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
-            <p id="form-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
-          </div>
-          <div>
-            <textarea id="form-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="5" maxlength="500" aria-label="Contact message" required></textarea>
-            <p id="form-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
-          </div>
-          <div class="captcha-container">
-            <p id="captcha-question" class="text-gray-800 dark:text-gray-200 sepia:text-amber-900"></p>
-            <input id="captcha-input" type="number" placeholder="Enter answer" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="CAPTCHA answer" required>
-            <button type="button" onclick="refreshCaptcha()" class="mt-2 btn w-full" aria-label="Refresh CAPTCHA">Refresh CAPTCHA</button>
-            <p id="captcha-error" class="text-red-500 text-sm hidden">Incorrect CAPTCHA answer.</p>
-          </div>
-          <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
-        </form>
+    <!-- Continuation of Contact Section -->
+  <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/contact-bg.jpg');">
+    <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Contact</h2>
+    <div class="card p-10 max-w-md mx-auto">
+      <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy phone number">9381329751</span></p>
+      <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy email">aravind@example.com</span></p>
+      <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
+      <p><strong>GitHub:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub profile">github.com/aravind</a></p>
+      <div id="qr-code" class="mt-6 flex justify-center"></div>
+      <div class="mt-6">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
       </div>
-    </section>
-  </main>
+      <form id="contact-form" class="mt-8 space-y-4">
+        <div>
+          <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact name" required>
+          <p id="contact-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+        </div>
+        <div>
+          <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
+          <p id="contact-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+        </div>
+        <div>
+          <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
+          <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+        </div>
+        <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
+      </form>
+      <div id="contact-success" class="hidden mt-4">
+        <div id="lottie-contact-success" class="lottie-success"></div>
+        <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Message sent successfully!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-900 dark:bg-gray-800 sepia:bg-amber-200 text-white dark:text-gray-300 sepia:text-amber-900">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
+      <div class="flex justify-center space-x-4 mt-4">
+        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+      </div>
+      <p class="mt-4 text-sm">Built with <span class="text-red-500">&hearts;</span> in Hyderabad</p>
+    </div>
+  </footer>
 
   <!-- Toast Notification -->
-  <div id="toast" class="toast fixed bottom-8 right-8 bg-green-500 text-white p-4 rounded-lg shadow-lg hidden">
-    <p id="toast-message"></p>
-  </div>
+  <div id="toast" class="toast fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">Copied!</div>
 
+  <!-- JavaScript -->
   <script>
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeMenu = document.getElementById('theme-menu');
-    const body = document.body;
-    themeToggle.addEventListener('click', () => themeMenu.classList.toggle('hidden'));
-    themeMenu.addEventListener('click', (e) => {
-      if (e.target.dataset.theme) {
-        body.className = e.target.dataset.theme === 'dark' ? 'dark-mode' : e.target.dataset.theme === 'sepia' ? 'sepia-mode' : '';
-        localStorage.setItem('theme', e.target.dataset.theme);
-        themeMenu.classList.add('hidden');
-      }
-    });
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) body.className = savedTheme === 'dark' ? 'dark-mode' : savedTheme === 'sepia' ? 'sepia-mode' : '';
-
-    // Mobile Menu
-    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-      const navLinks = document.getElementById('nav-links');
-      navLinks.classList.toggle('hidden');
-      navLinks.classList.toggle('flex');
-    });
-
-    // Custom Cursor
-    const cursor = document.getElementById('custom-cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    });
-    document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-    });
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
 
     // Particles.js
     particlesJS('particles-js', {
@@ -969,351 +969,303 @@
         shape: { type: 'circle' },
         opacity: { value: 0.5, random: true },
         size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 150, color: '#6d28d9', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+        line_linked: { enable: true, distance: 150, color: '#14b8a6', opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: 'none', random: false }
       },
       interactivity: {
         detect_on: 'canvas',
-        events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-        modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
       },
       retina_detect: true
     });
 
-    // AOS Initialization
-    AOS.init({ duration: 1000, once: true });
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeMenu = document.getElementById('theme-menu');
+    const body = document.getElementById('body');
+    themeToggle.addEventListener('click', () => {
+      themeMenu.classList.toggle('hidden');
+    });
+    themeMenu.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', () => {
+        const theme = button.dataset.theme;
+        body.classList.remove('dark-mode', 'sepia-mode');
+        if (theme === 'dark') body.classList.add('dark-mode');
+        else if (theme === 'sepia') body.classList.add('sepia-mode');
+        themeMenu.classList.add('hidden');
+        localStorage.setItem('theme', theme);
+      });
+    });
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.classList.remove('dark-mode', 'sepia-mode');
+      if (savedTheme === 'dark') body.classList.add('dark-mode');
+      else if (savedTheme === 'sepia') body.classList.add('sepia-mode');
+    }
 
-    // Typed.js
-    new Typed('#typed', {
-      strings: ['Full-Stack Developer', 'IoT Enthusiast', 'Quality Assurance Expert'],
-      typeSpeed: 50,
-      backSpeed: 30,
-      loop: true
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('hidden');
+      mobileMenuBtn.classList.toggle('active');
     });
 
-    // Scroll Progress
-    const scrollProgress = document.getElementById('scroll-progress');
+    // Sticky Navbar
+    const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      scrollProgress.style.width = `${scrollPercent}%`;
+      if (window.scrollY > 50) {
+        navbar.classList.add('sticky');
+      } else {
+        navbar.classList.remove('sticky');
+      }
     });
+
+    // Section Observer
+    const sections = document.querySelectorAll('.section');
+    const navLinksEls = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          navLinksEls.forEach(link => {
+            link.classList.toggle('text-purple-600', link.dataset.section === entry.target.id);
+            link.classList.toggle('dark:text-purple-400', link.dataset.section === entry.target.id);
+            link.classList.toggle('sepia:text-amber-600', link.dataset.section === entry.target.id);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    sections.forEach(section => observer.observe(section));
 
     // Back to Top
     const backToTop = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
       backToTop.classList.toggle('hidden', window.scrollY < 300);
     });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Custom Cursor
+    const customCursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', e => {
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+      el.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
+    });
+
+    // Typed Animation
+    const typed = document.getElementById('typed');
+    const roles = ['Full-Stack Developer', 'IoT Enthusiast', 'Quality Assurance Expert', 'Web Innovator'];
+    let roleIndex = 0, charIndex = 0;
+    function type() {
+      if (charIndex < roles[roleIndex].length) {
+        typed.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(() => {
+          charIndex = 0;
+          typed.textContent = '';
+          roleIndex = (roleIndex + 1) % roles.length;
+          type();
+        }, 2000);
+      }
+    }
+    type();
 
     // Skills Chart
-    const ctx = document.getElementById('skills-chart').getContext('2d');
-    const skillsChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['HTML & CSS', 'JavaScript', 'React.js', 'Node.js', 'Arduino & ESP32', 'Quality Assurance'],
-        datasets: [{
-          label: 'Proficiency',
-          data: [90, 85, 80, 75, 70, 85],
-          backgroundColor: ['#6d28d9', '#14b8a6', '#f59e0b', '#6d28d9', '#14b8a6', '#f59e0b'],
-          borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-          borderWidth: 1
+    ```chartjs
+    {
+      "type": "bar",
+      "data": {
+        "labels": ["HTML & CSS", "JavaScript", "React.js", "Node.js", "Arduino & ESP32", "Quality Assurance"],
+        "datasets": [{
+          "label": "Proficiency",
+          "data": [90, 85, 80, 75, 70, 85],
+          "backgroundColor": ["#6d28d9", "#14b8a6", "#f59e0b", "#6d28d9", "#14b8a6", "#f59e0b"],
+          "borderColor": ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+          "borderWidth": 1
         }]
       },
-      options: {
-        scales: {
-          y: { beginAtZero: true, max: 100, title: { display: true, text: 'Proficiency (%)' } },
-          x: { title: { display: true, text: 'Skills' } }
+      "options": {
+        "indexAxis": "y",
+        "scales": {
+          "x": {
+            "beginAtZero": true,
+            "max": 100,
+            "title": { "display": true, "text": "Proficiency (%)" }
+          }
         },
-        plugins: { legend: { display: false } },
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
-
-    // Skill Filters
-    document.querySelectorAll('.skill-filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.skill-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.skill-item').forEach(item => {
-          item.style.display = filter === 'all' || item.dataset.category === filter ? 'block' : 'none';
-        });
-      });
-    });
-
-    // Progress Bar Animation
-    const progressBars = document.querySelectorAll('.progress-bar');
-    const animateProgressBars = () => {
-      progressBars.forEach(bar => {
-        const rect = bar.getBoundingClientRect();
-        if (rect.top < window.innerHeight && !bar.classList.contains('animate')) {
-          bar.classList.add('animate');
+        "plugins": {
+          "legend": { "display": false },
+          "tooltip": { "enabled": true }
         }
-      });
-    };
-    window.addEventListener('scroll', animateProgressBars);
-    animateProgressBars();
+      }
+    }
+    ```
 
-    // Project Carousel
-    let projectCurrentIndex = 0;
-    const projectItems = document.querySelectorAll('#project-carousel-inner .carousel-item');
-    const projectDots = document.getElementById('project-carousel-dots');
-    projectItems.forEach((_, i) => {
+    // Carousel
+    let currentSlide = 0;
+    const carouselInner = document.getElementById('carousel-inner');
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const carouselDots = document.getElementById('carousel-dots');
+    carouselItems.forEach((_, i) => {
       const dot = document.createElement('span');
       dot.classList.add('carousel-dot');
       if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => moveToProjectSlide(i));
-      projectDots.appendChild(dot);
+      dot.onclick = () => moveToSlide(i);
+      carouselDots.appendChild(dot);
     });
-    function moveProjectCarousel(direction) {
-      projectCurrentIndex = (projectCurrentIndex + direction + projectItems.length) % projectItems.length;
-      moveToProjectSlide(projectCurrentIndex);
-    }
-    function moveToProjectSlide(index) {
-      projectCurrentIndex = index;
-      document.getElementById('project-carousel-inner').style.transform = `translateX(-${projectCurrentIndex * 100}%)`;
-      document.querySelectorAll('#project-carousel-dots .carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === projectCurrentIndex);
+    function moveCarousel(direction) {
+      const totalSlides = carouselItems.length;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
       });
     }
-    setInterval(() => moveProjectCarousel(1), 5000);
-
-    // Testimonial Carousel
-    let testimonialCurrentIndex = 0;
-    const testimonialItems = document.querySelectorAll('#testimonial-carousel-inner .carousel-item');
-    const testimonialDots = document.getElementById('testimonial-carousel-dots');
-    testimonialItems.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.classList.add('carousel-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => moveToTestimonialSlide(i));
-      testimonialDots.appendChild(dot);
-    });
-    function moveTestimonialCarousel(direction) {
-      testimonialCurrentIndex = (testimonialCurrentIndex + direction + testimonialItems.length) % testimonialItems.length;
-      moveToTestimonialSlide(testimonialCurrentIndex);
-    }
-    function moveToTestimonialSlide(index) {
-      testimonialCurrentIndex = index;
-      document.getElementById('testimonial-carousel-inner').style.transform = `translateX(-${testimonialCurrentIndex * 100}%)`;
-      document.querySelectorAll('#testimonial-carousel-dots .carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === testimonialCurrentIndex);
+    function moveToSlide(index) {
+      currentSlide = index;
+      carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
       });
     }
-    setInterval(() => moveTestimonialCarousel(1), 5000);
 
-    // ESP32 Data Simulation
-    document.getElementById('esp32-refresh').addEventListener('click', () => {
-      const temp = (Math.random() * (30 - 20) + 20).toFixed(1);
-      const humidity = (Math.random() * (70 - 50) + 50).toFixed(1);
-      const tempElement = document.getElementById('esp32-temp');
-      const humidityElement = document.getElementById('esp32-humidity');
-      tempElement.textContent = `${temp}°C`;
-      humidityElement.textContent = `${humidity}%`;
-      tempElement.classList.add('active');
-      humidityElement.classList.add('active');
-      setTimeout(() => {
-        tempElement.classList.remove('active');
-        humidityElement.classList.remove('active');
-      }, 500);
+    // Project Filter
+    const projectFilter = document.getElementById('project-filter');
+    projectFilter.addEventListener('change', () => {
+      const category = projectFilter.value;
+      carouselItems.forEach(item => {
+        item.style.display = category === '' || item.dataset.category === category ? 'block' : 'none';
+      });
+      moveToSlide(0);
     });
 
     // Job Filter
     const jobFilter = document.getElementById('job-filter');
     const jobCategory = document.getElementById('job-category');
-    const jobListings = document.querySelectorAll('.job-card');
+    const jobListings = document.getElementById('job-listings');
+    const jobCards = document.querySelectorAll('.job-card');
     function filterJobs() {
-      const search = jobFilter.value.toLowerCase();
+      const filterText = jobFilter.value.toLowerCase();
       const category = jobCategory.value;
-      jobListings.forEach(card => {
+      jobCards.forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
-        const cardCategory = card.dataset.category;
-        const matchesSearch = title.includes(search);
-        const matchesCategory = !category || cardCategory === category;
-        card.style.display = matchesSearch && matchesCategory ? 'block' : 'none';
+        const matchesText = filterText === '' || title.includes(filterText);
+        const matchesCategory = category === '' || card.dataset.category === category;
+        card.style.display = matchesText && matchesCategory ? 'block' : 'none';
       });
     }
     jobFilter.addEventListener('input', filterJobs);
     jobCategory.addEventListener('change', filterJobs);
 
-    // Portfolio Functions
-    const portfolioUrl = 'https://[your-username].github.io/[your-repo]/';
-    function downloadPortfolioPDF() {
-      const link = document.createElement('a');
-      link.href = 'assets/pdf/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
-      link.download = 'Jogi_Bala_Venkata_Aravind_Portfolio.pdf';
-      link.click();
-      showToast('Portfolio PDF download started!');
-    }
-    function sharePortfolio() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Jogi Bala Venkata Aravind - Portfolio',
-          url: portfolioUrl
-        }).then(() => showToast('Portfolio shared successfully!'));
-      } else {
-        copyToClipboard(portfolioUrl);
-        showToast('Portfolio URL copied to clipboard!');
-      }
-    }
-    function sharePortfolioPDF() {
-      const pdfUrl = `${portfolioUrl}assets/pdf/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf`;
-      if (navigator.share) {
-        navigator.share({
-          title: 'Jogi Bala Venkata Aravind - Portfolio PDF',
-          url: pdfUrl
-        }).then(() => showToast('Portfolio PDF shared successfully!'));
-      } else {
-        copyToClipboard(pdfUrl);
-        showToast('Portfolio PDF URL copied to clipboard!');
-      }
-    }
-
-    // Toast Notification
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-message').textContent = message;
-      toast.classList.remove('hidden');
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateY(0)';
+    // ESP32 Data Simulation
+    document.getElementById('esp32-refresh').addEventListener('click', () => {
+      const temp = document.getElementById('esp32-temp');
+      const humidity = document.getElementById('esp32-humidity');
+      temp.classList.add('active');
+      humidity.classList.add('active');
       setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(20px)';
-        setTimeout(() => toast.classList.add('hidden'), 500);
-      }, 3000);
-    }
-
-    // Copy to Clipboard
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard!'));
-    }
-
-    // QR Code
-    QRCode.toCanvas(document.getElementById('qr-code'), portfolioUrl, { width: 150, color: { dark: '#6d28d9', light: '#ffffff' } }, (err) => {
-      if (err) console.error(err);
+        temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
+        humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
+        temp.classList.remove('active');
+        humidity.classList.remove('active');
+      }, 500);
     });
 
     // Photo Upload and Gallery
-    let galleryImages = [
-      { src: 'assets/images/IMG-20250421-WA0000.jpg', alt: 'Jogi Bala Venkata Aravind', caption: 'Profile Photo' },
-      { src: 'assets/images/project1.jpg', alt: 'Project 1', caption: 'Job Portal Project' },
-      { src: 'assets/images/project2.jpg', alt: 'Project 2', caption: 'IoT Smart Home' }
-    ];
     const photoUpload = document.getElementById('photo-upload');
     const photoPreview = document.getElementById('photo-preview');
     const previewImg = document.getElementById('preview-img');
-    photoUpload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
+    const galleryGrid = document.getElementById('gallery-grid');
+    photoUpload.addEventListener('change', () => {
+      const file = photoUpload.files[0];
       if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          previewImg.src = reader.result;
-          photoPreview.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-      } else {
-        showToast('Please upload a valid image file.');
+        previewImg.src = URL.createObjectURL(file);
+        photoPreview.classList.remove('hidden');
       }
     });
     function addToGallery() {
       const file = photoUpload.files[0];
       if (file) {
-        const url = URL.createObjectURL(file);
-        galleryImages.push({ src: url, alt: file.name, caption: file.name });
-        const galleryGrid = document.getElementById('gallery-grid');
         const img = document.createElement('img');
-        img.src = url;
-        img.alt = file.name;
+        img.src = previewImg.src;
+        img.alt = 'Uploaded Photo';
         img.className = 'rounded-lg object-cover w-full h-52 card cursor-pointer';
-        img.setAttribute('loading', 'lazy');
-        img.setAttribute('data-aos', 'fade-up');
-        img.setAttribute('data-aos-delay', '100');
-        img.onclick = () => openLightbox(url, file.name, galleryImages.length - 1);
+        img.dataset.src = img.src;
+        img.onclick = () => openLightbox(img.src, img.alt, galleryGrid.children.length);
         galleryGrid.appendChild(img);
         photoPreview.classList.add('hidden');
         photoUpload.value = '';
-        showToast('Photo added to gallery!');
-        AOS.refresh();
       }
     }
 
     // Lightbox
     let currentImageIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
     function openLightbox(src, alt, index) {
       currentImageIndex = index;
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-caption').textContent = galleryImages[index].caption;
-      document.getElementById('lightbox').classList.remove('hidden');
+      lightboxImg.src = src;
+      lightboxCaption.textContent = alt;
+      lightbox.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
-      document.getElementById('lightbox').classList.add('hidden');
+      lightbox.classList.add('hidden');
       document.body.style.overflow = 'auto';
     }
     function prevImage() {
-      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-      document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
-      document.getElementById('lightbox-caption').textContent = galleryImages[currentImageIndex].caption;
+      const images = document.querySelectorAll('#gallery-grid img');
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentImageIndex].src;
+      lightboxCaption.textContent = images[currentImageIndex].alt;
     }
     function nextImage() {
-      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-      document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
-      document.getElementById('lightbox-caption').textContent = galleryImages[currentImageIndex].caption;
+      const images = document.querySelectorAll('#gallery-grid img');
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      lightboxImg.src = images[currentImageIndex].src;
+      lightboxCaption.textContent = images[currentImageIndex].alt;
     }
 
     // Blog Modal
-    const blogPosts = [
-      { title: 'Building a Job Portal with React', content: 'This blog walks through creating a job portal using React and Tailwind CSS, covering component design, state management, and responsive layouts.', date: 'Published: July 10, 2025' },
-      { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to interface sensors with ESP32, set up a web server, and monitor real-time data for smart home applications.', date: 'Published: July 5, 2025' }
+    const blogData = [
+      { title: 'Building a Job Portal with React', content: 'This blog post covers the step-by-step process of creating a responsive job portal using React and Tailwind CSS, including user authentication and job filtering.', date: 'Published: July 10, 2025' },
+      { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to get started with ESP32 for IoT projects, including sensor interfacing, data monitoring, and building a web dashboard for real-time data visualization.', date: 'Published: July 5, 2025' }
     ];
     function openBlogModal(index) {
-      document.getElementById('modal-title').textContent = blogPosts[index].title;
-      document.getElementById('modal-content').textContent = blogPosts[index].content;
-      document.getElementById('modal-date').textContent = blogPosts[index].date;
+      document.getElementById('modal-title').textContent = blogData[index].title;
+      document.getElementById('modal-content').textContent = blogData[index].content;
+      document.getElementById('modal-date').textContent = blogData[index].date;
       document.getElementById('blog-modal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
     }
     function closeBlogModal() {
       document.getElementById('blog-modal').classList.add('hidden');
-      document.body.style.overflow = 'auto';
     }
 
     // Accordion
     function toggleAccordion(index) {
       const content = document.getElementById(`accordion-content-${index}`);
-      const isActive = content.classList.contains('active');
-      document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.accordion-header i').forEach(i => i.classList.replace('fa-chevron-up', 'fa-chevron-down'));
-      if (!isActive) {
-        content.classList.add('active');
-        content.previousElementSibling.querySelector('i').classList.replace('fa-chevron-down', 'fa-chevron-up');
-        content.previousElementSibling.setAttribute('aria-expanded', 'true');
-      } else {
-        content.previousElementSibling.setAttribute('aria-expanded', 'false');
-      }
+      const header = content.previousElementSibling;
+      content.classList.toggle('active');
+      header.querySelector('i').classList.toggle('fa-chevron-down');
+      header.querySelector('i').classList.toggle('fa-chevron-up');
+      header.setAttribute('aria-expanded', content.classList.contains('active'));
     }
 
-    // Newsletter Form
-    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('newsletter-email').value;
-      const emailError = document.getElementById('newsletter-email-error');
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        emailError.classList.remove('hidden');
-        return;
-      }
-      emailError.classList.add('hidden');
-      showToast('Subscribed successfully!');
-      document.getElementById('newsletter-form').reset();
-    });
-
     // Resume Form
-    document.getElementById('resume-form').addEventListener('submit', (e) => {
+    const resumeForm = document.getElementById('resume-form');
+    resumeForm.addEventListener('submit', e => {
       e.preventDefault();
+      let valid = true;
       const name = document.getElementById('resume-name').value;
       const email = document.getElementById('resume-email').value;
       const experience = document.getElementById('resume-experience').value;
@@ -1322,32 +1274,25 @@
       const emailError = document.getElementById('email-error');
       const experienceError = document.getElementById('experience-error');
       const skillsError = document.getElementById('skills-error');
-      const nameRegex = /^[a-zA-Z\s]+$/;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      let valid = true;
-      if (!nameRegex.test(name)) {
+      nameError.classList.add('hidden');
+      emailError.classList.add('hidden');
+      experienceError.classList.add('hidden');
+      skillsError.classList.add('hidden');
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
         nameError.classList.remove('hidden');
         valid = false;
-      } else {
-        nameError.classList.add('hidden');
       }
-      if (!emailRegex.test(email)) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         emailError.classList.remove('hidden');
         valid = false;
-      } else {
-        emailError.classList.add('hidden');
       }
       if (experience.length < 10) {
         experienceError.classList.remove('hidden');
         valid = false;
-      } else {
-        experienceError.classList.add('hidden');
       }
       if (skills.length < 10) {
         skillsError.classList.remove('hidden');
         valid = false;
-      } else {
-        skillsError.classList.add('hidden');
       }
       if (valid) {
         document.getElementById('preview-name').textContent = name;
@@ -1355,95 +1300,178 @@
         document.getElementById('preview-experience').textContent = experience;
         document.getElementById('preview-skills').textContent = skills;
         document.getElementById('resume-preview').classList.remove('hidden');
-        showToast('Resume preview generated!');
       }
-    });
-    document.getElementById('resume-download').addEventListener('click', () => {
-      showToast('Resume download initiated!');
     });
 
-    // Contact Form with CAPTCHA
-    let captchaAnswer;
-    function generateCaptcha() {
-      const num1 = Math.floor(Math.random() * 10);
-      const num2 = Math.floor(Math.random() * 10);
-      captchaAnswer = num1 + num2;
-      document.getElementById('captcha-question').textContent = `What is ${num1} + ${num2}?`;
-      document.getElementById('captcha-input').value = '';
-    }
-    function refreshCaptcha() {
-      generateCaptcha();
-      document.getElementById('captcha-error').classList.add('hidden');
-    }
-    generateCaptcha();
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
+    // Contact Form
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', e => {
       e.preventDefault();
-      const name = document.getElementById('form-name').value;
-      const email = document.getElementById('form-email').value;
-      const message = document.getElementById('form-message').value;
-      const captchaInput = document.getElementById('captcha-input').value;
-      const nameError = document.getElementById('form-name-error');
-      const emailError = document.getElementById('form-email-error');
-      const messageError = document.getElementById('form-message-error');
-      const captchaError = document.getElementById('captcha-error');
-      const nameRegex = /^[a-zA-Z\s]+$/;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       let valid = true;
-      if (!nameRegex.test(name)) {
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+      const nameError = document.getElementById('contact-name-error');
+      const emailError = document.getElementById('contact-email-error');
+      const messageError = document.getElementById('contact-message-error');
+      nameError.classList.add('hidden');
+      emailError.classList.add('hidden');
+      messageError.classList.add('hidden');
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
         nameError.classList.remove('hidden');
         valid = false;
-      } else {
-        nameError.classList.add('hidden');
       }
-      if (!emailRegex.test(email)) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         emailError.classList.remove('hidden');
         valid = false;
-      } else {
-        emailError.classList.add('hidden');
       }
       if (message.length < 10) {
         messageError.classList.remove('hidden');
         valid = false;
-      } else {
-        messageError.classList.add('hidden');
-      }
-      if (parseInt(captchaInput) !== captchaAnswer) {
-        captchaError.classList.remove('hidden');
-        valid = false;
-      } else {
-        captchaError.classList.add('hidden');
       }
       if (valid) {
-        showToast('Message sent successfully!');
-        document.getElementById('contact-form').reset();
-        generateCaptcha();
+        document.getElementById('contact-success').classList.remove('hidden');
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-contact-success'),
+          renderer: 'svg',
+          loop: false,
+          autoplay: true,
+          path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+        });
+        contactForm.reset();
+        setTimeout(() => {
+          document.getElementById('contact-success').classList.add('hidden');
+        }, 3000);
       }
     });
+
+    // Newsletter Form
+    const newsletterForm = document.getElementById('newsletter-form');
+    newsletterForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('newsletter-email').value;
+      const emailError = document.getElementById('newsletter-email-error');
+      emailError.classList.add('hidden');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.classList.remove('hidden');
+      } else {
+        document.getElementById('newsletter-success').classList.remove('hidden');
+        lottie.loadAnimation({
+          container: document.getElementById('lottie-success'),
+          renderer: 'svg',
+          loop: false,
+          autoplay: true,
+          path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+        });
+        newsletterForm.reset();
+        setTimeout(() => {
+          document.getElementById('newsletter-success').classList.add('hidden');
+        }, 3000);
+      }
+    });
+
+    // Copy to Clipboard
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.textContent = `Copied ${text}!`;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2000);
+      });
+    }
+
+    // QR Code
+    QRCode.toCanvas(document.getElementById('qr-code'), window.location.href, { width: 150 }, err => {
+      if (err) console.error(err);
+    });
+
+    // Download Counter
+    let resumeCount = 0, portfolioCount = 0;
+    document.getElementById('resume-download').addEventListener('click', () => {
+      resumeCount++;
+      document.getElementById('resume-download-count').textContent = `(${resumeCount})`;
+      downloadResumePDF();
+    });
+    function downloadPortfolioPDF() {
+      portfolioCount++;
+      document.getElementById('portfolio-download-count').textContent = `(${portfolioCount})`;
+      const link = document.createElement('a');
+      link.href = 'assets/portfolio.pdf';
+      link.download = 'portfolio.pdf';
+      link.click();
+    }
+    function downloadResumePDF() {
+      const link = document.createElement('a');
+      link.href = 'assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
+      link.download = 'resume.pdf';
+      link.click();
+    }
+
+    // Share Portfolio
+    function sharePortfolio() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Jogi Bala Venkata Aravind - Portfolio',
+          text: 'Check out my portfolio showcasing web development, IoT, and QA projects!',
+          url: window.location.href
+        }).catch(err => console.error('Share failed:', err));
+      } else {
+        copyToClipboard(window.location.href);
+      }
+    }
+
+    // Live Clock
+    function updateClock() {
+      const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      document.getElementById('live-clock').textContent = now;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // PDF Fallback
+    const pdfEmbed = document.getElementById('pdf-embed');
+    if (!pdfEmbed.getAttribute('src')) {
+      document.getElementById('pdf-fallback').classList.remove('hidden');
+    }
+
+    // Lazy Loading Images
+    const images = document.querySelectorAll('img[data-src]');
+    const imgObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          observer.unobserve(img);
+        }
+      });
+    });
+    images.forEach(img => imgObserver.observe(img));
 
     // Social Media Analytics Simulation
     function updateSocialAnalytics() {
       document.getElementById('github-stars').textContent = Math.floor(Math.random() * 1000);
-      document.getElementById('linkedin-followers').textContent = Math.floor(Math.random() * 5000);
-      document.getElementById('twitter-followers').textContent = Math.floor(Math.random() * 3000);
+      document.getElementById('linkedin-followers').textContent = Math.floor(Math.random() * 500);
+      document.getElementById('twitter-followers').textContent = Math.floor(Math.random() * 300);
+      document.querySelectorAll('.data-update').forEach(el => {
+        el.classList.add('active');
+        setTimeout(() => el.classList.remove('active'), 500);
+      });
     }
     updateSocialAnalytics();
-    setInterval(updateSocialAnalytics, 30000);
-
-    // Lazy Load Sections
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    sections.forEach(section => observer.observe(section));
+    setInterval(updateSocialAnalytics, 10000);
 
     // Loading Spinner
     window.addEventListener('load', () => {
       document.getElementById('loading').classList.add('hidden');
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeBlogModal();
+      }
     });
   </script>
 </body>
