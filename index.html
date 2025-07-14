@@ -22,25 +22,25 @@
   <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #1e40af; /* Blue */
-      --accent-color: #06b6d4; /* Teal */
-      --secondary-accent: #3b82f6; /* Lighter Blue */
-      --bg-gradient: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      --primary-color: #4f46e5; /* Indigo */
+      --accent-color: #10b981; /* Emerald */
+      --secondary-accent: #f59e0b; /* Amber */
+      --bg-gradient: linear-gradient(135deg, #f8fafc, #e2e8f0);
       --dark-bg-gradient: linear-gradient(135deg, #1e293b, #334155);
-      --sepia-bg-gradient: linear-gradient(135deg, #fefce8, #f5e7b3);
-      --text-color: #111827;
-      --text-color-dark: #e5e7eb;
-      --text-color-sepia: #78350f;
+      --sepia-bg-gradient: linear-gradient(135deg, #fef3c7, #f3e5ab);
+      --text-color: #1e293b;
+      --text-color-dark: #f1f5f9;
+      --text-color-sepia: #5c4033;
     }
     body {
       background: var(--bg-gradient);
       color: var(--text-color);
-      font-family: 'Roboto', sans-serif;
-      line-height: 1.8;
-      font-size: 1.1rem;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     .dark-mode {
       background: var(--dark-bg-gradient);
@@ -51,48 +51,47 @@
       color: var(--text-color-sepia);
     }
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 2rem;
     }
     .dark-mode .card, .sepia-mode .card {
-      background: rgba(31, 41, 55, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
     }
     .btn {
       background: var(--primary-color);
-      color: #ffffff;
+      color: white;
       padding: 0.75rem 1.5rem;
       border-radius: 8px;
-      transition: background 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
       font-weight: 500;
     }
     .btn:hover {
-      background: var(--secondary-accent);
-      transform: scale(1.03);
+      background: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .section {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
       padding: 5rem 1rem;
-      background: var(--bg-gradient);
+      position: relative;
     }
     .section.active {
       opacity: 1;
       transform: translateY(0);
     }
     .section-header {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
       font-size: 2.5rem;
       position: relative;
       display: inline-block;
@@ -101,12 +100,16 @@
     .section-header::after {
       content: '';
       position: absolute;
-      bottom: -6px;
+      bottom: -8px;
       left: 0;
       width: 60px;
-      height: 3px;
+      height: 4px;
       background: var(--accent-color);
       border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .section-header:hover::after {
+      width: 80px;
     }
     .progress-circle {
       position: relative;
@@ -145,19 +148,19 @@
       background: var(--primary-color);
       color: white;
       padding: 0.75rem;
-      border-radius: 8px;
+      border-radius: 50%;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .back-to-top:hover {
-      background: var(--secondary-accent);
-      transform: scale(1.05);
+      background: var(--accent-color);
+      transform: scale(1.1);
     }
     .spinner {
       border: 4px solid rgba(255, 255, 255, 0.3);
       border-top: 4px solid var(--accent-color);
       border-radius: 50%;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       animation: spin 0.8s linear infinite;
       opacity: 1;
       transition: opacity 0.5s ease;
@@ -203,10 +206,10 @@
     }
     .cert-card:hover, .testimonial-card:hover, .service-card:hover, .blog-card:hover, .job-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
     }
     .chart-container {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
     }
     .timeline::before {
@@ -215,7 +218,7 @@
       top: 0;
       left: 25px;
       height: 100%;
-      width: 3px;
+      width: 4px;
       background: var(--accent-color);
       border-radius: 2px;
     }
@@ -239,11 +242,7 @@
       transform: scale(1.2);
     }
     .modal {
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      transform: scale(0.95);
-    }
-    .modal:not(.hidden) {
-      transform: scale(1);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .star-rating .fa-star {
       cursor: pointer;
@@ -254,51 +253,128 @@
       color: var(--secondary-accent);
     }
     .share-btn {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
       font-size: 0.95rem;
       transition: all 0.3s ease;
     }
     .share-btn:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px);
     }
-    .skill-matrix {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 1rem;
+    ::-webkit-scrollbar {
+      width: 10px;
     }
-    .skill-matrix th, .skill-matrix td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 5px;
     }
-    .skill-matrix th {
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 5px;
+    }
+    .dark-mode ::-webkit-scrollbar-track {
+      background: #334155;
+    }
+    .sepia-mode ::-webkit-scrollbar-track {
+      background: #f3e5ab;
+    }
+    .dark-mode ::-webkit-scrollbar-thumb, .sepia-mode ::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-item {
+      flex: 0 0 100%;
+      padding: 1.5rem;
+    }
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
       background: var(--primary-color);
       color: white;
-      font-weight: 600;
+      padding: 0.75rem;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+    .carousel-control:hover {
+      background: var(--accent-color);
+    }
+    .carousel-control.prev {
+      left: 10px;
+    }
+    .carousel-control.next {
+      right: 10px;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      background: #d1d5db;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .carousel-dot.active {
+      background: var(--accent-color);
+    }
+    .accordion-item {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .accordion-header {
+      cursor: pointer;
+      padding: 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+    .accordion-header:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.25rem;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .accordion-content.active {
+      max-height: 300px;
+      padding: 1.25rem;
+    }
+    .skill-matrix td {
+      transition: background 0.3s ease, transform 0.3s ease;
     }
     .skill-matrix td:hover {
       background: rgba(0, 0, 0, 0.05);
-    }
-    .dark-mode .skill-matrix th, .sepia-mode .skill-matrix th {
-      background: var(--secondary-accent);
+      transform: scale(1.03);
     }
     .dark-mode .skill-matrix td:hover, .sepia-mode .skill-matrix td:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1);
     }
     .navbar {
-      transition: transform 0.3s ease;
-      background: rgba(255, 255, 255, 0.95);
-    }
-    .dark-mode .navbar {
-      background: rgba(31, 41, 55, 0.95);
-    }
-    .sepia-mode .navbar {
-      background: rgba(254, 252, 232, 0.95);
+      transition: all 0.3s ease;
     }
     .navbar.sticky {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .hamburger {
       transition: transform 0.3s ease;
@@ -317,17 +393,29 @@
       height: 180px;
       margin: 0 auto;
     }
+    .nav-link.active {
+      color: var(--accent-color) !important;
+      position: relative;
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-color);
+    }
     @media (max-width: 768px) {
-      .section { padding: 3rem 0.75rem; }
-      h2 { font-size: 2rem; }
+      .section { padding: 3rem 1rem; }
+      .section-header { font-size: 2rem; }
       .card { padding: 1.5rem; }
-      .btn { padding: 0.6rem 1.2rem; font-size: 0.95rem; }
+      .btn { padding: 0.6rem 1.25rem; font-size: 0.95rem; }
       .navbar { padding: 1rem; }
       .timeline::before { left: 15px; }
-      .timeline-item::before { left: 10px; }
-      .skill-matrix th, .skill-matrix td { padding: 0.75rem; font-size: 0.9rem; }
+      .timeline-item::before { left: 8px; }
+      .carousel-item { padding: 1rem; }
       .chart-container { max-width: 100%; }
-      .section-header { font-size: 1.8rem; }
     }
     @media (max-width: 640px) {
       .grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -335,17 +423,56 @@
     }
   </style>
 </head>
-<body class="min-h-screen transition-colors duration-300">
+<body class="min-h-screen transition-colors duration-300" id="body">
   <!-- Particles Background -->
   <div id="particles-js"></div>
 
   <!-- Loading Spinner -->
-  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-gray-900/70 z-50">
+  <div id="loading" class="fixed inset-0 flex items-center justify-center bg-gray-900/80 z-50">
     <div class="spinner"></div>
   </div>
 
   <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-50 navbar" aria-label="Main navigation" id="navbar"></nav>
+  <nav class="fixed w-full top-0 z-50 bg-white/95 dark:bg-gray-900/95 sepia:bg-amber-50/95 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-700/20 sepia:border-amber-200/20 p-4 navbar" aria-label="Main navigation">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-inter">Aravind</h1>
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <button id="theme-toggle" class="text-gray-900 dark:text-white sepia:text-amber-900 focus:outline-none" aria-label="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div id="theme-menu" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 sepia:bg-amber-50 border border-gray-200 dark:border-gray-700 sepia:border-amber-200 rounded-lg shadow-lg">
+            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-100" data-theme="light">Light</button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-100" data-theme="dark">Dark</button>
+            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 sepia:hover:bg-amber-100" data-theme="sepia">Sepia</button>
+          </div>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-900 dark:text-white sepia:text-amber-900 focus:outline-none hamburger" aria-label="Toggle menu">
+          <span class="bar block w-6 h-0.5 bg-current mb-1.5"></span>
+          <span class="bar block w-6 h-0.5 bg-current mb-1.5"></span>
+          <span class="bar block w-6 h-0.5 bg-current"></span>
+        </button>
+      </div>
+      <div id="nav-links" class="hidden md:flex space-x-6">
+        <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="home" aria-label="Home">Home</a>
+        <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="about" aria-label="About">About</a>
+        <a href="#services" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="services" aria-label="Services">Services</a>
+        <a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="skills" aria-label="Skills">Skills</a>
+        <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="projects" aria-label="Projects">Projects</a>
+        <a href="#jobs" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="jobs" aria-label="Job Portal">Job Portal</a>
+        <a href="#timeline" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="timeline" aria-label="Timeline">Timeline</a>
+        <a href="#gallery" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="gallery" aria-label="Gallery">Gallery</a>
+        <a href="#resume-pdf" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="resume-pdf" aria-label="Resume PDF">Resume PDF</a>
+        <a href="#certifications" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="certifications" aria-label="Certifications">Certifications</a>
+        <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="testimonials" aria-label="Testimonials">Testimonials</a>
+        <a href="#blog" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="blog" aria-label="Blog">Blog</a>
+        <a href="#faq" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="faq" aria-label="FAQ">FAQ</a>
+        <a href="#newsletter" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="newsletter" aria-label="Newsletter">Newsletter</a>
+        <a href="#resume" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="resume" aria-label="Resume">Resume</a>
+        <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 sepia:text-amber-800 hover:text-indigo-600 dark:hover:text-indigo-400 sepia:hover:text-amber-600 transition font-inter font-medium" data-section="contact" aria-label="Contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" class="back-to-top hidden btn" aria-label="Back to top">
@@ -353,699 +480,731 @@
   </button>
 
   <!-- Main Content -->
-  <main class="pt-20">
-    <!-- Home Section -->
-    <section id="home" class="section min-h-screen flex items-center justify-center active" data-aos="zoom-in">
-      <div class="card p-10 max-w-lg mx-auto text-center">
-        <img src="images/IMG-20250421-WA0000.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gray-200 dark:border-gray-700 sepia:border-amber-200 shadow-md" data-src="images/IMG-20250421-WA0000.jpg">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-montserrat">Jogi Bala Venkata Aravind</h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2">I am a <span id="typed" class="typed font-semibold text-blue-600 dark:text-blue-400 sepia:text-amber-600"></span></p>
-        <div class="flex justify-center space-x-3 mt-6">
-          <a href="#resume" class="btn" id="resume-download" aria-label="Download Resume">Download Resume <span id="resume-download-count" class="text-sm ml-1">(0)</span></a>
-          <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio <span id="portfolio-download-count" class="text-sm ml-1">(0)</span></button>
-          <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio <span id="portfolio-share-count" class="text-sm ml-1">(0)</span></button>
-        </div>
-        <p class="mt-3 text-gray-600 dark:text-gray-300 sepia:text-amber-700">Local Time: <span id="live-clock" class="font-semibold"></span> (IST, Hyderabad)</p>
-      </div>
-    </section>
+  <main id="main-content" class="pt-20"></main>
 
-    <!-- About Section -->
-    <section id="about" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">About Me</h2>
-      <div class="card p-8 max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p class="text-lg"><strong>Native Place:</strong> Hyderabad, Telangana</p>
-            <p class="text-lg"><strong>Education:</strong> B.Tech in Computer Science, [Your University Name], 2020</p>
-            <p class="text-lg"><strong>Profession:</strong> Full-Stack Developer</p>
-          </div>
-          <div>
-            <p class="text-lg"><strong>Bio:</strong> Passionate about creating intuitive web applications and IoT solutions, with experience in quality assurance at Guts Electro Mech, focusing on in-process quality and pre-delivery inspection.</p>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-3">Building innovative job portal solutions and IoT projects to connect talent with opportunities and enhance smart systems, leveraging modern web technologies and user-centric design.</p>
-          </div>
-        </div>
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-900 dark:bg-gray-800 sepia:bg-amber-200 text-white dark:text-gray-300 sepia:text-amber-900">
+    <div class="container mx-auto text-center">
+      <p>© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
+      <div class="flex justify-center space-x-4 mt-4">
+        <a href="#" class="hover:text-indigo-400 sepia:hover:text-amber-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+        <a href="#" class="hover:text-indigo-400 sepia:hover:text-amber-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="#" class="hover:text-indigo-400 sepia:hover:text-amber-600" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
       </div>
-    </section>
+      <p class="mt-4 text-sm">Built with <span class="text-red-500">♥</span> in Hyderabad</p>
+    </div>
+  </footer>
 
-    <!-- Services Section -->
-    <section id="services" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Services</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="100">
-          <i class="fas fa-code fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-lg font-semibold font-montserrat">Web Development</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Building responsive and scalable web applications using React, Node.js, and Tailwind CSS.</p>
-        </div>
-        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="200">
-          <i class="fas fa-microchip fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-lg font-semibold font-montserrat">IoT Solutions</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Designing smart systems with Arduino and ESP32 for automation and data monitoring.</p>
-        </div>
-        <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="300">
-          <i class="fas fa-check-circle fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-4"></i>
-          <h3 class="text-lg font-semibold font-montserrat">Quality Assurance</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensuring product excellence through rigorous testing and process optimization.</p>
-        </div>
-      </div>
-    </section>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden" role="alert">Copied!</div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Skills</h2>
-      <div class="chart-container" data-aos="fade-up" data-aos-delay="100">
-        <canvas id="skills-chart"></canvas>
-      </div>
-      <div class="max-w-4xl mx-auto mt-6">
-        <table class="skill-matrix" data-aos="fade-up" data-aos-delay="200">
-          <thead>
-            <tr>
-              <th class="p-3">Skill</th>
-              <th class="p-3 text-center">Proficiency</th>
-              <th class="p-3 text-center">Experience (Years)</th>
-              <th class="p-3 text-center">Your Rating</th>
-              <th class="p-3 text-center">Average Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="cursor-pointer" title="Proficient in responsive design and animations">
-              <td class="p-3">HTML & CSS</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="90">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="22.62"></circle>
-                  </svg>
-                  <span>90%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">4</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="html_css">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="html_css">0.0</span></td>
-            </tr>
-            <tr class="cursor-pointer" title="Advanced JavaScript with ES6+ and frameworks">
-              <td class="p-3">JavaScript</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="85">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
-                  </svg>
-                  <span>85%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">3.5</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="javascript">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="javascript">0.0</span></td>
-            </tr>
-            <tr class="cursor-pointer" title="Building dynamic SPAs with React">
-              <td class="p-3">React.js</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="80">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="45.24"></circle>
-                  </svg>
-                  <span>80%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">3</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="react">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="react">0.0</span></td>
-            </tr>
-            <tr class="cursor-pointer" title="Server-side development with Node.js">
-              <td class="p-3">Node.js</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="75">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="56.55"></circle>
-                  </svg>
-                  <span>75%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">2.5</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="nodejs">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="nodejs">0.0</span></td>
-            </tr>
-            <tr class="cursor-pointer" title="IoT development with microcontrollers">
-              <td class="p-3">Arduino & ESP32</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="70">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="67.86"></circle>
-                  </svg>
-                  <span>70%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">2</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="iot">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="iot">0.0</span></td>
-            </tr>
-            <tr class="cursor-pointer" title="Rigorous testing and process optimization">
-              <td class="p-3">Quality Assurance</td>
-              <td class="p-3 text-center">
-                <div class="progress-circle" data-progress="85">
-                  <svg width="80" height="80">
-                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
-                  </svg>
-                  <span>85%</span>
-                </div>
-              </td>
-              <td class="p-3 text-center">4</td>
-              <td class="p-3 text-center">
-                <div class="star-rating" data-skill="qa">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-              </td>
-              <td class="p-3 text-center"><span class="avg-rating" data-skill="qa">0.0</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize AOS
+      AOS.init({ duration: 800, once: true });
 
-    <!-- Projects Section -->
-    <section id="projects" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Projects</h2>
-      <div class="max-w-4xl mx-auto mb-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-        <select id="project-filter" class="p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Project category">
-          <option value="">All Categories</option>
-          <option value="Web Development">Web Development</option>
-          <option value="IoT">IoT</option>
-          <option value="Quality Assurance">Quality Assurance</option>
-        </select>
-        <button onclick="shareSection('projects', 'Check out my projects!')" class="btn share-btn" aria-label="Share Projects">Share Projects <span id="projects-share-count" class="text-sm ml-1">(0)</span></button>
-      </div>
-      <div class="carousel max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-        <div class="carousel-inner" id="carousel-inner">
-          <div class="carousel-item card p-6" data-category="Web Development" onclick="openProjectModal(0)">
-            <h3 class="text-lg font-semibold font-montserrat">Job Portal</h3>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A responsive job search platform with advanced filtering and user authentication.</p>
-            <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View Job Portal">View Project</a>
-          </div>
-          <div class="carousel-item card p-6" data-category="IoT" onclick="openProjectModal(1)">
-            <h3 class="text-lg font-semibold font-montserrat">IoT Smart Home</h3>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
-            <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Smart Home">View Project</a>
-          </div>
-          <div class="carousel-item card p-6" data-category="IoT" onclick="openProjectModal(2)">
-            <h3 class="text-lg font-semibold font-montserrat">ESP32 Sensor Dashboard</h3>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
-            <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View ESP32 Sensor Dashboard">View Project</a>
-          </div>
-        </div>
-        <button class="carousel-control prev" onclick="moveCarousel(-1)" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-control next" onclick="moveCarousel(1)" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-dots" id="carousel-dots"></div>
-      </div>
-      <div id="project-modal" class="hidden fixed inset-0 bg-gray-900/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="project-modal-title">
-        <div class="card p-8 max-w-md w-full">
-          <h3 id="project-modal-title" class="text-lg font-semibold font-montserrat mb-3"></h3>
-          <p id="project-modal-description" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
-          <p id="project-modal-tech" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
-          <p id="project-modal-challenges" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
-          <p id="project-modal-outcomes" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
-          <button onclick="closeProjectModal()" class="mt-4 btn w-full" aria-label="Close project modal">Close</button>
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-center mt-8 font-montserrat">ESP32 Live Demo</h3>
-      <div class="card p-6 max-w-sm mx-auto" data-aos="fade-up">
-        <p><strong>Temperature:</strong> <span id="esp32-temp" class="data-update">25°C</span></p>
-        <p><strong>Humidity:</strong> <span id="esp32-humidity" class="data-update">60%</span></p>
-        <button id="esp32-refresh" class="btn mt-3" aria-label="Refresh ESP32 Data">Refresh Data</button>
-      </div>
-    </section>
+      // Particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 60, density: { enable: true, value_area: 1000 } },
+          color: { value: ['#4f46e5', '#10b981', '#f59e0b'] },
+          shape: { type: 'circle' },
+          opacity: { value: 0.6, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 120, color: '#10b981', opacity: 0.3, width: 1 },
+          move: { enable: true, speed: 1.5, direction: 'none', random: false }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+          modes: { repulse: { distance: 80, duration: 0.4 }, push: { particles_nb: 3 } }
+        },
+        retina_detect: true
+      });
 
-    <!-- Job Portal Section -->
-    <section id="jobs" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Job Portal</h2>
-      <div class="max-w-4xl mx-auto mb-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-        <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Filter jobs">
-        <select id="job-category" class="p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Job category">
-          <option value="">All Categories</option>
-          <option value="Frontend Developer">Frontend Developer</option>
-          <option value="IoT Engineer">IoT Engineer</option>
-          <option value="Quality Analyst">Quality Analyst</option>
-        </select>
-        <button onclick="shareSection('jobs', 'Explore my job portal!')" class="btn share-btn" aria-label="Share Job Portal">Share Job Portal <span id="jobs-share-count" class="text-sm ml-1">(0)</span></button>
-      </div>
-      <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="card job-card p-6" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-lg font-semibold font-montserrat">Frontend Developer</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Develop responsive web interfaces using React and Tailwind CSS.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Frontend Developer">Apply Now</a>
-        </div>
-        <div class="card job-card p-6" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-lg font-semibold font-montserrat">IoT Engineer</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Design and implement IoT solutions with ESP32 and Arduino.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="Apply for IoT Engineer">Apply Now</a>
-        </div>
-        <div class="card job-card p-6" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-lg font-semibold font-montserrat">Quality Analyst</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensure product quality through in-process and pre-delivery inspections.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Quality Analyst">Apply Now</a>
-        </div>
-      </div>
-    </section>
+      // Theme Toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeMenu = document.getElementById('theme-menu');
+      const body = document.getElementById('body');
+      themeToggle.addEventListener('click', () => {
+        themeMenu.classList.toggle('hidden');
+      });
+      themeMenu.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          const theme = button.dataset.theme;
+          body.classList.remove('dark-mode', 'sepia-mode');
+          if (theme === 'dark') body.classList.add('dark-mode');
+          else if (theme === 'sepia') body.classList.add('sepia-mode');
+          themeMenu.classList.add('hidden');
+          localStorage.setItem('theme', theme);
+        });
+      });
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        body.classList.remove('dark-mode', 'sepia-mode');
+        if (savedTheme === 'dark') body.classList.add('dark-mode');
+        else if (savedTheme === 'sepia') body.classList.add('sepia-mode');
+      }
 
-    <!-- Timeline Section -->
-    <section id="timeline" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Work Experience</h2>
-      <div class="max-w-3xl mx-auto relative timeline pl-10">
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="card p-6 ml-5">
-            <h3 class="text-lg font-semibold font-montserrat">Quality Assurance Engineer</h3>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Guts Electro Mech, Hyderabad | 2021 - Present</p>
-            <p class="mt-2">Conducted in-process quality checks and pre-delivery inspections, ensuring high product standards.</p>
-          </div>
-        </div>
-        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="card p-6 ml-5">
-            <h3 class="text-lg font-semibold font-montserrat">Intern - Web Developer</h3>
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">[Company Name], Hyderabad | 2020</p>
-            <p class="mt-2">Developed responsive web interfaces using HTML, CSS, and JavaScript.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+      // Mobile Menu
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navLinks = document.getElementById('nav-links');
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+        mobileMenuBtn.classList.toggle('active');
+      });
 
-    <!-- Resume PDF Section -->
-    <section id="resume-pdf" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Resume PDF</h2>
-      <div class="card p-8 max-w-4xl mx-auto">
-        <h3 class="text-lg font-semibold font-montserrat mb-3">View My Resume</h3>
-        <div class="flex justify-center mb-4">
-          <button onclick="shareSection('resume-pdf', 'Check out my resume!')" class="btn share-btn" aria-label="Share Resume PDF">Share Resume <span id="resume-pdf-share-count" class="text-sm ml-1">(0)</span></button>
-        </div>
-        <div id="pdf-container" class="relative">
-          <embed id="pdf-embed" src="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" type="application/pdf" width="100%" height="600px" class="rounded-md" aria-label="Resume PDF viewer">
-          <div id="pdf-fallback" class="hidden text-center">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-3">Your browser does not support PDF viewing. Please download the resume below.</p>
-            <a href="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" class="btn" download aria-label="Download Resume PDF">Download Resume PDF</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Certifications</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-lg font-semibold font-montserrat">Full-Stack Web Development</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Coursera, 2023</p>
-          <p>Mastered HTML, CSS, JavaScript, React, and Node.js for building scalable web applications.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View Full-Stack Web Development Certificate">View Certificate</a>
-        </div>
-        <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-lg font-semibold font-montserrat">IoT Fundamentals</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Udemy, 2022</p>
-          <p>Learned IoT concepts, sensor interfacing, and ESP32 programming for smart systems.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Fundamentals Certificate">View Certificate</a>
-        </div>
-        <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-lg font-semibold font-montserrat">Quality Assurance Professional</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">LinkedIn Learning, 2021</p>
-          <p>Developed skills in quality control, testing methodologies, and process optimization.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 sepia:text-amber-600 hover:underline" aria-label="View Quality Assurance Certificate">View Certificate</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Testimonials</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto" id="testimonial-grid">
-        <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="100">
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
-          <p class="mt-3 font-semibold font-montserrat">John Doe, Project Manager</p>
-        </div>
-        <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="200">
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"His IoT solutions transformed our smart home project with robust sensor integration."</p>
-          <p class="mt-3 font-semibold font-montserrat">Jane Smith, IoT Engineer</p>
-        </div>
-        <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="300">
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's attention to detail in quality assurance ensured top-notch deliverables."</p>
-          <p class="mt-3 font-semibold font-montserrat">Emily Johnson, QA Lead</p>
-        </div>
-      </div>
-      <div class="card p-8 max-w-sm mx-auto mt-6">
-        <h3 class="text-lg font-semibold font-montserrat mb-3">Submit a Testimonial</h3>
-        <form id="testimonial-form" class="space-y-3">
-          <div>
-            <input id="testimonial-name" type="text" placeholder="Your Name" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial name" required>
-            <p id="testimonial-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
-          </div>
-          <div>
-            <input id="testimonial-title" type="text" placeholder="Your Title (e.g., Project Manager)" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial title" required>
-            <p id="testimonial-title-error" class="text-red-500 text-sm hidden">Title is required.</p>
-          </div>
-          <div>
-            <textarea id="testimonial-message" placeholder="Your Testimonial" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Testimonial message" required></textarea>
-            <p id="testimonial-message-error" class="text-red-500 text-sm hidden">Testimonial must be at least 10 characters.</p>
-          </div>
-          <button type="submit" class="w-full btn" aria-label="Submit Testimonial">Submit Testimonial</button>
-        </form>
-        <div id="testimonial-success" class="hidden mt-3">
-          <div id="lottie-testimonial-success" class="lottie-success"></div>
-          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Testimonial submitted successfully!</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Blog</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(0)" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="text-lg font-semibold font-montserrat">Building a Job Portal with React</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Guide to creating a responsive job portal using React and Tailwind CSS.</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 10, 2025</p>
-        </div>
-        <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(1)" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-lg font-semibold font-montserrat">IoT with ESP32: A Beginner's Guide</h3>
-          <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Exploring sensor interfacing and data monitoring with ESP32.</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 5, 2025</p>
-        </div>
-      </div>
-      <div id="blog-modal" class="hidden fixed inset-0 bg-gray-900/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="modal-title">
-        <div class="card p-8 max-w-md w-full">
-          <h3 id="modal-title" class="text-lg font-semibold font-montserrat mb-3"></h3>
-          <p id="modal-content" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
-          <p id="modal-date" class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2"></p>
-          <button onclick="closeBlogModal()" class="mt-4 btn w-full" aria-label="Close blog modal">Close</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Frequently Asked Questions</h2>
-      <div class="max-w-3xl mx-auto">
-        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion-header" onclick="toggleAccordion(0)" role="button" aria-expanded="false" aria-controls="accordion-content-0">
-            <span class="font-montserrat">What services do you offer?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div id="accordion-content-0" class="accordion-content">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">I offer web development, IoT solutions, and quality assurance services, specializing in responsive web applications, smart systems with Arduino/ESP32, and rigorous testing processes.</p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
-          <div class="accordion-header" onclick="toggleAccordion(1)" role="button" aria-expanded="false" aria-controls="accordion-content-1">
-            <span class="font-montserrat">How can I contact you for a project?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div id="accordion-content-1" class="accordion-content">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">You can reach me via the contact form below, email at aravind@example.com, or connect with me on LinkedIn or GitHub.</p>
-          </div>
-        </div>
-        <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
-          <div class="accordion-header" onclick="toggleAccordion(2)" role="button" aria-expanded="false" aria-controls="accordion-content-2">
-            <span class="font-montserrat">What is your experience with IoT?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div id="accordion-content-2" class="accordion-content">
-            <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">I have developed IoT projects using Arduino and ESP32, focusing on sensor integration, real-time data monitoring, and smart home automation.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Subscribe to Newsletter</h2>
-      <div class="card p-8 max-w-sm mx-auto">
-        <form id="newsletter-form" class="space-y-3">
-          <div>
-            <input id="newsletter-email" type="email" placeholder="Your Email" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Newsletter email" required>
-            <p id="newsletter-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
-          </div>
-          <button type="submit" class="w-full btn" aria-label="Subscribe to Newsletter">Subscribe</button>
-        </form>
-        <div id="newsletter-success" class="hidden mt-3">
-          <div id="lottie-success" class="lottie-success"></div>
-          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Subscribed successfully!</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Media Analytics Section -->
-    <section id="social-analytics" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Social Engagement</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
-          <i class="fab fa-github fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-3"></i>
-          <h3 class="text-lg font-semibold font-montserrat">GitHub Stars</h3>
-          <p id="github-stars" class="text-2xl font-bold data-update">0</p>
-        </div>
-        <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="200">
-          <i class="fab fa-linkedin fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-3"></i>
-          <h3 class="text-lg font-semibold font-montserrat">LinkedIn Followers</h3>
-          <p id="linkedin-followers" class="text-2xl font-bold data-update">0</p>
-        </div>
-        <div class="card p-6 text-center" data-aos="fade-up" data-aos-delay="300">
-          <i class="fab fa-twitter fa-2x text-blue-600 dark:text-blue-400 sepia:text-amber-600 mb-3"></i>
-          <h3 class="text-lg font-semibold font-montserrat">Twitter Followers</h3>
-          <p id="twitter-followers" class="text-2xl font-bold data-update">0</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Gallery</h2>
-      <div class="card p-8 max-w-4xl mx-auto">
-        <h3 class="text-lg font-semibold font-montserrat mb-3">Upload Your Photo</h3>
-        <input id="photo-upload" type="file" accept="image/*" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900 mb-3" aria-label="Upload photo">
-        <div id="photo-preview" class="hidden mb-3">
-          <img id="preview-img" src="" alt="Photo Preview" class="w-full h-60 object-cover rounded-md">
-          <button onclick="addToGallery()" class="btn mt-3" aria-label="Add to Gallery">Add to Gallery</button>
-        </div>
-        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      </div>
-      <div id="lightbox" class="hidden fixed inset-0 bg-gray-900/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
-        <div class="relative max-w-3xl w-full">
-          <img id="lightbox-img" src="" alt="Lightbox Image" class="w-full rounded-md">
-          <p id="lightbox-caption" class="text-white text-center mt-3 font-montserrat"></p>
-          <button onclick="prevImage()" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-          <button onclick="nextImage()" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-          <button onclick="closeLightbox()" class="absolute top-3 right-3 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Resume Form Section -->
-    <section id="resume" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Build Your Resume</h2>
-      <div class="card p-8 max-w-4xl mx-auto">
-        <form id="resume-form" class="space-y-3">
-          <div>
-            <input id="resume-name" type="text" placeholder="Your Name" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume name" required>
-            <p id="name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
-          </div>
-          <div>
-            <input id="resume-email" type="email" placeholder="Your Email" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume email" required>
-            <p id="email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
-          </div>
-          <div>
-            <textarea id="resume-experience" placeholder="Your Experience" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume experience" required></textarea>
-            <p id="experience-error" class="text-red-500 text-sm hidden">Experience must be at least 10 characters.</p>
-          </div>
-          <div>
-            <textarea id="resume-skills" placeholder="Your Skills" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume skills" required></textarea>
-            <p id="skills-error" class="text-red-500 text-sm hidden">Skills must be at least 10 characters.</p>
-          </div>
-          <button type="submit" class="w-full btn" aria-label="Generate Resume">Generate Resume</button>
-        </form>
-        <div id="resume-preview" class="hidden mt-6">
-          <h3 class="text-lg font-semibold font-montserrat mb-3">Resume Preview</h3>
-          <p><strong>Name:</strong> <span id="preview-name" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
-          <p><strong>Email:</strong> <span id="preview-email" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
-          <p><strong>Experience:</strong> <span id="preview-experience" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
-          <p><strong>Skills:</strong> <span id="preview-skills" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section py-12" data-aos="fade-up">
-      <h2 class="section-header text-center">Contact Me</h2>
-      <div class="card p-8 max-w-4xl mx-auto">
-        <div class="flex justify-center mb-6">
-          <canvas id="qr-code" aria-label="QR code for portfolio"></canvas>
-        </div>
-        <div class="mb-6">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
-        </div>
-        <form id="contact-form" class="space-y-3">
-          <div>
-            <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact name" required>
-            <p id="contact-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
-          </div>
-          <div>
-            <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
-            <p id="contact-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
-          </div>
-          <div>
-            <textarea id="contact-message" placeholder="Your Message" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
-            <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
-          </div>
-          <div>
-            <label for="captcha" class="block text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-1" id="captcha-question">CAPTCHA: Loading...</label>
-            <input id="captcha" type="number" placeholder="Enter answer" class="w-full p-2 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-100/90 border border-gray-200 dark:border-gray-600 sepia:border-amber-200 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="CAPTCHA answer" required>
-            <p id="captcha-error" class="text-red-500 text-sm hidden">Incorrect CAPTCHA answer.</p>
-          </div>
-          <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
-        </form>
-        <div id="contact-success" class="hidden mt-3">
-          <div id="lottie-contact-success" class="lottie-success"></div>
-          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Message sent successfully!</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-6 bg-gray-800 dark:bg-gray-900 sepia:bg-amber-200 text-white dark:text-gray-300 sepia:text-amber-900">
-      <div class="container mx-auto text-center">
-        <p>© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
-        <div class="flex justify-center space-x-3 mt-3">
-          <a href="#" class="hover:text-blue-400 sepia:hover:text-amber-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
-          <a href="#" class="hover:text-blue-400 sepia:hover:text-amber-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-          <a href="#" class="hover:text-blue-400 sepia:hover:text-amber-600" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
-        </div>
-        <p class="mt-3 text-sm">Built with <span class="text-red-500">♥</span> in Hyderabad</p>
-      </div>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast fixed bottom-6 right-6 bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hidden" role="alert">Copied!</div>
-
-    <!-- JavaScript -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // Load Navigation
-        fetch('nav.html')
-          .then(response => response.text())
-          .then(data => {
-            document.getElementById('navbar').innerHTML = data;
-            // Re-attach event listeners for nav after loading
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const navLinks = document.getElementById('nav-links');
-            mobileMenuBtn.addEventListener('click', () => {
-              navLinks.classList.toggle('hidden');
-              mobileMenuBtn.classList.toggle('active');
-            });
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeMenu = document.getElementById('theme-menu');
-            themeToggle.addEventListener('click', () => {
-              themeMenu.classList.toggle('hidden');
-            });
-            themeMenu.querySelectorAll('button').forEach(button => {
-              button.addEventListener('click', () => {
-                const theme = button.dataset.theme;
-                document.body.classList.remove('dark-mode', 'sepia-mode');
-                if (theme === 'dark') document.body.classList.add('dark-mode');
-                else if (theme === 'sepia') document.body.classList.add('sepia-mode');
-                themeMenu.classList.add('hidden');
-                localStorage.setItem('theme', theme);
-              });
-            });
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-              document.body.classList.remove('dark-mode', 'sepia-mode');
-              if (savedTheme === 'dark') document.body.classList.add('dark-mode');
-              else if (savedTheme === 'sepia') document.body.classList.add('sepia-mode');
-            }
-            // Nav link highlighting
-            const navLinksEls = document.querySelectorAll('.nav-link');
-            const observer = new IntersectionObserver(entries => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add('active');
-                  navLinksEls.forEach(link => {
-                    link.classList.toggle('text-blue-600', link.dataset.section === entry.target.id);
-                    link.classList.toggle('dark:text-blue-400', link.dataset.section === entry.target.id);
-                    link.classList.toggle('sepia:text-amber-600', link.dataset.section === entry.target.id);
-                  });
-                }
-              });
-            }, { threshold: 0.3 });
-            document.querySelectorAll('.section').forEach(section => observer.observe(section));
-          })
-          .catch(err => console.warn('Failed to load nav.html:', err));
-
-        // Initialize AOS
-        try {
-          AOS.init({ duration: 800, once: true });
-        } catch (e) {
-          console.warn('AOS initialization failed:', e);
+      // Sticky Navbar
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
         }
+      });
 
-        // Particles.js
-        try {
-          particlesJS('particles-js', {
-            particles: {
-              number: { value: 60, density: { enable: true, value_area: 800 } },
-              color: { value: ['#1e40af', '#06b6d4', '#3b82f6'] },
-              shape: { type: 'circle' },
-              opacity: { value: 0.4, random: true },
-              size: { value: 2, random: true },
-              line_linked: { enable: true, distance: 120, color: '#06b6d4', opacity: 0.3, width: 1 },
-              move: { enable: true, speed: 1.5, direction: 'none', random: false }
-            },
-            interactivity: {
-              detect_on: 'canvas',
-              events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-              modes: { repulse: { distance: 80, duration: 0.4 }, push: { particles_nb: 3 } }
-            },
-            retina_detect: true
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('hidden', window.scrollY < 300);
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Dynamic Section Loading
+      const mainContent = document.getElementById('main-content');
+      const navLinksEls = document.querySelectorAll('.nav-link');
+      const sectionContents = {
+        home: `
+          <section id="home" class="section min-h-screen flex items-center justify-center relative active" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/hero-bg.jpg');">
+            <div class="card p-10 max-w-lg mx-auto text-center">
+              <img src="images/IMG-20250421-WA0000.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 sepia:border-amber-200 shadow-lg" data-src="images/IMG-20250421-WA0000.jpg">
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-inter">Jogi Bala Venkata Aravind</h2>
+              <p class="text-lg text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2">I am a <span id="typed" class="typed font-semibold text-indigo-600 dark:text-indigo-400 sepia:text-amber-600"></span></p>
+              <div class="flex justify-center space-x-4 mt-6">
+                <a href="#resume" class="btn" id="resume-download" aria-label="Download Resume">Download Resume <span id="resume-download-count" class="text-sm ml-2">(0)</span></a>
+                <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio <span id="portfolio-download-count" class="text-sm ml-2">(0)</span></button>
+                <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio <span id="portfolio-share-count" class="text-sm ml-2">(0)</span></button>
+              </div>
+              <p class="mt-4 text-gray-600 dark:text-gray-300 sepia:text-amber-700">Local Time: <span id="live-clock" class="font-semibold"></span> (IST, Hyderabad)</p>
+            </div>
+          </section>
+        `,
+        about: `
+          <section id="about" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/about-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">About Me</h2>
+            <div class="card p-8 max-w-4xl mx-auto">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <p class="text-lg"><strong>Native Place:</strong> Hyderabad, Telangana</p>
+                  <p class="text-lg"><strong>Education:</strong> B.Tech in Computer Science, [Your University Name], 2020</p>
+                  <p class="text-lg"><strong>Profession:</strong> Full-Stack Developer</p>
+                </div>
+                <div>
+                  <p class="text-lg"><strong>Bio:</strong> Passionate about creating intuitive web applications and IoT solutions, with experience in quality assurance at Guts Electro Mech, focusing on in-process quality and pre-delivery inspection.</p>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-4">Building innovative job portal solutions and IoT projects to connect talent with opportunities and enhance smart systems.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        `,
+        services: `
+          <section id="services" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/services-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Services</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-code fa-2x text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 mb-4"></i>
+                <h3 class="text-lg font-semibold font-inter">Web Development</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Building responsive and scalable web applications using React, Node.js, and Tailwind CSS.</p>
+              </div>
+              <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-microchip fa-2x text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 mb-4"></i>
+                <h3 class="text-lg font-semibold font-inter">IoT Solutions</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Designing smart systems with Arduino and ESP32 for automation and data monitoring.</p>
+              </div>
+              <div class="card service-card p-6" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-check-circle fa-2x text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 mb-4"></i>
+                <h3 class="text-lg font-semibold font-inter">Quality Assurance</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensuring product excellence through rigorous testing and process optimization.</p>
+              </div>
+            </div>
+          </section>
+        `,
+        skills: `
+          <section id="skills" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/skills-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Skills</h2>
+            <div class="chart-container" data-aos="fade-up" data-aos-delay="100">
+              <canvas id="skills-chart"></canvas>
+            </div>
+            <div class="max-w-4xl mx-auto mt-8">
+              <table class="skill-matrix w-full border-collapse" data-aos="fade-up" data-aos-delay="200">
+                <thead>
+                  <tr class="bg-gray-100/50 dark:bg-gray-700/50 sepia:bg-amber-100/50">
+                    <th class="p-4 text-left font-inter font-medium">Skill</th>
+                    <th class="p-4 text-center font-inter font-medium">Proficiency</th>
+                    <th class="p-4 text-center font-inter font-medium">Experience (Years)</th>
+                    <th class="p-4 text-center font-inter font-medium">Your Rating</th>
+                    <th class="p-4 text-center font-inter font-medium">Average Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="cursor-pointer" title="Proficient in responsive design and animations">
+                    <td class="p-4">HTML & CSS</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="90">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="22.62"></circle>
+                        </svg>
+                        <span>90%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">4</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="html_css">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="html_css">0.0</span></td>
+                  </tr>
+                  <tr class="cursor-pointer" title="Advanced JavaScript with ES6+ and frameworks">
+                    <td class="p-4">JavaScript</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="85">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
+                        </svg>
+                        <span>85%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">3.5</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="javascript">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="javascript">0.0</span></td>
+                  </tr>
+                  <tr class="cursor-pointer" title="Building dynamic SPAs with React">
+                    <td class="p-4">React.js</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="80">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="45.24"></circle>
+                        </svg>
+                        <span>80%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">3</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="react">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="react">0.0</span></td>
+                  </tr>
+                  <tr class="cursor-pointer" title="Server-side development with Node.js">
+                    <td class="p-4">Node.js</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="75">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="56.55"></circle>
+                        </svg>
+                        <span>75%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">2.5</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="nodejs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="nodejs">0.0</span></td>
+                  </tr>
+                  <tr class="cursor-pointer" title="IoT development with microcontrollers">
+                    <td class="p-4">Arduino & ESP32</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="70">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="67.86"></circle>
+                        </svg>
+                        <span>70%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">2</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="iot">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="iot">0.0</span></td>
+                  </tr>
+                  <tr class="cursor-pointer" title="Rigorous testing and process optimization">
+                    <td class="p-4">Quality Assurance</td>
+                    <td class="p-4 text-center">
+                      <div class="progress-circle" data-progress="85">
+                        <svg width="80" height="80">
+                          <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                          <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
+                        </svg>
+                        <span>85%</span>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center">4</td>
+                    <td class="p-4 text-center">
+                      <div class="star-rating" data-skill="qa">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                    </td>
+                    <td class="p-4 text-center"><span class="avg-rating" data-skill="qa">0.0</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        `,
+        projects: `
+          <section id="projects" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/projects-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Projects</h2>
+            <div class="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <select id="project-filter" class="p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Project category">
+                <option value="">All Categories</option>
+                <option value="Web Development">Web Development</option>
+                <option value="IoT">IoT</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+              </select>
+              <button onclick="shareSection('projects', 'Check out my projects!')" class="btn share-btn" aria-label="Share Projects">Share Projects <span id="projects-share-count" class="text-sm ml-2">(0)</span></button>
+            </div>
+            <div class="carousel" data-aos="fade-up" data-aos-delay="100">
+              <div class="carousel-inner" id="carousel-inner">
+                <div class="carousel-item card p-6" data-category="Web Development" onclick="openProjectModal(0)">
+                  <h3 class="text-lg font-semibold font-inter">Job Portal</h3>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A responsive job search platform with advanced filtering and user authentication.</p>
+                  <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View Job Portal">View Project</a>
+                </div>
+                <div class="carousel-item card p-6" data-category="IoT" onclick="openProjectModal(1)">
+                  <h3 class="text-lg font-semibold font-inter">IoT Smart Home</h3>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
+                  <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Smart Home">View Project</a>
+                </div>
+                <div class="carousel-item card p-6" data-category="IoT" onclick="openProjectModal(2)">
+                  <h3 class="text-lg font-semibold font-inter">ESP32 Sensor Dashboard</h3>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
+                  <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View ESP32 Sensor Dashboard">View Project</a>
+                </div>
+              </div>
+              <button class="carousel-control prev" onclick="moveCarousel(-1)" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
+              <button class="carousel-control next" onclick="moveCarousel(1)" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
+              <div class="carousel-dots" id="carousel-dots"></div>
+            </div>
+            <div id="project-modal" class="hidden fixed inset-0 bg-gray-900/80 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="project-modal-title">
+              <div class="card p-8 max-w-md w-full">
+                <h3 id="project-modal-title" class="text-lg font-semibold font-inter mb-4"></h3>
+                <p id="project-modal-description" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
+                <p id="project-modal-tech" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+                <p id="project-modal-challenges" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+                <p id="project-modal-outcomes" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+                <button onclick="closeProjectModal()" class="mt-6 btn w-full" aria-label="Close project modal">Close</button>
+              </div>
+            </div>
+            <h3 class="text-lg font-semibold text-center mt-10 font-inter">ESP32 Live Demo</h3>
+            <div class="card p-6 max-w-sm mx-auto" data-aos="fade-up">
+              <p><strong>Temperature:</strong> <span id="esp32-temp" class="data-update">25°C</span></p>
+              <p><strong>Humidity:</strong> <span id="esp32-humidity" class="data-update">60%</span></p>
+              <button id="esp32-refresh" class="btn mt-4" aria-label="Refresh ESP32 Data">Refresh Data</button>
+            </div>
+          </section>
+        `,
+        jobs: `
+          <section id="jobs" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/jobs-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Job Portal</h2>
+            <div class="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <input id="job-filter" type="text" placeholder="Filter jobs by title..." class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Filter jobs">
+              <select id="job-category" class="p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Job category">
+                <option value="">All Categories</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="IoT Engineer">IoT Engineer</option>
+                <option value="Quality Analyst">Quality Analyst</option>
+              </select>
+              <button onclick="shareSection('jobs', 'Explore my job portal!')" class="btn share-btn" aria-label="Share Job Portal">Share Job Portal <span id="jobs-share-count" class="text-sm ml-2">(0)</span></button>
+            </div>
+            <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div class="card job-card p-6" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg font-semibold font-inter">Frontend Developer</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Develop responsive web interfaces using React and Tailwind CSS.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Frontend Developer">Apply Now</a>
+              </div>
+              <div class="card job-card p-6" data-category="IoT Engineer" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-lg font-semibold font-inter">IoT Engineer</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Design and implement IoT solutions with ESP32 and Arduino.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="Apply for IoT Engineer">Apply Now</a>
+              </div>
+              <div class="card job-card p-6" data-category="Quality Analyst" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-lg font-semibold font-inter">Quality Analyst</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Ensure product quality through in-process and pre-delivery inspections.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="Apply for Quality Analyst">Apply Now</a>
+              </div>
+            </div>
+          </section>
+        `,
+        timeline: `
+          <section id="timeline" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/timeline-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Work Experience</h2>
+            <div class="max-w-3xl mx-auto relative timeline pl-10">
+              <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="card p-6 ml-6">
+                  <h3 class="text-lg font-semibold font-inter">Quality Assurance Engineer</h3>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Guts Electro Mech, Hyderabad | 2021 - Present</p>
+                  <p class="mt-2">Conducted in-process quality checks and pre-delivery inspections, ensuring high product standards.</p>
+                </div>
+              </div>
+              <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="card p-6 ml-6">
+                  <h3 class="text-lg font-semibold font-inter">Intern - Web Developer</h3>
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">[Company Name], Hyderabad | 2020</p>
+                  <p class="mt-2">Developed responsive web interfaces using HTML, CSS, and JavaScript.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        `,
+        gallery: `
+          <section id="gallery" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/gallery-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Gallery</h2>
+            <div class="card p-8 max-w-4xl mx-auto">
+              <h3 class="text-lg font-semibold font-inter mb-4">Upload Your Photo</h3>
+              <input id="photo-upload" type="file" accept="image/*" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900 mb-4" aria-label="Upload photo">
+              <div id="photo-preview" class="hidden mb-4">
+                <img id="preview-img" src="" alt="Photo Preview" class="w-full h-64 object-cover rounded-lg">
+                <button onclick="addToGallery()" class="btn mt-4" aria-label="Add to Gallery">Add to Gallery</button>
+              </div>
+              <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+            <div id="lightbox" class="hidden fixed inset-0 bg-gray-900/80 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
+              <div class="relative max-w-3xl w-full">
+                <img id="lightbox-img" src="" alt="Lightbox Image" class="w-full rounded-lg">
+                <p id="lightbox-caption" class="text-white text-center mt-4 font-inter"></p>
+                <button onclick="prevImage()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white bg-gray-900/50 p-2 rounded-full" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+          </section>
+        `,
+        'resume-pdf': `
+          <section id="resume-pdf" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/resume-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Resume PDF</h2>
+            <div class="card p-8 max-w-4xl mx-auto">
+              <h3 class="text-lg font-semibold font-inter mb-4">View My Resume</h3>
+              <div class="flex justify-center mb-4">
+                <button onclick="shareSection('resume-pdf', 'Check out my resume!')" class="btn share-btn" aria-label="Share Resume PDF">Share Resume <span id="resume-pdf-share-count" class="text-sm ml-2">(0)</span></button>
+              </div>
+              <div id="pdf-container" class="relative">
+                <embed id="pdf-embed" src="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" type="application/pdf" width="100%" height="600px" class="rounded-lg" aria-label="Resume PDF viewer">
+                <div id="pdf-fallback" class="hidden text-center">
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-4">Your browser does not support PDF viewing. Please download the resume below.</p>
+                  <a href="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" class="btn" download aria-label="Download Resume PDF">Download Resume PDF</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        `,
+        certifications: `
+          <section id="certifications" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/certifications-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Certifications</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg font-semibold font-inter">Full-Stack Web Development</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Coursera, 2023</p>
+                <p>Mastered HTML, CSS, JavaScript, React, and Node.js for building scalable web applications.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View Full-Stack Web Development Certificate">View Certificate</a>
+              </div>
+              <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-lg font-semibold font-inter">IoT Fundamentals</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Udemy, 2022</p>
+                <p>Learned IoT concepts, sensor interfacing, and ESP32 programming for smart systems.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Fundamentals Certificate">View Certificate</a>
+              </div>
+              <div class="card cert-card p-6" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-lg font-semibold font-inter">Quality Assurance Professional</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">LinkedIn Learning, 2021</p>
+                <p>Developed skills in quality control, testing methodologies, and process optimization.</p>
+                <a href="#" class="text-indigo-600 dark:text-indigo-400 sepia:text-amber-600 hover:underline" aria-label="View Quality Assurance Certificate">View Certificate</a>
+              </div>
+            </div>
+          </section>
+        `,
+        testimonials: `
+          <section id="testimonials" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/testimonials-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Testimonials</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto" id="testimonial-grid">
+              <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
+                <p class="mt-4 font-semibold font-inter">John Doe, Project Manager</p>
+              </div>
+              <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"His IoT solutions transformed our smart home project with robust sensor integration."</p>
+                <p class="mt-4 font-semibold font-inter">Jane Smith, IoT Engineer</p>
+              </div>
+              <div class="card testimonial-card p-6" data-aos="fade-up" data-aos-delay="300">
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's attention to detail in quality assurance ensured top-notch deliverables."</p>
+                <p class="mt-4 font-semibold font-inter">Emily Johnson, QA Lead</p>
+              </div>
+            </div>
+            <div class="card p-8 max-w-md mx-auto mt-8">
+              <h3 class="text-lg font-semibold font-inter mb-4">Submit a Testimonial</h3>
+              <form id="testimonial-form" class="space-y-4">
+                <div>
+                  <input id="testimonial-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial name" required>
+                  <p id="testimonial-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+                </div>
+                <div>
+                  <input id="testimonial-title" type="text" placeholder="Your Title (e.g., Project Manager)" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial title" required>
+                  <p id="testimonial-title-error" class="text-red-500 text-sm hidden">Title is required.</p>
+                </div>
+                <div>
+                  <textarea id="testimonial-message" placeholder="Your Testimonial" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Testimonial message" required></textarea>
+                  <p id="testimonial-message-error" class="text-red-500 text-sm hidden">Testimonial must be at least 10 characters.</p>
+                </div>
+                <button type="submit" class="w-full btn" aria-label="Submit Testimonial">Submit Testimonial</button>
+              </form>
+              <div id="testimonial-success" class="hidden mt-4">
+                <div id="lottie-testimonial-success" class="lottie-success"></div>
+                <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Testimonial submitted successfully!</p>
+              </div>
+            </div>
+          </section>
+        `,
+        blog: `
+          <section id="blog" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/blog-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Blog</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(0)" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg font-semibold font-inter">Building a Job Portal with React</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A step-by-step guide to creating a responsive job portal using React and Tailwind CSS.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 10, 2025</p>
+              </div>
+              <div class="card blog-card p-6 cursor-pointer" onclick="openBlogModal(1)" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-lg font-semibold font-inter">IoT with ESP32: A Beginner's Guide</h3>
+                <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Exploring sensor interfacing and data monitoring with ESP32 for smart home solutions.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2">Published: July 5, 2025</p>
+              </div>
+            </div>
+            <div id="blog-modal" class="hidden fixed inset-0 bg-gray-900/80 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="modal-title">
+              <div class="card p-8 max-w-md w-full">
+                <h3 id="modal-title" class="text-lg font-semibold font-inter mb-4"></h3>
+                <p id="modal-content" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
+                <p id="modal-date" class="text-sm text-gray-500 dark:text-gray-400 sepia:text-amber-600 mt-2"></p>
+                <button onclick="closeBlogModal()" class="mt-6 btn w-full" aria-label="Close blog modal">Close</button>
+              </div>
+            </div>
+          </section>
+        `,
+        faq: `
+          <section id="faq" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/faq-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto">
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="accordion-header" onclick="toggleAccordion(0)" role="button" aria-expanded="false" aria-controls="accordion-content-0">
+                  <span class="font-inter font-medium">What services do you offer?</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div id="accordion-content-0" class="accordion-content">
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">I offer web development, IoT solutions, and quality assurance services, specializing in responsive web applications, smart systems with Arduino/ESP32, and rigorous testing processes.</p>
+                </div>
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="accordion-header" onclick="toggleAccordion(1)" role="button" aria-expanded="false" aria-controls="accordion-content-1">
+                  <span class="font-inter font-medium">How can I contact you for a project?</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div id="accordion-content-1" class="accordion-content">
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">You can reach me via the contact form below, email at aravind@example.com, or connect with me on LinkedIn or GitHub.</p>
+                </div>
+              </div>
+              <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="accordion-header" onclick="toggleAccordion(2)" role="button" aria-expanded="false" aria-controls="accordion-content-2">
+                  <span class="font-inter font-medium">What is your experience with IoT?</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div id="accordion-content-2" class="accordion-content">
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">I have developed IoT projects using Arduino and ESP32, focusing on sensor integration, real-time data monitoring, and smart home automation.</p>
+                </div>
+              </div>
+            </div>
+          </section><div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="accordion-header" onclick="toggleAccordion(3)" role="button" aria-expanded="false" aria-controls="accordion-content-3">
+                  <span class="font-inter font-medium">Can I see your resume?</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div id="accordion-content-3" class="accordion-content">
+                  <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">Yes, you can view or download my resume in the Resume PDF section or use the resume builder to create a customized version.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        `,
+        newsletter: `
+          <section id="newsletter" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/newsletter-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Newsletter</h2>
+            <div class="card p-8 max-w-md mx-auto">
+              <h3 class="text-lg font-semibold font-inter mb-4">Subscribe to My Newsletter</h3>
+              <form id="newsletter-form" class="space-y-4">
+                <div>
+                  <input id="newsletter-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Newsletter email" required>
+                  <p id="newsletter-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+                </div>
+                <button type="submit" class="w-full btn" aria-label="Subscribe to Newsletter">Subscribe</button>
+              </form>
+              <div id="newsletter-success" class="hidden mt-4">
+                <div id="lottie-success" class="lottie-success"></div>
+                <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Subscribed successfully!</p>
+              </div>
+            </div>
+          </section>
+        `,
+        'social-media': `
+          <section id="social-media" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/social-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Social Media Analytics</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg font-semibold font-inter mb-4">GitHub Stars</h3>
+                <p id="github-stars" class="text-3xl font-bold data-update">0</p>
+              </div>
+              <div class="card p-6" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-lg font-semibold font-inter mb-4">LinkedIn Followers</h3>
+                <p id="linkedin-followers" class="text-3xl font-bold data-update">0</p>
+              </div>
+              <div class="card p-6" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-lg font-semibold font-inter mb-4">Twitter Followers</h3>
+                <p id="twitter-followers" class="text-3xl font-bold data-update">0</p>
+              </div>
+            </div>
+          </section>
+        `,
+        resume: `
+          <section id="resume" class="section py-16 bg-gray-50/50 dark:bg-gray-900/50 sepia:bg-amber-50/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/resume-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Build Your Resume</h2>
+            <div class="card p-8 max-w-4xl mx-auto">
+              <form id="resume-form" class="space-y-4">
+                <div>
+                  <input id="resume-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume name" required>
+                  <p id="name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+                </div>
+                <div>
+                  <input id="resume-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume email" required>
+                  <p id="email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+                </div>
+                <div>
+                  <textarea id="resume-experience" placeholder="Your Experience" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume experience" required></textarea>
+                  <p id="experience-error" class="text-red-500 text-sm hidden">Experience must be at least 10 characters.</p>
+                </div>
+                <div>
+                  <textarea id="resume-skills" placeholder="Your Skills" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume skills" required></textarea>
+                  <p id="skills-error" class="text-red-500 text-sm hidden">Skills must be at least 10 characters.</p>
+                </div>
+                <button type="submit" class="w-full btn" aria-label="Generate Resume">Generate Resume</button>
+              </form>
+              <div id="resume-preview" class="hidden mt-8">
+                <h3 class="text-lg font-semibold font-inter mb-4">Resume Preview</h3>
+                <p><strong>Name:</strong> <span id="preview-name" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+                <p><strong>Email:</strong> <span id="preview-email" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+                <p><strong>Experience:</strong> <span id="preview-experience" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+                <p><strong>Skills:</strong> <span id="preview-skills" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+              </div>
+            </div>
+          </section>
+        `,
+        contact: `
+          <section id="contact" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/contact-bg.jpg');">
+            <h2 class="text-3xl font-bold text-center mb-12 section-header font-inter">Contact Me</h2>
+            <div class="card p-8 max-w-4xl mx-auto">
+              <div class="flex justify-center mb-6">
+                <canvas id="qr-code" aria-label="QR code for portfolio"></canvas>
+              </div>
+              <div class="mb-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
+              </div>
+              <form id="contact-form" class="space-y-4">
+                <div>
+                  <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact name" required>
+                  <p id="contact-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+                </div>
+                <div>
+                  <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
+                  <p id="contact-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+                </div>
+                <div>
+                  <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
+                  <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+                </div>
+                <div>
+                  <label for="captcha" class="block text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-2" id="captcha-question">CAPTCHA: Loading...</label>
+                  <input id="captcha" type="number" placeholder="Enter answer" class="w-full p-3 rounded bg-white/90 dark:bg-gray-800/90 sepia:bg-amber-50/90 border border-gray-200/50 dark:border-gray-700/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="CAPTCHA answer" required>
+                  <p id="captcha-error" class="text-red-500 text-sm hidden">Incorrect CAPTCHA answer.</p>
+                </div>
+                <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
+              </form>
+              <div id="contact-success" class="hidden mt-4">
+                <div id="lottie-contact-success" class="lottie-success"></div>
+                <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Message sent successfully!</p>
+              </div>
+            </div>
+          </section>
+        `
+      };
+
+      function loadSection(sectionId) {
+        const loading = document.getElementById('loading');
+        loading.classList.remove('hidden');
+        setTimeout(() => {
+          mainContent.innerHTML = sectionContents[sectionId] || sectionContents.home;
+          navLinksEls.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === sectionId);
           });
-        } catch (e) {
-          console.warn('Particles.js initialization failed:', e);
-        }
+          // Reinitialize section-specific scripts
+          if (sectionId === 'home') initHome();
+          if (sectionId === 'skills') initSkills();
+          if (sectionId === 'projects') initProjects();
+          if (sectionId === 'jobs') initJobs();
+          if (sectionId === 'gallery') initGallery();
+          if (sectionId === 'resume') initResume();
+          if (sectionId === 'testimonials') initTestimonials();
+          if (sectionId === 'blog') initBlog();
+          if (sectionId === 'contact') initContact();
+          if (sectionId === 'social-media') initSocialMedia();
+          AOS.refresh();
+          loading.classList.add('hidden');
+        }, 500); // Simulate loading delay
+      }
 
-        // Sticky Navbar
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 50) {
-            navbar.classList.add('sticky');
-          } else {
-            navbar.classList.remove('sticky');
-          }
+      navLinksEls.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const sectionId = link.dataset.section;
+          window.history.pushState({}, '', `#${sectionId}`);
+          loadSection(sectionId);
         });
+      });
 
-        // Back to Top
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-          backToTop.classList.toggle('hidden', window.scrollY < 300);
-        });
-        backToTop.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+      // Load initial section based on hash
+      const initialSection = window.location.hash.replace('#', '') || 'home';
+      loadSection(initialSection);
 
+      // Handle popstate for browser back/forward
+      window.addEventListener('popstate', () => {
+        const sectionId = window.location.hash.replace('#', '') || 'home';
+        loadSection(sectionId);
+      });
+
+      function initHome() {
         // Typed Animation
         const typed = document.getElementById('typed');
         const roles = ['Full-Stack Developer', 'IoT Enthusiast', 'Quality Assurance Expert', 'Web Innovator'];
@@ -1054,7 +1213,7 @@
           if (charIndex < roles[roleIndex].length) {
             typed.textContent += roles[roleIndex].charAt(charIndex);
             charIndex++;
-            settimeout(type, 100);
+            setTimeout(type, 100);
           } else {
             setTimeout(() => {
               charIndex = 0;
@@ -1066,17 +1225,57 @@
         }
         type();
 
-        // Animated Progress Circles
-        function animateProgressCircles() {
-          document.querySelectorAll('.progress-circle').forEach(circle => {
-            const progress = circle.dataset.progress;
-            const circleFg = circle.querySelector('.circle-fg');
-            const circumference = 2 * Math.PI * 36; // r=36 from SVG
-            const offset = circumference * (1 - progress / 100);
-            circleFg.style.strokeDashoffset = offset;
+        // Live Clock
+        function updateClock() {
+          const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+          const clock = document.getElementById('live-clock');
+          if (clock) clock.textContent = now;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Download Counter
+        let resumeCount = parseInt(localStorage.getItem('resumeCount')) || 0;
+        let portfolioCount = parseInt(localStorage.getItem('portfolioCount')) || 0;
+        const resumeDownload = document.getElementById('resume-download');
+        if (resumeDownload) {
+          resumeDownload.addEventListener('click', () => {
+            resumeCount++;
+            localStorage.setItem('resumeCount', resumeCount);
+            document.getElementById('resume-download-count').textContent = `(${resumeCount})`;
+            downloadResumePDF();
           });
         }
-        animateProgressCircles();
+      }
+
+      function initSkills() {
+        // Skills Chart
+        const ctx = document.getElementById('skills-chart')?.getContext('2d');
+        if (ctx) {
+          new Chart(ctx, {
+            type: 'radar',
+            data: {
+              labels: ['HTML & CSS', 'JavaScript', 'React.js', 'Node.js', 'Arduino & ESP32', 'Quality Assurance'],
+              datasets: [{
+                label: 'Proficiency',
+                data: [90, 85, 80, 75, 70, 85],
+                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                borderColor: 'rgba(79, 70, 229, 1)',
+                borderWidth: 2
+              }]
+            },
+            options: {
+              scales: {
+                r: {
+                  beginAtZero: true,
+                  max: 100,
+                  ticks: { stepSize: 20 }
+                }
+              },
+              plugins: { legend: { display: false } }
+            }
+          });
+        }
 
         // Skill Rating System
         const skillRatings = JSON.parse(localStorage.getItem('skillRatings')) || {};
@@ -1104,6 +1303,20 @@
         });
         updateAverageRatings();
 
+        // Animated Progress Circles
+        function animateProgressCircles() {
+          document.querySelectorAll('.progress-circle').forEach(circle => {
+            const progress = circle.dataset.progress;
+            const circleFg = circle.querySelector('.circle-fg');
+            const circumference = 2 * Math.PI * 36; // r=36 from SVG
+            const offset = circumference * (1 - progress / 100);
+            circleFg.style.strokeDashoffset = offset;
+          });
+        }
+        animateProgressCircles();
+      }
+
+      function initProjects() {
         // Carousel
         let currentSlide = 0;
         const carouselInner = document.getElementById('carousel-inner');
@@ -1111,8 +1324,8 @@
         const carouselDots = document.getElementById('carousel-dots');
         carouselItems.forEach((_, i) => {
           const dot = document.createElement('span');
-          dot.classList.add('carousel-dot', 'w-3', 'h-3', 'bg-gray-400', 'rounded-full', 'cursor-pointer', 'transition-colors', 'duration-300');
-          if (i === 0) dot.classList.add('bg-blue-600');
+          dot.classList.add('carousel-dot');
+          if (i === 0) dot.classList.add('active');
           dot.onclick = () => moveToSlide(i);
           carouselDots.appendChild(dot);
         });
@@ -1121,16 +1334,14 @@
           currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
           carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
           document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-            dot.classList.toggle('bg-blue-600', i === currentSlide);
-            dot.classList.toggle('bg-gray-400', i !== currentSlide);
+            dot.classList.toggle('active', i === currentSlide);
           });
         }
         function moveToSlide(index) {
           currentSlide = index;
           carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
           document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-            dot.classList.toggle('bg-blue-600', i === currentSlide);
-            dot.classList.toggle('bg-gray-400', i !== currentSlide);
+            dot.classList.toggle('active', i === currentSlide);
           });
         }
 
@@ -1182,6 +1393,22 @@
           document.body.style.overflow = 'auto';
         }
 
+        // ESP32 Data Simulation
+        document.getElementById('esp32-refresh').addEventListener('click', () => {
+          const temp = document.getElementById('esp32-temp');
+          const humidity = document.getElementById('esp32-humidity');
+          temp.classList.add('active');
+          humidity.classList.add('active');
+          setTimeout(() => {
+            temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
+            humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
+            temp.classList.remove('active');
+            humidity.classList.remove('active');
+          }, 500);
+        });
+      }
+
+      function initJobs() {
         // Job Filter
         const jobFilter = document.getElementById('job-filter');
         const jobCategory = document.getElementById('job-category');
@@ -1198,21 +1425,9 @@
         }
         jobFilter.addEventListener('input', filterJobs);
         jobCategory.addEventListener('change', filterJobs);
+      }
 
-        // ESP32 Data Simulation
-        document.getElementById('esp32-refresh').addEventListener('click', () => {
-          const temp = document.getElementById('esp32-temp');
-          const humidity = document.getElementById('esp32-humidity');
-          temp.classList.add('active');
-          humidity.classList.add('active');
-          setTimeout(() => {
-            temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
-            humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
-            temp.classList.remove('active');
-            humidity.classList.remove('active');
-          }, 500);
-        });
-
+      function initGallery() {
         // Photo Upload and Gallery
         const photoUpload = document.getElementById('photo-upload');
         const photoPreview = document.getElementById('photo-preview');
@@ -1231,7 +1446,7 @@
             const img = document.createElement('img');
             img.src = previewImg.src;
             img.alt = 'Uploaded Photo';
-            img.className = 'rounded-md object-cover w-full h-48 card cursor-pointer';
+            img.className = 'rounded-lg object-cover w-full h-52 card cursor-pointer';
             img.dataset.src = img.src;
             img.onclick = () => openLightbox(img.src, img.alt, galleryGrid.children.length);
             galleryGrid.appendChild(img);
@@ -1268,32 +1483,9 @@
           lightboxImg.src = images[currentImageIndex].src;
           lightboxCaption.textContent = images[currentImageIndex].alt;
         }
+      }
 
-        // Blog Modal
-        const blogData = [
-          { title: 'Building a Job Portal with React', content: 'This blog post covers the step-by-step process of creating a responsive job portal using React and Tailwind CSS, including user authentication and job filtering.', date: 'Published: July 10, 2025' },
-          { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to get started with ESP32 for IoT projects, including sensor interfacing, data monitoring, and building a web dashboard for real-time data visualization.', date: 'Published: July 5, 2025' }
-        ];
-        function openBlogModal(index) {
-          document.getElementById('modal-title').textContent = blogData[index].title;
-          document.getElementById('modal-content').textContent = blogData[index].content;
-          document.getElementById('modal-date').textContent = blogData[index].date;
-          document.getElementById('blog-modal').classList.remove('hidden');
-        }
-        function closeBlogModal() {
-          document.getElementById('blog-modal').classList.add('hidden');
-        }
-
-        // Accordion
-        function toggleAccordion(index) {
-          const content = document.getElementById(`accordion-content-${index}`);
-          const header = content.previousElementSibling;
-          content.classList.toggle('active');
-          header.querySelector('i').classList.toggle('fa-chevron-down');
-          header.querySelector('i').classList.toggle('fa-chevron-up');
-          header.setAttribute('aria-expanded', content.classList.contains('active'));
-        }
-
+      function initResume() {
         // Resume Form
         const resumeForm = document.getElementById('resume-form');
         resumeForm.addEventListener('submit', e => {
@@ -1335,7 +1527,9 @@
             document.getElementById('resume-preview').classList.remove('hidden');
           }
         });
+      }
 
+      function initTestimonials() {
         // Testimonial Form
         const testimonialForm = document.getElementById('testimonial-form');
         const testimonialGrid = document.getElementById('testimonial-grid');
@@ -1349,7 +1543,7 @@
             div.dataset.aosDelay = (index + 3) * 100;
             div.innerHTML = `
               <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"${testimonial.message}"</p>
-              <p class="mt-3 font-semibold font-montserrat">${testimonial.name}, ${testimonial.title}</p>
+              <p class="mt-4 font-semibold font-inter">${testimonial.name}, ${testimonial.title}</p>
             `;
             testimonialGrid.appendChild(div);
           });
@@ -1385,24 +1579,39 @@
             localStorage.setItem('testimonials', JSON.stringify(testimonials));
             renderTestimonials();
             document.getElementById('testimonial-success').classList.remove('hidden');
-            try {
-              lottie.loadAnimation({
-                container: document.getElementById('lottie-testimonial-success'),
-                renderer: 'svg',
-                loop: false,
-                autoplay: true,
-                path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
-              });
-            } catch (e) {
-              console.warn('Lottie animation failed to load:', e);
-            }
+            lottie.loadAnimation({
+              container: document.getElementById('lottie-testimonial-success'),
+              renderer: 'svg',
+              loop: false,
+              autoplay: true,
+              path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+            });
             testimonialForm.reset();
             setTimeout(() => {
               document.getElementById('testimonial-success').classList.add('hidden');
             }, 3000);
           }
         });
+      }
 
+      function initBlog() {
+        // Blog Modal
+        const blogData = [
+          { title: 'Building a Job Portal with React', content: 'This blog post covers the step-by-step process of creating a responsive job portal using React and Tailwind CSS, including user authentication and job filtering.', date: 'Published: July 10, 2025' },
+          { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to get started with ESP32 for IoT projects, including sensor interfacing, data monitoring, and building a web dashboard for real-time data visualization.', date: 'Published: July 5, 2025' }
+        ];
+        function openBlogModal(index) {
+          document.getElementById('modal-title').textContent = blogData[index].title;
+          document.getElementById('modal-content').textContent = blogData[index].content;
+          document.getElementById('modal-date').textContent = blogData[index].date;
+          document.getElementById('blog-modal').classList.remove('hidden');
+        }
+        function closeBlogModal() {
+          document.getElementById('blog-modal').classList.add('hidden');
+        }
+      }
+
+      function initContact() {
         // Contact Form with CAPTCHA
         let captchaAnswer;
         function generateCaptcha() {
@@ -1446,17 +1655,13 @@
           }
           if (valid) {
             document.getElementById('contact-success').classList.remove('hidden');
-            try {
-              lottie.loadAnimation({
-                container: document.getElementById('lottie-contact-success'),
-                renderer: 'svg',
-                loop: false,
-                autoplay: true,
-                path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
-              });
-            } catch (e) {
-              console.warn('Lottie animation failed to load:', e);
-            }
+            lottie.loadAnimation({
+              container: document.getElementById('lottie-contact-success'),
+              renderer: 'svg',
+              loop: false,
+              autoplay: true,
+              path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+            });
             contactForm.reset();
             generateCaptcha();
             setTimeout(() => {
@@ -1465,146 +1670,13 @@
           }
         });
 
-        // Newsletter Form
-        const newsletterForm = document.getElementById('newsletter-form');
-        newsletterForm.addEventListener('submit', e => {
-          e.preventDefault();
-          const email = document.getElementById('newsletter-email').value;
-          const emailError = document.getElementById('newsletter-email-error');
-          emailError.classList.add('hidden');
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            emailError.classList.remove('hidden');
-          } else {
-            document.getElementById('newsletter-success').classList.remove('hidden');
-            try {
-              lottie.loadAnimation({
-                container: document.getElementById('lottie-success'),
-                renderer: 'svg',
-                loop: false,
-                autoplay: true,
-                path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
-              });
-            } catch (e) {
-              console.warn('Lottie animation failed to load:', e);
-            }
-            newsletterForm.reset();
-            setTimeout(() => {
-              document.getElementById('newsletter-success').classList.add('hidden');
-            }, 3000);
-          }
-        });
-
-        // Copy to Clipboard
-        function copyToClipboard(text) {
-          navigator.clipboard.writeText(text).then(() => {
-            const toast = document.getElementById('toast');
-            toast.textContent = `Copied ${text}!`;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 2000);
-          }).catch(err => console.warn('Clipboard copy failed:', err));
-        }
-
         // QR Code
-        try {
-          QRCode.toCanvas(document.getElementById('qr-code'), window.location.href, { width: 120 }, err => {
-            if (err) console.warn('QR Code generation failed:', err);
-          });
-        } catch (e) {
-          console.warn('QR Code initialization failed:', e);
-        }
-
-        // Download Counter
-        let resumeCount = 0, portfolioCount = 0;
-        document.getElementById('resume-download').addEventListener('click', () => {
-          resumeCount++;
-          document.getElementById('resume-download-count').textContent = `(${resumeCount})`;
-          downloadResumePDF();
+        QRCode.toCanvas(document.getElementById('qr-code'), window.location.href, { width: 150 }, err => {
+          if (err) console.warn('QR Code generation failed:', err);
         });
-        function downloadPortfolioPDF() {
-          portfolioCount++;
-          document.getElementById('portfolio-download-count').textContent = `(${portfolioCount})`;
-          const link = document.createElement('a');
-          link.href = 'assets/portfolio.pdf';
-          link.download = 'portfolio.pdf';
-          link.click();
-        }
-        function downloadResumePDF() {
-          const link = document.createElement('a');
-          link.href = 'assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
-          link.download = 'resume.pdf';
-          link.click();
-        }
+      }
 
-        // Share Portfolio and Sections
-        const shareCounts = JSON.parse(localStorage.getItem('shareCounts')) || {
-          portfolio: 0,
-          projects: 0,
-          jobs: 0,
-          'resume-pdf': 0
-        };
-        function updateShareCounts() {
-          document.getElementById('portfolio-share-count').textContent = `(${shareCounts.portfolio})`;
-          document.getElementById('projects-share-count').textContent = `(${shareCounts.projects})`;
-          document.getElementById('jobs-share-count').textContent = `(${shareCounts.jobs})`;
-          document.getElementById('resume-pdf-share-count').textContent = `(${shareCounts['resume-pdf']})`;
-        }
-        function sharePortfolio() {
-          shareCounts.portfolio++;
-          localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
-          updateShareCounts();
-          if (navigator.share) {
-            navigator.share({
-              title: 'Jogi Bala Venkata Aravind - Portfolio',
-              text: 'Check out my portfolio showcasing web development, IoT, and QA projects!',
-              url: window.location.href
-            }).catch(err => console.warn('Share failed:', err));
-          } else {
-            copyToClipboard(window.location.href);
-          }
-        }
-        function shareSection(sectionId, text) {
-          shareCounts[sectionId]++;
-          localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
-          updateShareCounts();
-          if (navigator.share) {
-            navigator.share({
-              title: `Jogi Bala Venkata Aravind - ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`,
-              text,
-              url: `${window.location.href}#${sectionId}`
-            }).catch(err => console.warn('Share failed:', err));
-          } else {
-            copyToClipboard(`${window.location.href}#${sectionId}`);
-          }
-        }
-
-        // Live Clock
-        function updateClock() {
-          const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-          document.getElementById('live-clock').textContent = now;
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        // PDF Fallback
-        const pdfEmbed = document.getElementById('pdf-embed');
-        if (!pdfEmbed.getAttribute('src')) {
-          document.getElementById('pdf-fallback').classList.remove('hidden');
-        }
-
-        // Lazy Loading Images
-        const images = document.querySelectorAll('img[data-src]');
-        const imgObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src;
-              img.removeAttribute('data-src');
-              observer.unobserve(img);
-            }
-          });
-        });
-        images.forEach(img => imgObserver.observe(img));
-
+      function initSocialMedia() {
         // Social Media Analytics Simulation
         function updateSocialAnalytics() {
           document.getElementById('github-stars').textContent = Math.floor(Math.random() * 1000);
@@ -1617,52 +1689,119 @@
         }
         updateSocialAnalytics();
         setInterval(updateSocialAnalytics, 10000);
+      }
 
-        // Skills Chart
-        try {
-          new Chart(document.getElementById('skills-chart'), {
-            type: 'bar',
-            data: {
-              labels: ['HTML & CSS', 'JavaScript', 'React.js', 'Node.js', 'Arduino & ESP32', 'QA'],
-              datasets: [{
-                label: 'Proficiency (%)',
-                data: [90, 85, 80, 75, 70, 85],
-                backgroundColor: 'rgba(30, 64, 175, 0.6)', // Blue
-                borderColor: 'rgba(30, 64, 175, 1)',
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: { beginAtZero: true, max: 100 },
-                x: { ticks: { font: { size: 12 } } }
-              },
-              plugins: { legend: { display: false } },
-              responsive: true,
-              maintainAspectRatio: false
-            }
-          });
-        } catch (e) {
-          console.warn('Chart.js initialization failed:', e);
+      // Share Portfolio and Sections
+      const shareCounts = JSON.parse(localStorage.getItem('shareCounts')) || {
+        portfolio: 0,
+        projects: 0,
+        jobs: 0,
+        'resume-pdf': 0
+      };
+      function updateShareCounts() {
+        const portfolioShare = document.getElementById('portfolio-share-count');
+        const projectsShare = document.getElementById('projects-share-count');
+        const jobsShare = document.getElementById('jobs-share-count');
+        const resumeShare = document.getElementById('resume-pdf-share-count');
+        if (portfolioShare) portfolioShare.textContent = `(${shareCounts.portfolio})`;
+        if (projectsShare) projectsShare.textContent = `(${shareCounts.projects})`;
+        if (jobsShare) jobsShare.textContent = `(${shareCounts.jobs})`;
+        if (resumeShare) resumeShare.textContent = `(${shareCounts['resume-pdf']})`;
+      }
+      function sharePortfolio() {
+        shareCounts.portfolio++;
+        localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
+        updateShareCounts();
+        if (navigator.share) {
+          navigator.share({
+            title: 'Jogi Bala Venkata Aravind - Portfolio',
+            text: 'Check out my portfolio showcasing web development, IoT, and QA projects!',
+            url: window.location.href
+          }).catch(err => console.warn('Share failed:', err));
+        } else {
+          copyToClipboard(window.location.href);
         }
-
-        // Loading Spinner
-        function hideSpinner() {
-          const loading = document.getElementById('loading');
-          loading.classList.add('hidden');
+      }
+      function shareSection(sectionId, text) {
+        shareCounts[sectionId]++;
+        localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
+        updateShareCounts();
+        if (navigator.share) {
+          navigator.share({
+            title: `Jogi Bala Venkata Aravind - ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`,
+            text,
+            url: `${window.location.href}#${sectionId}`
+          }).catch(err => console.warn('Share failed:', err));
+        } else {
+          copyToClipboard(`${window.location.href}#${sectionId}`);
         }
-        window.addEventListener('load', hideSpinner);
-        setTimeout(hideSpinner, 5000); // Fallback timeout
+      }
 
-        // Keyboard Navigation
-        document.addEventListener('keydown', e => {
-          if (e.key === 'Escape') {
-            closeLightbox();
-            closeBlogModal();
-            closeProjectModal();
+      // Copy to Clipboard
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById('toast');
+          toast.textContent = `Copied ${text}!`;
+          toast.classList.remove('hidden');
+          setTimeout(() => toast.classList.add('hidden'), 2000);
+        }).catch(err => console.warn('Clipboard copy failed:', err));
+      }
+
+      // Download Portfolio PDF
+      function downloadPortfolioPDF() {
+        const portfolioCount = parseInt(localStorage.getItem('portfolioCount')) || 0;
+        localStorage.setItem('portfolioCount', portfolioCount + 1);
+        document.getElementById('portfolio-download-count').textContent = `(${portfolioCount + 1})`;
+        const link = document.createElement('a');
+        link.href = 'assets/portfolio.pdf';
+        link.download = 'portfolio.pdf';
+        link.click();
+      }
+
+      function downloadResumePDF() {
+        const link = document.createElement('a');
+        link.href = 'assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
+        link.download = 'resume.pdf';
+        link.click();
+      }
+
+      // PDF Fallback
+      const pdfEmbed = document.getElementById('pdf-embed');
+      if (pdfEmbed && !pdfEmbed.getAttribute('src')) {
+        document.getElementById('pdf-fallback')?.classList.remove('hidden');
+      }
+
+      // Lazy Loading Images
+      const images = document.querySelectorAll('img[data-src]');
+      const imgObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
           }
         });
       });
-    </script>
-  </body>
+      images.forEach(img => imgObserver.observe(img));
+
+      // Keyboard Navigation
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          closeLightbox();
+          closeBlogModal();
+          closeProjectModal();
+        }
+      });
+
+      // Loading Spinner
+      function hideSpinner() {
+        const loading = document.getElementById('loading');
+        loading.classList.add('hidden');
+      }
+      window.addEventListener('load', hideSpinner);
+      setTimeout(hideSpinner, 5000); // Fallback timeout
+    });
+  </script>
+</body>
 </html>
