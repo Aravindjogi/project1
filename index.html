@@ -144,11 +144,34 @@
       from { opacity: 0; transform: translateY(60px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .progress-bar {
-      height: 8px;
-      background: var(--accent-color);
-      transition: width 2s ease-in-out;
-      border-radius: 4px;
+    .progress-circle {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+    }
+    .progress-circle svg {
+      transform: rotate(-90deg);
+    }
+    .progress-circle .circle-bg {
+      fill: none;
+      stroke: #e5e7eb;
+      stroke-width: 4;
+    }
+    .progress-circle .circle-fg {
+      fill: none;
+      stroke: var(--accent-color);
+      stroke-width: 4;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+    .progress-circle span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+      font-weight: 500;
     }
     .back-to-top {
       position: fixed;
@@ -258,6 +281,23 @@
     }
     .modal {
       transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .star-rating .fa-star {
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .star-rating .fa-star:hover,
+    .star-rating .fa-star.active {
+      color: var(--secondary-accent);
+    }
+    .share-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .share-btn:hover {
+      transform: scale(1.05);
     }
     ::-webkit-scrollbar {
       width: 8px;
@@ -496,13 +536,13 @@
     <!-- Home Section -->
     <section id="home" class="section min-h-screen flex items-center justify-center relative active" data-aos="zoom-in" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/hero-bg.jpg'); background-position: center;">
       <div class="card p-12 max-w-xl mx-auto text-center">
-        <img src="IMG-20250421-WA0000.jpg" alt="Profile Photo" class="w-36 h-36 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 sepia:border-amber-200 shadow-xl" data-src="images/IMG-20250421-WA0000.jpg">
+        <img src="images/IMG-20250421-WA0000.jpg" alt="Profile Photo" class="w-36 h-36 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-800 sepia:border-amber-200 shadow-xl" data-src="images/IMG-20250421-WA0000.jpg">
         <h2 class="text-4xl font-bold text-gray-900 dark:text-white sepia:text-amber-900 font-montserrat">Jogi Bala Venkata Aravind</h2>
         <p class="text-xl text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-3">I am a <span id="typed" class="typed font-semibold text-purple-600 dark:text-purple-400 sepia:text-amber-600"></span></p>
         <div class="flex justify-center space-x-4 mt-8">
-          <a href="JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" class="btn" aria-label="Download Resume">Download Resume <span id="resume-download-count" class="text-sm ml-2">(0)</span></a>
+          <a href="#resume" class="btn" id="resume-download" aria-label="Download Resume">Download Resume <span id="resume-download-count" class="text-sm ml-2">(0)</span></a>
           <button onclick="downloadPortfolioPDF()" class="btn" aria-label="Download Portfolio PDF">Download Portfolio <span id="portfolio-download-count" class="text-sm ml-2">(0)</span></button>
-          <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio</button>
+          <button onclick="sharePortfolio()" class="btn" aria-label="Share Portfolio">Share Portfolio <span id="portfolio-share-count" class="text-sm ml-2">(0)</span></button>
         </div>
         <p class="mt-4 text-gray-600 dark:text-gray-300 sepia:text-amber-700">Local Time: <span id="live-clock" class="font-semibold"></span> (IST, Hyderabad)</p>
       </div>
@@ -561,45 +601,131 @@
               <th class="p-4 text-left font-montserrat">Skill</th>
               <th class="p-4 text-center font-montserrat">Proficiency</th>
               <th class="p-4 text-center font-montserrat">Experience (Years)</th>
+              <th class="p-4 text-center font-montserrat">Your Rating</th>
+              <th class="p-4 text-center font-montserrat">Average Rating</th>
             </tr>
           </thead>
           <tbody>
             <tr class="cursor-pointer" title="Proficient in responsive design and animations">
               <td class="p-4">HTML & CSS</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 90%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="90">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="22.62"></circle>
+                  </svg>
+                  <span>90%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">4</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="html_css">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="html_css">0.0</span></td>
             </tr>
             <tr class="cursor-pointer" title="Advanced JavaScript with ES6+ and frameworks">
               <td class="p-4">JavaScript</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 85%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="85">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
+                  </svg>
+                  <span>85%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">3.5</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="javascript">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="javascript">0.0</span></td>
             </tr>
             <tr class="cursor-pointer" title="Building dynamic SPAs with React">
               <td class="p-4">React.js</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 80%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="80">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="45.24"></circle>
+                  </svg>
+                  <span>80%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">3</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="react">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="react">0.0</span></td>
             </tr>
             <tr class="cursor-pointer" title="Server-side development with Node.js">
               <td class="p-4">Node.js</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 75%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="75">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="56.55"></circle>
+                  </svg>
+                  <span>75%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">2.5</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="nodejs">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="nodejs">0.0</span></td>
             </tr>
             <tr class="cursor-pointer" title="IoT development with microcontrollers">
               <td class="p-4">Arduino & ESP32</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 70%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="70">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="67.86"></circle>
+                  </svg>
+                  <span>70%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">2</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="iot">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="iot">0.0</span></td>
             </tr>
             <tr class="cursor-pointer" title="Rigorous testing and process optimization">
               <td class="p-4">Quality Assurance</td>
-              <td class="p-4 text-center"><div class="progress-bar h-2 rounded mx-auto" style="width: 85%"></div></td>
+              <td class="p-4 text-center">
+                <div class="progress-circle" data-progress="85">
+                  <svg width="80" height="80">
+                    <circle class="circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="circle-fg" cx="40" cy="40" r="36" stroke-dasharray="226.2" stroke-dashoffset="33.93"></circle>
+                  </svg>
+                  <span>85%</span>
+                </div>
+              </td>
               <td class="p-4 text-center">4</td>
+              <td class="p-4 text-center">
+                <div class="star-rating" data-skill="qa">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+              </td>
+              <td class="p-4 text-center"><span class="avg-rating" data-skill="qa">0.0</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Projects Section (Carousel with Filters) -->
+    <!-- Projects Section (Carousel with Filters and Modals) -->
     <section id="projects" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/projects-bg.jpg');">
       <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Projects</h2>
       <div class="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -609,20 +735,21 @@
           <option value="IoT">IoT</option>
           <option value="Quality Assurance">Quality Assurance</option>
         </select>
+        <button onclick="shareSection('projects', 'Check out my projects!')" class="btn share-btn" aria-label="Share Projects">Share Projects <span id="projects-share-count" class="text-sm ml-2">(0)</span></button>
       </div>
       <div class="carousel" data-aos="fade-up" data-aos-delay="100">
         <div class="carousel-inner" id="carousel-inner">
-          <div class="carousel-item card p-8" data-category="Web Development">
+          <div class="carousel-item card p-8" data-category="Web Development" onclick="openProjectModal(0)">
             <h3 class="text-xl font-semibold font-montserrat">Job Portal</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A responsive job search platform with advanced filtering and user authentication.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View Job Portal">View Project</a>
           </div>
-          <div class="carousel-item card p-8" data-category="IoT">
+          <div class="carousel-item card p-8" data-category="IoT" onclick="openProjectModal(1)">
             <h3 class="text-xl font-semibold font-montserrat">IoT Smart Home</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View IoT Smart Home">View Project</a>
           </div>
-          <div class="carousel-item card p-8" data-category="IoT">
+          <div class="carousel-item card p-8" data-category="IoT" onclick="openProjectModal(2)">
             <h3 class="text-xl font-semibold font-montserrat">ESP32 Sensor Dashboard</h3>
             <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700">A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.</p>
             <a href="#" class="text-purple-600 dark:text-purple-400 sepia:text-amber-600 hover:underline" aria-label="View ESP32 Sensor Dashboard">View Project</a>
@@ -631,6 +758,16 @@
         <button class="carousel-control prev" onclick="moveCarousel(-1)" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
         <button class="carousel-control next" onclick="moveCarousel(1)" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
         <div class="carousel-dots" id="carousel-dots"></div>
+      </div>
+      <div id="project-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="project-modal-title">
+        <div class="card p-10 max-w-lg w-full">
+          <h3 id="project-modal-title" class="text-xl font-semibold font-montserrat mb-4"></h3>
+          <p id="project-modal-description" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></p>
+          <p id="project-modal-tech" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+          <p id="project-modal-challenges" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+          <p id="project-modal-outcomes" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 mt-2"></p>
+          <button onclick="closeProjectModal()" class="mt-6 btn w-full" aria-label="Close project modal">Close</button>
+        </div>
       </div>
       <h3 class="text-xl font-semibold text-center mt-12 font-montserrat">ESP32 Live Demo</h3>
       <div class="card p-8 max-w-md mx-auto" data-aos="fade-up">
@@ -651,6 +788,7 @@
           <option value="IoT Engineer">IoT Engineer</option>
           <option value="Quality Analyst">Quality Analyst</option>
         </select>
+        <button onclick="shareSection('jobs', 'Explore my job portal!')" class="btn share-btn" aria-label="Share Job Portal">Share Job Portal <span id="jobs-share-count" class="text-sm ml-2">(0)</span></button>
       </div>
       <div id="job-listings" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div class="card job-card p-8" data-category="Frontend Developer" data-aos="fade-up" data-aos-delay="100">
@@ -697,6 +835,9 @@
       <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Resume PDF</h2>
       <div class="card p-10 max-w-5xl mx-auto">
         <h3 class="text-xl font-semibold font-montserrat mb-4">View My Resume</h3>
+        <div class="flex justify-center mb-4">
+          <button onclick="shareSection('resume-pdf', 'Check out my resume!')" class="btn share-btn" aria-label="Share Resume PDF">Share Resume <span id="resume-pdf-share-count" class="text-sm ml-2">(0)</span></button>
+        </div>
         <div id="pdf-container" class="relative">
           <embed id="pdf-embed" src="assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf" type="application/pdf" width="100%" height="600px" class="rounded-lg" aria-label="Resume PDF viewer">
           <div id="pdf-fallback" class="hidden text-center">
@@ -735,7 +876,7 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/testimonials-bg.jpg');">
       <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Testimonials</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto" id="testimonial-grid">
         <div class="card testimonial-card p-8" data-aos="fade-up" data-aos-delay="100">
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's work on our job portal was exceptional, delivering a seamless user experience."</p>
           <p class="mt-4 font-semibold font-montserrat">John Doe, Project Manager</p>
@@ -747,6 +888,28 @@
         <div class="card testimonial-card p-8" data-aos="fade-up" data-aos-delay="300">
           <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"Aravind's attention to detail in quality assurance ensured top-notch deliverables."</p>
           <p class="mt-4 font-semibold font-montserrat">Emily Johnson, QA Lead</p>
+        </div>
+      </div>
+      <div class="card p-10 max-w-md mx-auto mt-8">
+        <h3 class="text-xl font-semibold font-montserrat mb-4">Submit a Testimonial</h3>
+        <form id="testimonial-form" class="space-y-4">
+          <div>
+            <input id="testimonial-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial name" required>
+            <p id="testimonial-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+          </div>
+          <div>
+            <input id="testimonial-title" type="text" placeholder="Your Title (e.g., Project Manager)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Testimonial title" required>
+            <p id="testimonial-title-error" class="text-red-500 text-sm hidden">Title is required.</p>
+          </div>
+          <div>
+            <textarea id="testimonial-message" placeholder="Your Testimonial" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Testimonial message" required></textarea>
+            <p id="testimonial-message-error" class="text-red-500 text-sm hidden">Testimonial must be at least 10 characters.</p>
+          </div>
+          <button type="submit" class="w-full btn" aria-label="Submit Testimonial">Submit Testimonial</button>
+        </form>
+        <div id="testimonial-success" class="hidden mt-4">
+          <div id="lottie-testimonial-success" class="lottie-success"></div>
+          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Testimonial submitted successfully!</p>
         </div>
       </div>
     </section>
@@ -850,74 +1013,70 @@
       </div>
     </section>
 
-    <!-- Photo Gallery Section -->
-    <section id="gallery" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/gallery-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Photo Gallery</h2>
-      <div class="max-w-5xl mx-auto mb-8">
-        <input type="file" id="photo-upload" accept="image/*" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Upload photo">
-        <div id="photo-preview" class="mt-4 hidden">
-          <img id="preview-img" class="w-28 h-28 rounded-lg object-cover" alt="Photo Preview">
-          <button onclick="addToGallery()" class="mt-2 btn" aria-label="Add to Gallery">Add to Gallery</button>
+    <!-- Gallery Section -->
+    <section id="gallery" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/gallery-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Gallery</h2>
+      <div class="card p-10 max-w-5xl mx-auto">
+        <h3 class="text-xl font-semibold font-montserrat mb-4">Upload Your Photo</h3>
+        <input id="photo-upload" type="file" accept="image/*" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900 mb-4" aria-label="Upload photo">
+        <div id="photo-preview" class="hidden mb-4">
+          <img id="preview-img" src="" alt="Photo Preview" class="w-full h-64 object-cover rounded-lg">
+          <button onclick="addToGallery()" class="btn mt-4" aria-label="Add to Gallery">Add to Gallery</button>
         </div>
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
       </div>
-      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <img src="images/IMG-20250421-WA0000.jpg" alt="Personal Photo" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 0)" data-aos="fade-up" data-aos-delay="100" data-src="images/IMG-20250421-WA0000.jpg">
-        <img src="images/project1.jpg" alt="Project 1" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 1)" data-aos="fade-up" data-aos-delay="200" data-src="images/project1.jpg">
-        <img src="images/iot_setup.jpg" alt="IoT Setup" class="rounded-lg object-cover w-full h-52 card cursor-pointer" onclick="openLightbox(this.src, this.alt, 2)" data-aos="fade-up" data-aos-delay="300" data-src="images/iot_setup.jpg">
-      </div>
-      <div id="lightbox" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
-        <span onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl cursor-pointer" aria-label="Close lightbox">×</span>
-        <button onclick="prevImage()" class="absolute left-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-        <img id="lightbox-img" class="max-w-[90%] max-h-[80%] rounded-lg" alt="Lightbox Image">
-        <button onclick="nextImage()" class="absolute right-4 top-1/2 text-white text-2xl cursor-pointer" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-        <p id="lightbox-caption" class="text-white mt-4 text-lg font-montserrat"></p>
+      <div id="lightbox" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[2000]" role="dialog" aria-labelledby="lightbox-caption">
+        <div class="relative max-w-4xl w-full">
+          <img id="lightbox-img" src="" alt="Lightbox Image" class="w-full rounded-lg">
+          <p id="lightbox-caption" class="text-white text-center mt-4 font-montserrat"></p>
+          <button onclick="prevImage()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-2 rounded-full" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+          <button onclick="nextImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-2 rounded-full" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+          <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
+        </div>
       </div>
     </section>
 
-    <!-- Resume Builder Section -->
-    <section id="resume" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/resume-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Resume Builder</h2>
-      <div class="card p-10 max-w-4xl mx-auto">
-        <form id="resume-form" class="space-y-6">
+    <!-- Resume Form Section -->
+    <section id="resume" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/resume-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Build Your Resume</h2>
+      <div class="card p-10 max-w-5xl mx-auto">
+        <form id="resume-form" class="space-y-4">
           <div>
-            <input id="resume-name" type="text" placeholder="Full Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume name" required>
+            <input id="resume-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume name" required>
             <p id="name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
           </div>
           <div>
-            <input id="resume-email" type="email" placeholder="Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume email" required>
+            <input id="resume-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Resume email" required>
             <p id="email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
           </div>
           <div>
-            <textarea id="resume-experience" placeholder="Experience (e.g., Guts Electro Mech - Quality Assurance)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume experience" required></textarea>
+            <textarea id="resume-experience" placeholder="Your Experience" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume experience" required></textarea>
             <p id="experience-error" class="text-red-500 text-sm hidden">Experience must be at least 10 characters.</p>
           </div>
           <div>
-            <textarea id="resume-skills" placeholder="Skills (e.g., JavaScript, ESP32)" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume skills" required></textarea>
+            <textarea id="resume-skills" placeholder="Your Skills" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Resume skills" required></textarea>
             <p id="skills-error" class="text-red-500 text-sm hidden">Skills must be at least 10 characters.</p>
           </div>
-          <button type="submit" class="w-full btn" aria-label="Preview Resume">Preview Resume</button>
+          <button type="submit" class="w-full btn" aria-label="Generate Resume">Generate Resume</button>
         </form>
-        <div id="resume-preview" class="mt-8 hidden">
+        <div id="resume-preview" class="hidden mt-8">
           <h3 class="text-xl font-semibold font-montserrat mb-4">Resume Preview</h3>
-          <p><strong>Name:</strong> <span id="preview-name"></span></p>
-          <p><strong>Email:</strong> <span id="preview-email"></span></p>
-          <p><strong>Experience:</strong> <span id="preview-experience"></span></p>
-          <p><strong>Skills:</strong> <span id="preview-skills"></span></p>
-          <button id="resume-download" class="block mt-6 btn" aria-label="Download Resume">Download Resume (PDF)</button>
+          <p><strong>Name:</strong> <span id="preview-name" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+          <p><strong>Email:</strong> <span id="preview-email" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+          <p><strong>Experience:</strong> <span id="preview-experience" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
+          <p><strong>Skills:</strong> <span id="preview-skills" class="text-gray-600 dark:text-gray-300 sepia:text-amber-700"></span></p>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/contact-bg.jpg');">
-      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Contact</h2>
-      <div class="card p-10 max-w-md mx-auto">
-        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy phone number">9381329751</span></p>
-        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy email">aravind@example.com</span></p>
-        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
-        <p><strong>GitHub:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub profile">github.com/aravind</a></p>
-        <div id="qr-code" class="mt-6 flex justify-center"></div>
-        <div class="mt-6">
+    <section id="contact" class="section py-16" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/contact-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Contact Me</h2>
+      <div class="card p-10 max-w-5xl mx-auto">
+        <div class="flex justify-center mb-8">
+          <canvas id="qr-code" aria-label="QR code for portfolio"></canvas>
+        </div>
+        <div class="mb-8">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
         </div>
         <form id="contact-form" class="mt-8 space-y-4">
@@ -932,6 +1091,11 @@
           <div>
             <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
             <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+          </div>
+          <div>
+            <label for="captcha" class="block text-gray-600 dark:text-gray-300 sepia:text-amber-700 mb-2" id="captcha-question">CAPTCHA: Loading...</label>
+            <input id="captcha" type="number" placeholder="Enter answer" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="CAPTCHA answer" required>
+            <p id="captcha-error" class="text-red-500 text-sm hidden">Incorrect CAPTCHA answer.</p>
           </div>
           <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
         </form>
@@ -1090,31 +1254,43 @@
         }
         type();
 
-        // Skills Chart
-        try {
-          new Chart(document.getElementById('skills-chart'), {
-            type: 'bar',
-            data: {
-              labels: ['HTML & CSS', 'JavaScript', 'React.js', 'Node.js', 'Arduino & ESP32', 'Quality Assurance'],
-              datasets: [{
-                label: 'Proficiency',
-                data: [90, 85, 80, 75, 70, 85],
-                backgroundColor: ['#6d28d9', '#14b8a6', '#f59e0b', '#6d28d9', '#14b8a6', '#f59e0b'],
-                borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              indexAxis: 'y',
-              scales: {
-                x: { beginAtZero: true, max: 100, title: { display: true, text: 'Proficiency (%)' } }
-              },
-              plugins: { legend: { display: false }, tooltip: { enabled: true } }
-            }
+        // Animated Progress Circles
+        function animateProgressCircles() {
+          document.querySelectorAll('.progress-circle').forEach(circle => {
+            const progress = circle.dataset.progress;
+            const circleFg = circle.querySelector('.circle-fg');
+            const circumference = 2 * Math.PI * 36; // r=36 from SVG
+            const offset = circumference * (1 - progress / 100);
+            circleFg.style.strokeDashoffset = offset;
           });
-        } catch (e) {
-          console.warn('Chart.js initialization failed:', e);
         }
+        animateProgressCircles();
+
+        // Skill Rating System
+        const skillRatings = JSON.parse(localStorage.getItem('skillRatings')) || {};
+        function updateAverageRatings() {
+          document.querySelectorAll('.avg-rating').forEach(span => {
+            const skill = span.dataset.skill;
+            const ratings = skillRatings[skill] || [];
+            const avg = ratings.length ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1) : '0.0';
+            span.textContent = avg;
+          });
+        }
+        document.querySelectorAll('.star-rating').forEach(rating => {
+          const skill = rating.dataset.skill;
+          rating.querySelectorAll('.fa-star').forEach((star, index) => {
+            star.addEventListener('click', () => {
+              if (!skillRatings[skill]) skillRatings[skill] = [];
+              skillRatings[skill].push(index + 1);
+              localStorage.setItem('skillRatings', JSON.stringify(skillRatings));
+              rating.querySelectorAll('.fa-star').forEach((s, i) => {
+                s.classList.toggle('active', i <= index);
+              });
+              updateAverageRatings();
+            });
+          });
+        });
+        updateAverageRatings();
 
         // Carousel
         let currentSlide = 0;
@@ -1153,6 +1329,44 @@
           });
           moveToSlide(0);
         });
+
+        // Project Modal
+        const projectData = [
+          {
+            title: 'Job Portal',
+            description: 'A responsive job search platform with advanced filtering and user authentication.',
+            tech: 'Technologies: React, Node.js, Tailwind CSS, MongoDB',
+            challenges: 'Challenges: Implementing real-time search and secure authentication.',
+            outcomes: 'Outcomes: Achieved 30% faster job matching and 99% uptime.'
+          },
+          {
+            title: 'IoT Smart Home',
+            description: 'An IoT project using Arduino and ESP32 for home appliance control with sensor interfacing.',
+            tech: 'Technologies: Arduino, ESP32, MQTT, JavaScript',
+            challenges: 'Challenges: Ensuring low-latency communication and sensor accuracy.',
+            outcomes: 'Outcomes: Reduced energy consumption by 15% through automation.'
+          },
+          {
+            title: 'ESP32 Sensor Dashboard',
+            description: 'A web dashboard to monitor ESP32 sensor data, built with Node.js and Chart.js.',
+            tech: 'Technologies: Node.js, Chart.js, Express, WebSocket',
+            challenges: 'Challenges: Handling real-time data updates and scalability.',
+            outcomes: 'Outcomes: Enabled real-time monitoring for 100+ devices.'
+          }
+        ];
+        function openProjectModal(index) {
+          document.getElementById('project-modal-title').textContent = projectData[index].title;
+          document.getElementById('project-modal-description').textContent = projectData[index].description;
+          document.getElementById('project-modal-tech').textContent = projectData[index].tech;
+          document.getElementById('project-modal-challenges').textContent = projectData[index].challenges;
+          document.getElementById('project-modal-outcomes').textContent = projectData[index].outcomes;
+          document.getElementById('project-modal').classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeProjectModal() {
+          document.getElementById('project-modal').classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
 
         // Job Filter
         const jobFilter = document.getElementById('job-filter');
@@ -1308,7 +1522,90 @@
           }
         });
 
-        // Contact Form
+        // Testimonial Form
+        const testimonialForm = document.getElementById('testimonial-form');
+        const testimonialGrid = document.getElementById('testimonial-grid');
+        const testimonials = JSON.parse(localStorage.getItem('testimonials')) || [];
+        function renderTestimonials() {
+          testimonials.forEach((testimonial, index) => {
+            const div = document.createElement('div');
+            div.className = 'card testimonial-card p-8';
+            div.dataset.aos = 'fade-up';
+            div.dataset.aosDelay = (index + 3) * 100;
+            div.innerHTML = `
+              <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"${testimonial.message}"</p>
+              <p class="mt-4 font-semibold font-montserrat">${testimonial.name}, ${testimonial.title}</p>
+            `;
+            testimonialGrid.appendChild(div);
+          });
+          AOS.refresh();
+        }
+        renderTestimonials();
+        testimonialForm.addEventListener('submit', e => {
+          e.preventDefault();
+          let valid = true;
+          const name = document.getElementById('testimonial-name').value;
+          const title = document.getElementById('testimonial-title').value;
+          const message = document.getElementById('testimonial-message').value;
+          const nameError = document.getElementById('testimonial-name-error');
+          const titleError = document.getElementById('testimonial-title-error');
+          const messageError = document.getElementById('testimonial-message-error');
+          nameError.classList.add('hidden');
+          titleError.classList.add('hidden');
+          messageError.classList.add('hidden');
+          if (!/^[a-zA-Z\s]+$/.test(name)) {
+            nameError.classList.remove('hidden');
+            valid = false;
+          }
+          if (!title.trim()) {
+            titleError.classList.remove('hidden');
+            valid = false;
+          }
+          if (message.length < 10) {
+            messageError.classList.remove('hidden');
+            valid = false;
+          }
+          if (valid) {
+            testimonials.push({ name, title, message });
+            localStorage.setItem('testimonials', JSON.stringify(testimonials));
+            const div = document.createElement('div');
+            div.className = 'card testimonial-card p-8';
+            div.dataset.aos = 'fade-up';
+            div.dataset.aosDelay = (testimonials.length + 2) * 100;
+            div.innerHTML = `
+              <p class="text-gray-600 dark:text-gray-300 sepia:text-amber-700 italic">"${message}"</p>
+              <p class="mt-4 font-semibold font-montserrat">${name}, ${title}</p>
+            `;
+            testimonialGrid.appendChild(div);
+            AOS.refresh();
+            document.getElementById('testimonial-success').classList.remove('hidden');
+            try {
+              lottie.loadAnimation({
+                container: document.getElementById('lottie-testimonial-success'),
+                renderer: 'svg',
+                loop: false,
+                autoplay: true,
+                path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+              });
+            } catch (e) {
+              console.warn('Lottie animation failed to load:', e);
+            }
+            testimonialForm.reset();
+            setTimeout(() => {
+              document.getElementById('testimonial-success').classList.add('hidden');
+            }, 3000);
+          }
+        });
+
+        // Contact Form with CAPTCHA
+        let captchaAnswer;
+        function generateCaptcha() {
+          const num1 = Math.floor(Math.random() * 10) + 1;
+          const num2 = Math.floor(Math.random() * 10) + 1;
+          captchaAnswer = num1 + num2;
+          document.getElementById('captcha-question').textContent = `CAPTCHA: What is ${num1} + ${num2}?`;
+        }
+        generateCaptcha();
         const contactForm = document.getElementById('contact-form');
         contactForm.addEventListener('submit', e => {
           e.preventDefault();
@@ -1316,12 +1613,15 @@
           const name = document.getElementById('contact-name').value;
           const email = document.getElementById('contact-email').value;
           const message = document.getElementById('contact-message').value;
+          const captcha = parseInt(document.getElementById('captcha').value);
           const nameError = document.getElementById('contact-name-error');
           const emailError = document.getElementById('contact-email-error');
           const messageError = document.getElementById('contact-message-error');
+          const captchaError = document.getElementById('captcha-error');
           nameError.classList.add('hidden');
           emailError.classList.add('hidden');
           messageError.classList.add('hidden');
+          captchaError.classList.add('hidden');
           if (!/^[a-zA-Z\s]+$/.test(name)) {
             nameError.classList.remove('hidden');
             valid = false;
@@ -1332,6 +1632,10 @@
           }
           if (message.length < 10) {
             messageError.classList.remove('hidden');
+            valid = false;
+          }
+          if (captcha !== captchaAnswer) {
+            captchaError.classList.remove('hidden');
             valid = false;
           }
           if (valid) {
@@ -1348,6 +1652,7 @@
               console.warn('Lottie animation failed to load:', e);
             }
             contactForm.reset();
+            generateCaptcha();
             setTimeout(() => {
               document.getElementById('contact-success').classList.add('hidden');
             }, 3000);
@@ -1424,8 +1729,23 @@
           link.click();
         }
 
-        // Share Portfolio
+        // Share Portfolio and Sections
+        const shareCounts = JSON.parse(localStorage.getItem('shareCounts')) || {
+          portfolio: 0,
+          projects: 0,
+          jobs: 0,
+          'resume-pdf': 0
+        };
+        function updateShareCounts() {
+          document.getElementById('portfolio-share-count').textContent = `(${shareCounts.portfolio})`;
+          document.getElementById('projects-share-count').textContent = `(${shareCounts.projects})`;
+          document.getElementById('jobs-share-count').textContent = `(${shareCounts.jobs})`;
+          document.getElementById('resume-pdf-share-count').textContent = `(${shareCounts['resume-pdf']})`;
+        }
         function sharePortfolio() {
+          shareCounts.portfolio++;
+          localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
+          updateShareCounts();
           if (navigator.share) {
             navigator.share({
               title: 'Jogi Bala Venkata Aravind - Portfolio',
@@ -1434,6 +1754,20 @@
             }).catch(err => console.warn('Share failed:', err));
           } else {
             copyToClipboard(window.location.href);
+          }
+        }
+        function shareSection(sectionId, text) {
+          shareCounts[sectionId]++;
+          localStorage.setItem('shareCounts', JSON.stringify(shareCounts));
+          updateShareCounts();
+          if (navigator.share) {
+            navigator.share({
+              title: `Jogi Bala Venkata Aravind - ${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}`,
+              text,
+              url: `${window.location.href}#${sectionId}`
+            }).catch(err => console.warn('Share failed:', err));
+          } else {
+            copyToClipboard(`${window.location.href}#${sectionId}`);
           }
         }
 
@@ -1491,6 +1825,7 @@
           if (e.key === 'Escape') {
             closeLightbox();
             closeBlogModal();
+            closeProjectModal();
           }
         });
       });
