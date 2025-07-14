@@ -410,6 +410,9 @@
       height: 200px;
       margin: 0 auto;
     }
+    .hidden {
+      display: none !important;
+    }
     @media (max-width: 768px) {
       .section { padding: 4rem 0.75rem; }
       h2 { font-size: 2.5rem; }
@@ -906,573 +909,583 @@
       </div>
     </section>
 
-    <!-- Continuation of Contact Section -->
-  <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/contact-bg.jpg');">
-    <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Contact</h2>
-    <div class="card p-10 max-w-md mx-auto">
-      <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy phone number">9381329751</span></p>
-      <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy email">aravind@example.com</span></p>
-      <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
-      <p><strong>GitHub:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub profile">github.com/aravind</a></p>
-      <div id="qr-code" class="mt-6 flex justify-center"></div>
-      <div class="mt-6">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
-      </div>
-      <form id="contact-form" class="mt-8 space-y-4">
-        <div>
-          <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact name" required>
-          <p id="contact-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+    <!-- Contact Section -->
+    <section id="contact" class="section py-16 bg-gray-100/50 dark:bg-gray-900/50 sepia:bg-amber-100/50" data-aos="fade-up" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('images/contact-bg.jpg');">
+      <h2 class="text-3xl font-bold text-center mb-12 section-header font-montserrat">Contact</h2>
+      <div class="card p-10 max-w-md mx-auto">
+        <p><strong>Phone:</strong> <span onclick="copyToClipboard('9381329751')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy phone number">9381329751</span></p>
+        <p><strong>Email:</strong> <span onclick="copyToClipboard('aravind@example.com')" class="cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Copy email">aravind@example.com</span></p>
+        <p><strong>LinkedIn:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn profile">linkedin.com/in/aravind</a></p>
+        <p><strong>GitHub:</strong> <a href="#" class="hover:text-purple-600 dark:hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub profile">github.com/aravind</a></p>
+        <div id="qr-code" class="mt-6 flex justify-center"></div>
+        <div class="mt-6">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.440496297904!2d78.45635531462372!3d17.43992998799712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb974c2b7d2b4f%3A0x3c1c7a3e1e7f0b2!2sHyderabad%2C%20Telangana%2C%20India!5e0!3m2!1sen!2sin!4v1696431234567!5m2!1sen!2sin" width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" aria-label="Map of Hyderabad"></iframe>
         </div>
-        <div>
-          <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
-          <p id="contact-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+        <form id="contact-form" class="mt-8 space-y-4">
+          <div>
+            <input id="contact-name" type="text" placeholder="Your Name" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contactname" required>
+            <p id="contact-name-error" class="text-red-500 text-sm hidden">Name should contain only letters and spaces.</p>
+          </div>
+          <div>
+            <input id="contact-email" type="email" placeholder="Your Email" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" aria-label="Contact email" required>
+            <p id="contact-email-error" class="text-red-500 text-sm hidden">Invalid email address.</p>
+          </div>
+          <div>
+            <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
+            <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+          </div>
+          <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
+        </form>
+        <div id="contact-success" class="hidden mt-4">
+          <div id="lottie-contact-success" class="lottie-success"></div>
+          <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Message sent successfully!</p>
         </div>
-        <div>
-          <textarea id="contact-message" placeholder="Your Message" class="w-full p-3 rounded bg-white/80 dark:bg-gray-800/80 sepia:bg-amber-100/80 border border-gray-300/50 dark:border-gray-600/50 sepia:border-amber-200/50 text-gray-800 dark:text-white sepia:text-amber-900" rows="4" maxlength="500" aria-label="Contact message" required></textarea>
-          <p id="contact-message-error" class="text-red-500 text-sm hidden">Message must be at least 10 characters.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 dark:bg-gray-800 sepia:bg-amber-200 text-white dark:text-gray-300 sepia:text-amber-900">
+      <div class="container mx-auto text-center">
+        <p>© 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-4">
+          <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+          <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
         </div>
-        <button type="submit" class="w-full btn" aria-label="Send Message">Send Message</button>
-      </form>
-      <div id="contact-success" class="hidden mt-4">
-        <div id="lottie-contact-success" class="lottie-success"></div>
-        <p class="text-center text-gray-600 dark:text-gray-300 sepia:text-amber-700">Message sent successfully!</p>
+        <p class="mt-4 text-sm">Built with <span class="text-red-500">♥</span> in Hyderabad</p>
       </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="py-8 bg-gray-900 dark:bg-gray-800 sepia:bg-amber-200 text-white dark:text-gray-300 sepia:text-amber-900">
-    <div class="container mx-auto text-center">
-      <p>&copy; 2025 Jogi Bala Venkata Aravind. All rights reserved.</p>
-      <div class="flex justify-center space-x-4 mt-4">
-        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
-        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-        <a href="#" class="hover:text-purple-400 sepia:hover:text-amber-600" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
-      </div>
-      <p class="mt-4 text-sm">Built with <span class="text-red-500">&hearts;</span> in Hyderabad</p>
-    </div>
-  </footer>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">Copied!</div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden">Copied!</div>
+    <!-- JavaScript -->
+    <script>
+      // Initialize AOS
+      AOS.init({ duration: 1000, once: true });
 
-  <!-- JavaScript -->
-  <script>
-    // Initialize AOS
-    AOS.init({ duration: 1000, once: true });
-
-    // Particles.js
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: ['#6d28d9', '#14b8a6', '#f59e0b'] },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: true },
-        size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 150, color: '#14b8a6', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 2, direction: 'none', random: false }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-      },
-      retina_detect: true
-    });
-
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeMenu = document.getElementById('theme-menu');
-    const body = document.getElementById('body');
-    themeToggle.addEventListener('click', () => {
-      themeMenu.classList.toggle('hidden');
-    });
-    themeMenu.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', () => {
-        const theme = button.dataset.theme;
-        body.classList.remove('dark-mode', 'sepia-mode');
-        if (theme === 'dark') body.classList.add('dark-mode');
-        else if (theme === 'sepia') body.classList.add('sepia-mode');
-        themeMenu.classList.add('hidden');
-        localStorage.setItem('theme', theme);
-      });
-    });
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      body.classList.remove('dark-mode', 'sepia-mode');
-      if (savedTheme === 'dark') body.classList.add('dark-mode');
-      else if (savedTheme === 'sepia') body.classList.add('sepia-mode');
-    }
-
-    // Mobile Menu
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const navLinks = document.getElementById('nav-links');
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('hidden');
-      mobileMenuBtn.classList.toggle('active');
-    });
-
-    // Sticky Navbar
-    const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('sticky');
-      } else {
-        navbar.classList.remove('sticky');
-      }
-    });
-
-    // Section Observer
-    const sections = document.querySelectorAll('.section');
-    const navLinksEls = document.querySelectorAll('.nav-link');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          navLinksEls.forEach(link => {
-            link.classList.toggle('text-purple-600', link.dataset.section === entry.target.id);
-            link.classList.toggle('dark:text-purple-400', link.dataset.section === entry.target.id);
-            link.classList.toggle('sepia:text-amber-600', link.dataset.section === entry.target.id);
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-    sections.forEach(section => observer.observe(section));
-
-    // Back to Top
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('hidden', window.scrollY < 300);
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Custom Cursor
-    const customCursor = document.getElementById('custom-cursor');
-    document.addEventListener('mousemove', e => {
-      customCursor.style.left = e.clientX + 'px';
-      customCursor.style.top = e.clientY + 'px';
-    });
-    document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
-      el.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
-    });
-
-    // Typed Animation
-    const typed = document.getElementById('typed');
-    const roles = ['Full-Stack Developer', 'IoT Enthusiast', 'Quality Assurance Expert', 'Web Innovator'];
-    let roleIndex = 0, charIndex = 0;
-    function type() {
-      if (charIndex < roles[roleIndex].length) {
-        typed.textContent += roles[roleIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 100);
-      } else {
-        setTimeout(() => {
-          charIndex = 0;
-          typed.textContent = '';
-          roleIndex = (roleIndex + 1) % roles.length;
-          type();
-        }, 2000);
-      }
-    }
-    type();
-
-    // Skills Chart
-    ```chartjs
-    {
-      "type": "bar",
-      "data": {
-        "labels": ["HTML & CSS", "JavaScript", "React.js", "Node.js", "Arduino & ESP32", "Quality Assurance"],
-        "datasets": [{
-          "label": "Proficiency",
-          "data": [90, 85, 80, 75, 70, 85],
-          "backgroundColor": ["#6d28d9", "#14b8a6", "#f59e0b", "#6d28d9", "#14b8a6", "#f59e0b"],
-          "borderColor": ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
-          "borderWidth": 1
-        }]
-      },
-      "options": {
-        "indexAxis": "y",
-        "scales": {
-          "x": {
-            "beginAtZero": true,
-            "max": 100,
-            "title": { "display": true, "text": "Proficiency (%)" }
-          }
+      // Particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: ['#6d28d9', '#14b8a6', '#f59e0b'] },
+          shape: { type: 'circle' },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: '#14b8a6', opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, direction: 'none', random: false }
         },
-        "plugins": {
-          "legend": { "display": false },
-          "tooltip": { "enabled": true }
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+          modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+      });
+
+      // Theme Toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeMenu = document.getElementById('theme-menu');
+      const body = document.getElementById('body');
+      themeToggle.addEventListener('click', () => {
+        themeMenu.classList.toggle('hidden');
+      });
+      themeMenu.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          const theme = button.dataset.theme;
+          body.classList.remove('dark-mode', 'sepia-mode');
+          if (theme === 'dark') body.classList.add('dark-mode');
+          else if (theme === 'sepia') body.classList.add('sepia-mode');
+          themeMenu.classList.add('hidden');
+          localStorage.setItem('theme', theme);
+        });
+      });
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        body.classList.remove('dark-mode', 'sepia-mode');
+        if (savedTheme === 'dark') body.classList.add('dark-mode');
+        else if (savedTheme === 'sepia') body.classList.add('sepia-mode');
+      }
+
+      // Mobile Menu
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navLinks = document.getElementById('nav-links');
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+        mobileMenuBtn.classList.toggle('active');
+      });
+
+      // Sticky Navbar
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
+        }
+      });
+
+      // Section Observer
+      const sections = document.querySelectorAll('.section');
+      const navLinksEls = document.querySelectorAll('.nav-link');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            navLinksEls.forEach(link => {
+              link.classList.toggle('text-purple-600', link.dataset.section === entry.target.id);
+              link.classList.toggle('dark:text-purple-400', link.dataset.section === entry.target.id);
+              link.classList.toggle('sepia:text-amber-600', link.dataset.section === entry.target.id);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      sections.forEach(section => observer.observe(section));
+
+      // Back to Top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('hidden', window.scrollY < 300);
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Custom Cursor
+      const customCursor = document.getElementById('custom-cursor');
+      document.addEventListener('mousemove', e => {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+        el.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
+        el.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
+      });
+
+      // Typed Animation
+      const typed = document.getElementById('typed');
+      const roles = ['Full-Stack Developer', 'IoT Enthusiast', 'Quality Assurance Expert', 'Web Innovator'];
+      let roleIndex = 0, charIndex = 0;
+      function type() {
+        if (charIndex < roles[roleIndex].length) {
+          typed.textContent += roles[roleIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(type, 100);
+        } else {
+          setTimeout(() => {
+            charIndex = 0;
+            typed.textContent = '';
+            roleIndex = (roleIndex + 1) % roles.length;
+            type();
+          }, 2000);
         }
       }
-    }
-    ```
+      type();
 
-    // Carousel
-    let currentSlide = 0;
-    const carouselInner = document.getElementById('carousel-inner');
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    const carouselDots = document.getElementById('carousel-dots');
-    carouselItems.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.classList.add('carousel-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.onclick = () => moveToSlide(i);
-      carouselDots.appendChild(dot);
-    });
-    function moveCarousel(direction) {
-      const totalSlides = carouselItems.length;
-      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-      carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
-    function moveToSlide(index) {
-      currentSlide = index;
-      carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
+      // Skills Chart
+      ```chartjs
+      {
+        "type": "bar",
+        "data": {
+          "labels": ["HTML & CSS", "JavaScript", "React.js", "Node.js", "Arduino & ESP32", "Quality Assurance"],
+          "datasets": [{
+            "label": "Proficiency",
+            "data": [90, 85, 80, 75, 70, 85],
+            "backgroundColor": ["#6d28d9", "#14b8a6", "#f59e0b", "#6d28d9", "#14b8a6", "#f59e0b"],
+            "borderColor": ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
+            "borderWidth": 1
+          }]
+        },
+        "options": {
+          "indexAxis": "y",
+          "scales": {
+            "x": {
+              "beginAtZero": true,
+              "max": 100,
+              "title": { "display": true, "text": "Proficiency (%)" }
+            }
+          },
+          "plugins": {
+            "legend": { "display": false },
+            "tooltip": { "enabled": true }
+          }
+        }
+      }
+      ```
 
-    // Project Filter
-    const projectFilter = document.getElementById('project-filter');
-    projectFilter.addEventListener('change', () => {
-      const category = projectFilter.value;
-      carouselItems.forEach(item => {
-        item.style.display = category === '' || item.dataset.category === category ? 'block' : 'none';
+      // Carousel
+      let currentSlide = 0;
+      const carouselInner = document.getElementById('carousel-inner');
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const carouselDots = document.getElementById('carousel-dots');
+      carouselItems.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => moveToSlide(i);
+        carouselDots.appendChild(dot);
       });
-      moveToSlide(0);
-    });
+      function moveCarousel(direction) {
+        const totalSlides = carouselItems.length;
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlide);
+        });
+      }
+      function moveToSlide(index) {
+        currentSlide = index;
+        carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlide);
+        });
+      }
 
-    // Job Filter
-    const jobFilter = document.getElementById('job-filter');
-    const jobCategory = document.getElementById('job-category');
-    const jobListings = document.getElementById('job-listings');
-    const jobCards = document.querySelectorAll('.job-card');
-    function filterJobs() {
-      const filterText = jobFilter.value.toLowerCase();
-      const category = jobCategory.value;
-      jobCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const matchesText = filterText === '' || title.includes(filterText);
-        const matchesCategory = category === '' || card.dataset.category === category;
-        card.style.display = matchesText && matchesCategory ? 'block' : 'none';
+      // Project Filter
+      const projectFilter = document.getElementById('project-filter');
+      projectFilter.addEventListener('change', () => {
+        const category = projectFilter.value;
+        carouselItems.forEach(item => {
+          item.style.display = category === '' || item.dataset.category === category ? 'block' : 'none';
+        });
+        moveToSlide(0);
       });
-    }
-    jobFilter.addEventListener('input', filterJobs);
-    jobCategory.addEventListener('change', filterJobs);
 
-    // ESP32 Data Simulation
-    document.getElementById('esp32-refresh').addEventListener('click', () => {
-      const temp = document.getElementById('esp32-temp');
-      const humidity = document.getElementById('esp32-humidity');
-      temp.classList.add('active');
-      humidity.classList.add('active');
+      // Job Filter
+      const jobFilter = document.getElementById('job-filter');
+      const jobCategory = document.getElementById('job-category');
+      const jobListings = document.getElementById('job-listings');
+      const jobCards = document.querySelectorAll('.job-card');
+      function filterJobs() {
+        const filterText = jobFilter.value.toLowerCase();
+        const category = jobCategory.value;
+        jobCards.forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const matchesText = filterText === '' || title.includes(filterText);
+          const matchesCategory = category === '' || card.dataset.category === category;
+          card.style.display = matchesText && matchesCategory ? 'block' : 'none';
+        });
+      }
+      jobFilter.addEventListener('input', filterJobs);
+      jobCategory.addEventListener('change', filterJobs);
+
+      // ESP32 Data Simulation
+      document.getElementById('esp32-refresh').addEventListener('click', () => {
+        const temp = document.getElementById('esp32-temp');
+        const humidity = document.getElementById('esp32-humidity');
+        temp.classList.add('active');
+        humidity.classList.add('active');
+        setTimeout(() => {
+          temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
+          humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
+          temp.classList.remove('active');
+          humidity.classList.remove('active');
+        }, 500);
+      });
+
+      // Photo Upload and Gallery
+      const photoUpload = document.getElementById('photo-upload');
+      const photoPreview = document.getElementById('photo-preview');
+      const previewImg = document.getElementById('preview-img');
+      const galleryGrid = document.getElementById('gallery-grid');
+      photoUpload.addEventListener('change', () => {
+        const file = photoUpload.files[0];
+        if (file && file.type.startsWith('image/')) {
+          previewImg.src = URL.createObjectURL(file);
+          photoPreview.classList.remove('hidden');
+        }
+      });
+      function addToGallery() {
+        const file = photoUpload.files[0];
+        if (file) {
+          const img = document.createElement('img');
+          img.src = previewImg.src;
+          img.alt = 'Uploaded Photo';
+          img.className = 'rounded-lg object-cover w-full h-52 card cursor-pointer';
+          img.dataset.src = img.src;
+          img.onclick = () => openLightbox(img.src, img.alt, galleryGrid.children.length);
+          galleryGrid.appendChild(img);
+          photoPreview.classList.add('hidden');
+          photoUpload.value = '';
+        }
+      }
+
+      // Lightbox
+      let currentImageIndex = 0;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      function openLightbox(src, alt, index) {
+        currentImageIndex = index;
+        lightboxImg.src = src;
+        lightboxCaption.textContent = alt;
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+      function prevImage() {
+        const images = document.querySelectorAll('#gallery-grid img');
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentImageIndex].src;
+        lightboxCaption.textContent = images[currentImageIndex].alt;
+      }
+      function nextImage() {
+        const images = document.querySelectorAll('#gallery-grid img');
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        lightboxImg.src = images[currentImageIndex].src;
+        lightboxCaption.textContent = images[currentImageIndex].alt;
+      }
+
+      // Blog Modal
+      const blogData = [
+        { title: 'Building a Job Portal with React', content: 'This blog post covers the step-by-step process of creating a responsive job portal using React and Tailwind CSS, including user authentication and job filtering.', date: 'Published: July 10, 2025' },
+        { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to get started with ESP32 for IoT projects, including sensor interfacing, data monitoring, and building a web dashboard for real-time data visualization.', date: 'Published: July 5, 2025' }
+      ];
+      function openBlogModal(index) {
+        document.getElementById('modal-title').textContent = blogData[index].title;
+        document.getElementById('modal-content').textContent = blogData[index].content;
+        document.getElementById('modal-date').textContent = blogData[index].date;
+        document.getElementById('blog-modal').classList.remove('hidden');
+      }
+      function closeBlogModal() {
+        document.getElementById('blog-modal').classList.add('hidden');
+      }
+
+      // Accordion
+      function toggleAccordion(index) {
+        const content = document.getElementById(`accordion-content-${index}`);
+        const header = content.previousElementSibling;
+        content.classList.toggle('active');
+        header.querySelector('i').classList.toggle('fa-chevron-down');
+        header.querySelector('i').classList.toggle('fa-chevron-up');
+        header.setAttribute('aria-expanded', content.classList.contains('active'));
+      }
+
+      // Resume Form
+      const resumeForm = document.getElementById('resume-form');
+      resumeForm.addEventListener('submit', e => {
+        e.preventDefault();
+        let valid = true;
+        const name = document.getElementById('resume-name').value;
+        const email = document.getElementById('resume-email').value;
+        const experience = document.getElementById('resume-experience').value;
+        const skills = document.getElementById('resume-skills').value;
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const experienceError = document.getElementById('experience-error');
+        const skillsError = document.getElementById('skills-error');
+        nameError.classList.add('hidden');
+        emailError.classList.add('hidden');
+        experienceError.classList.add('hidden');
+        skillsError.classList.add('hidden');
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+          nameError.classList.remove('hidden');
+          valid = false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          emailError.classList.remove('hidden');
+          valid = false;
+        }
+        if (experience.length < 10) {
+          experienceError.classList.remove('hidden');
+          valid = false;
+        }
+        if (skills.length < 10) {
+          skillsError.classList.remove('hidden');
+          valid = false;
+        }
+        if (valid) {
+          document.getElementById('preview-name').textContent = name;
+          document.getElementById('preview-email').textContent = email;
+          document.getElementById('preview-experience').textContent = experience;
+          document.getElementById('preview-skills').textContent = skills;
+          document.getElementById('resume-preview').classList.remove('hidden');
+        }
+      });
+
+      // Contact Form
+      const contactForm = document.getElementById('contact-form');
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        let valid = true;
+        const name = document.getElementById('contact-name').value;
+        const email = document.getElementById('contact-email').value;
+        const message = document.getElementById('contact-message').value;
+        const nameError = document.getElementById('contact-name-error');
+        const emailError = document.getElementById('contact-email-error');
+        const messageError = document.getElementById('contact-message-error');
+        nameError.classList.add('hidden');
+        emailError.classList.add('hidden');
+        messageError.classList.add('hidden');
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+          nameError.classList.remove('hidden');
+          valid = false;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          emailError.classList.remove('hidden');
+          valid = false;
+        }
+        if (message.length < 10) {
+          messageError.classList.remove('hidden');
+          valid = false;
+        }
+        if (valid) {
+          document.getElementById('contact-success').classList.remove('hidden');
+          lottie.loadAnimation({
+            container: document.getElementById('lottie-contact-success'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+          });
+          contactForm.reset();
+          setTimeout(() => {
+            document.getElementById('contact-success').classList.add('hidden');
+          }, 3000);
+        }
+      });
+
+      // Newsletter Form
+      const newsletterForm = document.getElementById('newsletter-form');
+      newsletterForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        const emailError = document.getElementById('newsletter-email-error');
+        emailError.classList.add('hidden');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          emailError.classList.remove('hidden');
+        } else {
+          document.getElementById('newsletter-success').classList.remove('hidden');
+          lottie.loadAnimation({
+            container: document.getElementById('lottie-success'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+          });
+          newsletterForm.reset();
+          setTimeout(() => {
+            document.getElementById('newsletter-success').classList.add('hidden');
+          }, 3000);
+        }
+      });
+
+      // Copy to Clipboard
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById('toast');
+          toast.textContent = `Copied ${text}!`;
+          toast.classList.remove('hidden');
+          setTimeout(() => toast.classList.add('hidden'), 2000);
+        });
+      }
+
+      // QR Code
+      QRCode.toCanvas(document.getElementById('qr-code'), window.location.href, { width: 150 }, err => {
+        if (err) console.error(err);
+      });
+
+      // Download Counter
+      let resumeCount = 0, portfolioCount = 0;
+      document.getElementById('resume-download').addEventListener('click', () => {
+        resumeCount++;
+        document.getElementById('resume-download-count').textContent = `(${resumeCount})`;
+        downloadResumePDF();
+      });
+      function downloadPortfolioPDF() {
+        portfolioCount++;
+        document.getElementById('portfolio-download-count').textContent = `(${portfolioCount})`;
+        const link = document.createElement('a');
+        link.href = 'assets/portfolio.pdf';
+        link.download = 'portfolio.pdf';
+        link.click();
+      }
+      function downloadResumePDF() {
+        const link = document.createElement('a');
+        link.href = 'assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
+        link.download = 'resume.pdf';
+        link.click();
+      }
+
+      // Share Portfolio
+      function sharePortfolio() {
+        if (navigator.share) {
+          navigator.share({
+            title: 'Jogi Bala Venkata Aravind - Portfolio',
+            text: 'Check out my portfolio showcasing web development, IoT, and QA projects!',
+            url: window.location.href
+          }).catch(err => console.error('Share failed:', err));
+        } else {
+          copyToClipboard(window.location.href);
+        }
+      }
+
+      // Live Clock
+      function updateClock() {
+        const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        document.getElementById('live-clock').textContent = now;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // Loading Spinner with Timeout and Error Handling
+      window.addEventListener('load', () => {
+        document.getElementById('loading').classList.add('hidden');
+      });
       setTimeout(() => {
-        temp.textContent = `${Math.floor(Math.random() * 10 + 20)}°C`;
-        humidity.textContent = `${Math.floor(Math.random() * 20 + 50)}%`;
-        temp.classList.remove('active');
-        humidity.classList.remove('active');
-      }, 500);
-    });
-
-    // Photo Upload and Gallery
-    const photoUpload = document.getElementById('photo-upload');
-    const photoPreview = document.getElementById('photo-preview');
-    const previewImg = document.getElementById('preview-img');
-    const galleryGrid = document.getElementById('gallery-grid');
-    photoUpload.addEventListener('change', () => {
-      const file = photoUpload.files[0];
-      if (file && file.type.startsWith('image/')) {
-        previewImg.src = URL.createObjectURL(file);
-        photoPreview.classList.remove('hidden');
-      }
-    });
-    function addToGallery() {
-      const file = photoUpload.files[0];
-      if (file) {
-        const img = document.createElement('img');
-        img.src = previewImg.src;
-        img.alt = 'Uploaded Photo';
-        img.className = 'rounded-lg object-cover w-full h-52 card cursor-pointer';
-        img.dataset.src = img.src;
-        img.onclick = () => openLightbox(img.src, img.alt, galleryGrid.children.length);
-        galleryGrid.appendChild(img);
-        photoPreview.classList.add('hidden');
-        photoUpload.value = '';
-      }
-    }
-
-    // Lightbox
-    let currentImageIndex = 0;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    function openLightbox(src, alt, index) {
-      currentImageIndex = index;
-      lightboxImg.src = src;
-      lightboxCaption.textContent = alt;
-      lightbox.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      lightbox.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-    function prevImage() {
-      const images = document.querySelectorAll('#gallery-grid img');
-      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      lightboxImg.src = images[currentImageIndex].src;
-      lightboxCaption.textContent = images[currentImageIndex].alt;
-    }
-    function nextImage() {
-      const images = document.querySelectorAll('#gallery-grid img');
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      lightboxImg.src = images[currentImageIndex].src;
-      lightboxCaption.textContent = images[currentImageIndex].alt;
-    }
-
-    // Blog Modal
-    const blogData = [
-      { title: 'Building a Job Portal with React', content: 'This blog post covers the step-by-step process of creating a responsive job portal using React and Tailwind CSS, including user authentication and job filtering.', date: 'Published: July 10, 2025' },
-      { title: 'IoT with ESP32: A Beginner\'s Guide', content: 'Learn how to get started with ESP32 for IoT projects, including sensor interfacing, data monitoring, and building a web dashboard for real-time data visualization.', date: 'Published: July 5, 2025' }
-    ];
-    function openBlogModal(index) {
-      document.getElementById('modal-title').textContent = blogData[index].title;
-      document.getElementById('modal-content').textContent = blogData[index].content;
-      document.getElementById('modal-date').textContent = blogData[index].date;
-      document.getElementById('blog-modal').classList.remove('hidden');
-    }
-    function closeBlogModal() {
-      document.getElementById('blog-modal').classList.add('hidden');
-    }
-
-    // Accordion
-    function toggleAccordion(index) {
-      const content = document.getElementById(`accordion-content-${index}`);
-      const header = content.previousElementSibling;
-      content.classList.toggle('active');
-      header.querySelector('i').classList.toggle('fa-chevron-down');
-      header.querySelector('i').classList.toggle('fa-chevron-up');
-      header.setAttribute('aria-expanded', content.classList.contains('active'));
-    }
-
-    // Resume Form
-    const resumeForm = document.getElementById('resume-form');
-    resumeForm.addEventListener('submit', e => {
-      e.preventDefault();
-      let valid = true;
-      const name = document.getElementById('resume-name').value;
-      const email = document.getElementById('resume-email').value;
-      const experience = document.getElementById('resume-experience').value;
-      const skills = document.getElementById('resume-skills').value;
-      const nameError = document.getElementById('name-error');
-      const emailError = document.getElementById('email-error');
-      const experienceError = document.getElementById('experience-error');
-      const skillsError = document.getElementById('skills-error');
-      nameError.classList.add('hidden');
-      emailError.classList.add('hidden');
-      experienceError.classList.add('hidden');
-      skillsError.classList.add('hidden');
-      if (!/^[a-zA-Z\s]+$/.test(name)) {
-        nameError.classList.remove('hidden');
-        valid = false;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailError.classList.remove('hidden');
-        valid = false;
-      }
-      if (experience.length < 10) {
-        experienceError.classList.remove('hidden');
-        valid = false;
-      }
-      if (skills.length < 10) {
-        skillsError.classList.remove('hidden');
-        valid = false;
-      }
-      if (valid) {
-        document.getElementById('preview-name').textContent = name;
-        document.getElementById('preview-email').textContent = email;
-        document.getElementById('preview-experience').textContent = experience;
-        document.getElementById('preview-skills').textContent = skills;
-        document.getElementById('resume-preview').classList.remove('hidden');
-      }
-    });
-
-    // Contact Form
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', e => {
-      e.preventDefault();
-      let valid = true;
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const message = document.getElementById('contact-message').value;
-      const nameError = document.getElementById('contact-name-error');
-      const emailError = document.getElementById('contact-email-error');
-      const messageError = document.getElementById('contact-message-error');
-      nameError.classList.add('hidden');
-      emailError.classList.add('hidden');
-      messageError.classList.add('hidden');
-      if (!/^[a-zA-Z\s]+$/.test(name)) {
-        nameError.classList.remove('hidden');
-        valid = false;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailError.classList.remove('hidden');
-        valid = false;
-      }
-      if (message.length < 10) {
-        messageError.classList.remove('hidden');
-        valid = false;
-      }
-      if (valid) {
-        document.getElementById('contact-success').classList.remove('hidden');
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-contact-success'),
-          renderer: 'svg',
-          loop: false,
-          autoplay: true,
-          path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
+        document.getElementById('loading').classList.add('hidden');
+      }, 5000);
+      const images = document.querySelectorAll('img[data-src]');
+      const pdfEmbed = document.getElementById('pdf-embed');
+      images.forEach(img => {
+        img.addEventListener('error', () => {
+          console.error(`Failed to load image: ${img.dataset.src}`);
+          img.src = 'images/fallback.jpg';
         });
-        contactForm.reset();
-        setTimeout(() => {
-          document.getElementById('contact-success').classList.add('hidden');
-        }, 3000);
-      }
-    });
-
-    // Newsletter Form
-    const newsletterForm = document.getElementById('newsletter-form');
-    newsletterForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = document.getElementById('newsletter-email').value;
-      const emailError = document.getElementById('newsletter-email-error');
-      emailError.classList.add('hidden');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailError.classList.remove('hidden');
-      } else {
-        document.getElementById('newsletter-success').classList.remove('hidden');
-        lottie.loadAnimation({
-          container: document.getElementById('lottie-success'),
-          renderer: 'svg',
-          loop: false,
-          autoplay: true,
-          path: 'https://lottie.host/7b3b07c2-6a0a-4e2e-8e68-37a2e9e4a1b2/4L9W4P3V.json'
-        });
-        newsletterForm.reset();
-        setTimeout(() => {
-          document.getElementById('newsletter-success').classList.add('hidden');
-        }, 3000);
-      }
-    });
-
-    // Copy to Clipboard
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        toast.textContent = `Copied ${text}!`;
-        toast.classList.remove('hidden');
-        setTimeout(() => toast.classList.add('hidden'), 2000);
       });
-    }
+      pdfEmbed.addEventListener('error', () => {
+        console.error('Failed to load PDF');
+        document.getElementById('pdf-fallback').classList.remove('hidden');
+        pdfEmbed.classList.add('hidden');
+      });
 
-    // QR Code
-    QRCode.toCanvas(document.getElementById('qr-code'), window.location.href, { width: 150 }, err => {
-      if (err) console.error(err);
-    });
+      // Lazy Loading Images
+      const imgObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        });
+      });
+      images.forEach(img => imgObserver.observe(img));
 
-    // Download Counter
-    let resumeCount = 0, portfolioCount = 0;
-    document.getElementById('resume-download').addEventListener('click', () => {
-      resumeCount++;
-      document.getElementById('resume-download-count').textContent = `(${resumeCount})`;
-      downloadResumePDF();
-    });
-    function downloadPortfolioPDF() {
-      portfolioCount++;
-      document.getElementById('portfolio-download-count').textContent = `(${portfolioCount})`;
-      const link = document.createElement('a');
-      link.href = 'assets/portfolio.pdf';
-      link.download = 'portfolio.pdf';
-      link.click();
-    }
-    function downloadResumePDF() {
-      const link = document.createElement('a');
-      link.href = 'assets/JOGI_BALA_VENKATA_ARAVIND_(6)[1].pdf_20250607_082941_0000.pdf';
-      link.download = 'resume.pdf';
-      link.click();
-    }
-
-    // Share Portfolio
-    function sharePortfolio() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Jogi Bala Venkata Aravind - Portfolio',
-          text: 'Check out my portfolio showcasing web development, IoT, and QA projects!',
-          url: window.location.href
-        }).catch(err => console.error('Share failed:', err));
-      } else {
-        copyToClipboard(window.location.href);
+      // Social Media Analytics Simulation
+      function updateSocialAnalytics() {
+        document.getElementById('github-stars').textContent = Math.floor(Math.random() * 1000);
+        document.getElementById('linkedin-followers').textContent = Math.floor(Math.random() * 500);
+        document.getElementById('twitter-followers').textContent = Math.floor(Math.random() * 300);
+        document.querySelectorAll('.data-update').forEach(el => {
+          el.classList.add('active');
+          setTimeout(() => el.classList.remove('active'), 500);
+        });
       }
-    }
+      updateSocialAnalytics();
+      setInterval(updateSocialAnalytics, 10000);
 
-    // Live Clock
-    function updateClock() {
-      const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-      document.getElementById('live-clock').textContent = now;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    // PDF Fallback
-    const pdfEmbed = document.getElementById('pdf-embed');
-    if (!pdfEmbed.getAttribute('src')) {
-      document.getElementById('pdf-fallback').classList.remove('hidden');
-    }
-
-    // Lazy Loading Images
-    const images = document.querySelectorAll('img[data-src]');
-    const imgObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          observer.unobserve(img);
+      // Keyboard Navigation
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          closeLightbox();
+          closeBlogModal();
         }
       });
-    });
-    images.forEach(img => imgObserver.observe(img));
-
-    // Social Media Analytics Simulation
-    function updateSocialAnalytics() {
-      document.getElementById('github-stars').textContent = Math.floor(Math.random() * 1000);
-      document.getElementById('linkedin-followers').textContent = Math.floor(Math.random() * 500);
-      document.getElementById('twitter-followers').textContent = Math.floor(Math.random() * 300);
-      document.querySelectorAll('.data-update').forEach(el => {
-        el.classList.add('active');
-        setTimeout(() => el.classList.remove('active'), 500);
-      });
-    }
-    updateSocialAnalytics();
-    setInterval(updateSocialAnalytics, 10000);
-
-    // Loading Spinner
-    window.addEventListener('load', () => {
-      document.getElementById('loading').classList.add('hidden');
-    });
-
-    // Keyboard Navigation
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        closeBlogModal();
-      }
-    });
-  </script>
+    </script>
+  </main>
 </body>
 </html>
